@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem('steeltrace-theme')==='light'?'light':'dark';}catch(e){document.documentElement.dataset.theme='dark';}})();</script>
+<title>About — SteelTrace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="steeltrace/site.css" />
+<style>
+  .about-hero { padding: 96px 0 56px; }
+  .about-hero .h1 { max-width: 17ch; margin-top: 20px; }
+  .about-hero .lead { max-width: 56ch; margin-top: 24px; }
+  .stat-band { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; margin-top: 8px; }
+  .stat-band .s { background: var(--bg); padding: 26px 24px; }
+  .stat-band .n { font-family: var(--font-mono); font-weight: 600; font-size: 34px; color: var(--accent); letter-spacing: -.02em; line-height: 1; }
+  .stat-band .l { color: var(--txt-2); font-size: 13.5px; margin-top: 10px; line-height: 1.45; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .two .imgph { aspect-ratio: 4/3; }
+  .princ { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 36px; }
+  .pc { padding: 26px; }
+  .pc .ic { width: 42px; height: 42px; border-radius: 11px; display: grid; place-items: center; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-dim); margin-bottom: 16px; }
+  .pc h3 { font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+  .pc p { color: var(--txt-2); font-size: 14px; line-height: 1.55; margin-top: 9px; }
+  .cta-band { margin-top: 80px; padding: 56px; text-align: center; background: linear-gradient(180deg, var(--accent-soft), transparent 70%), var(--panel); }
+  .cta-band h2 { max-width: 22ch; margin: 0 auto; }
+  .cta-band .row { display: flex; gap: 14px; justify-content: center; margin-top: 28px; }
+  .careers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; scroll-margin-top: 90px; }
+  .roles { display: flex; flex-direction: column; gap: 10px; }
+  .role-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 20px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-md); text-decoration: none; color: inherit; transition: transform .35s var(--ease-out), border-color .3s, background .3s; }
+  .role-row:hover { transform: translateX(4px); border-color: var(--accent-line); background: var(--panel-solid); }
+  .role-row b { display: block; font-size: 15.5px; font-weight: 600; letter-spacing: -.01em; }
+  .role-row span { display: block; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--txt-3); margin-top: 5px; }
+  .role-ar { color: var(--accent); font-size: 18px; }
+  .role-note { font-size: 13.5px; color: var(--txt-2); margin-top: 8px; line-height: 1.55; }
+  .role-note a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  @media (max-width: 920px) { .stat-band, .princ { grid-template-columns: 1fr 1fr; } .two, .careers-grid { grid-template-columns: 1fr; gap: 28px; } }
+
+  /* ===== HERO META ===== */
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 26px; }
+  .hero-meta .m { display: flex; align-items: center; gap: 9px; font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; color: var(--txt-2); }
+  .hero-meta .m svg { width: 15px; height: 15px; color: var(--accent); flex: none; }
+
+  /* ===== INDUSTRIES ===== */
+  .ind-wrap { margin-top: 30px; }
+  .ind-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--txt-3); margin-bottom: 14px; }
+  .ind-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+  .ind { font-size: 13.5px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); color: var(--txt-2); white-space: nowrap; transition: border-color .3s, color .3s, background .3s; }
+  .ind.core { border-color: var(--accent-line); background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+
+  /* ===== WHAT WE DO POINTS ===== */
+  .wd-points { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 30px; margin-top: 30px; }
+  .wd-pt { margin: 0; }
+  .wd-pt dt { font-size: 15px; font-weight: 600; letter-spacing: -.01em; display: flex; align-items: center; gap: 11px; }
+  .wd-pt dt::before { content: ""; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); flex: none; transform: rotate(45deg); }
+  .wd-pt dd { margin: 9px 0 0 18px; color: var(--txt-2); font-size: 13.5px; line-height: 1.55; }
+  @media (max-width: 920px) { .wd-points { grid-template-columns: 1fr; gap: 20px; } }
+
+  /* ===== WHAT WE DO — PDF PROCESSING ANIMATION ===== */
+  .wd-anim { --blue:#2c9fd9; --anim-accent:#27b497; position: relative; width: 100%; aspect-ratio: 720/560; border-radius: 16px; overflow: hidden; border: 1px solid var(--line-2); box-shadow: var(--shadow); background: radial-gradient(circle at 50% 40%,#2e4a73 0%,#1b315a 45%,#10203c 100%); }
+  .wd-anim .scene { position: absolute; top: 0; left: 0; width: 720px; height: 560px; transform-origin: top left; transform: scale(var(--wd-s, 1)); }
+  .wd-anim .pdf { position: absolute; left: 316px; top: 154px; width: 88px; height: 112px; background: #fff; border-radius: 7px; box-shadow: 0 10px 24px rgba(0,0,0,.45); transform-origin: center; }
+  .wd-anim .pdf .corner { position: absolute; top: 0; right: 0; border-width: 0 18px 18px 0; border-style: solid; border-color: #e7ebf2 #10203c #10203c #e7ebf2; border-radius: 0 7px 0 0; }
+  .wd-anim .pdf .tag { position: absolute; top: 42px; left: 0; background: #e8453c; color: #fff; font-size: 13px; font-weight: 800; letter-spacing: 1px; padding: 4px 9px; border-radius: 0 4px 4px 0; }
+  .wd-anim .pdf .ln { position: absolute; left: 11px; height: 5px; border-radius: 3px; background: #d7dde6; }
+  .wd-anim .pdf .ln:nth-child(3){ top: 14px; width: 46px; }
+  .wd-anim .pdf .ln:nth-child(4){ top: 24px; width: 62px; }
+  .wd-anim .pdf .ln:nth-child(5){ top: 74px; width: 64px; }
+  .wd-anim .pdf .ln:nth-child(6){ top: 84px; width: 64px; }
+  .wd-anim .pdf .ln:nth-child(7){ top: 94px; width: 40px; }
+  .wd-anim .p-top   { animation: wdFlyTop    12s ease-in-out infinite; }
+  .wd-anim .p-right { animation: wdFlyRight  12s ease-in-out infinite; }
+  .wd-anim .p-bottom{ animation: wdFlyBottom 12s ease-in-out infinite; }
+  .wd-anim .p-left  { animation: wdFlyLeft   12s ease-in-out infinite; }
+  @keyframes wdFlyTop{ 0%{opacity:0;transform:translate(0,-400px) rotate(-8deg) scale(1)} 7%{opacity:1} 22%{opacity:1;transform:translate(0,-40px) rotate(0) scale(.9)} 30%{opacity:1;transform:translate(0,0) scale(.16)} 33%,100%{opacity:0;transform:translate(0,0) scale(.05)} }
+  @keyframes wdFlyBottom{ 0%{opacity:0;transform:translate(0,400px) rotate(8deg) scale(1)} 7%{opacity:1} 22%{opacity:1;transform:translate(0,40px) rotate(0) scale(.9)} 30%{opacity:1;transform:translate(0,0) scale(.16)} 33%,100%{opacity:0;transform:translate(0,0) scale(.05)} }
+  @keyframes wdFlyLeft{ 0%{opacity:0;transform:translate(-460px,0) rotate(8deg) scale(1)} 7%{opacity:1} 22%{opacity:1;transform:translate(-50px,0) rotate(0) scale(.9)} 30%{opacity:1;transform:translate(0,0) scale(.16)} 33%,100%{opacity:0;transform:translate(0,0) scale(.05)} }
+  @keyframes wdFlyRight{ 0%{opacity:0;transform:translate(460px,0) rotate(-8deg) scale(1)} 7%{opacity:1} 22%{opacity:1;transform:translate(50px,0) rotate(0) scale(.9)} 30%{opacity:1;transform:translate(0,0) scale(.16)} 33%,100%{opacity:0;transform:translate(0,0) scale(.05)} }
+  .wd-anim .monitor { position: absolute; left: 50%; top: 210px; transform: translate(-50%,-50%); }
+  .wd-anim .bezel { width: 440px; height: 286px; background: #161d33; border-radius: 18px; padding: 16px; box-shadow: 0 18px 50px rgba(0,0,0,.55), inset 0 0 0 2px #2b3656; }
+  .wd-anim .screen { position: relative; width: 100%; height: 100%; border-radius: 9px; overflow: hidden; background: radial-gradient(circle at 50% 40%,#13335c,#0c1d38); }
+  .wd-anim .stand { width: 120px; height: 46px; margin: 6px auto 0; background: linear-gradient(#26304d,#161d33); border-radius: 0 0 10px 10px; clip-path: polygon(22% 0,78% 0,100% 100%,0 100%); }
+  .wd-anim .base { width: 170px; height: 14px; margin: 0 auto; background: #26304d; border-radius: 8px; }
+  .wd-anim .screen::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle,rgba(44,159,217,.55),transparent 60%); opacity: 0; animation: wdAbsorb 12s ease-in-out infinite; }
+  @keyframes wdAbsorb{ 0%,8%{opacity:0} 20%{opacity:.9} 30%{opacity:.4} 32%,100%{opacity:0} }
+  .wd-anim .scanline { position: absolute; left: 6%; right: 6%; height: 3px; border-radius: 3px; background: linear-gradient(90deg,transparent,var(--blue),transparent); box-shadow: 0 0 14px var(--blue); animation: wdScan 12s linear infinite; }
+  @keyframes wdScan{ 0%,31%{opacity:0;top:10%} 33%{opacity:1} 52%{top:86%;opacity:1} 55%,100%{opacity:0} }
+  .wd-anim .proc { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; color: #cfe3f5; animation: wdShow1 12s ease-in-out infinite; }
+  .wd-anim .proc .gear { width: 46px; height: 46px; border: 5px solid rgba(255,255,255,.18); border-top-color: var(--blue); border-radius: 50%; animation: wdSpin 1s linear infinite; }
+  .wd-anim .proc .t { font-size: 16px; letter-spacing: .5px; }
+  .wd-anim .bar { width: 62%; height: 9px; background: rgba(255,255,255,.14); border-radius: 6px; overflow: hidden; }
+  .wd-anim .bar > i { display: block; height: 100%; width: 0; border-radius: 6px; background: linear-gradient(90deg,var(--blue),var(--anim-accent)); animation: wdFill 12s ease-in-out infinite; }
+  @keyframes wdSpin{ to{transform:rotate(360deg)} }
+  @keyframes wdFill{ 0%,32%{width:0} 52%{width:100%} 55%,100%{width:100%} }
+  @keyframes wdShow1{ 0%,29%{opacity:0} 31%,53%{opacity:1} 56%,100%{opacity:0} }
+  .wd-anim .result { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: #eaf4ff; animation: wdShow2 12s ease-in-out infinite; }
+  .wd-anim .check { width: 58px; height: 58px; border-radius: 50%; background: var(--anim-accent); position: relative; animation: wdPop 12s ease-in-out infinite; box-shadow: 0 0 22px rgba(39,180,151,.6); }
+  .wd-anim .check::after { content: ""; position: absolute; left: 20px; top: 11px; width: 13px; height: 26px; border: solid #fff; border-width: 0 5px 5px 0; transform: rotate(45deg); }
+  .wd-anim .rtitle { font-size: 17px; font-weight: 700; }
+  .wd-anim .chart { display: flex; align-items: flex-end; gap: 12px; height: 64px; margin-top: 4px; }
+  .wd-anim .chart i { width: 18px; border-radius: 4px 4px 0 0; height: 0; background: linear-gradient(var(--blue),var(--anim-accent)); animation: wdGrow 12s ease-in-out infinite; }
+  .wd-anim .chart i:nth-child(1){ --h: 34px; animation-delay: 0s; }
+  .wd-anim .chart i:nth-child(2){ --h: 54px; }
+  .wd-anim .chart i:nth-child(3){ --h: 42px; }
+  .wd-anim .chart i:nth-child(4){ --h: 62px; }
+  .wd-anim .tagline { margin-top: 8px; font-size: 15px; font-weight: 600; letter-spacing: .4px; background: linear-gradient(90deg,var(--blue),var(--anim-accent)); -webkit-background-clip: text; background-clip: text; color: transparent; opacity: 0; transform: translateY(8px); animation: wdShowTag 12s ease-out infinite; }
+  @keyframes wdShowTag{ 0%,72%{opacity:0;transform:translateY(8px)} 80%,95%{opacity:1;transform:translateY(0)} 99%,100%{opacity:0} }
+  .wd-anim .secure { display: flex; align-items: center; gap: 7px; margin-top: 10px; padding: 5px 12px; border: 1px solid rgba(44,159,217,.5); border-radius: 20px; background: rgba(44,159,217,.10); color: #bfe0f5; font-size: 12px; font-weight: 600; letter-spacing: .3px; opacity: 0; animation: wdShowSec 12s ease-out infinite; }
+  .wd-anim .secure svg { display: block; }
+  @keyframes wdShowSec{ 0%,80%{opacity:0;transform:scale(.9)} 87%,95%{opacity:1;transform:scale(1)} 99%,100%{opacity:0} }
+  @keyframes wdPop{ 0%,57%{transform:scale(0)} 65%{transform:scale(1.15)} 70%,96%{transform:scale(1)} 99%,100%{transform:scale(0)} }
+  @keyframes wdGrow{ 0%,63%{height:0} 80%,96%{height:var(--h)} 100%{height:0} }
+  @keyframes wdShow2{ 0%,57%{opacity:0} 61%,95%{opacity:1} 99%,100%{opacity:0} }
+  .wd-anim .caption { position: absolute; bottom: 6px; left: 0; right: 0; text-align: center; color: #9fc1e0; font-size: 13px; letter-spacing: 1px; }
+  @media (prefers-reduced-motion: reduce) { .wd-anim .scene * { animation: none !important; } .wd-anim .result, .wd-anim .secure { opacity: 1; } .wd-anim .proc, .wd-anim .scanline, .wd-anim .pdf { opacity: 0; } .wd-anim .check { transform: scale(1); } .wd-anim .chart i { height: var(--h); } }
+
+  /* ===== MISSION / VISION ===== */
+  .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 8px; }
+  .mv-card { position: relative; padding: 40px 38px; overflow: hidden; }
+  .mv-card::before { content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--accent); opacity: .55; }
+  .mv-mark { font-family: var(--font-mono); font-size: 64px; line-height: .7; color: var(--accent); opacity: .22; font-weight: 600; }
+  .mv-k { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin: 22px 0 16px; }
+  .mv-text { font-size: 17px; line-height: 1.6; color: var(--txt-1); letter-spacing: -.005em; text-wrap: pretty; }
+  @media (max-width: 920px) { .mv-grid { grid-template-columns: 1fr; } }
+
+  /* ===== TEAM ===== */
+  .team-head { max-width: 22ch; margin-top: 16px; }
+  .team-sub { font-family: var(--font-mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--txt-3); margin: 52px 0 26px; display: flex; align-items: center; gap: 14px; }
+  .team-sub::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .lead-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .adv-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  .person { display: flex; gap: 20px; align-items: flex-start; }
+  .person image-slot { width: 92px; height: 92px; flex: none; border: 1px solid var(--line-2); border-radius: 50%; box-shadow: var(--shadow); }
+  .person img.p-photo { width: 92px; height: 92px; flex: none; border: 1px solid var(--line-2); border-radius: 50%; box-shadow: var(--shadow); object-fit: cover; display: block; }
+  .p-body { min-width: 0; padding-top: 4px; }
+  .p-name { font-size: 18px; font-weight: 700; letter-spacing: -.02em; line-height: 1.1; }
+  .p-role { font-style: italic; font-size: 14px; color: var(--accent); margin-top: 5px; }
+  .p-li { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 7px; margin-top: 12px; margin-left: -6px; color: var(--accent); background: none; border: none; box-shadow: none; transition: transform .3s var(--spring), color .3s; }
+  .p-li:hover { transform: translateY(-2px); color: var(--accent-2); }
+  .p-li svg { width: 20px; height: 20px; }
+  .p-bio { color: var(--txt-2); font-size: 14px; line-height: 1.55; margin-top: 14px; }
+  .adv-grid .person image-slot { width: 76px; height: 76px; }
+  @media (max-width: 920px) { .lead-grid { grid-template-columns: 1fr; } .adv-grid { grid-template-columns: 1fr; } }
+
+  /* ===== LIFECYCLE IMAGE STRIP ===== */
+  .life-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 34px; }
+  .life-card { position: relative; border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--line-2); aspect-ratio: 3/4; background: var(--panel); box-shadow: var(--shadow); transition: transform .4s var(--ease-out), border-color .3s; }
+  .life-card:hover { transform: translateY(-5px); border-color: var(--accent-line); }
+  .life-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.92) brightness(.82); transition: transform .6s var(--ease-out), filter .4s; }
+  .life-card:hover img { transform: scale(1.06); filter: saturate(1) brightness(.95); }
+  .life-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(8,14,28,.9) 100%); }
+  .life-card .lc-body { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px 15px; z-index: 1; }
+  .life-card .lc-step { font-family: var(--font-mono); font-size: 10px; letter-spacing: .18em; color: var(--accent-2); }
+  .life-card .lc-name { font-size: 14px; font-weight: 600; letter-spacing: -.01em; margin-top: 6px; color: #fff; }
+  .life-track { display: flex; align-items: center; gap: 12px; margin-top: 22px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--txt-3); }
+  .life-track .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex: none; }
+  .life-track .ln { flex: 1; height: 1px; background: linear-gradient(90deg, var(--accent-line), var(--line)); }
+
+  /* ===== STORY / EDITORIAL ===== */
+  .story { max-width: 72ch; margin: 0 auto; }
+  .story .eyebrow { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); }
+  .story h1 { font-size: clamp(34px, 5vw, 56px); line-height: 1.05; letter-spacing: -.025em; margin: 20px 0 0; max-width: 18ch; }
+  .story .dek { font-size: 19px; line-height: 1.6; color: var(--txt-2); margin-top: 26px; max-width: 60ch; }
+  .story-rule { max-width: 72ch; margin: 52px auto 0; height: 1px; background: var(--line); }
+  .story p.body { font-size: 18px; line-height: 1.75; color: var(--txt-1); margin: 26px 0 0; letter-spacing: -.003em; text-wrap: pretty; }
+  .story p.body:first-of-type { margin-top: 38px; }
+  .story p.body.lead-para { font-size: 20px; color: var(--txt-1); }
+  .story p.body .drop { float: left; font-family: var(--font-mono); font-weight: 600; font-size: 70px; line-height: .82; padding: 6px 14px 0 0; color: var(--accent); }
+  .chapter { max-width: 72ch; margin: 0 auto; padding-top: 72px; }
+  .chapter .ch-k { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); }
+  .chapter h2 { font-size: clamp(28px, 3.4vw, 40px); line-height: 1.1; letter-spacing: -.02em; margin: 14px 0 0; }
+  .chapter p.body { font-size: 20px; line-height: 1.72; color: var(--txt-1); margin-top: 24px; text-wrap: pretty; letter-spacing: -.004em; }
+  .story-figure { max-width: 72ch; margin: 48px auto 0; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line-2); box-shadow: var(--shadow); aspect-ratio: 16/9; }
+  .story-figure img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(.95) brightness(.86); }
+  .story-figure figcaption { display: none; }
+  .story figure.story-figure { margin-left: auto; margin-right: auto; }
+
+  /* full-bleed background hero */
+  .story-hero { position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); margin-top: -8px; overflow: hidden; border-bottom: 1px solid var(--line); min-height: 560px; display: flex; align-items: flex-end; }
+  .story-hero .bg { position: absolute; inset: 0; background-size: cover; background-position: center 38%; transform: scale(1.04); }
+  .story-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,14,28,.30) 0%, rgba(8,14,28,.55) 52%, rgba(8,14,28,.92) 100%); }
+  .story-hero .hbody { position: relative; z-index: 2; width: 100%; max-width: 1160px; margin: 0 auto; padding: 120px clamp(20px, 4vw, 48px) 56px; }
+  .story-hero .hinner { max-width: 72ch; }
+  .story-hero .eyebrow { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--accent-2); }
+  .story-hero h1 { font-size: clamp(36px, 5.4vw, 60px); line-height: 1.04; letter-spacing: -.028em; margin: 18px 0 0; max-width: 20ch; color: #fff; text-wrap: balance; }
+  .story-hero .dek { font-size: 19px; line-height: 1.6; color: rgba(255,255,255,.86); margin-top: 22px; max-width: 58ch; }
+
+  /* reveal-on-scroll */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+  @media (max-width: 920px) { .life-strip { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body>
+<div class="aura a"></div><div class="aura b"></div>
+<div class="gridbg"></div>
+<div class="wrap">
+
+<header class="topbar" data-site-header data-page="about" data-crumb="About Us"></header>
+
+<div class="page">
+
+  <!-- ===== INTRODUCTION (STORY) ===== -->
+  <section class="story-hero">
+    <div class="bg" style="background-image:url('steeltrace/img/ndt.png')"></div>
+    <div class="hbody">
+      <div class="hinner">
+        <span class="eyebrow reveal">Introduction to SteelTrace</span>
+        <h1 class="reveal">Trusted manufacturing data for the assets the world runs on.</h1>
+        <p class="dek reveal">A Dutch technology company building the standard for Smart Manufacturing Records in safety-critical industries.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-hero" style="padding-top:48px">
+    <div class="story">
+      <p class="body lead-para reveal"><span class="drop">S</span>teelTrace is a Dutch technology company established in 2017, with headquarters in the Netherlands and a presence in Houston, Texas. Our multidisciplinary team combines expertise in software engineering, metallurgy, quality assurance, cybersecurity, and industrial operations to solve one of the biggest challenges facing safety-critical industries: trusted manufacturing and quality data.</p>
+
+      <p class="body reveal">SteelTrace is the standard for Smart Manufacturing Records (SMRs) in safety-critical industries. Our cloud-based Software-as-a-Service (SaaS) platform replaces paper- and PDF-based quality, compliance, and traceability processes with smart, data-native workflows secured by blockchain technology.</p>
+
+      <figure class="story-figure reveal">
+        <img src="steeltrace/img/mfg.png" alt="Steel pipe manufacturing facility">
+      </figure>
+
+      <p class="body reveal">The SteelTrace platform connects operators, EPCs, manufacturers, laboratories, inspection companies, stockists, and other supply chain participants in a single digital ecosystem. By capturing, validating, and verifying data at its source, SteelTrace creates a trusted and structured data foundation that enables real-time compliance, end-to-end traceability, and immutable auditability across complex supply chains.</p>
+
+      <p class="body reveal">Unlike traditional quality management systems or document repositories, SteelTrace embeds requirements and verification rules directly into the workflow. This enables organizations to move from compliance-by-audit to compliance-by-design, automatically validating manufacturing and inspection data against project specifications, quality plans, and regulatory requirements as work is performed.</p>
+
+      <figure class="story-figure reveal">
+        <img src="steeltrace/img/wld.png" alt="Welding and fabrication on a project site">
+      </figure>
+
+      <p class="body reveal">SteelTrace supports the complete asset lifecycle from raw material and manufacturing through construction, operation, maintenance, and decommissioning, providing cradle-to-grave traceability and a trusted foundation for Digital Twins, predictive analytics, AI initiatives, and asset integrity management.</p>
+
+      <p class="body reveal">Today, SteelTrace primarily serves the Energy sector, including oil and gas, LNG, carbon capture, hydrogen, and other energy infrastructure projects, while its Smart Manufacturing Record approach is equally applicable to Aerospace, Defense, Medical devices, and other highly regulated industries.</p>
+
+      <figure class="story-figure reveal">
+        <img src="steeltrace/img/op.png" alt="Energy infrastructure in operation">
+      </figure>
+
+      <p class="body reveal">By transforming manufacturing and quality data into a structured, searchable, and trusted asset, SteelTrace helps organizations reduce risk, improve efficiency, accelerate project execution, strengthen regulatory compliance, and make data the cornerstone of decision-making.</p>
+    </div>
+  </section>
+
+  <div class="story-rule"></div>
+
+  <!-- MISSION -->
+  <section class="chapter reveal">
+    <span class="ch-k">Our Mission</span>
+    <h2>Quality as a trusted digital foundation.</h2>
+    <p class="body">Our mission is to transform quality, compliance, and traceability into a trusted digital foundation for safety-critical industries by replacing fragmented, document-based processes with Smart Manufacturing Records that improve safety, reduce risk, and enable better decisions throughout the asset lifecycle.</p>
+  </section>
+
+  <!-- VISION -->
+  <section class="chapter reveal">
+    <span class="ch-k">Our Vision</span>
+    <h2>Quality assured by design — not verified after the fact.</h2>
+    <p class="body">Our vision is a world where manufacturing and asset data flows seamlessly across the supply chain, enabling quality to be assured by design rather than verified after the fact. We envision an interconnected ecosystem where trusted, structured, and traceable data powers safer operations, smarter decisions, Digital Twins, AI-driven insights, and full asset lifecycle transparency from cradle to grave.</p>
+  </section>
+
+  <!-- TEAM -->
+  <section class="section" style="padding-top:0">
+    <span class="kicker">Team</span>
+    <h2 class="h2 team-head">Built by people who've lived this problem for decades</h2>
+
+    <div class="team-sub">Leadership</div>
+    <div class="lead-grid">
+      <div class="person">
+        <img class="p-photo" src="graphics/team-tom.png" alt="Tom Meulendijks">
+        <div class="p-body">
+          <div class="p-name">Tom Meulendijks</div>
+          <div class="p-role">Founder &amp; CEO</div>
+          <a class="p-li" href="https://www.linkedin.com/in/tommeulendijksmaastricht/" aria-label="Tom Meulendijks on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+          <p class="p-bio">10+ years building this solution end-to-end. Domain-deep, technical founder.</p>
+        </div>
+      </div>
+      <div class="person">
+        <img class="p-photo" src="graphics/team-erwin.png" alt="Erwin de Rijcke">
+        <div class="p-body">
+          <div class="p-name">Erwin de Rijcke</div>
+          <div class="p-role">CCO</div>
+          <a class="p-li" href="https://www.linkedin.com/in/erwin-de-rijcke-9a697314/" aria-label="Erwin de Rijcke on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+          <p class="p-bio">Former Global Sales Director, Energy TIC. 25+ years in the industry.</p>
+        </div>
+      </div>
+      <div class="person">
+        <img class="p-photo" src="graphics/team-joan.png" alt="Joan Housseinpour">
+        <div class="p-body">
+          <div class="p-name">Joan Housseinpour</div>
+          <div class="p-role">CTO</div>
+          <a class="p-li" href="https://www.linkedin.com/in/jahan-hoseinpour/" aria-label="Joan Housseinpour on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+          <p class="p-bio">25+ years in software engineering with deep energy-sector experience.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="cta-band panel">
+    <h2 class="h2">The supply-chain data layer the industry has been missing.</h2>
+    <div class="row">
+      <a class="btn btn-primary" href="demo.html">Book a demo <span class="ar">→</span></a>
+      <a class="btn btn-ghost" href="SteelTrace%20Matrix%20Explorer.html">Explore the platform</a>
+    </div>
+  </section>
+</div>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<script src="steeltrace/image-slot.js"></script>
+<script>
+(function () {
+  var anim = document.querySelector(".wd-anim");
+  if (!anim) return;
+  var scene = anim.querySelector(".scene");
+  function fit() { anim.style.setProperty("--wd-s", (anim.clientWidth / 720).toFixed(4)); }
+  if (window.ResizeObserver) { new ResizeObserver(fit).observe(anim); } else { window.addEventListener("resize", fit); }
+  fit();
+})();
+(function () {
+  var els = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window) || !els.length) { els.forEach(function(e){e.classList.add("in");}); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+  els.forEach(function (e) { io.observe(e); });
+})();
+</script>
+<script src="steeltrace/chrome.js"></script>
+</div>
+</body>
+</html>

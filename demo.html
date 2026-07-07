@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem('steeltrace-theme')==='light'?'light':'dark';}catch(e){document.documentElement.dataset.theme='dark';}})();</script>
+<title>Book a demo — SteelTrace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="steeltrace/site.css" />
+<style>
+  .cal-wrap { padding-top: 44px; }
+  .cal-frame { width: 100%; max-width: 1080px; margin: 0 auto; border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: #fff; }
+  .cal-frame iframe { display: block; width: 100%; height: 760px; border: 0; }
+  .weekly-line { margin-top: 18px; font-size: 14.5px; color: var(--txt-2); display: inline-flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+  .weekly-line a { color: var(--accent); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+  .weekly-line a:hover { text-decoration: underline; }
+  .weekly-line a svg { flex: none; }
+  @media (max-width: 700px) { .cal-frame iframe { height: 980px; } }
+</style>
+</head>
+<body>
+<div class="aura a"></div><div class="aura b"></div>
+<div class="gridbg"></div>
+<div class="wrap">
+
+<!--NAV-->
+<header class="topbar" data-site-header data-page=""></header>
+
+<div class="page" data-screen-label="Book a demo — Calendly">
+  <section class="hero" style="padding:64px 0 0">
+    <span class="kicker">Book a demo</span>
+    <h1 class="h1" style="margin-top:18px;max-width:18ch">Want to see the product?</h1>
+    <p class="lead" style="margin-top:20px;max-width:54ch">Pick a slot below for a private walkthrough of the SteelTrace platform — tailored to your project and role.</p>
+    <p class="weekly-line">Prefer an open group session? Join the
+      <a href="https://steeltrace.co/weekly/" target="_blank" rel="noopener">free weekly product demo
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg>
+      </a> on Teams, every Thursday.
+    </p>
+  </section>
+
+  <div class="cal-wrap">
+    <div class="cal-frame">
+      <iframe src="https://calendly.com/tom-steeltrace/demo-of-the-steeltrace-platform?embed_domain=steeltrace.co&amp;embed_type=Inline&amp;hide_gdpr_banner=1" title="Book a demo of the SteelTrace platform" loading="eager" allow="fullscreen"></iframe>
+    </div>
+  </div>
+</div>
+
+<!--FOOTER-->
+<footer class="site-footer" data-site-footer></footer>
+
+</div>
+<script src="steeltrace/chrome.js"></script>
+</body>
+</html>

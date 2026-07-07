@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SteelTrace — The Supply Chain Layer the Industry Is Missing</title>
+<style>
+  :root{
+    --cyan:#46e8ff;
+    --cyan-dim:rgba(70,232,255,0.28);
+    --navy:#04111c;
+    --panel-bg:linear-gradient(160deg, rgba(8,22,36,0.88), rgba(10,30,48,0.70));
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:"SF Mono",SFMono-Regular,ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:auto;}
+  body{
+    background:#03101a;
+    font-family:var(--font);
+    color:#cfe9f2;
+    overflow-x:hidden;
+  }
+  #scroll-space{height:1000vh;width:100%;pointer-events:none;}
+  #scene{
+    position:fixed;inset:0;width:100%;height:100%;display:block;
+    pointer-events:none;z-index:1;
+  }
+  #lines{
+    position:fixed;inset:0;width:100%;height:100%;
+    pointer-events:none;z-index:3;
+  }
+  /* ---------- HERO ---------- */
+  #hero{
+    position:fixed;inset:0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;
+    z-index:6;pointer-events:none;padding:0 24px;
+  }
+  #hero .logo{
+    font-size:15px;letter-spacing:0.42em;text-transform:uppercase;
+    color:#8fb8c9;font-weight:600;margin-bottom:22px;
+  }
+  #hero .logo span{color:var(--cyan);}
+  .logo-img{height:40px;display:inline-block;filter:drop-shadow(0 2px 14px rgba(0,40,60,0.7));}
+  .logo-img-sm{height:22px;display:inline-block;vertical-align:middle;opacity:0.92;}
+  .logo-fallback span{color:var(--cyan);}
+  #hero h1{
+    font-size:clamp(28px,5vw,58px);font-weight:700;letter-spacing:-0.015em;
+    color:#eaf7fb;max-width:900px;line-height:1.12;
+    text-shadow:0 4px 40px rgba(0,40,60,0.8);
+  }
+  #hero p{
+    margin-top:20px;font-size:clamp(14px,1.6vw,18px);color:#9fc4d3;max-width:660px;line-height:1.55;
+  }
+  #scroll-hint{
+    position:fixed;bottom:34px;left:50%;transform:translateX(-50%);
+    z-index:6;pointer-events:none;text-align:center;
+    font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:#8fb8c9;
+  }
+  #scroll-hint .chev{
+    display:block;margin:10px auto 0;width:14px;height:14px;
+    border-right:2px solid var(--cyan);border-bottom:2px solid var(--cyan);
+    transform:rotate(45deg);animation:chev 1.8s ease-in-out infinite;
+  }
+  @keyframes chev{0%,100%{transform:rotate(45deg) translate(0,0);opacity:0.4;}50%{transform:rotate(45deg) translate(5px,5px);opacity:1;}}
+  /* ---------- HUD ---------- */
+  #hud{
+    position:fixed;top:22px;right:26px;z-index:6;pointer-events:none;
+    text-align:right;font-family:var(--mono);
+  }
+  #hud .line1{font-size:10px;letter-spacing:0.28em;color:#7fa9ba;text-transform:uppercase;}
+  #hud .line2{font-size:15px;color:var(--cyan);margin-top:6px;letter-spacing:0.06em;text-shadow:0 0 12px rgba(70,232,255,0.5);}
+  #brand-corner{
+    position:fixed;top:22px;left:26px;z-index:6;pointer-events:none;
+    font-size:13px;letter-spacing:0.4em;text-transform:uppercase;color:#9fc4d3;font-weight:600;
+  }
+  #brand-corner span{color:var(--cyan);}
+  /* ---------- KEYPOINT NAV ---------- */
+  #kp-nav{
+    position:fixed;right:18px;top:50%;transform:translateY(-50%);
+    z-index:10;display:flex;flex-direction:column;gap:7px;align-items:flex-end;
+  }
+  .kp-item{
+    display:flex;align-items:center;gap:9px;cursor:pointer;
+    pointer-events:auto;background:none;border:none;padding:2px 0;
+    font-family:var(--font);
+  }
+  .kp-label{
+    font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#7fa9ba;
+    opacity:0;transform:translateX(6px);transition:opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    white-space:nowrap;
+  }
+  .kp-item:hover .kp-label{opacity:1;transform:translateX(0);}
+  .kp-item.active .kp-label{opacity:1;transform:translateX(0);color:var(--cyan);}
+  .kp-dot{
+    width:8px;height:8px;border-radius:50%;flex:none;
+    background:rgba(120,180,200,0.30);border:1px solid rgba(120,200,220,0.35);
+    transition:background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .kp-item:hover .kp-dot{background:rgba(70,232,255,0.6);}
+  .kp-item.active .kp-dot{
+    background:var(--cyan);box-shadow:0 0 10px rgba(70,232,255,0.8);transform:scale(1.3);
+  }
+  /* ---------- VALUE PANELS ---------- */
+  .vp{
+    position:fixed;top:50%;width:min(380px,82vw);z-index:5;pointer-events:none;
+    background:var(--panel-bg);
+    border:1px solid var(--cyan-dim);
+    border-radius:14px;padding:24px 26px;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    box-shadow:0 0 40px rgba(0,30,50,0.55), 0 0 22px rgba(70,232,255,0.10), inset 0 1px 0 rgba(255,255,255,0.06);
+    opacity:0;transform:translateY(calc(-50% + 40px));
+    will-change:opacity,transform;
+  }
+  .vp[data-side="left"]{left:5vw;}
+  .vp[data-side="right"]{right:5vw;}
+  .vp .vp-tag{
+    font-family:var(--mono);font-size:10px;letter-spacing:0.3em;
+    color:var(--cyan);text-transform:uppercase;margin-bottom:12px;
+  }
+  .vp h2{font-size:21px;color:#eef9fc;font-weight:700;letter-spacing:-0.01em;line-height:1.22;}
+  .vp .vp-rows{margin-top:14px;display:flex;flex-direction:column;gap:11px;}
+  .vp .row span{
+    display:block;font-family:var(--mono);font-size:9px;letter-spacing:0.26em;
+    color:var(--cyan);text-transform:uppercase;margin-bottom:3px;opacity:0.85;
+  }
+  .vp .row p{font-size:13px;color:#bfe2ee;line-height:1.5;}
+  .vp .row.outcome p{color:#dff6fb;font-weight:600;}
+  .vp .vp-bar{height:2px;width:46px;background:var(--cyan);margin-top:16px;border-radius:2px;box-shadow:0 0 10px rgba(70,232,255,0.7);}
+  /* ---------- CHAPTER HEADERS (centered) ---------- */
+  .vp.chapter{
+    left:50%;right:auto;width:min(720px,90vw);
+    background:none;border:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+    text-align:center;padding:0;
+    transform:translate(-50%,calc(-50% + 40px));
+  }
+  .vp.chapter .vp-tag{margin-bottom:16px;}
+  .vp.chapter h2{
+    font-size:clamp(26px,4.2vw,46px);line-height:1.12;
+    text-shadow:0 4px 36px rgba(0,30,50,0.9), 0 0 60px rgba(70,232,255,0.12);
+  }
+  .vp.chapter .chapter-sub{
+    margin-top:14px;font-size:clamp(14px,1.7vw,19px);color:#9fc4d3;
+  }
+  .vp.chapter .vp-bar{margin:22px auto 0;}
+  /* ---------- RESULTS PANEL ---------- */
+  .vp.results{
+    left:50%;right:auto;width:min(640px,92vw);
+    transform:translate(-50%,calc(-50% + 40px));
+    text-align:center;padding:30px 34px;
+  }
+  .stat-grid{
+    margin-top:20px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  }
+  .stat .num{
+    font-size:clamp(24px,3.4vw,38px);font-weight:700;color:var(--cyan);
+    text-shadow:0 0 18px rgba(70,232,255,0.5);font-family:var(--mono);letter-spacing:-0.02em;
+  }
+  .stat .lbl{margin-top:5px;font-size:11px;color:#9fc4d3;letter-spacing:0.06em;line-height:1.35;}
+  .vp.results .commit{
+    margin-top:22px;font-size:13px;color:#bfe2ee;line-height:1.55;
+    border-top:1px solid rgba(120,200,220,0.16);padding-top:16px;
+  }
+  /* ---------- TRACE CARDS ---------- */
+  .trace-card{
+    position:fixed;left:0;top:0;width:248px;z-index:4;pointer-events:none;
+    background:var(--panel-bg);
+    border:1px solid var(--cyan-dim);
+    border-radius:10px;padding:12px 14px 10px;
+    backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
+    box-shadow:0 8px 30px rgba(0,15,30,0.6), 0 0 16px rgba(70,232,255,0.08);
+    opacity:0;visibility:hidden;
+    will-change:transform,opacity;
+    font-size:11px;
+  }
+  .tc-head{display:flex;align-items:center;gap:8px;padding-bottom:8px;border-bottom:1px solid rgba(120,200,220,0.14);}
+  .tc-live{
+    width:7px;height:7px;border-radius:50%;background:var(--cyan);flex:none;
+    box-shadow:0 0 8px var(--cyan);animation:pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.35;transform:scale(0.7);}}
+  .tc-id{font-family:var(--mono);font-size:12px;color:#eaf7fb;letter-spacing:0.08em;font-weight:600;}
+  .tc-cat{font-family:var(--mono);font-size:10px;letter-spacing:0.22em;color:#dff2f8;text-transform:uppercase;font-weight:600;}
+  .tc-grid .v.good{color:#5cf2b8;}
+  .tc-grid .v.warn{color:#ff9b54;}
+  .tc-status{margin-left:auto;font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:20px;}
+  .tc-status.ok{color:#5cf2b8;background:rgba(40,200,140,0.12);border:1px solid rgba(60,230,160,0.3);}
+  .tc-status.sync{color:#ffd479;background:rgba(255,190,80,0.10);border:1px solid rgba(255,200,100,0.3);}
+  .tc-grid{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;padding:9px 0 8px;}
+  .tc-grid .l{color:#7da4b5;font-size:10px;letter-spacing:0.04em;}
+  .tc-grid .v{color:#d8f0f8;font-family:var(--mono);font-size:10.5px;text-align:right;letter-spacing:0.02em;}
+  .tc-foot{
+    border-top:1px solid rgba(120,200,220,0.14);padding-top:7px;
+    font-family:var(--mono);font-size:9.5px;color:#6f99ab;letter-spacing:0.05em;
+  }
+  .tc-dot{
+    position:fixed;width:9px;height:9px;border-radius:50%;z-index:4;pointer-events:none;
+    background:var(--cyan);box-shadow:0 0 12px var(--cyan),0 0 4px #fff inset;
+    opacity:0;visibility:hidden;transform:translate(-50%,-50%);will-change:transform,opacity;
+  }
+  /* ---------- CTA ---------- */
+  #cta{
+    position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    z-index:7;text-align:center;opacity:0;pointer-events:none;padding:0 24px;
+  }
+  #cta h2{font-size:clamp(28px,4.6vw,52px);color:#eef9fc;font-weight:700;max-width:760px;line-height:1.15;}
+  #cta p{margin-top:14px;color:#9fc4d3;font-size:16px;max-width:560px;line-height:1.55;}
+  #cta a{
+    margin-top:30px;display:inline-block;padding:15px 42px;border-radius:8px;
+    background:linear-gradient(135deg,#19c6ea,#46e8ff);color:#04222e;
+    font-weight:700;font-size:15px;text-decoration:none;letter-spacing:0.04em;
+    box-shadow:0 0 34px rgba(70,232,255,0.45);
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  #cta a:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(70,232,255,0.7);}
+  #webgl-fail{
+    position:fixed;inset:0;display:none;align-items:center;justify-content:center;
+    z-index:50;background:#03101a;color:#9fc4d3;font-size:15px;text-align:center;padding:30px;
+  }
+  @media (max-width:640px){
+    .vp{padding:20px 20px;}
+    .vp h2{font-size:18px;}
+    .vp .row p{font-size:12px;}
+    .trace-card{width:206px;font-size:10px;}
+    #hud{display:none;}
+    #kp-nav{right:10px;gap:6px;}
+    .kp-label{display:none;}
+    .stat-grid{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
+<body>
+
+<div id="scroll-space"></div>
+<canvas id="scene"></canvas>
+<svg id="lines" xmlns="http://www.w3.org/2000/svg"></svg>
+
+<div id="brand-corner"><img class="logo-img-sm" src="https://steeltrace.co/wp-content/themes/steeltrace/images/logo_white.svg" alt="SteelTrace" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';"><span class="logo-fallback" style="display:none;">Steel<span>Trace</span></span></div>
+<div id="hud">
+  <div class="line1">16&Prime; Export Pipeline &mdash; North Sea</div>
+  <div class="line2" id="hud-kp">KP 0+000 &nbsp;&middot;&nbsp; JT-0001</div>
+</div>
+<nav id="kp-nav"></nav>
+
+<header id="hero">
+  <div class="logo"><img class="logo-img" src="https://steeltrace.co/wp-content/themes/steeltrace/images/logo_white.svg" alt="SteelTrace" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';"><span class="logo-fallback" style="display:none;">Steel<span>Trace</span></span></div>
+  <h1>The Supply Chain Layer the Industry Is Missing</h1>
+  <p>Welcome to SteelTrace. A journey along the pipeline &mdash; every weld, every plate, every coating verified, traceable, and built for a digital lifetime.</p>
+</header>
+<div id="scroll-hint">Scroll to dive<span class="chev"></span></div>
+
+<!-- ============ CHAPTER I ============ -->
+<section class="vp chapter" data-t="0.055">
+  <div class="vp-tag">I &mdash; Across the Energy Supply Chain</div>
+  <h2>Across the energy supply chain</h2>
+  <div class="chapter-sub">Five segments. One Smart Manufacturing Record.</div>
+  <div class="vp-bar"></div>
+</section>
+
+<section class="vp" data-t="0.125" data-side="left" data-marker="1">
+  <div class="vp-tag">Segment 01 &mdash; OP</div>
+  <h2>Pipeline Operators (IOCs &amp; NOCs)</h2>
+  <div class="vp-rows">
+    <div class="row"><span>Who</span><p>Asset owners building onshore, offshore, LNG, hydrogen and CCS infrastructure &mdash; the market makers that define the rules.</p></div>
+    <div class="row"><span>Value</span><p>Compliance-by-design, blockchain-verified records and faster project-to-operations handover.</p></div>
+    <div class="row outcome"><span>Outcome</span><p>Trusted lifecycle data for integrity, AI and Digital Twins.</p></div>
+  </div>
+  <div class="vp-bar"></div>
+</section>
+
+<section class="vp" data-t="0.20" data-side="right" data-marker="1">
+  <div class="vp-tag">Segment 02 &mdash; EPC</div>
+  <h2>EPC Contractors</h2>
+  <div class="vp-rows">
+    <div class="row"><span>Who</span><p>Engineering, Procurement and Construction contractors coordinating pipeline construction from spoolbase to offshore vessel.</p></div>
+    <div class="row"><span>Value</span><p>Automated digital MRBs generated during production, with real-time supplier quality visibility.</p></div>
+    <div class="row outcome"><span>Outcome</span><p>Less QA/QC effort, cleaner deliverables, improved operator transparency.</p></div>
+  </div>
+  <div class="vp-bar"></div>
+</section>
+
+<section class="vp" data-t="0.275" data-side="left" data-marker="1">
+  <div class="vp-tag">Segment 03 &mdash; MFG</div>
+  <h2>Manufacturers &amp; Material Suppliers</h2>
+  <div class="vp-rows">
+    <div class="row"><span>Who</span><p>Steel mills, pipe makers, coating and clad companies generating critical production data.</p></div>
+    <div class="row"><span>Value</span><p>A data layer above MES &mdash; standardized exchange and melt-to-end-product traceability.</p></div>
+    <div class="row outcome"><span>Outcome</span><p>One channel across all operator customers.</p></div>
+  </div>
+  <div class="vp-bar"></div>
+</section>
+
+<section class="vp" data-t="0.35" data-side="right" data-marker="1">
+  <div class="vp-tag">Segment 04 &mdash; WLD</div>
+  <h2>Welding Contractors</h2>
+  <div class="vp-rows">
+    <div class="row"><span>Who</span><p>Pipeline welders and fabricators running welding-data platforms, automated inspection and qualification workflows.</p></div>
+    <div class="row"><span>Value</span><p>Weld parameters and inspections flow into the SMR automatically &mdash; one exchange channel for all clients.</p></div>
+    <div class="row outcome"><span>Outcome</span><p>Documentation workload replaced by data exchange.</p></div>
+  </div>
+  <div class="vp-bar"></div>
+</section>
+
+<section class="vp" data-t="0.425" data-side="left" data-marker="1">
+  <div class="vp-tag">Segment 05 &mdash; NDT</div>
+  <h2>Inspection &amp; Testing Companies</h2>
+  <div class="vp-rows">
+    <div class="row"><span>Who</span><p>NDT, AUT, destructive and non-destructive testing labs verifying materials, welds and coatings.</p></div>
+    <div class="row"><span>Value</span><p>Inspection results integrated directly into the SMR &mdash; digitally verified, immutable approvals.</p></div>
+    <div class="row outcome"><span>Outcome</span><p>Stronger compliance and audit readiness.</p></div>
+  </div>
+  <div class="vp-bar"></div>
+</section>
+
+<!-- ============ CHAPTER II ============ -->
+<section class="vp chapter" data-t="0.50">
+  <div class="vp-tag">II &mdash; Inside the Buyer Organization</div>
+  <h2>Inside the buyer organization</h2>
+  <div class="chapter-sub">Five stakeholders. One shared, verified source of truth.</div>
+  <div class="vp-bar"></div>
+</section>
+
+<section class="vp" data-t="0.575" data-side="right" data-marker="1">
+  <div class="vp-tag">Stakeholder 01 &mdash; EXEC</div>
+  <h2>Executive Leadership</h2>
+  <div class="vp-rows">
+    <div class="row"><span>Who</span><p>VPs and Directors of Quality, Engineering, Operations, Integrity and Supply Chain at IOCs, NOCs and Tier-1 EPCs.</p></div>
+    <div class="row"><span>Value</span><p>Compliance-by-design, trusted data for AI, and lifecycle traceability protecting residual asset value.</p></div>
+    <div class="row outcome"><span>Outcome</span><p>Lower execution risk, automation cost efficiency, supply-chain transparency.</p></div>
+  </div>
+  <div class="vp-bar"></div>
+</section>
+
+<section class="vp" data-t="0.65" data-side="left" data-marker="1">
+  <div class="vp-tag">Stakeholder 02 &mdash; QA/QC</div>
+  <h2>QA / QC Teams</h2>
+  <div class="vp-rows">
+    <div class="row"><span>Who</span><p>QA/QC managers, project engineers, supplier-quality leads and inspection coordinators &mdash; the primary daily users.</p></div>
+    <div class="row"><span>Value</span><p>Rule-based validation against QCP/ITP, an immutable audit trail, and earlier NCR detection.</p></div>
+    <div class="row outcome"><span>Outcome</span><p>From document chasing to engineering oversight.</p></div>
+  </div>
+  <div class="vp-bar"></div>
+</section>
+
+<section class="vp" data-t="0.72" data-side="right" data-marker="1">
+  <div class="vp-tag">Stakeholder 03 &mdash; PM</div>
+  <h2>Project Management</h2>
+  <div class="vp-rows">
+    <div class="row"><span>Who</span><p>Project managers and execution directors at operators and EPCs &mdash; typically the budget owner.</p></div>
+    <div class="row"><span>Value</span><p>Digital approval workflows, earlier compliance detection, one shared and verified dataset.</p></div>
+    <div class="row outcome"><span>Outcome</span><p>Faster mechanical completion and handover.</p></div>
+  </div>
+  <div class="vp-bar"></div>
+</section>
+
+<section class="vp" data-t="0.79" data-side="left" data-marker="1">
+  <div class="vp-tag">Stakeholder 04 &mdash; OPS</div>
+  <h2>Operations &amp; Asset Integrity</h2>
+  <div class="vp-rows">
+    <div class="row"><span>Who</span><p>Asset-integrity, reliability and maintenance leaders responsible for the asset after handover.</p></div>
+    <div class="row"><span>Value</span><p>Instant access to verified manufacturing history, integrated with CMMS and digital twins.</p></div>
+    <div class="row outcome"><span>Outcome</span><p>Verified residual value at decommissioning.</p></div>
+  </div>
+  <div class="vp-bar"></div>
+</section>
+
+<section class="vp" data-t="0.86" data-side="right" data-marker="1">
+  <div class="vp-tag">Stakeholder 05 &mdash; DIG</div>
+  <h2>Digital Transformation</h2>
+  <div class="vp-rows">
+    <div class="row"><span>Who</span><p>Digital transformation leads, IT and enterprise architects, Digital Twin and data teams.</p></div>
+    <div class="row"><span>Value</span><p>Structured AI-ready datasets, open APIs, and blockchain-secured records (EAS / Ethereum L2).</p></div>
+    <div class="row outcome"><span>Outcome</span><p>The supply-chain data layer the industry is missing.</p></div>
+  </div>
+  <div class="vp-bar"></div>
+</section>
+
+<!-- ============ RESULTS ============ -->
+<section class="vp results" data-t="0.905">
+  <div class="vp-tag">Results &mdash; Proven at Tier-1 Scale</div>
+  <h2>Smart Manufacturing Records in production</h2>
+  <div class="stat-grid">
+    <div class="stat"><div class="num">74%</div><div class="lbl">Fewer NCRs</div></div>
+    <div class="stat"><div class="num">60%</div><div class="lbl">Less QA/QC effort</div></div>
+    <div class="stat"><div class="num">100%</div><div class="lbl">Digital MRBs</div></div>
+    <div class="stat"><div class="num">0</div><div class="lbl">Paper handovers</div></div>
+  </div>
+  <div class="commit">Our commitment: the standard for Smart Manufacturing Records in safety-critical industries &mdash; trusted data for safety, performance and capital efficiency.</div>
+</section>
+
+<section id="cta">
+  <h2>Ready to trace every weld on your next project?</h2>
+  <p>SteelTrace turns supplier documentation into live, verified, searchable material data &mdash; from the mill to the seabed.</p>
+  <a href="https://steeltrace.io" target="_blank" rel="noopener">Book a demo</a>
+</section>
+
+<div id="webgl-fail">WebGL is not available in this browser, so the 3D pipeline cannot be rendered.<br>Please try a recent version of Chrome, Edge, Firefox or Safari.</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+"use strict";
+
+if(!window.THREE){
+  document.getElementById("webgl-fail").style.display = "flex";
+  return;
+}
+try{
+  var testCanvas = document.createElement("canvas");
+  var gl = testCanvas.getContext("webgl") || testCanvas.getContext("experimental-webgl");
+  if(!gl){ document.getElementById("webgl-fail").style.display = "flex"; return; }
+}catch(e){
+  document.getElementById("webgl-fail").style.display = "flex"; return;
+}
+
+/* ============================================================
+   UTILITIES — seeded RNG and value noise
+============================================================ */
+function mulberry32(seed){
+  var a = seed >>> 0;
+  return function(){
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    var t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function hash2(ix, iy){
+  var n = (Math.imul(ix, 374761393) + Math.imul(iy, 668265263)) | 0;
+  n = Math.imul(n ^ (n >>> 13), 1274126177);
+  n = n ^ (n >>> 16);
+  return (n >>> 0) / 4294967296;
+}
+function smooth01(t){ return t * t * (3 - 2 * t); }
+function clamp(v, a, b){ return v < a ? a : (v > b ? b : v); }
+function easeInOutCubic(t){ return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+function vnoise(x, y){
+  var ix = Math.floor(x), iy = Math.floor(y);
+  var fx = x - ix, fy = y - iy;
+  var a = hash2(ix, iy), b = hash2(ix + 1, iy);
+  var c = hash2(ix, iy + 1), d = hash2(ix + 1, iy + 1);
+  var u = smooth01(fx), v = smooth01(fy);
+  return a * (1 - u) * (1 - v) + b * u * (1 - v) + c * (1 - u) * v + d * u * v;
+}
+function fbm(x, y){
+  var s = 0, amp = 0.5, f = 1;
+  for(var i = 0; i < 4; i++){
+    s += amp * vnoise(x * f, y * f);
+    f *= 2.07; amp *= 0.5;
+  }
+  return s;
+}
+
+/* ============================================================
+   SEABED HEIGHT FIELD (shared by terrain + pipeline path)
+============================================================ */
+var PIPE_R = 0.65;
+function seabedBase(x, z){
+  var h = fbm(x * 0.013 + 7.3, z * 0.013 - 2.1) * 7.0 - 3.5;
+  h += fbm(x * 0.05 - 3.0, z * 0.05 + 11.0) * 1.4 - 0.7;
+  return h;
+}
+function seabedDetail(x, z){
+  var r = Math.sin(x * 1.05 + z * 0.42 + fbm(x * 0.12, z * 0.12) * 6.0) * 0.07;
+  r += Math.sin(x * 0.43 - z * 0.71) * 0.045;
+  r += (vnoise(x * 0.8 + 50, z * 0.8 - 30) - 0.5) * 0.13;
+  return r;
+}
+
+/* ============================================================
+   RENDERER / SCENE / CAMERA / LIGHTS
+============================================================ */
+var canvas = document.getElementById("scene");
+var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, powerPreference: "high-performance" });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.2;
+renderer.outputEncoding = THREE.sRGBEncoding;
+
+var scene = new THREE.Scene();
+var FOG_COLOR = new THREE.Color(0x07212e);
+scene.fog = new THREE.FogExp2(FOG_COLOR.getHex(), 0.020);
+scene.background = FOG_COLOR;
+
+var camera = new THREE.PerspectiveCamera(58, window.innerWidth / window.innerHeight, 0.1, 280);
+
+var hemi = new THREE.HemisphereLight(0x2a6b7c, 0x1a2c24, 0.6);
+scene.add(hemi);
+
+var sun = new THREE.DirectionalLight(0xbfe8f5, 1.5);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+sun.shadow.camera.near = 5;
+sun.shadow.camera.far = 170;
+sun.shadow.camera.left = -48;
+sun.shadow.camera.right = 48;
+sun.shadow.camera.top = 48;
+sun.shadow.camera.bottom = -48;
+sun.shadow.bias = -0.0015;
+sun.shadow.radius = 4;
+scene.add(sun);
+scene.add(sun.target);
+
+var fill = new THREE.PointLight(0x2288aa, 0.55, 42, 2);
+scene.add(fill);
+
+/* ============================================================
+   PROCEDURAL TEXTURES
+============================================================ */
+function canvasOf(w, h){
+  var c = document.createElement("canvas");
+  c.width = w; c.height = h;
+  return c;
+}
+
+/* ---- Pipe coating textures: uniform dark anti-corrosion coating
+       with subtle, low-contrast wear (no banding) ---- */
+function makePipeTextures(){
+  var W = 1024, H = 1024;
+  var rng = mulberry32(48271);
+
+  // Shared procedural feature lists so all maps stay aligned
+  var wornSpots = [];
+  for(var i = 0; i < 38; i++){
+    wornSpots.push({ x: rng() * W, y: rng() * H, r: 8 + rng() * 22, a: 0.10 + rng() * 0.20 });
+  }
+  var streaks = [];
+  for(i = 0; i < 18; i++){
+    streaks.push({ x: rng() * W, y: rng() * H, len: 50 + rng() * 160, w: 2.5 + rng() * 7, a: 0.05 + rng() * 0.10 });
+  }
+  var scratches = [];
+  for(i = 0; i < 60; i++){
+    scratches.push({ x: rng() * W, y: rng() * H, dx: (rng() - 0.5) * 110, dy: (rng() - 0.5) * 36, a: 0.025 + rng() * 0.06 });
+  }
+  var speckles = [];
+  for(i = 0; i < 6000; i++){
+    speckles.push({ x: rng() * W, y: rng() * H, s: 0.6 + rng() * 2.0, t: rng() });
+  }
+
+  /* ---------- diffuse: consistent dark coating ---------- */
+  var dC = canvasOf(W, H), d = dC.getContext("2d");
+  d.fillStyle = "#23282c"; d.fillRect(0, 0, W, H);
+  // fine grain, very low contrast
+  for(i = 0; i < speckles.length; i++){
+    var sp = speckles[i];
+    var g = 30 + Math.floor(sp.t * 14);
+    d.fillStyle = "rgba(" + g + "," + (g + 3) + "," + (g + 5) + "," + (0.10 + sp.t * 0.14).toFixed(3) + ")";
+    d.fillRect(sp.x, sp.y, sp.s * 3, sp.s * 3);
+  }
+  // soft large-scale tonal variation (keeps the surface alive without stripes)
+  for(i = 0; i < 18; i++){
+    var gx = rng() * W, gy = rng() * H, gr = 160 + rng() * 320;
+    var grad = d.createRadialGradient(gx, gy, 0, gx, gy, gr);
+    var tone = rng() < 0.5 ? "rgba(16,20,24,0.10)" : "rgba(52,60,66,0.07)";
+    grad.addColorStop(0, tone); grad.addColorStop(1, "rgba(0,0,0,0)");
+    d.fillStyle = grad; d.fillRect(gx - gr, gy - gr, gr * 2, gr * 2);
+  }
+  // subtle worn coating spots (hint of steel beneath)
+  for(i = 0; i < wornSpots.length; i++){
+    var ws = wornSpots[i];
+    var wg = d.createRadialGradient(ws.x, ws.y, 0, ws.x, ws.y, ws.r);
+    wg.addColorStop(0, "rgba(96,104,112," + ws.a.toFixed(3) + ")");
+    wg.addColorStop(0.7, "rgba(70,78,86," + (ws.a * 0.4).toFixed(3) + ")");
+    wg.addColorStop(1, "rgba(0,0,0,0)");
+    d.fillStyle = wg;
+    d.fillRect(ws.x - ws.r, ws.y - ws.r, ws.r * 2, ws.r * 2);
+  }
+  // faint mineral / rust staining
+  for(i = 0; i < streaks.length; i++){
+    var st = streaks[i];
+    var rg2 = d.createLinearGradient(st.x, st.y, st.x, st.y + st.len);
+    rg2.addColorStop(0, "rgba(110,70,40," + st.a.toFixed(3) + ")");
+    rg2.addColorStop(1, "rgba(0,0,0,0)");
+    d.fillStyle = rg2;
+    d.beginPath();
+    d.moveTo(st.x - st.w * 0.5, st.y);
+    d.lineTo(st.x + st.w * 0.5, st.y);
+    d.lineTo(st.x + st.w * 0.15, st.y + st.len);
+    d.lineTo(st.x - st.w * 0.15, st.y + st.len);
+    d.closePath(); d.fill();
+  }
+  // hairline scratches
+  for(i = 0; i < scratches.length; i++){
+    var sc = scratches[i];
+    d.strokeStyle = "rgba(140,150,158," + sc.a.toFixed(3) + ")";
+    d.lineWidth = 0.7;
+    d.beginPath(); d.moveTo(sc.x, sc.y); d.lineTo(sc.x + sc.dx, sc.y + sc.dy); d.stroke();
+  }
+
+  /* ---------- roughness ---------- */
+  var rC = canvasOf(W, H), r = rC.getContext("2d");
+  r.fillStyle = "#a8a8a8"; r.fillRect(0, 0, W, H);
+  for(i = 0; i < speckles.length; i += 2){
+    sp = speckles[i];
+    var rv = 150 + Math.floor(sp.t * 50);
+    r.fillStyle = "rgba(" + rv + "," + rv + "," + rv + ",0.25)";
+    r.fillRect(sp.x, sp.y, sp.s * 3, sp.s * 3);
+  }
+  for(i = 0; i < wornSpots.length; i++){
+    ws = wornSpots[i];
+    wg = r.createRadialGradient(ws.x, ws.y, 0, ws.x, ws.y, ws.r);
+    wg.addColorStop(0, "rgba(70,70,70," + (ws.a * 1.6).toFixed(3) + ")");
+    wg.addColorStop(1, "rgba(0,0,0,0)");
+    r.fillStyle = wg;
+    r.fillRect(ws.x - ws.r, ws.y - ws.r, ws.r * 2, ws.r * 2);
+  }
+
+  /* ---------- metalness ---------- */
+  var mC = canvasOf(W, H), m = mC.getContext("2d");
+  m.fillStyle = "#484848"; m.fillRect(0, 0, W, H);
+  for(i = 0; i < wornSpots.length; i++){
+    ws = wornSpots[i];
+    wg = m.createRadialGradient(ws.x, ws.y, 0, ws.x, ws.y, ws.r);
+    wg.addColorStop(0, "rgba(190,190,190," + (ws.a * 1.8).toFixed(3) + ")");
+    wg.addColorStop(1, "rgba(0,0,0,0)");
+    m.fillStyle = wg;
+    m.fillRect(ws.x - ws.r, ws.y - ws.r, ws.r * 2, ws.r * 2);
+  }
+
+  /* ---------- bump ---------- */
+  var bC = canvasOf(W, H), bp = bC.getContext("2d");
+  bp.fillStyle = "#808080"; bp.fillRect(0, 0, W, H);
+  for(i = 0; i < speckles.length; i++){
+    sp = speckles[i];
+    var bv = 118 + Math.floor(sp.t * 20);
+    bp.fillStyle = "rgba(" + bv + "," + bv + "," + bv + ",0.30)";
+    bp.fillRect(sp.x, sp.y, sp.s * 2, sp.s * 2);
+  }
+  for(i = 0; i < wornSpots.length; i++){
+    ws = wornSpots[i];
+    wg = bp.createRadialGradient(ws.x, ws.y, 0, ws.x, ws.y, ws.r);
+    wg.addColorStop(0, "rgba(106,106,106," + (ws.a * 1.2).toFixed(3) + ")");
+    wg.addColorStop(1, "rgba(0,0,0,0)");
+    bp.fillStyle = wg;
+    bp.fillRect(ws.x - ws.r, ws.y - ws.r, ws.r * 2, ws.r * 2);
+  }
+
+  function wrapTex(c, srgb){
+    var t = new THREE.CanvasTexture(c);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    if(srgb){ t.encoding = THREE.sRGBEncoding; }
+    t.anisotropy = 4;
+    return t;
+  }
+  return {
+    map: wrapTex(dC, true),
+    roughnessMap: wrapTex(rC, false),
+    metalnessMap: wrapTex(mC, false),
+    bumpMap: wrapTex(bC, false)
+  };
+}
+
+/* ---- Seabed sediment textures: per-pixel diffuse + bump ---- */
+function makeSeabedTextures(){
+  var S = 512;
+  var dC = canvasOf(S, S), d = dC.getContext("2d");
+  var bC = canvasOf(S, S), b = bC.getContext("2d");
+  var dImg = d.createImageData(S, S);
+  var bImg = b.createImageData(S, S);
+  var dd = dImg.data, bd = bImg.data;
+  for(var y = 0; y < S; y++){
+    for(var x = 0; x < S; x++){
+      var ang1 = (x / S) * Math.PI * 2;
+      var ang2 = (y / S) * Math.PI * 2;
+      var tx = Math.cos(ang1) * 3.2, ty = Math.sin(ang1) * 3.2;
+      var tz = Math.cos(ang2) * 3.2, tw = Math.sin(ang2) * 3.2;
+      var n = fbm(tx + tz * 1.7 + 13.0, ty + tw * 1.7 - 4.0);
+      var silt = fbm(tx * 0.45 + tw + 31.0, ty * 0.45 + tz + 8.0);
+      var grain = vnoise(x * 0.9 + 200, y * 0.9 - 120);
+      var ripple = Math.sin(ang2 * 9.0 + n * 5.0 + Math.sin(ang1 * 2.0) * 1.4);
+      var sR = 152, sG = 134, sB = 100;
+      var iR = 104, iG = 97, iB = 80;
+      var mix = clamp(silt * 1.3 - 0.18, 0, 1);
+      var rr = sR + (iR - sR) * mix;
+      var gg = sG + (iG - sG) * mix;
+      var bb = sB + (iB - sB) * mix;
+      var lum = 0.86 + (n - 0.5) * 0.5 + (grain - 0.5) * 0.22 + ripple * 0.05;
+      var idx = (y * S + x) * 4;
+      dd[idx] = clamp(rr * lum, 0, 255);
+      dd[idx + 1] = clamp(gg * lum, 0, 255);
+      dd[idx + 2] = clamp(bb * lum, 0, 255);
+      dd[idx + 3] = 255;
+      var hgt = 128 + ripple * 36 + (n - 0.5) * 70 + (grain - 0.5) * 26;
+      hgt = clamp(hgt, 0, 255);
+      bd[idx] = hgt; bd[idx + 1] = hgt; bd[idx + 2] = hgt; bd[idx + 3] = 255;
+    }
+  }
+  d.putImageData(dImg, 0, 0);
+  b.putImageData(bImg, 0, 0);
+  var map = new THREE.CanvasTexture(dC);
+  map.wrapS = map.wrapT = THREE.RepeatWrapping;
+  map.encoding = THREE.sRGBEncoding;
+  map.anisotropy = 4;
+  var bump = new THREE.CanvasTexture(bC);
+  bump.wrapS = bump.wrapT = THREE.RepeatWrapping;
+  return { map: map, bump: bump };
+}
+
+/* ---- Caustic light-web texture (tiling) ---- */
+function makeCausticTexture(){
+  var S = 512;
+  var c = canvasOf(S, S), x = c.getContext("2d");
+  x.fillStyle = "#000000"; x.fillRect(0, 0, S, S);
+  x.globalCompositeOperation = "lighter";
+  var rng = mulberry32(7331);
+  var offs = [-S, 0, S];
+  for(var pass = 0; pass < 2; pass++){
+    var count = pass === 0 ? 60 : 34;
+    for(var i = 0; i < count; i++){
+      var cx = rng() * S, cy = rng() * S;
+      var rad = 22 + rng() * 64;
+      var nPts = 12;
+      var jit = [];
+      for(var k = 0; k <= nPts; k++){
+        jit.push(rad * (0.55 + rng() * 0.85));
+      }
+      jit[nPts] = jit[0];
+      var alpha = pass === 0 ? 0.045 + rng() * 0.06 : 0.10 + rng() * 0.10;
+      var lw = pass === 0 ? 2.2 + rng() * 3.0 : 1.0 + rng() * 1.4;
+      for(var oy = 0; oy < 3; oy++){
+        for(var ox = 0; ox < 3; ox++){
+          x.strokeStyle = "rgba(255,255,255," + alpha.toFixed(3) + ")";
+          x.lineWidth = lw;
+          x.beginPath();
+          for(k = 0; k <= nPts; k++){
+            var a2 = (k / nPts) * Math.PI * 2;
+            var px = cx + offs[ox] + Math.cos(a2) * jit[k];
+            var py = cy + offs[oy] + Math.sin(a2) * jit[k];
+            if(k === 0){ x.moveTo(px, py); } else { x.lineTo(px, py); }
+          }
+          x.closePath(); x.stroke();
+        }
+      }
+    }
+  }
+  var t = new THREE.CanvasTexture(c);
+  t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  return t;
+}
+
+/* ---- Soft round particle sprite ---- */
+function makeSpriteTexture(rgb){
+  var S = 64;
+  var c = canvasOf(S, S), x = c.getContext("2d");
+  var g = x.createRadialGradient(S / 2, S / 2, 0, S / 2, S / 2, S / 2);
+  g.addColorStop(0, "rgba(" + rgb + ",1)");
+  g.addColorStop(0.35, "rgba(" + rgb + ",0.55)");
+  g.addColorStop(1, "rgba(" + rgb + ",0)");
+  x.fillStyle = g; x.fillRect(0, 0, S, S);
+  return new THREE.CanvasTexture(c);
+}
+
+/* ---- Vertical light-shaft gradient ---- */
+function makeShaftTexture(){
+  var c = canvasOf(64, 256), x = c.getContext("2d");
+  var g = x.createLinearGradient(0, 0, 0, 256);
+  g.addColorStop(0, "rgba(255,255,255,0.55)");
+  g.addColorStop(0.4, "rgba(255,255,255,0.20)");
+  g.addColorStop(1, "rgba(255,255,255,0)");
+  x.fillStyle = g; x.fillRect(0, 0, 64, 256);
+  var t = new THREE.CanvasTexture(c);
+  t.wrapS = THREE.RepeatWrapping;
+  t.wrapT = THREE.ClampToEdgeWrapping;
+  return t;
+}
+
+/* ============================================================
+   PIPELINE CURVE
+============================================================ */
+var ctrlPts = [];
+var SEGS = 26, STEP = 54;
+for(var ci = 0; ci <= SEGS; ci++){
+  var cz = -ci * STEP;
+  var cx = Math.sin(ci * 0.55) * 32 + Math.sin(ci * 0.23 + 1.7) * 20 + Math.sin(ci * 0.9 + 4.0) * 6;
+  var cy = seabedBase(cx, cz) + PIPE_R * 0.62;
+  ctrlPts.push(new THREE.Vector3(cx, cy, cz));
+}
+var curve = new THREE.CatmullRomCurve3(ctrlPts, false, "catmullrom", 0.5);
+var totalLen = curve.getLength();
+
+var SAMPLE_N = 900;
+var pipeSamples = curve.getSpacedPoints(SAMPLE_N);
+var zSpan = -pipeSamples[SAMPLE_N].z;
+
+function nearestPipeSample(x, z){
+  // binary search on (monotonically decreasing) sample z, then refine locally
+  var lo = 0, hi = SAMPLE_N;
+  while(hi - lo > 1){
+    var mid = (lo + hi) >> 1;
+    if(pipeSamples[mid].z > z){ lo = mid; } else { hi = mid; }
+  }
+  var best = lo, bestD = Infinity;
+  var a = Math.max(0, lo - 10), b = Math.min(SAMPLE_N, lo + 10);
+  for(var s = a; s <= b; s++){
+    var dx = pipeSamples[s].x - x, dz = pipeSamples[s].z - z;
+    var dd = dx * dx + dz * dz;
+    if(dd < bestD){ bestD = dd; best = s; }
+  }
+  return { idx: best, dist: Math.sqrt(bestD) };
+}
+
+function terrainHeight(x, z){
+  var y = seabedBase(x, z) + seabedDetail(x, z);
+  if(z < 60 && z > -zSpan - 60){
+    var near = nearestPipeSample(x, z);
+    var dHor = near.dist;
+    if(dHor < 7){
+      var sy = pipeSamples[near.idx].y;
+      var pipeFloor = sy - PIPE_R * 0.62;
+      var berm = 0.22 * Math.exp(-Math.pow((dHor - 1.7) / 0.9, 2));
+      var w = smooth01(clamp(1 - dHor / 7, 0, 1));
+      y = y * (1 - w) + (pipeFloor + berm) * w + seabedDetail(x, z) * 0.25 * w;
+    }
+  }
+  return y;
+}
+
+/* ============================================================
+   SEABED MESH
+============================================================ */
+var seabedTex = makeSeabedTextures();
+var causticTex = makeCausticTexture();
+
+var seabedGeo = new THREE.PlaneGeometry(380, 1640, 150, 640);
+seabedGeo.rotateX(-Math.PI / 2);
+seabedGeo.translate(0, 0, -700);
+(function(){
+  var pos = seabedGeo.attributes.position;
+  for(var i = 0; i < pos.count; i++){
+    var x = pos.getX(i), z = pos.getZ(i);
+    pos.setY(i, terrainHeight(x, z));
+  }
+  pos.needsUpdate = true;
+  seabedGeo.computeVertexNormals();
+})();
+
+var seabedCaustic = causticTex.clone();
+seabedCaustic.needsUpdate = true;
+seabedCaustic.repeat.set(34, 150);
+
+seabedTex.map.repeat.set(46, 200);
+seabedTex.bump.repeat.set(46, 200);
+
+var seabedMat = new THREE.MeshStandardMaterial({
+  color: 0x96856a,
+  map: seabedTex.map,
+  bumpMap: seabedTex.bump,
+  bumpScale: 0.45,
+  roughness: 0.96,
+  metalness: 0.0,
+  emissive: 0x2a7080,
+  emissiveIntensity: 0.5,
+  emissiveMap: seabedCaustic
+});
+var seabed = new THREE.Mesh(seabedGeo, seabedMat);
+seabed.receiveShadow = true;
+scene.add(seabed);
+
+/* ============================================================
+   PIPELINE MESH + WELD RINGS + ANODES
+============================================================ */
+var pipeTex = makePipeTextures();
+var uRepeat = 26; // low-frequency tiling: consistent coating, no banding
+pipeTex.map.repeat.set(uRepeat, 2);
+pipeTex.roughnessMap.repeat.set(uRepeat, 2);
+pipeTex.metalnessMap.repeat.set(uRepeat, 2);
+pipeTex.bumpMap.repeat.set(uRepeat, 2);
+
+var pipeCaustic = causticTex.clone();
+pipeCaustic.needsUpdate = true;
+pipeCaustic.repeat.set(30, 1.5);
+
+var pipeMat = new THREE.MeshPhysicalMaterial({
+  color: 0x363c42,
+  map: pipeTex.map,
+  roughnessMap: pipeTex.roughnessMap,
+  roughness: 1.0,
+  metalnessMap: pipeTex.metalnessMap,
+  metalness: 1.0,
+  bumpMap: pipeTex.bumpMap,
+  bumpScale: 0.012,
+  clearcoat: 0.30,
+  clearcoatRoughness: 0.55,
+  emissive: 0x1d5563,
+  emissiveIntensity: 0.22,
+  emissiveMap: pipeCaustic
+});
+
+var tubeGeo = new THREE.TubeGeometry(curve, 1500, PIPE_R, 26, false);
+var pipe = new THREE.Mesh(tubeGeo, pipeMat);
+pipe.castShadow = true;
+pipe.receiveShadow = true;
+scene.add(pipe);
+
+/* Joints */
+var JOINT_LEN = 12.2;
+var nJoints = Math.floor(totalLen / JOINT_LEN);
+
+var UP = new THREE.Vector3(0, 1, 0);
+var AXIS_Z = new THREE.Vector3(0, 0, 1);
+var AXIS_Y = new THREE.Vector3(0, 1, 0);
+
+/* Weld rings — instanced tori at every joint boundary */
+var weldGeo = new THREE.TorusGeometry(PIPE_R + 0.012, 0.05, 8, 26);
+var weldMat = new THREE.MeshStandardMaterial({
+  color: 0x3f4549, roughness: 0.6, metalness: 0.75,
+  emissive: 0x10262c, emissiveIntensity: 0.2
+});
+var welds = new THREE.InstancedMesh(weldGeo, weldMat, nJoints + 1);
+(function(){
+  var mat4 = new THREE.Matrix4();
+  var quat = new THREE.Quaternion();
+  var sc = new THREE.Vector3(1, 1, 1);
+  for(var k = 0; k <= nJoints; k++){
+    var t = clamp((k * JOINT_LEN) / totalLen, 0, 1);
+    var p = curve.getPointAt(t);
+    var tan = curve.getTangentAt(t);
+    quat.setFromUnitVectors(AXIS_Z, tan);
+    mat4.compose(p, quat, sc);
+    welds.setMatrixAt(k, mat4);
+  }
+  welds.instanceMatrix.needsUpdate = true;
+})();
+welds.castShadow = true;
+scene.add(welds);
+
+/* Sacrificial anode bracelets — every 8th joint */
+var anodeIdx = [];
+for(var ak = 4; ak < nJoints; ak += 8){ anodeIdx.push(ak); }
+var anodeGeo = new THREE.CylinderGeometry(PIPE_R + 0.075, PIPE_R + 0.075, 0.55, 18, 1, true);
+var anodeMat = new THREE.MeshStandardMaterial({
+  color: 0x9aa4a9, roughness: 0.55, metalness: 0.8,
+  emissive: 0x16404c, emissiveIntensity: 0.25, side: THREE.DoubleSide
+});
+var anodes = new THREE.InstancedMesh(anodeGeo, anodeMat, anodeIdx.length);
+(function(){
+  var mat4 = new THREE.Matrix4();
+  var quat = new THREE.Quaternion();
+  var sc = new THREE.Vector3(1, 1, 1);
+  for(var i = 0; i < anodeIdx.length; i++){
+    var t = clamp(((anodeIdx[i] + 0.32) * JOINT_LEN) / totalLen, 0, 1);
+    var p = curve.getPointAt(t);
+    var tan = curve.getTangentAt(t);
+    quat.setFromUnitVectors(AXIS_Y, tan);
+    mat4.compose(p, quat, sc);
+    anodes.setMatrixAt(i, mat4);
+  }
+  anodes.instanceMatrix.needsUpdate = true;
+})();
+anodes.castShadow = true;
+scene.add(anodes);
+
+/* ============================================================
+   ROCKS — instanced craggy boulders
+============================================================ */
+var rockGeo = new THREE.IcosahedronGeometry(1, 1);
+(function(){
+  var pos = rockGeo.attributes.position;
+  for(var i = 0; i < pos.count; i++){
+    var vx = pos.getX(i), vy = pos.getY(i), vz = pos.getZ(i);
+    var s = 0.72 + fbm(vx * 1.9 + 5.0, vy * 1.9 + vz * 1.3 - 7.0) * 0.62;
+    pos.setXYZ(i, vx * s, vy * s * 0.72, vz * s);
+  }
+  pos.needsUpdate = true;
+  rockGeo.computeVertexNormals();
+})();
+var rockMap = seabedTex.map.clone();
+rockMap.needsUpdate = true;
+rockMap.repeat.set(1.5, 1.5);
+var rockMat = new THREE.MeshStandardMaterial({
+  color: 0x6a6358, map: rockMap, roughness: 0.95, metalness: 0.0,
+  emissive: 0x1c4a56, emissiveIntensity: 0.25
+});
+var N_ROCKS = 240;
+var rocks = new THREE.InstancedMesh(rockGeo, rockMat, N_ROCKS);
+(function(){
+  var rng = mulberry32(20260611);
+  var mat4 = new THREE.Matrix4();
+  var quat = new THREE.Quaternion();
+  var eul = new THREE.Euler();
+  var scv = new THREE.Vector3();
+  var pv = new THREE.Vector3();
+  for(var i = 0; i < N_ROCKS; i++){
+    var t = rng();
+    var sIdx = Math.floor(t * SAMPLE_N);
+    var base = pipeSamples[sIdx];
+    var side = (rng() < 0.5 ? -1 : 1) * (4.5 + rng() * 42);
+    var x = base.x + side + (rng() - 0.5) * 10;
+    var z = base.z + (rng() - 0.5) * 30;
+    var scale = 0.22 + Math.pow(rng(), 2.2) * 1.7;
+    var y = terrainHeight(x, z) + scale * 0.12;
+    eul.set(rng() * Math.PI, rng() * Math.PI * 2, rng() * Math.PI);
+    quat.setFromEuler(eul);
+    scv.set(scale * (0.8 + rng() * 0.5), scale * (0.55 + rng() * 0.4), scale * (0.8 + rng() * 0.5));
+    pv.set(x, y, z);
+    mat4.compose(pv, quat, scv);
+    rocks.setMatrixAt(i, mat4);
+  }
+  rocks.instanceMatrix.needsUpdate = true;
+})();
+rocks.castShadow = true;
+rocks.receiveShadow = true;
+scene.add(rocks);
+
+/* ============================================================
+   GOD RAYS — animated additive cones that follow the camera
+============================================================ */
+var shaftTex = makeShaftTexture();
+var rayGroup = new THREE.Group();
+var rays = [];
+(function(){
+  var rng = mulberry32(515);
+  for(var i = 0; i < 8; i++){
+    var topR = 1.6 + rng() * 2.4;
+    var botR = topR * (2.6 + rng() * 1.6);
+    var h = 52 + rng() * 18;
+    var geo = new THREE.CylinderGeometry(topR, botR, h, 10, 1, true);
+    var mat = new THREE.MeshBasicMaterial({
+      map: shaftTex,
+      color: 0x7fd8e8,
+      transparent: true,
+      opacity: 0.05,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      side: THREE.DoubleSide,
+      fog: false
+    });
+    var cone = new THREE.Mesh(geo, mat);
+    cone.position.set((rng() - 0.5) * 60, 22 + rng() * 8, -10 - rng() * 70);
+    cone.rotation.z = (rng() - 0.5) * 0.22;
+    cone.rotation.x = (rng() - 0.5) * 0.10;
+    cone.renderOrder = 5;
+    rays.push({ mesh: cone, base: 0.035 + rng() * 0.045, phase: rng() * Math.PI * 2, spin: (rng() - 0.5) * 0.1 });
+    rayGroup.add(cone);
+  }
+})();
+scene.add(rayGroup);
+
+/* ============================================================
+   MARINE SNOW — drifting particulates wrapped around camera
+============================================================ */
+var SNOW_N = 1500;
+var snowGeo = new THREE.BufferGeometry();
+var snowPos = new Float32Array(SNOW_N * 3);
+var snowData = [];
+(function(){
+  var rng = mulberry32(99173);
+  for(var i = 0; i < SNOW_N; i++){
+    snowData.push({
+      x: (rng() - 0.5) * 120,
+      y: (rng() - 0.5) * 56,
+      z: (rng() - 0.5) * 160,
+      sp: 0.12 + rng() * 0.4,
+      ph: rng() * Math.PI * 2,
+      am: 0.2 + rng() * 0.7
+    });
+    snowPos[i * 3] = 0; snowPos[i * 3 + 1] = 0; snowPos[i * 3 + 2] = 0;
+  }
+})();
+snowGeo.setAttribute("position", new THREE.BufferAttribute(snowPos, 3).setUsage(THREE.DynamicDrawUsage));
+var snowMat = new THREE.PointsMaterial({
+  size: 0.16,
+  map: makeSpriteTexture("210,235,245"),
+  transparent: true,
+  opacity: 0.65,
+  depthWrite: false,
+  sizeAttenuation: true,
+  blending: THREE.NormalBlending
+});
+var snow = new THREE.Points(snowGeo, snowMat);
+snow.frustumCulled = false;
+scene.add(snow);
+function wrapRange(v, r){
+  var m = ((v + r) % (2 * r) + 2 * r) % (2 * r);
+  return m - r;
+}
+
+/* ============================================================
+   VALUE PANELS + 3D MARKERS
+============================================================ */
+var glowTex = makeSpriteTexture("70,232,255");
+var panelEls = Array.prototype.slice.call(document.querySelectorAll(".vp"));
+var panels = [];
+var markers = [];
+panelEls.forEach(function(el){
+  var t = parseFloat(el.getAttribute("data-t"));
+  var hasMarker = el.getAttribute("data-marker") === "1";
+  var entry = { t: t, el: el, centered: el.classList.contains("chapter") || el.classList.contains("results"), marker: null, alpha: 0 };
+  if(hasMarker){
+    var p = curve.getPointAt(t);
+    var group = new THREE.Group();
+    group.position.copy(p);
+
+    var stalk = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.018, 0.018, 1.15, 6),
+      new THREE.MeshBasicMaterial({ color: 0x46e8ff, transparent: true, opacity: 0.55, fog: false })
+    );
+    stalk.position.y = PIPE_R + 0.55;
+    group.add(stalk);
+
+    var core = new THREE.Mesh(
+      new THREE.SphereGeometry(0.11, 12, 10),
+      new THREE.MeshBasicMaterial({ color: 0xc8fbff, fog: false })
+    );
+    core.position.y = PIPE_R + 1.15;
+    group.add(core);
+
+    var spriteMat = new THREE.SpriteMaterial({
+      map: glowTex, color: 0x46e8ff, transparent: true,
+      blending: THREE.AdditiveBlending, depthWrite: false, opacity: 0.8, fog: false
+    });
+    var glow = new THREE.Sprite(spriteMat);
+    glow.scale.set(2.4, 2.4, 1);
+    glow.position.y = PIPE_R + 1.15;
+    group.add(glow);
+
+    scene.add(group);
+    var mk = {
+      glow: glow,
+      anchor: new THREE.Vector3(p.x, p.y + PIPE_R + 1.15, p.z),
+      idx: markers.length
+    };
+    entry.marker = mk;
+    markers.push(mk);
+  }
+  panels.push(entry);
+});
+
+/* ============================================================
+   KEYPOINT NAV — jump between sections without long scrolling
+============================================================ */
+var keypoints = [{ t: 0, label: "Intro" }];
+panels.forEach(function(pn){
+  var label;
+  if(pn.el.classList.contains("chapter")){
+    label = pn.el.querySelector("h2").textContent.indexOf("buyer") !== -1 ? "Buyer Org" : "Supply Chain";
+  } else if(pn.el.classList.contains("results")){
+    label = "Results";
+  } else {
+    var tag = pn.el.querySelector(".vp-tag").textContent;
+    label = tag.split("—").pop().trim();
+  }
+  keypoints.push({ t: pn.t, label: label });
+});
+keypoints.push({ t: 1, label: "Demo" });
+
+var navEl = document.getElementById("kp-nav");
+var navItems = [];
+keypoints.forEach(function(kp, i){
+  var btn = document.createElement("button");
+  btn.className = "kp-item";
+  btn.type = "button";
+  btn.setAttribute("aria-label", "Jump to " + kp.label);
+  var lbl = document.createElement("span");
+  lbl.className = "kp-label";
+  lbl.textContent = kp.label;
+  var dot = document.createElement("span");
+  dot.className = "kp-dot";
+  btn.appendChild(lbl);
+  btn.appendChild(dot);
+  btn.addEventListener("click", function(){ jumpToT(kp.t); });
+  navEl.appendChild(btn);
+  navItems.push(btn);
+});
+
+/* Smooth programmatic scroll (cancelled by user input) */
+var scrollAnim = null;
+function maxScrollY(){
+  return Math.max(1, document.getElementById("scroll-space").offsetHeight - window.innerHeight);
+}
+function jumpToT(t){
+  var targetY = clamp((t - 0.005) / 0.975, 0, 1) * maxScrollY();
+  var startY = window.pageYOffset || document.documentElement.scrollTop || 0;
+  var dist = Math.abs(targetY - startY);
+  if(dist < 2){ return; }
+  scrollAnim = {
+    from: startY,
+    delta: targetY - startY,
+    t0: performance.now(),
+    dur: clamp(600 + (dist / maxScrollY()) * 1400, 600, 2000)
+  };
+}
+function cancelScrollAnim(){ scrollAnim = null; }
+window.addEventListener("wheel", cancelScrollAnim, { passive: true });
+window.addEventListener("touchstart", cancelScrollAnim, { passive: true });
+window.addEventListener("keydown", function(ev){
+  if(ev.key === "PageDown" || ev.key === "PageUp" || ev.key === " " ||
+     ev.key === "ArrowDown" || ev.key === "ArrowUp" ||
+     ev.key === "Home" || ev.key === "End"){
+    cancelScrollAnim();
+  }
+});
+
+/* ============================================================
+   PER-JOINT TRACEABILITY DATA
+============================================================ */
+var mills = ["Tenaris Dalmine", "Vallourec Star", "Corinth Pipeworks", "JFE Steel", "EEW SPC", "Tata Hartlepool"];
+var grades = ["API 5L X65", "API 5L X65", "API 5L X65", "API 5L X70", "API 5L X60"];
+var weldProcs = ["GMAW-P", "SAW-AC", "GMAW-STT", "FCAW-G"];
+var flawTypes = ["LOF &middot; root", "porosity &middot; fill", "undercut &middot; cap", "slag &middot; hot pass"];
+var coatSystems = ["3LPE", "3LPE", "3LPP", "FBE + CWC"];
+var heatSuffix = "KLMNP";
+function pad(num, w){
+  var s = String(num);
+  while(s.length < w){ s = "0" + s; }
+  return s;
+}
+var joints = [];
+(function(){
+  var rng = mulberry32(112358);
+  for(var k = 0; k < nJoints; k++){
+    var meters = Math.round((k + 0.5) * JOINT_LEN);
+    var km = Math.floor(meters / 1000);
+    var t = clamp(((k + 0.5) * JOINT_LEN) / totalLen, 0, 1);
+    var p = curve.getPointAt(t);
+    var ys = 450 + Math.floor(rng() * 80);
+    var ok = rng() < 0.92;
+    joints.push({
+      idx: k,
+      t: t,
+      anchor: new THREE.Vector3(p.x, p.y + PIPE_R + 0.22, p.z),
+      joint: "JT-" + pad(k + 1, 4),
+      cat: k % 6,
+      heat: String.fromCharCode(65 + Math.floor(rng() * 6)) + (10 + Math.floor(rng() * 89)) + "-" +
+            (1000 + Math.floor(rng() * 8999)) + "-" + heatSuffix.charAt(Math.floor(rng() * heatSuffix.length)),
+      grade: grades[Math.floor(rng() * grades.length)],
+      mill: mills[Math.floor(rng() * mills.length)],
+      ok: ok,
+      synced: 4 + Math.floor(rng() * 55),
+      kp: "KP " + km + "+" + pad(meters - km * 1000, 3),
+      // mechanical properties
+      ys: ys,
+      uts: ys + 70 + Math.floor(rng() * 45),
+      el: 18 + Math.floor(rng() * 9),
+      cvn: 180 + Math.floor(rng() * 85),
+      // dimensions
+      wt: ["15.9", "17.5", "19.1"][Math.floor(rng() * 3)],
+      len: (12.05 + rng() * 0.3).toFixed(2),
+      // AUT flaw sizing
+      flawH: (0.4 + rng() * 1.6).toFixed(1),
+      flawL: 4 + Math.floor(rng() * 18),
+      flawType: flawTypes[Math.floor(rng() * flawTypes.length)],
+      flawOk: ok || rng() < 0.5,
+      // coating
+      coat: coatSystems[Math.floor(rng() * coatSystems.length)],
+      dft: (2.8 + rng() * 0.8).toFixed(1),
+      adh: 20 + Math.floor(rng() * 11),
+      // welding
+      proc: weldProcs[Math.floor(rng() * weldProcs.length)],
+      wps: (180 + Math.floor(rng() * 60)) + "-R" + (1 + Math.floor(rng() * 3)),
+      passes: 6 + Math.floor(rng() * 5),
+      heatIn: (1.1 + rng() * 0.5).toFixed(1)
+    });
+  }
+})();
+
+/* ============================================================
+   DOM OVERLAYS — trace cards (one-by-one), dots, leader lines
+============================================================ */
+var MAX_CARDS = 2; // narrow per-joint window => sequential reveal with brief crossfade
+var cardsEls = [], dotEls = [], cardLines = [], markerLines = [];
+var linesSvg = document.getElementById("lines");
+(function(){
+  var SVG_NS = "http://www.w3.org/2000/svg";
+  for(var i = 0; i < MAX_CARDS; i++){
+    var card = document.createElement("div");
+    card.className = "trace-card";
+    document.body.appendChild(card);
+    cardsEls.push(card);
+    var dot = document.createElement("div");
+    dot.className = "tc-dot";
+    document.body.appendChild(dot);
+    dotEls.push(dot);
+    var ln = document.createElementNS(SVG_NS, "line");
+    ln.setAttribute("stroke", "rgba(70,232,255,0.55)");
+    ln.setAttribute("stroke-width", "1");
+    ln.setAttribute("opacity", "0");
+    linesSvg.appendChild(ln);
+    cardLines.push(ln);
+  }
+  for(i = 0; i < markers.length; i++){
+    var ml = document.createElementNS(SVG_NS, "line");
+    ml.setAttribute("stroke", "rgba(70,232,255,0.5)");
+    ml.setAttribute("stroke-width", "1");
+    ml.setAttribute("stroke-dasharray", "5 4");
+    ml.setAttribute("opacity", "0");
+    linesSvg.appendChild(ml);
+    markerLines.push(ml);
+  }
+})();
+
+function cardRows(d){
+  switch(d.cat){
+    case 0: return { title: "PHMSA Traceability", rows: [
+      ["Heat", d.heat, ""],
+      ["MTR", "verified", "good"],
+      ["Chain", "mill &rarr; site", ""],
+      ["Signed", "immutable", "good"]
+    ]};
+    case 1: return { title: "Mechanical Properties", rows: [
+      ["YS", d.ys + " MPa", ""],
+      ["UTS", d.uts + " MPa", ""],
+      ["El.", d.el + " %", ""],
+      ["CVN", d.cvn + " J / &minus;20 &deg;C", ""]
+    ]};
+    case 2: return { title: "Pipe Dimensions", rows: [
+      ["OD", "16.000&Prime;", ""],
+      ["WT", d.wt + " mm", ""],
+      ["Grade", d.grade, ""],
+      ["Length", d.len + " m", ""]
+    ]};
+    case 3: return { title: "AUT Flaw Sizing", rows: [
+      ["H &times; L", d.flawH + " &times; " + d.flawL + " mm", "warn"],
+      ["Limit", "3.0 &times; 50 mm", ""],
+      ["Type", d.flawType, ""],
+      ["Status", d.flawOk ? "ACCEPT" : "REPAIR", d.flawOk ? "good" : "warn"]
+    ]};
+    case 4: return { title: "Coating", rows: [
+      ["System", d.coat, ""],
+      ["DFT", d.dft + " mm", ""],
+      ["Holiday", "PASS", "good"],
+      ["Adhesion", d.adh + " N / cm", ""]
+    ]};
+    default: return { title: "Welding", rows: [
+      ["Process", d.proc, ""],
+      ["WPS", d.wps, ""],
+      ["Passes", String(d.passes), ""],
+      ["Heat in.", d.heatIn + " kJ / mm", ""]
+    ]};
+  }
+}
+function cardHTML(d){
+  var c = cardRows(d);
+  var html = '<div class="tc-head"><span class="tc-live"></span><span class="tc-cat">' + c.title +
+    '</span><span class="tc-status ' + (d.ok ? "ok" : "sync") + '">' + (d.ok ? "&#10003; Verified" : "&#10227; Syncing") + '</span></div>' +
+    '<div class="tc-grid">';
+  for(var i = 0; i < c.rows.length; i++){
+    var row = c.rows[i];
+    html += '<span class="l">' + row[0] + '</span><span class="v' + (row[2] ? " " + row[2] : "") + '">' + row[1] + '</span>';
+  }
+  html += '</div>' +
+    '<div class="tc-foot">' + d.joint + ' &nbsp;&middot;&nbsp; ' + d.kp + ' &nbsp;&middot;&nbsp; synced ' + d.synced + 's ago</div>';
+  return html;
+}
+
+var slots = [];
+var slotJointShown = [];
+for(var si = 0; si < MAX_CARDS; si++){ slots.push(-1); slotJointShown.push(-1); }
+
+/* Card visibility window (in curve parameter units).
+   Window width (~0.011) slightly exceeds joint spacing (~0.0087),
+   so cards appear strictly one-by-one with a short crossfade. */
+var CARD_NEAR = 0.002;
+var CARD_FAR = 0.013;
+var CARD_FADE = 0.003;
+
+/* ============================================================
+   SCROLL STATE
+============================================================ */
+var scrollSpace = document.getElementById("scroll-space");
+var heroEl = document.getElementById("hero");
+var hintEl = document.getElementById("scroll-hint");
+var ctaEl = document.getElementById("cta");
+var hudKp = document.getElementById("hud-kp");
+var lastHud = "";
+
+if("scrollRestoration" in history){ history.scrollRestoration = "manual"; }
+window.scrollTo(0, 0);
+
+var tCurrent = 0.005;
+var vw = window.innerWidth, vh = window.innerHeight;
+
+window.addEventListener("resize", function(){
+  vw = window.innerWidth; vh = window.innerHeight;
+  camera.aspect = vw / vh;
+  camera.updateProjectionMatrix();
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+  renderer.setSize(vw, vh);
+});
+
+/* ============================================================
+   PROJECTION HELPERS
+============================================================ */
+var projV = new THREE.Vector3();
+function projectToScreen(worldPos, out){
+  projV.copy(worldPos).project(camera);
+  out.x = (projV.x * 0.5 + 0.5) * vw;
+  out.y = (-projV.y * 0.5 + 0.5) * vh;
+  out.front = projV.z < 1 && projV.z > -1;
+}
+var scr = { x: 0, y: 0, front: false };
+
+/* ============================================================
+   PRE-ALLOCATED FRAME VECTORS
+============================================================ */
+var camP = new THREE.Vector3();
+var aheadP = new THREE.Vector3();
+var lookP = new THREE.Vector3();
+var dirV = new THREE.Vector3();
+var sideV = new THREE.Vector3();
+
+/* ============================================================
+   MAIN LOOP
+============================================================ */
+var clock = new THREE.Clock();
+var desired = [];
+var activeKpIdx = -1;
+
+function frame(){
+  requestAnimationFrame(frame);
+  var dt = Math.min(clock.getDelta(), 0.05);
+  var time = clock.elapsedTime;
+  var now = performance.now();
+
+  /* ---- programmatic keypoint scroll ---- */
+  if(scrollAnim){
+    var ka = clamp((now - scrollAnim.t0) / scrollAnim.dur, 0, 1);
+    window.scrollTo(0, scrollAnim.from + scrollAnim.delta * easeInOutCubic(ka));
+    if(ka >= 1){ scrollAnim = null; }
+  }
+
+  /* ---- scroll progress -> damped curve parameter ---- */
+  var maxScroll = maxScrollY();
+  var progress = clamp((window.pageYOffset || document.documentElement.scrollTop || 0) / maxScroll, 0, 1);
+  var tTarget = 0.005 + progress * 0.975;
+  tCurrent += (tTarget - tCurrent) * (1 - Math.exp(-dt * 3.2));
+  var tCam = clamp(tCurrent, 0.001, 0.995);
+
+  /* ---- cinematic camera along the curve ---- */
+  curve.getPointAt(tCam, camP);
+  curve.getPointAt(Math.min(tCam + 0.012, 1), aheadP);
+  dirV.subVectors(aheadP, camP).normalize();
+  sideV.crossVectors(dirV, UP).normalize();
+  var sway = Math.sin(time * 0.4) * 0.5 + Math.sin(time * 0.17 + 2.0) * 0.3;
+  var bob = Math.sin(time * 0.27 + 1.0) * 0.25;
+  camera.position.set(
+    camP.x + sideV.x * (2.7 + sway * 0.4),
+    camP.y + 2.1 + bob,
+    camP.z + sideV.z * (2.7 + sway * 0.4)
+  );
+  curve.getPointAt(Math.min(tCam + 0.022, 1), lookP);
+  lookP.y += 0.9 + Math.sin(time * 0.21) * 0.15;
+  lookP.x += sway * 0.25;
+  camera.lookAt(lookP);
+  camera.rotateZ(Math.sin(time * 0.23) * 0.015);
+
+  /* ---- lights follow camera region ---- */
+  sun.position.set(lookP.x + 16, lookP.y + 58, lookP.z + 10);
+  sun.target.position.copy(lookP);
+  fill.position.set(camera.position.x, camera.position.y + 3, camera.position.z);
+
+  /* ---- caustics scroll ---- */
+  seabedCaustic.offset.x = time * 0.016;
+  seabedCaustic.offset.y = time * 0.011;
+  pipeCaustic.offset.x = -time * 0.020;
+  pipeCaustic.offset.y = time * 0.013;
+
+  /* ---- god rays ---- */
+  rayGroup.position.set(camera.position.x, 0, camera.position.z);
+  for(var i = 0; i < rays.length; i++){
+    var ry = rays[i];
+    ry.mesh.material.opacity = ry.base * (0.65 + 0.35 * Math.sin(time * 0.5 + ry.phase));
+    ry.mesh.rotation.y += ry.spin * dt;
+  }
+
+  /* ---- marine snow ---- */
+  var sPos = snowGeo.attributes.position.array;
+  for(i = 0; i < SNOW_N; i++){
+    var pdat = snowData[i];
+    pdat.y -= pdat.sp * dt;
+    var wx = camera.position.x + wrapRange(pdat.x + Math.sin(time * 0.5 + pdat.ph) * pdat.am - camera.position.x, 60);
+    var wy = camera.position.y + wrapRange(pdat.y - camera.position.y, 28);
+    var wz = camera.position.z + wrapRange(pdat.z + Math.cos(time * 0.37 + pdat.ph) * pdat.am * 0.6 - camera.position.z, 80);
+    sPos[i * 3] = wx; sPos[i * 3 + 1] = wy; sPos[i * 3 + 2] = wz;
+  }
+  snowGeo.attributes.position.needsUpdate = true;
+
+  /* ---- value panels + markers ---- */
+  var maxPanelAlpha = 0;
+  var maxCenterAlpha = 0;
+  for(i = 0; i < panels.length; i++){
+    var pn = panels[i];
+    var prox = clamp(1 - Math.abs(tCam - pn.t) / 0.032, 0, 1);
+    var eased = smooth01(prox);
+    pn.alpha = eased;
+    if(eased > maxPanelAlpha){ maxPanelAlpha = eased; }
+    if(pn.centered && eased > maxCenterAlpha){ maxCenterAlpha = eased; }
+    var st = pn.el.style;
+    st.opacity = eased.toFixed(3);
+    if(pn.centered){
+      st.transform = "translate(-50%,calc(-50% + " + ((1 - eased) * 44).toFixed(1) + "px))";
+    } else {
+      st.transform = "translateY(calc(-50% + " + ((1 - eased) * 44).toFixed(1) + "px))";
+    }
+    st.visibility = eased < 0.01 ? "hidden" : "visible";
+    if(pn.marker){
+      var mk = pn.marker;
+      var pulse = 1 + 0.22 * Math.sin(time * 3 + mk.idx * 1.4);
+      mk.glow.scale.set(2.4 * pulse, 2.4 * pulse, 1);
+      mk.glow.material.opacity = 0.45 + 0.35 * Math.sin(time * 3 + mk.idx * 1.4) * 0.5 + eased * 0.25;
+      var ml = markerLines[mk.idx];
+      if(eased > 0.03){
+        projectToScreen(mk.anchor, scr);
+        if(scr.front){
+          var rect = pn.el.getBoundingClientRect();
+          var px = pn.el.getAttribute("data-side") === "left" ? rect.right : rect.left;
+          var py = rect.top + rect.height * 0.5;
+          ml.setAttribute("x1", px.toFixed(1));
+          ml.setAttribute("y1", py.toFixed(1));
+          ml.setAttribute("x2", scr.x.toFixed(1));
+          ml.setAttribute("y2", scr.y.toFixed(1));
+          ml.setAttribute("opacity", (eased * 0.8).toFixed(3));
+        } else {
+          ml.setAttribute("opacity", "0");
+        }
+      } else {
+        ml.setAttribute("opacity", "0");
+      }
+    }
+  }
+
+  /* ---- keypoint nav active state ---- */
+  var bestKp = 0, bestKpD = Infinity;
+  for(i = 0; i < keypoints.length; i++){
+    var kd = Math.abs(keypoints[i].t - tCam);
+    if(kd < bestKpD){ bestKpD = kd; bestKp = i; }
+  }
+  if(bestKp !== activeKpIdx){
+    if(activeKpIdx >= 0){ navItems[activeKpIdx].classList.remove("active"); }
+    navItems[bestKp].classList.add("active");
+    activeKpIdx = bestKp;
+  }
+
+  /* ---- trace card selection: strictly sequential, one-by-one ---- */
+  var heroVis = clamp(1 - progress * 24, 0, 1);
+  var ctaVis = clamp((progress - 0.975) / 0.022, 0, 1);
+  desired.length = 0;
+  for(i = 0; i < joints.length; i++){
+    var dj = joints[i].t - tCam;
+    if(dj > CARD_NEAR && dj < CARD_FAR){ desired.push(i); }
+  }
+  desired.sort(function(a, b){ return joints[a].t - joints[b].t; });
+  if(desired.length > MAX_CARDS){ desired.length = MAX_CARDS; }
+
+  for(i = 0; i < MAX_CARDS; i++){
+    if(slots[i] !== -1 && desired.indexOf(slots[i]) === -1){ slots[i] = -1; }
+  }
+  for(i = 0; i < desired.length; i++){
+    if(slots.indexOf(desired[i]) === -1){
+      var free = slots.indexOf(-1);
+      if(free !== -1){ slots[free] = desired[i]; }
+    }
+  }
+
+  for(i = 0; i < MAX_CARDS; i++){
+    var card = cardsEls[i], dot = dotEls[i], cl = cardLines[i];
+    var jIdx = slots[i];
+    if(jIdx === -1){
+      if(card.style.visibility !== "hidden"){
+        card.style.visibility = "hidden"; card.style.opacity = "0";
+        dot.style.visibility = "hidden"; dot.style.opacity = "0";
+        cl.setAttribute("opacity", "0");
+      }
+      continue;
+    }
+    var jd = joints[jIdx];
+    if(slotJointShown[i] !== jIdx){
+      card.innerHTML = cardHTML(jd);
+      slotJointShown[i] = jIdx;
+    }
+    projectToScreen(jd.anchor, scr);
+    var djc = jd.t - tCam;
+    var alpha = clamp(Math.min((djc - CARD_NEAR) / CARD_FADE, (CARD_FAR - djc) / CARD_FADE), 0, 1);
+    // soften cards while a side panel is in focus, hide entirely behind centered messages
+    alpha *= (1 - maxPanelAlpha * 0.55) * (1 - smooth01(clamp(maxCenterAlpha * 1.6, 0, 1)));
+    alpha *= (1 - heroVis) * (1 - ctaVis);
+    if(!scr.front || alpha < 0.02){
+      card.style.visibility = "hidden"; card.style.opacity = "0";
+      dot.style.visibility = "hidden"; dot.style.opacity = "0";
+      cl.setAttribute("opacity", "0");
+      continue;
+    }
+    var leftSide = (jd.idx % 2) === 0;
+    var cw = vw <= 640 ? 206 : 248;
+    var cardX = leftSide ? scr.x - cw - 46 : scr.x + 46;
+    var cardY = scr.y - 150;
+    cardX = clamp(cardX, 10, vw - cw - 10);
+    cardY = clamp(cardY, 64, vh - 230);
+    // closer joint always renders above the farther one
+    var zi = 400 - Math.round(djc * 10000);
+    card.style.zIndex = String(zi);
+    dot.style.zIndex = String(zi);
+    card.style.visibility = "visible";
+    card.style.opacity = alpha.toFixed(3);
+    card.style.transform = "translate3d(" + cardX.toFixed(1) + "px," + cardY.toFixed(1) + "px,0)";
+    dot.style.visibility = "visible";
+    dot.style.opacity = alpha.toFixed(3);
+    dot.style.transform = "translate(" + (scr.x - 4.5).toFixed(1) + "px," + (scr.y - 4.5).toFixed(1) + "px)";
+    var lx = leftSide ? cardX + cw : cardX;
+    var ly = cardY + 60;
+    cl.setAttribute("x1", lx.toFixed(1));
+    cl.setAttribute("y1", ly.toFixed(1));
+    cl.setAttribute("x2", scr.x.toFixed(1));
+    cl.setAttribute("y2", scr.y.toFixed(1));
+    cl.setAttribute("opacity", (alpha * 0.65).toFixed(3));
+  }
+
+  /* ---- hero / hint / cta / hud ---- */
+  var heroA = clamp(1 - progress * 24, 0, 1);
+  heroEl.style.opacity = heroA.toFixed(3);
+  heroEl.style.visibility = heroA < 0.01 ? "hidden" : "visible";
+  var hintA = clamp(1 - progress * 40, 0, 1);
+  hintEl.style.opacity = hintA.toFixed(3);
+  var ctaA = clamp((progress - 0.975) / 0.022, 0, 1);
+  ctaEl.style.opacity = ctaA.toFixed(3);
+  ctaEl.style.pointerEvents = ctaA > 0.5 ? "auto" : "none";
+
+  var meters = Math.round(tCam * totalLen);
+  var km = Math.floor(meters / 1000);
+  var jnum = clamp(Math.floor(meters / JOINT_LEN) + 1, 1, nJoints);
+  var hudStr = "KP " + km + "+" + pad(meters - km * 1000, 3) + "  ·  JT-" + pad(jnum, 4);
+  if(hudStr !== lastHud){
+    hudKp.textContent = hudStr;
+    lastHud = hudStr;
+  }
+
+  renderer.render(scene, camera);
+}
+frame();
+
+})();
+</script>
+</body>
+</html>

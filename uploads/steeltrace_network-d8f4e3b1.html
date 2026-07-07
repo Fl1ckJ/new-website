@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SteelTrace Network</title>
+<style>
+  html,body{margin:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;background:#0f1d33;}
+  .stage{
+    position:relative;width:100%;max-width:1173px;aspect-ratio:1173/951;margin:0 auto;
+    background:radial-gradient(circle at 70% 35%, #2e4a73 0%, #1d3559 45%, #15294a 100%);
+    overflow:hidden;
+  }
+
+  /* ---------- nodes ---------- */
+  .node{position:absolute;aspect-ratio:1/1;border-radius:50%;display:flex;align-items:center;justify-content:center;
+        opacity:0;animation:popIn .7s cubic-bezier(.2,.8,.3,1.4) both, glow 3s ease-in-out infinite;}
+  .node svg{width:62%;height:62%;}
+
+  /* ring dots (static) */
+
+  /* ---------- labels ---------- */
+  .label{position:absolute;color:#fff;white-space:nowrap;text-align:center;
+         opacity:0;transform:translate(-50%,-40%);animation:labelIn .6s ease-out forwards;}
+  .label.sm{font-size:1.7vw;font-weight:400;}
+  .label.lg{font-size:3.4vw;font-weight:400;}
+  @media(min-width:1173px){.label.sm{font-size:20px;}.label.lg{font-size:40px;}}
+
+  /* satellite colors */
+  .c-test{background:#27b497;}
+  .c-contract{background:#6f2fe0;}
+  .c-epc{background:#0a0a0a;}
+  .c-insp{background:#f5666b;}
+  .c-manu{background:#e8a91d;}
+  .c-blue{background:#2c9fd9;}
+  .c-dark{background:#1e2347;}
+
+  /* ---------- lines ---------- */
+  svg.lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+  .dash{stroke:#fff;stroke-width:2.5;stroke-dasharray:7 9;stroke-linecap:round;fill:none;
+        opacity:0;animation:lineIn .5s ease-out forwards, ants 1s linear infinite;}
+  .flow{fill:#fff;opacity:0;animation:flowOn .4s ease-out forwards;filter:url(#soft);}
+
+  /* ---------- keyframes ---------- */
+  @keyframes popIn{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}
+  @keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}50%{box-shadow:0 0 26px 5px rgba(255,255,255,.30)}}
+  @keyframes labelIn{to{opacity:1;transform:translate(-50%,-50%)}}
+  @keyframes lineIn{to{opacity:1}}
+  @keyframes ants{to{stroke-dashoffset:-32}}
+  @keyframes flowOn{to{opacity:1}}
+
+  /* ---------- intro stagger ---------- */
+  .c-test{animation-delay:.05s,1s}
+  .c-contract{animation-delay:.15s,1.1s}
+  .c-epc{animation-delay:.25s,1.2s}
+  .c-insp{animation-delay:.35s,1.3s}
+  .c-manu{animation-delay:.45s,1.4s}
+  .c-blue{animation-delay:.55s,1s}
+  .c-dark{animation-delay:.75s,1.25s}
+
+  .dash{animation-delay:.9s,.9s}
+  .flow{animation-delay:1.3s}
+
+  .label{animation-delay:1.4s}
+  #lb-eng{animation-delay:1.5s} #lb-proc{animation-delay:1.6s}
+  #lb-qual{animation-delay:1.7s} #lb-maint{animation-delay:1.8s}
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <svg class="lines" viewBox="0 0 1173 951" preserveAspectRatio="none">
+    <defs>
+      <marker id="arrow" markerWidth="9" markerHeight="9" refX="4" refY="4.5" orient="auto">
+        <path d="M0,0 L9,4.5 L0,9 Z" fill="#fff"/>
+      </marker>
+      <filter id="soft" x="-200%" y="-200%" width="500%" height="500%">
+        <feGaussianBlur stdDeviation="2.5" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+
+    <!-- satellites -> blue hub -->
+    <path id="p-test"     class="dash" d="M299,166 L385,430"/>
+    <path id="p-contract" class="dash" d="M143,305 L345,455"/>
+    <path id="p-epc"      class="dash" d="M125,505 L305,487"/>
+    <path id="p-insp"     class="dash" d="M186,668 L350,525"/>
+    <path id="p-manu"     class="dash" d="M346,757 L388,555"/>
+    <!-- blue hub -> dark hub -->
+    <path id="p-hub"      class="dash" d="M500,487 L638,487"/>
+    <!-- dark hub -> outward labels -->
+    <path id="p-eng"   class="dash" d="M720,380 L690,185" marker-end="url(#arrow)"/>
+    <path id="p-proc"  class="dash" d="M880,410 L975,255" marker-end="url(#arrow)"/>
+    <path id="p-qual"  class="dash" d="M895,595 L985,745" marker-end="url(#arrow)"/>
+    <path id="p-maint" class="dash" d="M715,615 L675,765" marker-end="url(#arrow)"/>
+
+    <!-- flowing data dots -->
+    <g id="flows"></g>
+  </svg>
+
+  <!-- ===== satellite nodes ===== -->
+  <div class="node c-test"     style="left:21.5%;top:11.5%;width:9%;"></div>
+  <div class="node c-contract" style="left:8.3%;top:25.5%;width:9.5%;"></div>
+  <div class="node c-epc"      style="left:6.5%;top:46%;width:9.5%;"></div>
+  <div class="node c-insp"     style="left:11.5%;top:64%;width:8.5%;"></div>
+  <div class="node c-manu"     style="left:25%;top:73%;width:8.5%;"></div>
+
+  <!-- ===== hubs ===== -->
+  <div class="node c-blue" style="left:25.3%;top:39%;width:18%;"></div>
+  <div class="node c-dark" style="left:54%;top:36%;width:26%;"></div>
+
+  <!-- ===== small labels ===== -->
+  <div class="label sm" style="left:26.5%;top:26.3%;">Testing &amp; Inspection</div>
+  <div class="label sm" style="left:10.8%;top:41%;">Contractors</div>
+  <div class="label sm" style="left:10.2%;top:62%;">EPCs</div>
+  <div class="label sm" style="left:15.5%;top:79.7%;">Inspectors</div>
+  <div class="label sm" style="left:29.5%;top:88%;">Manufacturers</div>
+  <div class="label sm" style="left:68.5%;top:72.5%;">Operators</div>
+
+  <!-- ===== big labels ===== -->
+  <div id="lb-eng"   class="label lg" style="left:62%;top:8.7%;">Engineering</div>
+  <div id="lb-proc"  class="label lg" style="left:86%;top:18.5%;">Procurement</div>
+  <div id="lb-qual"  class="label lg" style="left:86.5%;top:84.5%;">Quality</div>
+  <div id="lb-maint" class="label lg" style="left:57%;top:88%;">Maintenance</div>
+
+<script>
+// SteelTrace mark for the two hubs — ring + 3 dots + bold "S"
+const sMark = `
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="52" r="30" fill="none" stroke="#fff" stroke-width="5"/>
+  <g class="ring-dots">
+    <circle cx="24" cy="33" r="6.5" fill="#fff"/>
+    <circle cx="76" cy="33" r="6.5" fill="#fff"/>
+    <circle cx="50" cy="84" r="6.5" fill="#fff"/>
+  </g>
+  <text x="50" y="68" font-family="Arial,Helvetica,sans-serif" font-weight="800"
+        font-size="42" text-anchor="middle" fill="#fff">S</text>
+</svg>`;
+
+// role icons for the satellites
+const icons = {
+  // Testing & Inspection — magnifying glass with a check
+  'c-test': `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="44" cy="44" r="22"/>
+    <line x1="60" y1="60" x2="80" y2="80"/>
+    <polyline points="34,45 41,52 55,36"/>
+  </svg>`,
+  // Contractors — crossed wrench & screwdriver (tools)
+  'c-contract': `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M64 24 a11 11 0 0 0 -13 17 L26 66 l8 8 25-25 a11 11 0 0 0 17-13 l-9 9 -6-6 z"/>
+    <path d="M30 24 l14 14"/>
+    <path d="M70 76 L44 50"/>
+  </svg>`,
+  // EPCs — gear (engineering)
+  'c-epc': `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#fff" stroke-width="6"><circle cx="50" cy="50" r="17"/><circle cx="50" cy="50" r="6"/></g>
+    <g stroke="#fff" stroke-width="9" stroke-linecap="round">
+      <line x1="68" y1="50" x2="79" y2="50"/><line x1="50" y1="68" x2="50" y2="79"/>
+      <line x1="32" y1="50" x2="21" y2="50"/><line x1="50" y1="32" x2="50" y2="21"/>
+      <line x1="62.7" y1="62.7" x2="70.5" y2="70.5"/><line x1="37.3" y1="62.7" x2="29.5" y2="70.5"/>
+      <line x1="37.3" y1="37.3" x2="29.5" y2="29.5"/><line x1="62.7" y1="37.3" x2="70.5" y2="29.5"/>
+    </g>
+  </svg>`,
+  // Inspectors — clipboard with check
+  'c-insp': `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="28" y="26" width="44" height="54" rx="5"/>
+    <rect x="41" y="19" width="18" height="12" rx="3"/>
+    <polyline points="38,55 46,63 63,43" stroke-width="7"/>
+  </svg>`,
+  // Manufacturers — factory
+  'c-manu': `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24 76 V48 l16 10 V48 l16 10 V40 h20 v36 z"/>
+    <rect x="61" y="28" width="8" height="13"/>
+  </svg>`
+};
+
+document.querySelectorAll('.node').forEach(n => {
+  const key = Object.keys(icons).find(k => n.classList.contains(k));
+  n.innerHTML = key ? icons[key] : sMark;
+});
+
+// flowing data dots — synchronized in stages:
+// stage 1: all satellites reach the blue hub at the same instant
+// stage 2: blue hub -> dark hub (starts exactly when stage 1 arrives)
+// stage 3: dark hub -> all labels (starts exactly when stage 2 arrives)
+const ns = "http://www.w3.org/2000/svg";
+const flows = document.getElementById("flows");
+const DUR = 2.2;          // every leg takes the same time
+const START = 1.3;        // when stage 1 launches
+
+const stages = [
+  { begin: START,             ids: ["p-test","p-contract","p-epc","p-insp","p-manu"] },
+  { begin: START + DUR,       ids: ["p-hub"] },
+  { begin: START + DUR * 2,   ids: ["p-eng","p-proc","p-qual","p-maint"] }
+];
+
+stages.forEach(stage => {
+  stage.ids.forEach(id => {
+    const c = document.createElementNS(ns, "circle");
+    c.setAttribute("r", "5.5");
+    c.setAttribute("class", "flow");
+    const m = document.createElementNS(ns, "animateMotion");
+    m.setAttribute("dur", DUR + "s");
+    m.setAttribute("repeatCount", "indefinite");
+    m.setAttribute("begin", stage.begin.toFixed(2) + "s");
+    const mp = document.createElementNS(ns, "mpath");
+    mp.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#" + id);
+    mp.setAttribute("href", "#" + id);
+    m.appendChild(mp);
+    c.appendChild(m);
+    flows.appendChild(c);
+  });
+});
+</script>
+</div>
+</body>
+</html>

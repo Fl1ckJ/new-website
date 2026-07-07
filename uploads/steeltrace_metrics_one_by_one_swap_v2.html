@@ -1,0 +1,72 @@
+<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Animation of a monitor showing one metric at a time, each swapping to the next: 74% fewer NCRs, 60% less QA/QC effort, 90% less time per certificate, 2 weeks faster delivery, 9/10 traceability score.</h2>
+<style>
+#slide{display:flex;flex-direction:column;align-items:center;gap:14px;transition:opacity .6s ease,transform .6s ease}
+#slide.out{opacity:0;transform:translateY(-24px)}
+#slide.in{opacity:0;transform:translateY(24px);transition:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#D3D1C7;transition:background .3s}
+.dot.on{background:#2C7BC9}
+@media (prefers-reduced-motion: reduce){#slide{transition:none}}
+</style>
+<div style="padding:1rem 0;display:flex;flex-direction:column;align-items:center">
+<div style="width:640px;max-width:100%;background:#1C1C1E;border-radius:16px;padding:14px;box-sizing:border-box;border:1px solid #3a3a3c">
+<div style="position:relative;width:612px;max-width:100%;height:320px;background:#FAF9F5;border-radius:8px;overflow:hidden">
+<div style="position:absolute;top:0;left:0;right:0;height:30px;background:#F0EEE6;border-bottom:1px solid #E0DDD2;display:flex;align-items:center;gap:8px;padding:0 14px;box-sizing:border-box">
+<span style="width:8px;height:8px;border-radius:50%;background:#1D9E75"></span>
+<span style="font-size:11px;color:#5F5E5A">SteelTrace — results</span>
+<span style="margin-left:auto;font-size:11px;color:#888780">live</span>
+</div>
+<div style="position:absolute;top:30px;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px">
+<div id="slide">
+<span style="font-family:var(--font-mono);font-weight:500;color:#2C7BC9;font-size:64px;line-height:1;white-space:nowrap"><span id="num">0</span><span id="suffix" style="font-size:38px"></span></span>
+<span id="label" style="font-size:16px;color:#5F5E5A"></span>
+</div>
+<div id="dots" style="display:flex;gap:8px">
+<span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+</div>
+</div>
+</div>
+</div>
+<div style="width:96px;height:34px;background:#2A2A2C;clip-path:polygon(20% 0,80% 0,100% 100%,0 100%)"></div>
+<div style="width:190px;height:10px;background:#2A2A2C;border-radius:5px"></div>
+</div>
+<script>
+(function(){
+var data=[
+{n:74,s:'%',l:'Fewer NCRs'},
+{n:60,s:'%',l:'Less QA/QC effort'},
+{n:90,s:'%',l:'Less time per certificate'},
+{n:2,s:' weeks',l:'Faster delivery'},
+{n:9,s:'/10',l:'Traceability score'}
+];
+var slide=document.getElementById('slide'),num=document.getElementById('num'),suf=document.getElementById('suffix'),lbl=document.getElementById('label');
+var dots=[].slice.call(document.querySelectorAll('.dot'));
+var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var i=0;
+function countUp(target,dur){
+var start=null;
+function step(ts){if(!start)start=ts;var p=Math.min((ts-start)/dur,1);num.textContent=Math.round(target*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(step);}
+requestAnimationFrame(step);
+}
+function set(idx){
+var d=data[idx];
+suf.textContent=d.s;lbl.textContent=d.l;
+dots.forEach(function(dt,k){dt.classList.toggle('on',k===idx);});
+if(reduced){num.textContent=d.n;}else{countUp(d.n,900);}
+}
+function next(){
+if(reduced){i=(i+1)%data.length;set(i);return;}
+slide.classList.add('out');
+setTimeout(function(){
+i=(i+1)%data.length;
+slide.classList.remove('out');slide.classList.add('in');
+set(i);
+requestAnimationFrame(function(){requestAnimationFrame(function(){
+slide.style.transition='opacity .6s ease,transform .6s ease';
+slide.classList.remove('in');
+});});
+},620);
+}
+set(0);
+setInterval(next,4200);
+})();
+</script>

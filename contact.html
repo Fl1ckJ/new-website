@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem('steeltrace-theme')==='light'?'light':'dark';}catch(e){document.documentElement.dataset.theme='dark';}})();</script>
+<title>Contact — SteelTrace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="steeltrace/site.css" />
+<style>
+  .c-grid { display: grid; grid-template-columns: .85fr 1fr; gap: 56px; align-items: start; padding-top: 60px; }
+  .addr-stack { display: flex; flex-direction: column; gap: 14px; }
+  .addr { padding: 24px 26px; }
+  .addr h3 { font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .addr p { color: var(--txt-2); font-size: 14.5px; line-height: 1.65; }
+  .addr p b { color: var(--txt); font-weight: 600; }
+  .addr a { color: var(--accent); text-decoration: none; font-family: var(--font-mono); font-size: 13.5px; }
+  .addr a:hover { text-decoration: underline; }
+  .addr .kvk { font-family: var(--font-mono); font-size: 12px; color: var(--txt-3); margin-top: 14px; }
+  .holidays { list-style: none; margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .holidays li { display: flex; justify-content: space-between; gap: 16px; font-size: 13.5px; color: var(--txt-2); padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  .holidays li:last-child { border-bottom: 0; padding-bottom: 0; }
+  .holidays li span { font-family: var(--font-mono); font-size: 12px; color: var(--txt-3); white-space: nowrap; }
+  .c-form { padding: 32px; }
+  .c-form h2 { font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
+  .c-form .formsub { color: var(--txt-2); font-size: 14px; margin: 6px 0 24px; }
+  .form-stack { display: flex; flex-direction: column; gap: 16px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .c-form .btn { width: 100%; margin-top: 4px; }
+  .consent { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--txt-2); line-height: 1.5; }
+  .consent input { width: 16px; height: 16px; margin-top: 2px; flex: none; accent-color: var(--accent); }
+  .consent a { color: var(--accent); text-decoration: none; }
+  .consent a:hover { text-decoration: underline; }
+  @media (max-width: 940px) { .c-grid { grid-template-columns: 1fr; gap: 34px; } }
+</style>
+</head>
+<body>
+<div class="aura a"></div><div class="aura b"></div>
+<div class="gridbg"></div>
+<div class="wrap">
+
+<header class="topbar" data-site-header data-page="about" data-crumb="About Us>>about.html|Contact"></header>
+
+<div class="page">
+  <section class="hero" style="padding-bottom:0">
+    <h1 class="h1" style="margin-top:18px;max-width:16ch">Contact</h1>
+    <p class="lead" style="margin-top:20px;max-width:52ch">Whether you're an operator, EPC or supplier, we'll point you to the right specialist.</p>
+  </section>
+
+  <div class="c-grid">
+    <!-- addresses & info -->
+    <div class="addr-stack">
+      <div class="addr panel">
+        <h3>Visiting address</h3>
+        <p>Smedestraat 2<br>6411 CR Heerlen<br>The Netherlands</p>
+      </div>
+      <div class="addr panel">
+        <h3>Postal address</h3>
+        <p><b>SteelTrace B.V.</b><br>Pastoor Moormanstraat 72<br>6219 AX Maastricht<br>The Netherlands</p>
+      </div>
+      <div class="addr panel">
+        <h3>Get in touch</h3>
+        <p><a href="mailto:info@steeltrace.co">info@steeltrace.co</a><br><a href="tel:+31432203004">+31 (0)43 220 3004</a></p>
+        <p class="kvk">Chamber of Commerce (K.V.K.) 69242054</p>
+      </div>
+      <div class="addr panel">
+        <h3>Holidays 2026</h3>
+        <p>SteelTrace is closed on the following days:</p>
+        <ul class="holidays">
+          <li>New Year's Day <span>Thu 1 Jan</span></li>
+          <li>Easter Monday <span>Mon 6 Apr</span></li>
+          <li>Ascension Day <span>Thu 14 May</span></li>
+          <li>Pentecost Monday <span>Mon 25 May</span></li>
+          <li>Christmas Day <span>Fri 25 Dec</span></li>
+          <li>Boxing Day <span>Sat 26 Dec</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- form -->
+    <div class="c-form panel">
+      <h2>Send us a message</h2>
+      <p class="formsub">We typically respond within one business day.</p>
+      <form class="form-stack" id="cForm">
+        <div class="grid2">
+          <div class="field"><label for="fn">First name</label><input id="fn" type="text" placeholder="First name" required /></div>
+          <div class="field"><label for="ln">Last name</label><input id="ln" type="text" placeholder="Last name" required /></div>
+        </div>
+        <div class="field"><label for="co">Company</label><input id="co" type="text" placeholder="Company" /></div>
+        <div class="field"><label for="em">Email</label><input id="em" type="email" placeholder="you@company.com" required /></div>
+        <div class="field"><label for="msgf">Message</label><textarea id="msgf" placeholder="How can we help?"></textarea></div>
+        <label class="consent"><input type="checkbox" required /> <span>I consent to SteelTrace processing my data as per the <a href="#">privacy policy</a></span></label>
+        <div class="form-msg" id="msg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Thanks — this is a demo form, but we'd be in touch shortly.</div>
+        <button type="submit" class="btn btn-primary">Get in touch <span class="ar">→</span></button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer" data-site-footer></footer>
+
+</div>
+<script>
+  document.getElementById('cForm').addEventListener('submit', function (e) { e.preventDefault(); document.getElementById('msg').classList.add('show'); });
+</script>
+<script src="steeltrace/chrome.js"></script>
+</body>
+</html>

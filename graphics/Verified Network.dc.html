@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; }
+    body { background: var(--net-bg) !important; }
+    :root {
+      --net-bg: radial-gradient(120% 90% at 50% 0%, #0e1b31 0%, #0a1526 55%, #071019 100%);
+      --net-circle-bg: rgba(20,32,54,0.9);
+      --net-txt: rgba(220,232,250,0.9);
+      --net-txt-hi: #F2F6FD;
+      --net-txt-dim: rgba(190,210,245,0.55);
+      --net-card-bg: linear-gradient(170deg, rgba(28,44,74,0.85), rgba(16,26,46,0.9));
+      --net-card-line: rgba(150,190,245,0.3);
+      --net-card-shadow: 0 24px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(180,210,255,0.12);
+      --net-row-bg: rgba(10,18,34,0.65);
+      --net-row-line: rgba(140,175,235,0.18);
+      --net-chip-bg: rgba(80,180,240,0.12);
+      --net-chip-line: rgba(120,190,245,0.3);
+      --net-op-bg: radial-gradient(circle at 35% 30%, rgba(46,68,110,0.95), rgba(22,34,60,0.98));
+      --net-op-line: rgba(160,200,250,0.35);
+      --net-op-shadow: 0 20px 50px rgba(0,0,0,0.45);
+      --net-line-dim: rgba(160,190,235,0.4);
+      --net-line-dim2: rgba(160,190,235,0.5);
+      --net-s1: #4FC3F7;
+      --net-s2: #7EE0B8;
+      --net-s3: #F3B14E;
+      --net-s4: #9D8CFF;
+      --net-s5: #F78DA7;
+    }
+    :root[data-theme="light"] {
+      --net-bg: radial-gradient(120% 90% at 50% 0%, #f4f7fc 0%, #e8eef7 60%, #dde5f1 100%);
+      --net-circle-bg: rgba(255,255,255,0.94);
+      --net-txt: rgba(28,42,64,0.92);
+      --net-txt-hi: #14243C;
+      --net-txt-dim: rgba(50,72,105,0.62);
+      --net-card-bg: linear-gradient(170deg, rgba(255,255,255,0.96), rgba(236,243,252,0.97));
+      --net-card-line: rgba(40,80,140,0.24);
+      --net-card-shadow: 0 24px 60px rgba(30,60,110,0.14), inset 0 1px 0 rgba(255,255,255,0.8);
+      --net-row-bg: rgba(233,241,250,0.8);
+      --net-row-line: rgba(40,80,140,0.16);
+      --net-chip-bg: rgba(30,140,210,0.1);
+      --net-chip-line: rgba(30,120,200,0.32);
+      --net-op-bg: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.98), rgba(224,234,247,0.98));
+      --net-op-line: rgba(40,90,160,0.32);
+      --net-op-shadow: 0 20px 50px rgba(30,60,110,0.16);
+      --net-line-dim: rgba(50,90,150,0.42);
+      --net-line-dim2: rgba(50,90,150,0.58);
+      --net-s1: #0A6EA8;
+      --net-s2: #147A54;
+      --net-s3: #A3660A;
+      --net-s4: #5F48D0;
+      --net-s5: #BE3E62;
+    }
+  </style>
+</helmet>
+
+<div data-fit-wrap="1" style="width: 100%; min-height: 100vh; box-sizing: border-box; display: flex; align-items: safe center; justify-content: safe center; background: transparent; padding: 16px; overflow: hidden; font-family: 'Space Grotesk', sans-serif;">
+  <div style="width: {{ scaledWidth }}; height: {{ scaledHeight }}; flex: 0 0 auto; position: relative;">
+  <div data-screen-label="Verified Network" style="position: absolute; top: 0; left: 0; transform: scale({{ scale }}); transform-origin: top left; width: 720px; height: 740px; overflow: hidden;">
+
+
+    <!-- connector lines -->
+    <svg width="720" height="740" viewBox="0 0 720 740" style="position: absolute; inset: 0; pointer-events: none;">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 1 L 9 5 L 0 9" fill="none" stroke="{{ accent }}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+        </marker>
+        <marker id="arrDim" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 1 L 9 5 L 0 9" fill="none" style="stroke: var(--net-line-dim2);" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+        </marker>
+      </defs>
+      <!-- sources -> platform -->
+      <path d="M 88 148 C 88 190, 296 156, 296 194" fill="none" style="stroke: var(--net-line-dim);" stroke-width="1.4" stroke-dasharray="2 7" stroke-linecap="round" marker-end="url(#arrDim)"></path>
+      <path d="M 224 148 C 224 182, 328 166, 328 194" fill="none" style="stroke: var(--net-line-dim);" stroke-width="1.4" stroke-dasharray="2 7" stroke-linecap="round" marker-end="url(#arrDim)"></path>
+      <path d="M 360 148 L 360 194" fill="none" style="stroke: var(--net-line-dim);" stroke-width="1.4" stroke-dasharray="2 7" stroke-linecap="round" marker-end="url(#arrDim)"></path>
+      <path d="M 496 148 C 496 182, 392 166, 392 194" fill="none" style="stroke: var(--net-line-dim);" stroke-width="1.4" stroke-dasharray="2 7" stroke-linecap="round" marker-end="url(#arrDim)"></path>
+      <path d="M 632 148 C 632 190, 424 156, 424 194" fill="none" style="stroke: var(--net-line-dim);" stroke-width="1.4" stroke-dasharray="2 7" stroke-linecap="round" marker-end="url(#arrDim)"></path>
+      <!-- platform -> operator -->
+      <path d="M 360 464 L 360 492" fill="none" stroke="{{ accent }}" stroke-width="2" stroke-dasharray="3 8" stroke-linecap="round" marker-end="url(#arr)"></path>
+      <!-- operator -> functions -->
+      <path d="M 320 648 C 250 665, 100 668, 100 684" fill="none" style="stroke: var(--net-line-dim);" stroke-width="1.4" stroke-dasharray="2 7" stroke-linecap="round" marker-end="url(#arrDim)"></path>
+      <path d="M 344 656 C 320 668, 278 670, 278 684" fill="none" style="stroke: var(--net-line-dim);" stroke-width="1.4" stroke-dasharray="2 7" stroke-linecap="round" marker-end="url(#arrDim)"></path>
+      <path d="M 376 656 C 400 668, 452 670, 452 684" fill="none" style="stroke: var(--net-line-dim);" stroke-width="1.4" stroke-dasharray="2 7" stroke-linecap="round" marker-end="url(#arrDim)"></path>
+      <path d="M 400 648 C 470 665, 620 668, 620 684" fill="none" style="stroke: var(--net-line-dim);" stroke-width="1.4" stroke-dasharray="2 7" stroke-linecap="round" marker-end="url(#arrDim)"></path>
+      <!-- flowing data pulses -->
+      <circle r="3" fill="#4FC3F7" opacity="0.9"><animateMotion dur="3.2s" begin="-0.4s" repeatCount="indefinite" path="M 88 148 C 88 190, 296 156, 296 194"></animateMotion></circle>
+      <circle r="3" fill="#7EE0B8" opacity="0.9"><animateMotion dur="3.2s" begin="-1.1s" repeatCount="indefinite" path="M 224 148 C 224 182, 328 166, 328 194"></animateMotion></circle>
+      <circle r="3" fill="#F3B14E" opacity="0.9"><animateMotion dur="3.2s" begin="-1.8s" repeatCount="indefinite" path="M 360 148 L 360 194"></animateMotion></circle>
+      <circle r="3" fill="#9D8CFF" opacity="0.9"><animateMotion dur="3.2s" begin="-2.5s" repeatCount="indefinite" path="M 496 148 C 496 182, 392 166, 392 194"></animateMotion></circle>
+      <circle r="3" fill="#F78DA7" opacity="0.9"><animateMotion dur="3.2s" begin="-3s" repeatCount="indefinite" path="M 632 148 C 632 190, 424 156, 424 194"></animateMotion></circle>
+      <circle r="3.5" fill="{{ accent }}"><animateMotion dur="1.8s" repeatCount="indefinite" path="M 360 464 L 360 492"></animateMotion></circle>
+      <circle r="3" fill="{{ accent }}" opacity="0.9"><animateMotion dur="2.6s" begin="-0.3s" repeatCount="indefinite" path="M 320 648 C 250 665, 100 668, 100 684"></animateMotion></circle>
+      <circle r="3" fill="{{ accent }}" opacity="0.9"><animateMotion dur="2.6s" begin="-1s" repeatCount="indefinite" path="M 344 656 C 320 668, 278 670, 278 684"></animateMotion></circle>
+      <circle r="3" fill="{{ accent }}" opacity="0.9"><animateMotion dur="2.6s" begin="-1.7s" repeatCount="indefinite" path="M 376 656 C 400 668, 452 670, 452 684"></animateMotion></circle>
+      <circle r="3" fill="{{ accent }}" opacity="0.9"><animateMotion dur="2.6s" begin="-2.3s" repeatCount="indefinite" path="M 400 648 C 470 665, 620 668, 620 684"></animateMotion></circle>
+    </svg>
+
+    <!-- sources (row across the top) -->
+    <sc-for list="{{ sources }}" as="src" hint-placeholder-count="5">
+      <div style="position: absolute; top: 28px; left: {{ src.left }}; width: 128px; display: flex; flex-direction: column; align-items: center; gap: 9px;">
+        <div style="width: 52px; height: 52px; flex: 0 0 auto; border-radius: 50%; background: var(--net-circle-bg); border: 1px solid {{ src.color }}; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; color: {{ src.color }};">{{ src.code }}</div>
+        <div style="font-size: 19px; font-weight: 500; color: var(--net-txt); line-height: 1.25; text-align: center;">{{ src.name }}</div>
+      </div>
+    </sc-for>
+
+    <!-- platform card -->
+    <div style="position: absolute; left: 200px; top: 204px; width: 320px; height: 256px; box-sizing: border-box; border-radius: 20px; background: var(--net-card-bg); border: 1px solid var(--net-card-line); box-shadow: var(--net-card-shadow); display: flex; flex-direction: column; padding: 28px;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="width: 40px; height: 40px; border-radius: 12px; background: {{ accent }}; display: flex; align-items: center; justify-content: center;">
+          <svg width="20" height="20" viewBox="0 0 20 20">
+            <circle cx="10" cy="10" r="7.5" fill="none" stroke="#0A1220" stroke-width="2"></circle>
+            <path d="M 6 10 L 9 13 L 14.5 7" fill="none" stroke="#0A1220" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <div>
+          <div style="font-size: 19px; font-weight: 700; letter-spacing: 0.02em; color: var(--net-txt-hi);">SteelTrace</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.18em; color: var(--net-txt-dim); text-transform: uppercase;">Single source of truth</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 22px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border-radius: 12px; background: var(--net-row-bg); border: 1px solid var(--net-row-line);">
+          <div style="width: 34px; height: 34px; flex: 0 0 auto; border-radius: 9px; background: var(--net-chip-bg); border: 1px solid var(--net-chip-line); display: flex; align-items: center; justify-content: center;">
+            <svg width="18" height="18" viewBox="0 0 18 18">
+              <line x1="9" y1="1.5" x2="9" y2="4.5" stroke="{{ accent }}" stroke-width="1.4" stroke-linecap="round"></line>
+              <circle cx="9" cy="1.8" r="1.2" fill="{{ accent }}"></circle>
+              <rect x="3.5" y="4.5" width="11" height="9" rx="2.5" fill="none" stroke="{{ accent }}" stroke-width="1.4"></rect>
+              <circle cx="6.8" cy="9" r="1.1" fill="{{ accent }}"></circle>
+              <circle cx="11.2" cy="9" r="1.1" fill="{{ accent }}"></circle>
+              <line x1="6.5" y1="16" x2="11.5" y2="16" stroke="{{ accent }}" stroke-width="1.4" stroke-linecap="round"></line>
+            </svg>
+          </div>
+          <div style="align-self: center;">
+            <div style="font-size: 15px; font-weight: 600; color: var(--net-txt-hi);">Agents clean, verify and approve.</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border-radius: 12px; background: var(--net-row-bg); border: 1px solid var(--net-row-line);">
+          <div style="width: 34px; height: 34px; flex: 0 0 auto; border-radius: 9px; background: var(--net-chip-bg); border: 1px solid var(--net-chip-line); display: flex; align-items: center; justify-content: center;">
+            <svg width="18" height="18" viewBox="0 0 16 16">
+              <rect x="3" y="7" width="10" height="7" rx="2" fill="none" stroke="{{ accent }}" stroke-width="1.5"></rect>
+              <path d="M 5.5 7 L 5.5 5.5 A 2.5 2.5 0 0 1 10.5 5.5 L 10.5 7" fill="none" stroke="{{ accent }}" stroke-width="1.5"></path>
+              <circle cx="8" cy="10.5" r="1.2" fill="{{ accent }}"></circle>
+            </svg>
+          </div>
+          <div style="align-self: center;">
+            <div style="font-size: 15px; font-weight: 600; color: var(--net-txt-hi);">Sealed &amp; traceable on-chain</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- operator -->
+    <div style="position: absolute; left: 278px; top: 496px; width: 164px; height: 164px; border-radius: 50%; background: var(--net-op-bg); border: 1.5px solid var(--net-op-line); box-shadow: var(--net-op-shadow); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
+      <svg width="44" height="44" viewBox="0 0 44 44">
+        <path d="M 18 6 L 26 6 L 32 38 L 12 38 Z" fill="none" style="stroke: var(--net-txt-hi);" stroke-width="2" stroke-linejoin="round"></path>
+        <line x1="16.5" y1="16" x2="27.5" y2="16" style="stroke: var(--net-txt-hi);" stroke-width="2"></line>
+        <line x1="15" y1="26" x2="29" y2="26" style="stroke: var(--net-txt-hi);" stroke-width="2"></line>
+      </svg>
+      <div style="font-size: 15px; font-weight: 600; color: var(--net-txt-hi);">Operators</div>
+    </div>
+
+    <!-- functions (row across the bottom) -->
+    <sc-for list="{{ functions }}" as="fn" hint-placeholder-count="4">
+      <div style="position: absolute; left: {{ fn.cx }}; top: 700px; transform: translateX(-50%); display: flex; align-items: center; justify-content: center;">
+        <div style="font-size: 19px; font-weight: 600; color: var(--net-txt-hi); letter-spacing: 0.01em; white-space: nowrap;">{{ fn.name }}</div>
+      </div>
+    </sc-for>
+
+  </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:760,&quot;height&quot;:960},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#4FC3F7&quot;,&quot;options&quot;:[&quot;#4FC3F7&quot;,&quot;#7EE0B8&quot;,&quot;#F3B14E&quot;,&quot;#9D8CFF&quot;],&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { scale: 1 };
+  componentDidMount() {
+    const attach = () => {
+      const el = document.querySelector('[data-fit-wrap]');
+      if (!el) { setTimeout(attach, 100); return; }
+      this._ro = new ResizeObserver(() => {
+        const avail = el.clientWidth - 32; // minus padding
+        const scale = Math.min(1, Math.max(0.1, avail / 720));
+        if (Math.abs(scale - this.state.scale) > 0.005) this.setState({ scale });
+      });
+      this._ro.observe(el);
+    };
+    attach();
+  }
+  componentWillUnmount() {
+    if (this._ro) this._ro.disconnect();
+  }
+  renderVals() {
+    const accent = this.props.accent ?? "#4FC3F7";
+    const scale = this.state.scale;
+    return {
+      accent,
+      scale,
+      scaledWidth: (720 * scale) + "px",
+      scaledHeight: (740 * scale) + "px",
+      sources: [
+        { code: "T·I", name: "Testing & Inspection", left: "24px", color: "var(--net-s1)" },
+        { code: "CO", name: "Contractors", left: "160px", color: "var(--net-s2)" },
+        { code: "EP", name: "EPCs", left: "296px", color: "var(--net-s3)" },
+        { code: "IN", name: "Inspectors", left: "432px", color: "var(--net-s4)" },
+        { code: "MF", name: "Manufacturers", left: "568px", color: "var(--net-s5)" },
+      ],
+      functions: [
+        { name: "Engineering", cx: "100px" },
+        { name: "Procurement", cx: "278px" },
+        { name: "Quality", cx: "452px" },
+        { name: "Maintenance", cx: "620px" },
+      ],
+    };
+  }
+}
+</script>
+<script>
+(function () {
+  function apply() {
+    try {
+      document.documentElement.dataset.theme = localStorage.getItem("steeltrace-theme") === "light" ? "light" : "dark";
+    } catch (e) {}
+  }
+  apply();
+  window.addEventListener("storage", function (e) { if (!e || !e.key || e.key === "steeltrace-theme") apply(); });
+  window.addEventListener("message", function (e) { if (e && e.data && e.data.type === "steeltrace-theme") apply(); });
+  setInterval(apply, 700);
+})();
+</script>
+</body>
+</html>

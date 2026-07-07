@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Verified Network — SteelTrace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0a0e17;
+    --panel:#0d1522;
+    --line:#1b2942;
+    --line-soft:#16233a;
+    --card:#111b2b;
+    --card-line:#22334f;
+    --txt:#f2f5fa;
+    --txt-2:#9fb0c8;
+    --txt-3:#5d7089;
+    --accent:#4da3ff;
+    --accent-soft:rgba(77,163,255,.12);
+    --mono:'IBM Plex Mono',monospace;
+    --sans:'Archivo',system-ui,sans-serif;
+  }
+  html,body{margin:0;height:100%;background:var(--bg);font-family:var(--sans);color:var(--txt);}
+  body{display:grid;place-items:center;overflow:hidden;}
+  .fit{width:min(100%, calc(100vh * 1380 / 820));}
+  .stage{position:relative;width:100%;aspect-ratio:1380/820;container-type:inline-size;
+    background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;
+    background-image:
+      linear-gradient(to right, rgba(120,150,200,.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(120,150,200,.045) 1px, transparent 1px);
+    background-size:7.5% 12.2%;
+  }
+  /* everything positions in % of the 1380x820 canvas */
+  .abs{position:absolute;}
+
+  /* ---------- header ---------- */
+  .hd-title{left:4.6%;top:6.4%;font-family:var(--mono);font-size:1.09cqw;font-weight:600;
+    letter-spacing:.42em;text-transform:uppercase;color:var(--accent);}
+  .hd-sub{left:4.6%;top:12.6%;font-size:1.05cqw;line-height:1.5;color:var(--txt-2);max-width:34ch;}
+
+  /* ---------- column labels ---------- */
+  .col-lbl{font-family:var(--mono);font-size:.8cqw;letter-spacing:.34em;text-transform:uppercase;color:var(--txt-3);}
+
+  /* ---------- sources ---------- */
+  .src{display:flex;align-items:center;gap:4.5%;width:24%;}
+  .src .badge{flex:none;width:23.5%;aspect-ratio:1/1;border-radius:50%;display:grid;place-items:center;
+    border:1.5px solid var(--card-line);background:linear-gradient(160deg,#131e30,#0e1726);
+    font-family:var(--mono);font-size:.94cqw;font-weight:600;color:var(--accent);letter-spacing:.02em;}
+  .src .name{font-size:1.2cqw;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--txt);}
+
+  /* ---------- platform card ---------- */
+  .plat{left:32.6%;top:21.3%;width:23.2%;height:60.5%;background:linear-gradient(170deg,#121d30,#0f1828);
+    border:1px solid var(--card-line);border-radius:16px;box-shadow:0 30px 70px -30px rgba(0,0,0,.7);
+    padding:2% 1.9%;box-sizing:border-box;display:flex;flex-direction:column;}
+  .plat-head{display:flex;align-items:center;gap:9%;}
+  .plat-logo{flex:none;width:13%;aspect-ratio:1/1;border-radius:26%;background:linear-gradient(150deg,#5eb0ff,#2f7fe0);
+    display:grid;place-items:center;color:#fff;}
+  .plat-logo svg{width:60%;height:60%;}
+  .plat-name{font-size:1.38cqw;font-weight:700;letter-spacing:-.02em;}
+  .plat-sub{font-family:var(--mono);font-size:.69cqw;letter-spacing:.3em;text-transform:uppercase;color:var(--txt-3);margin-top:4%;}
+  .plat-div{display:flex;align-items:center;gap:4%;margin:5.5% 0 3.5%;}
+  .plat-div span{font-family:var(--mono);font-size:.72cqw;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:600;}
+  .plat-div i{flex:1;height:1px;background:var(--card-line);}
+  .plat-desc{font-size:.94cqw;line-height:1.5;color:var(--txt-2);}
+  .agents{display:flex;flex-direction:column;gap:4%;margin-top:5%;flex:1;}
+  .agent{display:flex;align-items:center;gap:5%;padding:4.5% 5%;border:1px solid var(--card-line);border-radius:10px;
+    background:rgba(10,16,27,.55);}
+  .agent .ic{flex:none;width:11%;aspect-ratio:1/1;border-radius:22%;display:grid;place-items:center;
+    color:var(--accent);background:var(--accent-soft);border:1px solid rgba(77,163,255,.28);}
+  .agent .ic svg{width:62%;height:62%;}
+  .agent b{display:block;font-size:1.01cqw;font-weight:700;letter-spacing:-.01em;}
+  .agent span{display:block;font-size:.87cqw;color:var(--txt-2);line-height:1.35;margin-top:2%;}
+  .plat-foot{display:flex;align-items:center;gap:3.5%;margin-top:5%;font-family:var(--mono);
+    font-size:.72cqw;letter-spacing:.24em;text-transform:uppercase;color:var(--txt-3);}
+  .plat-foot svg{width:4.5%;color:var(--accent);flex:none;}
+
+  /* ---------- operators hub ---------- */
+  .oper{left:63.8%;top:39.5%;width:12%;aspect-ratio:1/1;border-radius:50%;
+    background:radial-gradient(circle at 34% 28%,#31486e,#1c2c47 62%,#16233a);
+    border:1px solid #33507c;box-shadow:0 26px 60px -22px rgba(0,0,0,.75), inset 0 1px 0 rgba(255,255,255,.07);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8%;}
+  .oper svg{width:32%;color:#dbe7f7;}
+  .oper span{font-size:1.09cqw;font-weight:700;letter-spacing:-.01em;}
+
+  /* ---------- delivered to ---------- */
+  .dest{display:flex;align-items:center;gap:.87cqw;}
+  .dest .dia{flex:none;width:.8cqw;aspect-ratio:1/1;background:var(--accent);
+    transform:rotate(45deg);border-radius:2px;box-shadow:0 0 14px rgba(77,163,255,.55);}
+  .dest .t{font-size:1.81cqw;font-weight:800;letter-spacing:-.025em;}
+
+  /* ---------- blockchain strip ---------- */
+  .chain{left:50%;top:87%;transform:translateX(-50%);display:flex;align-items:center;gap:.65cqw;}
+  .chip{font-family:var(--mono);font-size:.83cqw;font-weight:600;color:var(--txt-2);
+    border:1px solid var(--card-line);background:#101a2b;border-radius:7px;padding:.55em .9em;position:relative;}
+  .chip::before{content:"";position:absolute;top:.32em;left:50%;transform:translateX(-50%);width:34%;height:2px;border-radius:2px;background:var(--accent);opacity:.85;}
+  .chip{padding-top:1em;}
+  .link{display:flex;align-items:center;gap:2px;color:var(--txt-3);}
+  .link i{width:.43cqw;aspect-ratio:1/1;border:1px solid var(--txt-3);border-radius:50%;}
+  .link s{display:block;width:.72cqw;height:1px;background:var(--txt-3);text-decoration:none;}
+  .chain-cap{left:50%;top:94%;transform:translateX(-50%);font-family:var(--mono);white-space:nowrap;
+    font-size:.72cqw;letter-spacing:.34em;text-transform:uppercase;color:var(--txt-3);}
+
+  /* ---------- svg connectors ---------- */
+  svg.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+  .wire{fill:none;stroke:#3c5578;stroke-width:1.6;stroke-dasharray:2 6;stroke-linecap:round;vector-effect:non-scaling-stroke;}
+  .wire.hot{stroke:#4da3ff;stroke-width:2;stroke-dasharray:3 7;}
+  .wdot{fill:#4da3ff;}
+  .chev{fill:none;stroke:#4da3ff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;}
+</style>
+</head>
+<body>
+<div class="fit"><div class="stage" id="stage">
+
+  <svg class="wires" viewBox="0 0 1380 820" preserveAspectRatio="none" aria-hidden="true">
+    <!-- sources -> platform -->
+    <path class="wire" d="M175,205 C300,215 370,330 432,392"/>
+    <path class="wire" d="M175,300 C300,308 370,370 432,410"/>
+    <path class="wire" d="M175,398 C300,400 370,420 432,428"/>
+    <path class="wire" d="M175,495 C300,490 370,462 432,446"/>
+    <path class="wire" d="M175,592 C300,582 370,500 432,464"/>
+    <!-- convergence chevrons -->
+    <path class="chev" d="M436,386 l7,6 l-7,6"/>
+    <path class="chev" d="M436,404 l7,6 l-7,6"/>
+    <path class="chev" d="M436,422 l7,6 l-7,6"/>
+    <path class="chev" d="M436,440 l7,6 l-7,6"/>
+    <path class="chev" d="M436,458 l7,6 l-7,6"/>
+    <!-- platform -> operators -->
+    <path class="wire hot" id="w-hub" d="M772,410 L866,410"/>
+    <path class="chev" d="M862,403 l8,7 l-8,7"/>
+    <!-- operators -> destinations -->
+    <path class="wire" d="M1028,352 C1070,320 1105,275 1148,238"/>
+    <path class="wire" d="M1048,392 C1090,382 1115,360 1155,340"/>
+    <path class="wire" d="M1048,442 C1090,452 1115,472 1155,490"/>
+    <path class="wire" d="M1028,478 C1070,510 1105,555 1148,592"/>
+    <!-- traveling dots -->
+    <circle class="wdot" r="4"><animateMotion dur="3.2s" repeatCount="indefinite" path="M175,205 C300,215 370,330 432,392"/></circle>
+    <circle class="wdot" r="4"><animateMotion dur="3.2s" begin="0.5s" repeatCount="indefinite" path="M175,300 C300,308 370,370 432,410"/></circle>
+    <circle class="wdot" r="4"><animateMotion dur="3.2s" begin="1s" repeatCount="indefinite" path="M175,398 C300,400 370,420 432,428"/></circle>
+    <circle class="wdot" r="4"><animateMotion dur="3.2s" begin="1.5s" repeatCount="indefinite" path="M175,495 C300,490 370,462 432,446"/></circle>
+    <circle class="wdot" r="4"><animateMotion dur="3.2s" begin="2s" repeatCount="indefinite" path="M175,592 C300,582 370,500 432,464"/></circle>
+    <circle class="wdot" r="4.5"><animateMotion dur="1.8s" repeatCount="indefinite" path="M772,410 L866,410"/></circle>
+    <circle class="wdot" r="3.5"><animateMotion dur="2.6s" begin=".2s" repeatCount="indefinite" path="M1028,352 C1070,320 1105,275 1148,238"/></circle>
+    <circle class="wdot" r="3.5"><animateMotion dur="2.6s" begin=".9s" repeatCount="indefinite" path="M1048,392 C1090,382 1115,360 1155,340"/></circle>
+    <circle class="wdot" r="3.5"><animateMotion dur="2.6s" begin="1.6s" repeatCount="indefinite" path="M1048,442 C1090,452 1115,472 1155,490"/></circle>
+    <circle class="wdot" r="3.5"><animateMotion dur="2.6s" begin="2.3s" repeatCount="indefinite" path="M1028,478 C1070,510 1105,555 1148,592"/></circle>
+  </svg>
+
+  <!-- header -->
+  <div class="abs hd-title">The Verified Network</div>
+  <div class="abs hd-sub">Field data captured at the source, structured by agents, delivered verified to the operator.</div>
+
+  <!-- column labels -->
+  <div class="abs col-lbl" style="left:4.6%;top:20.5%;">Sources</div>
+  <div class="abs col-lbl" style="left:32.9%;top:17.2%;">Platform</div>
+  <div class="abs col-lbl" style="right:4.6%;top:20.5%;">Delivered to</div>
+
+  <!-- sources -->
+  <div class="abs src" style="left:4.6%;top:21.5%;"><span class="badge">T·I</span><span class="name">Testing &amp;<br>Inspection</span></div>
+  <div class="abs src" style="left:4.6%;top:33.4%;"><span class="badge">CO</span><span class="name">Contractors</span></div>
+  <div class="abs src" style="left:4.6%;top:45.3%;"><span class="badge">EP</span><span class="name">EPCs</span></div>
+  <div class="abs src" style="left:4.6%;top:57.2%;"><span class="badge">IN</span><span class="name">Inspectors</span></div>
+  <div class="abs src" style="left:4.6%;top:69.1%;"><span class="badge">MF</span><span class="name">Manufacturers</span></div>
+
+  <!-- platform card -->
+  <div class="abs plat">
+    <div class="plat-head">
+      <span class="plat-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.2"/><path d="M8 12.2l2.6 2.6L16 9.4"/></svg></span>
+      <div>
+        <div class="plat-name">SteelTrace</div>
+        <div class="plat-sub">Single source of truth</div>
+      </div>
+    </div>
+    <div class="plat-div"><span>Agents</span><i></i></div>
+    <div class="plat-desc">Autonomous agents clean, structure and verify every record.</div>
+    <div class="agents">
+      <div class="agent">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="6" width="14" height="12" rx="2.5"/><path d="M9 6V4.6A1.6 1.6 0 0 1 10.6 3h2.8A1.6 1.6 0 0 1 15 4.6V6"/><circle cx="9.5" cy="11.5" r="1"/><circle cx="14.5" cy="11.5" r="1"/><path d="M9.5 15h5"/></svg></span>
+        <div><b>Capture agent</b><span>Ingests certificates &amp; field data</span></div>
+      </div>
+      <div class="agent">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="6" width="14" height="12" rx="2.5"/><path d="M9 6V4.6A1.6 1.6 0 0 1 10.6 3h2.8A1.6 1.6 0 0 1 15 4.6V6"/><circle cx="9.5" cy="11.5" r="1"/><circle cx="14.5" cy="11.5" r="1"/><path d="M9.5 15h5"/></svg></span>
+        <div><b>Cleaning agent</b><span>Deduplicates and corrects records</span></div>
+      </div>
+      <div class="agent">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="6" width="14" height="12" rx="2.5"/><path d="M9 6V4.6A1.6 1.6 0 0 1 10.6 3h2.8A1.6 1.6 0 0 1 15 4.6V6"/><circle cx="9.5" cy="11.5" r="1"/><circle cx="14.5" cy="11.5" r="1"/><path d="M9.5 15h5"/></svg></span>
+        <div><b>Organising agent</b><span>Structures data against the spec</span></div>
+      </div>
+    </div>
+    <div class="plat-foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> Sealed &amp; traceable on-chain</div>
+  </div>
+
+  <!-- operators hub -->
+  <div class="abs oper">
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="19" y1="50" x2="28" y2="12"/><line x1="45" y1="50" x2="36" y2="12"/>
+      <line x1="28" y1="12" x2="36" y2="12"/><line x1="22.5" y1="35" x2="41.5" y2="35"/>
+      <line x1="20.7" y1="42.5" x2="43.3" y2="42.5"/><line x1="24.4" y1="27.5" x2="39.6" y2="27.5"/>
+      <line x1="32" y1="12" x2="32" y2="50"/><line x1="12" y1="50" x2="52" y2="50"/>
+    </svg>
+    <span>Operators</span>
+  </div>
+
+  <!-- delivered to -->
+  <div class="abs dest" style="left:83.4%;top:26.2%;"><span class="dia"></span><span class="t">Engineering</span></div>
+  <div class="abs dest" style="left:84%;top:38.8%;"><span class="dia"></span><span class="t">Procurement</span></div>
+  <div class="abs dest" style="left:84%;top:57.2%;"><span class="dia"></span><span class="t">Quality</span></div>
+  <div class="abs dest" style="left:83.4%;top:69.8%;"><span class="dia"></span><span class="t">Maintenance</span></div>
+
+  <!-- blockchain strip -->
+  <div class="abs chain">
+    <span class="chip">0x3F8A</span>
+    <span class="link"><i></i><s></s><i></i></span>
+    <span class="chip">0x91C2</span>
+    <span class="link"><i></i><s></s><i></i></span>
+    <span class="chip">0xB74E</span>
+    <span class="link"><i></i><s></s><i></i></span>
+    <span class="chip">0x2D6F</span>
+    <span class="link"><i></i><s></s><i></i></span>
+    <span class="chip">0xE501</span>
+  </div>
+  <div class="abs chain-cap">Every record anchored on the blockchain</div>
+
+</div></div>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem('steeltrace-theme')==='light'?'light':'dark';}catch(e){document.documentElement.dataset.theme='dark';}})();</script>
+<title>SteelTrace — Blog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="steeltrace/site.css" />
+<style>
+  /* most-recent strip */
+  .recent-bar { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); font-family: var(--font-mono); font-size: 11px; }
+  .recent-bar .lbl { color: var(--accent); letter-spacing: .14em; text-transform: uppercase; flex: none; }
+  .recent-bar a { color: var(--txt-2); text-decoration: none; letter-spacing: .02em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; transition: color .3s; }
+  .recent-bar a:hover { color: var(--txt); }
+  .recent-bar a .ar { color: var(--accent); margin-left: 6px; }
+
+  .article-wrap { max-width: 1080px; margin: 0 auto; padding-bottom: 40px; }
+  .back { display: inline-flex; align-items: center; gap: 8px; margin: 30px 0 22px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--txt-3); text-decoration: none; transition: color .3s; }
+  .back:hover { color: var(--accent); }
+
+  .a-cover { position: relative; width: 100vw; margin-left: calc(50% - 50vw); height: clamp(260px, 40vw, 460px); overflow: hidden; background-size: cover; background-position: center; display: grid; place-items: center; }
+  .a-cover::after { content: ""; position: absolute; inset: 0; background: radial-gradient(130% 130% at 78% 8%, transparent 38%, rgba(4,10,20,.4)); }
+  .a-cover .glyph { font-family: var(--font-mono); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.92); text-shadow: 0 2px 18px rgba(0,0,0,.4); z-index: 1; font-size: 19px; }
+
+  /* two-column layout: article + connected-posts sidebar */
+  .a-layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 56px; align-items: start; margin-top: 34px; }
+  .a-main { min-width: 0; }
+  .a-side { position: sticky; top: 96px; }
+  .side-card { border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--panel); padding: 20px; }
+  .side-h { display: block; font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  .side-link { display: flex; gap: 12px; align-items: center; padding: 11px 0; border-top: 1px solid var(--line); text-decoration: none; color: inherit; transition: opacity .25s; }
+  .side-link:first-of-type { border-top: 0; padding-top: 0; }
+  .side-link:hover { opacity: .72; }
+  .side-link .sl-cov { flex: none; width: 52px; height: 52px; border-radius: 9px; background-size: cover; background-position: center; }
+  .side-link .sl-tx { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+  .side-link .sl-cat { font-family: var(--font-mono); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+  .side-link .sl-t { font-size: 13.5px; font-weight: 600; line-height: 1.3; letter-spacing: -.01em; color: var(--txt); text-wrap: pretty; }
+
+  .a-head { margin: 0 0 6px; }
+  .a-cat { font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+  .a-title { font-size: clamp(28px, 4vw, 46px); font-weight: 800; letter-spacing: -.035em; line-height: 1.02; margin-top: 14px; text-wrap: balance; }
+  .byline { display: flex; align-items: center; gap: 12px; margin-top: 24px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+  .byline .av { width: 40px; height: 40px; border-radius: 50%; flex: none; display: grid; place-items: center; font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-dim); }
+  .byline .who { font-size: 14px; line-height: 1.4; }
+  .byline .who b { display: block; color: var(--txt); font-weight: 600; letter-spacing: -.01em; }
+  .byline .who span { color: var(--txt-3); font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; }
+
+  /* prose */
+  .a-prose { margin-top: 30px; font-size: 16.5px; line-height: 1.75; color: var(--txt-2); }
+  .a-prose > *:first-child { margin-top: 0; }
+  .a-prose p { margin-top: 20px; }
+  .a-prose h2 { font-size: clamp(21px, 2.4vw, 27px); font-weight: 700; letter-spacing: -.02em; color: var(--txt); margin-top: 40px; line-height: 1.15; }
+  .a-prose h3 { font-size: 18px; font-weight: 700; letter-spacing: -.01em; color: var(--txt); margin-top: 30px; }
+  .a-prose ul { margin-top: 18px; padding-left: 2px; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .a-prose li { position: relative; padding-left: 26px; }
+  .a-prose li::before { content: ""; position: absolute; left: 4px; top: 11px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .a-prose strong { color: var(--txt); font-weight: 600; }
+  .a-prose a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim); }
+  .a-prose code { font-family: var(--font-mono); font-size: .88em; background: var(--elev); border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px; }
+  .a-prose blockquote { margin: 26px 0; padding: 4px 0 4px 24px; border-left: 3px solid var(--accent); color: var(--txt); font-size: 19px; line-height: 1.5; font-weight: 500; letter-spacing: -.01em; }
+
+  .a-foot { margin-top: 44px; padding-top: 30px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  /* read next */
+  .read-next { margin-top: 64px; }
+  .read-next .kicker { margin-bottom: 20px; }
+  .rn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .rn { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: var(--panel); text-align: left; color: inherit; font: inherit; padding: 0; cursor: pointer; transition: transform .4s var(--ease-out), border-color .3s, box-shadow .4s; }
+  .rn:hover { transform: translateY(-5px); border-color: var(--accent-line); box-shadow: var(--shadow); }
+  .rn .cov { height: 96px; background-size: cover; background-position: center; }
+  .rn .b { padding: 16px 18px 18px; }
+  .rn .t { font-family: var(--font-mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  .rn h4 { font-size: 15px; font-weight: 700; letter-spacing: -.01em; line-height: 1.25; margin-top: 9px; text-wrap: pretty; }
+
+  .a-missing { text-align: center; padding: 90px 20px; }
+  .a-missing h1 { font-size: 28px; font-weight: 700; }
+  .a-missing p { color: var(--txt-2); margin-top: 12px; }
+
+  @media (max-width: 900px) { .a-layout { grid-template-columns: 1fr; gap: 40px; } .a-side { position: static; } }
+  @media (max-width: 700px) { .rn-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="aura a"></div><div class="aura b"></div>
+<div class="gridbg"></div>
+<div class="wrap">
+
+<header class="topbar" data-site-header data-page="blog" data-crumb="Blog>>blog.html|Article"></header>
+
+<div class="page">
+  <div class="recent-bar" id="recentBar" style="display:none">
+    <span class="lbl">Most recent</span>
+    <a id="recentLink" href="#"></a>
+  </div>
+
+  <article class="article-wrap" id="article"></article>
+</div>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<script src="steeltrace/chrome.js"></script>
+<script src="steeltrace/posts.generated.js"></script>
+<script src="steeltrace/posts-data.js"></script>
+<script>
+(function () {
+  "use strict";
+  var B = window.STEELTRACE_BLOG;
+  var art = document.getElementById("article");
+  if (!B || !art) return;
+
+  function param(n) { return new URLSearchParams(location.search).get(n); }
+  var slug = param("slug");
+  var post = B.posts.filter(function (p) { return p.slug === slug; })[0] || (param("id") ? B.posts.filter(function (p) { return p.id === param("id"); })[0] : null);
+  // fall back to the most recent post when opened without a valid slug
+  if (!post && !slug && !param("id")) post = B.byDate[0];
+  var recent = B.byDate[0];
+
+  // most-recent strip (hide if you're already reading it)
+  if (recent && (!post || post.id !== recent.id)) {
+    document.getElementById("recentBar").style.display = "flex";
+    var rl = document.getElementById("recentLink");
+    rl.textContent = recent.title;
+    rl.innerHTML = B.esc(recent.title) + ' <span class="ar">→</span>';
+    rl.href = "post.html?slug=" + encodeURIComponent(recent.slug);
+  }
+
+  if (!post) {
+    document.title = "Not found — SteelTrace Blog";
+    art.innerHTML = '<div class="a-missing"><h1>Post not found</h1><p>This article may have moved.</p><p style="margin-top:22px"><a class="btn btn-primary" href="blog.html">← Back to the blog</a></p></div>';
+    return;
+  }
+
+  document.title = post.title + " — SteelTrace";
+
+  var sub = [post.role, B.formatDate(post.date)].filter(Boolean).join(" · ");
+  var byline = '<div class="byline"><span class="av">' + B.esc(B.initials(post.author || "ST")) + '</span>' +
+    '<span class="who"><b>' + B.esc(post.author || "SteelTrace Team") + '</b><span>' + B.esc(sub) + '</span></span></div>';
+
+  // connected posts: newest others
+  var others = B.byDate.filter(function (p) { return p.id !== post.id; }).slice(0, 5);
+  var sidebar = others.length ? (
+    '<aside class="a-side"><div class="side-card"><span class="side-h">Connected posts</span>' +
+    others.map(function (p) {
+      return '<a class="side-link" href="post.html?slug=' + encodeURIComponent(p.slug) + '">' +
+        '<span class="sl-cov" style="' + B.coverStyle(p) + '"></span>' +
+        '<span class="sl-tx"><span class="sl-cat">' + B.esc(p.cat || "Article") + '</span>' +
+        '<span class="sl-t">' + B.esc(p.title) + '</span></span></a>';
+    }).join("") +
+    '</div></aside>'
+  ) : "";
+
+  art.innerHTML =
+    '<a class="back" href="blog.html"><span>←</span> Back to blog</a>' +
+    '<div class="a-cover" style="' + B.coverStyle(post) + '">' + (!post.image && post.glyph ? '<span class="glyph">' + B.esc(post.glyph) + '</span>' : '') + '</div>' +
+    '<div class="a-layout"><div class="a-main">' +
+    '<div class="a-head"><span class="a-cat">' + B.esc(post.cat || "Article") + '</span><h1 class="a-title">' + B.esc(post.title) + '</h1></div>' +
+    byline +
+    '<div class="a-prose">' + (B.md(post.body) || '<p>' + B.esc(post.summary) + '</p>') + '</div>' +
+    '<div class="a-foot"><a class="btn btn-ghost" href="blog.html">← All articles</a><a class="btn btn-primary" href="demo.html">Book a demo <span class="ar">→</span></a></div>' +
+    '</div>' + sidebar + '</div>';
+
+  window.scrollTo(0, 0);
+})();
+</script>
+</div>
+</body>
+</html>
