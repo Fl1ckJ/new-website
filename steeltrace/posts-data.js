@@ -22,6 +22,8 @@
   function initials(t) { return (t || "").split(/\s+/).slice(0, 2).map(function (w) { return w[0] || ""; }).join("").toUpperCase(); }
   function slugify(t) { return String(t || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""); }
   function coverStyle(p) { return p.image ? 'background-image:url(' + esc(p.image) + ')' : 'background-image:' + COVERS[(p.cover || 0) % COVERS.length]; }
+  // card/thumbnail image: prefer a dedicated preview, fall back to the hero image, then gradient
+  function cardStyle(p) { var src = p.preview || p.image; return src ? 'background-image:url(' + esc(src) + ')' : 'background-image:' + COVERS[(p.cover || 0) % COVERS.length]; }
   var MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   function formatDate(d) {
     var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(d || ""));
@@ -83,6 +85,7 @@
       date: p.date || "",
       cover: typeof p.cover === "number" ? p.cover : (parseInt(p.cover, 10) || idx),
       image: p.image || "",
+      preview: p.preview || "",
       glyph: p.glyph || "",
       summary: p.summary || "",
       body: p.body || "",
@@ -102,6 +105,7 @@
     byDate: byDate,
     md: mdToHtml,
     coverStyle: coverStyle,
+    cardStyle: cardStyle,
     initials: initials,
     esc: esc,
     slugify: slugify,

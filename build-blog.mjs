@@ -1,13 +1,27 @@
 #!/usr/bin/env node
 /* SteelTrace blog build — pure Node, zero dependencies.
  *
- * Scans /posts for Markdown files and regenerates
+ * Scans /posts for posts and regenerates
  * steeltrace/posts.generated.js (window.STEELTRACE_POSTS).
  *
- *   Publish a post:  drop a .md file in /posts, then run:  node build-blog.mjs
+ * One post = one FOLDER in /posts holding the markdown file plus all of its
+ * images, side by side:
+ *
+ *   posts/2026-07-01-my-headline/
+ *     index.md        ← the post (any *.md name works, e.g. a Notion export)
+ *     hero.jpg        ← frontmatter:  image: hero.jpg
+ *     preview.jpg     ← frontmatter:  preview: preview.jpg
+ *     image-1.png     ← body:         ![caption](image-1.png)
+ *
+ * Inside the markdown, reference images by bare filename (or ./filename) —
+ * the build rewrites them to the full posts/<folder>/… URL. Absolute URLs
+ * (https://…) and root paths (uploads/…, /…) pass through untouched.
+ * Loose *.md files directly in /posts still work for image-less posts.
+ *
+ *   Publish a post:  drop a folder in /posts, then run:  node build-blog.mjs
  *   Watch mode:      node build-blog.mjs --watch
  *
- * Each .md file is one post. Two authoring styles are accepted:
+ * Two authoring styles are accepted for the markdown itself:
  *
  *   1) Frontmatter (recommended, hand-written):
  *        ---
@@ -33,7 +47,7 @@
  *
  * The build never edits your .md files. It only (re)writes the generated JS.
  */
-import { readFileSync, writeFileSync, readdirSync, watch } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync, statSync, watch } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
@@ -53,6 +67,7 @@ const ALIASES = {
   date: "date", published: "date", "publish date": "date",
   cover: "cover", glyph: "glyph", label: "glyph",
   image: "image", "cover image": "image", banner: "image",
+  preview: "preview", "preview image": "preview", preview_image: "preview", thumbnail: "preview",
   excerpt: "excerpt", summary: "excerpt", description: "excerpt"
 };
 
@@ -88,12 +103,41 @@ function assign(post, rawKey, value) {
   value = stripQuotes(value);
   if (!value) return;
   if (key === "cover") post.cover = parseInt(value, 10) || 0;
-  else if (["cat", "author", "role", "date", "glyph", "image", "excerpt", "title"].includes(key)) post[key] = value;
+  else if (["cat", "author", "role", "date", "glyph", "image", "preview", "excerpt", "title"].includes(key)) post[key] = value;
 }
 
-function parse(raw, index) {
+/* ---- asset-path rewriting ------------------------------------------------
+ * Posts live in folders; their images sit next to the .md. Authors write bare
+ * relative paths ("hero.jpg", "./image-1.png") and the build resolves them to
+ * the URL the site serves ("posts/<folder>/hero.jpg"). Anything that is
+ * already absolute or root-relative is left alone. */
+const PASS_THROUGH = /^(?:[a-z][a-z0-9+.-]*:|\/\/|\/|#)/i;   // http:, data:, mailto:, //cdn, /root, #anchor
+const ROOT_DIRS = /^(?:posts|uploads|graphics|screenshots|steeltrace)\//;
+
+function rewritePath(p, base) {
+  if (!base || !p) return p;
+  p = p.replace(/^\.\//, "");
+  if (PASS_THROUGH.test(p) || ROOT_DIRS.test(p)) return p;
+  return base + p;
+}
+
+function rewriteBody(body, base) {
+  if (!base) return body;
+  // markdown images: ![alt](src) / ![alt](src "title")
+  body = body.replace(/(!\[[^\]]*\]\()([^)\s]+)((?:\s+"[^"]*")?\))/g,
+    (m, pre, src, post) => pre + rewritePath(src, base) + post);
+  // raw HTML images: <img src="…">
+  body = body.replace(/(<img\b[^>]*?\bsrc=")([^"]+)(")/gi,
+    (m, pre, src, post) => pre + rewritePath(src, base) + post);
+  // links to local files (pdf, images, video…): [text](file.pdf)
+  body = body.replace(/((?:^|[^!])\[[^\]]*\]\()([^)\s]+\.(?:pdf|png|jpe?g|gif|svg|webp|mp4|webm|zip))((?:\s+"[^"]*")?\))/gi,
+    (m, pre, src, post) => pre + rewritePath(src, base) + post);
+  return body;
+}
+
+function parse(raw, index, base) {
   const text = raw.replace(/\r/g, "").replace(/^﻿/, "");
-  const post = { title: "", cat: "", author: "", role: "", date: "", cover: index, image: "", glyph: "", excerpt: "", body: "" };
+  const post = { title: "", cat: "", author: "", role: "", date: "", cover: index, image: "", preview: "", glyph: "", excerpt: "", body: "" };
 
   const fm = /^---\n([\s\S]*?)\n---\n?/.exec(text);
   if (fm) {
@@ -148,22 +192,48 @@ function parse(raw, index) {
   post.slug = slugify(post.title);
   post.id = post.slug;
   delete post.excerpt;
+
+  // Resolve relative image paths against the post's own folder.
+  post.image = rewritePath(post.image, base);
+  post.preview = rewritePath(post.preview, base);
+  post.body = rewriteBody(post.body, base);
   return post;
 }
 
+/* Find the posts to build: one folder per post (markdown + its images), plus
+ * any loose .md files directly in /posts. Names starting with "." or "_" are
+ * ignored (drafts), as are README files. */
+function collectSources() {
+  const keep = (n) => !/^[._]/.test(n) && n.toLowerCase() !== "readme.md";
+  const sources = [];
+  for (const name of readdirSync(POSTS_DIR).filter(keep).sort()) {
+    const full = join(POSTS_DIR, name);
+    if (statSync(full).isDirectory()) {
+      const mds = readdirSync(full).filter((f) => /\.md$/i.test(f) && keep(f)).sort();
+      if (!mds.length) { console.warn(`  ! ${name}/ has no .md file — skipped`); continue; }
+      if (mds.length > 1) console.warn(`  ! ${name}/ has ${mds.length} .md files — using ${mds[0]}`);
+      // base = URL prefix for this post's images (folder name URL-encoded)
+      sources.push({ file: join(full, mds[0]), base: `posts/${encodeURIComponent(name)}/`, label: `${name}/${mds[0]}` });
+    } else if (/\.md$/i.test(name)) {
+      sources.push({ file: full, base: "", label: name });
+    }
+  }
+  return sources;
+}
+
 function build() {
-  let files;
+  let sources;
   try {
-    files = readdirSync(POSTS_DIR).filter((f) => /\.md$/i.test(f) && !/^[._]/.test(f) && f.toLowerCase() !== "readme.md");
-  } catch {
-    console.error(`✗ No /posts folder found at ${POSTS_DIR}`);
+    sources = collectSources();
+  } catch (e) {
+    console.error(`✗ Could not read /posts at ${POSTS_DIR}: ${e.message}`);
     process.exit(1);
   }
 
-  const posts = files
-    .map((f, i) => {
-      try { return parse(readFileSync(join(POSTS_DIR, f), "utf8"), i); }
-      catch (e) { console.warn(`  ! skipped ${f}: ${e.message}`); return null; }
+  const posts = sources
+    .map((s, i) => {
+      try { return parse(readFileSync(s.file, "utf8"), i, s.base); }
+      catch (e) { console.warn(`  ! skipped ${s.label}: ${e.message}`); return null; }
     })
     .filter((p) => p && p.title)
     // newest first — keeps category chips and "most recent" stable
@@ -171,7 +241,7 @@ function build() {
 
   const banner =
     "/* AUTO-GENERATED by build-blog.mjs — do not edit by hand.\n" +
-    "   Add or edit Markdown files in /posts, then run:  node build-blog.mjs */\n";
+    "   Add or edit post folders in /posts, then run:  node build-blog.mjs */\n";
   writeFileSync(OUT, banner + "window.STEELTRACE_POSTS = " + JSON.stringify(posts, null, 2) + ";\n");
 
   console.log(`✓ ${posts.length} post${posts.length === 1 ? "" : "s"} bundled → steeltrace/posts.generated.js`);
@@ -183,5 +253,5 @@ build();
 if (process.argv.includes("--watch")) {
   console.log("… watching /posts for changes (Ctrl-C to stop)");
   let t = null;
-  watch(POSTS_DIR, () => { clearTimeout(t); t = setTimeout(build, 120); });
+  watch(POSTS_DIR, { recursive: true }, () => { clearTimeout(t); t = setTimeout(build, 120); });
 }

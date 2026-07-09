@@ -405,13 +405,18 @@ if(!window.THREE){
   document.getElementById("webgl-fail").style.display = "flex";
   return;
 }
+// Lenient WebGL probe: Safari can return null for a detached probe canvas and
+// caps live contexts, so we try webgl2/webgl/experimental and, crucially,
+// release the probe context immediately. The authoritative check is the real
+// renderer creation below (wrapped in try/catch).
 try{
   var testCanvas = document.createElement("canvas");
-  var gl = testCanvas.getContext("webgl") || testCanvas.getContext("experimental-webgl");
-  if(!gl){ document.getElementById("webgl-fail").style.display = "flex"; return; }
-}catch(e){
-  document.getElementById("webgl-fail").style.display = "flex"; return;
-}
+  var gl = testCanvas.getContext("webgl2") || testCanvas.getContext("webgl") || testCanvas.getContext("experimental-webgl");
+  if(gl){
+    var lose = gl.getExtension("WEBGL_lose_context");
+    if(lose) lose.loseContext();   // free the slot so Safari has one for the real canvas
+  }
+}catch(e){ /* ignore — let the real renderer decide */ }
 
 /* ============================================================
    UTILITIES — seeded RNG and value noise
@@ -471,7 +476,18 @@ function seabedDetail(x, z){
    RENDERER / SCENE / CAMERA / LIGHTS
 ============================================================ */
 var canvas = document.getElementById("scene");
-var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, powerPreference: "high-performance" });
+var renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, powerPreference: "high-performance" });
+} catch (e) {
+  // Some Safari configs reject "high-performance"; retry with defaults before giving up.
+  try { renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true }); }
+  catch (e2) {
+    console.error("WebGL renderer could not be created:", e2);
+    document.getElementById("webgl-fail").style.display = "flex";
+    return;
+  }
+}
 renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;

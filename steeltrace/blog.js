@@ -50,9 +50,9 @@
     if (showFeatured) {
       featuredEl.style.display = "";
       featuredEl.innerHTML =
-        '<div class="cover" style="' + B.coverStyle(featuredPost) + '">' +
+        '<div class="cover" style="' + B.cardStyle(featuredPost) + '">' +
           (featuredPost.cat ? '<span class="ct">' + B.esc(featuredPost.cat) + '</span>' : '') +
-          (!featuredPost.image && featuredPost.glyph ? '<span class="glyph">' + B.esc(featuredPost.glyph) + '</span>' : '') +
+          (!(featuredPost.preview || featuredPost.image) && featuredPost.glyph ? '<span class="glyph">' + B.esc(featuredPost.glyph) + '</span>' : '') +
         '</div>' +
         '<div class="fbody">' +
           '<span class="tagline">Most recent' + (featuredPost.cat ? ' · ' + B.esc(featuredPost.cat) : '') + '</span>' +
@@ -78,9 +78,9 @@
       card.type = "button";
       card.className = "post";
       card.innerHTML =
-        '<div class="cover" style="' + B.coverStyle(p) + '">' +
+        '<div class="cover" style="' + B.cardStyle(p) + '">' +
           (p.cat ? '<span class="ct">' + B.esc(p.cat) + '</span>' : '') +
-          (!p.image && p.glyph ? '<span class="glyph">' + B.esc(p.glyph) + '</span>' : '') +
+          (!(p.preview || p.image) && p.glyph ? '<span class="glyph">' + B.esc(p.glyph) + '</span>' : '') +
         '</div>' +
         '<div class="pbody">' +
           '<span class="tag">' + B.esc(p.cat || "Article") + '</span>' +

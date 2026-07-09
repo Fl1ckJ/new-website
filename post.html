@@ -61,6 +61,9 @@
   .a-prose a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim); }
   .a-prose code { font-family: var(--font-mono); font-size: .88em; background: var(--elev); border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px; }
   .a-prose blockquote { margin: 26px 0; padding: 4px 0 4px 24px; border-left: 3px solid var(--accent); color: var(--txt); font-size: 19px; line-height: 1.5; font-weight: 500; letter-spacing: -.01em; }
+  /* inline content images: fill the column, and break out a touch on wider screens */
+  .a-prose img { display: block; width: 100%; height: auto; margin: 30px auto; border-radius: var(--r-md, 12px); border: 1px solid var(--line); }
+  @media (min-width: 901px) { .a-prose img { width: 82%; max-width: 82%; } }
 
   .a-foot { margin-top: 44px; padding-top: 30px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 
@@ -139,13 +142,33 @@
   var byline = '<div class="byline"><span class="av">' + B.esc(B.initials(post.author || "ST")) + '</span>' +
     '<span class="who"><b>' + B.esc(post.author || "SteelTrace Team") + '</b><span>' + B.esc(sub) + '</span></span></div>';
 
-  // connected posts: newest others
-  var others = B.byDate.filter(function (p) { return p.id !== post.id; }).slice(0, 5);
+  // connected posts: ranked by thematic relatedness (shared category + keyword overlap)
+  var STOP = { the:1,a:1,an:1,and:1,or:1,of:1,to:1,in:1,for:1,on:1,with:1,is:1,are:1,be:1,by:1,as:1,at:1,from:1,how:1,why:1,what:1,your:1,you:1,our:1,we:1,can:1,it:1,its:1,this:1,that:1,do:1,does:1,steeltrace:1,steel:1,ways:1,way:1 };
+  function keywords(p) {
+    var s = ((p.title || "") + " " + (p.summary || "") + " " + (p.glyph || "")).toLowerCase();
+    var out = {};
+    (s.match(/[a-z0-9]+/g) || []).forEach(function (w) { if (w.length > 2 && !STOP[w]) out[w] = 1; });
+    return out;
+  }
+  var myKw = keywords(post);
+  function relScore(p) {
+    var kw = keywords(p), overlap = 0;
+    for (var w in kw) if (myKw[w]) overlap++;
+    var catBonus = (p.cat && post.cat && p.cat === post.cat) ? 4 : 0;
+    var glyphBonus = (p.glyph && post.glyph && p.glyph === post.glyph) ? 3 : 0;
+    return catBonus + glyphBonus + overlap;
+  }
+  var others = B.byDate
+    .filter(function (p) { return p.id !== post.id; })
+    .map(function (p) { return { p: p, s: relScore(p) }; })
+    .sort(function (a, b) { return b.s - a.s || (b.p.date || "").localeCompare(a.p.date || ""); })
+    .slice(0, 5)
+    .map(function (x) { return x.p; });
   var sidebar = others.length ? (
     '<aside class="a-side"><div class="side-card"><span class="side-h">Connected posts</span>' +
     others.map(function (p) {
       return '<a class="side-link" href="post.html?slug=' + encodeURIComponent(p.slug) + '">' +
-        '<span class="sl-cov" style="' + B.coverStyle(p) + '"></span>' +
+        '<span class="sl-cov" style="' + B.cardStyle(p) + '"></span>' +
         '<span class="sl-tx"><span class="sl-cat">' + B.esc(p.cat || "Article") + '</span>' +
         '<span class="sl-t">' + B.esc(p.title) + '</span></span></a>';
     }).join("") +
