@@ -285,7 +285,7 @@
         '<form class="nl-form nl-form-stack" id="mauticform_brochure" method="post" novalidate>' +
           '<input class="nl-input" type="text" name="mauticform[first_name]" placeholder="First name" required aria-label="First name" />' +
           '<input class="nl-input" type="text" name="mauticform[last_name]" placeholder="Last name" required aria-label="Last name" />' +
-          '<input class="nl-input" type="email" name="mauticform[email]" placeholder="Work email" required aria-label="Work email" />' +
+          '<input class="nl-input" type="email" name="mauticform[business_email]" placeholder="Work email" required aria-label="Work email" />' +
           '<label class="nl-consent"><input type="checkbox" class="nl-consent-box" /> <span>I consent to SteelTrace processing my data as per the <a href="privacy-policy.html" target="_blank" rel="noopener">privacy statement</a>.</span></label>' +
           '<div class="nl-hcap" data-hcap></div>' +
           '<span class="nl-err" data-err></span>' +
