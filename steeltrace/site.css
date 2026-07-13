@@ -274,3 +274,13 @@ a { color: inherit; }
 /* login left panel reads light */
 [data-theme="light"] .login-aside::before { background: radial-gradient(120% 90% at 20% 0%, rgba(120,165,225,.26), transparent 60%); }
 [data-theme="light"] .login-aside { border-right-color: var(--line); }
+
+/* ---- Mautic form additions (newsletter / brochure / contact) ---- */
+.nl-consent { display: flex; align-items: flex-start; gap: 9px; font-size: 12.5px; color: var(--txt-2); line-height: 1.5; text-align: left; }
+.nl-consent input { width: 15px; height: 15px; margin-top: 2px; flex: none; accent-color: var(--accent); }
+.nl-consent a { color: var(--accent); text-decoration: none; }
+.nl-consent a:hover { text-decoration: underline; }
+.nl-hcap, .c-hcap { display: flex; justify-content: center; min-height: 0; }
+.c-hcap { justify-content: flex-start; }
+.nl-err, .form-err { display: none; color: #e5638a; font-size: 12.5px; line-height: 1.45; }
+.nl-err.show, .form-err.show { display: block; }

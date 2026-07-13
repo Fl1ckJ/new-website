@@ -20,10 +20,20 @@
   .pr-crumbs a:hover { color: var(--accent); }
   .pr-crumbs .sep { opacity: .5; }
   .pr-crumbs .cur { color: var(--txt); }
-  .pr-hero { padding: 92px 0 36px; text-align: center; max-width: 820px; margin: 0 auto; }
-  .pr-hero .h1 { margin-top: 20px; }
-  .pr-hero .lead { margin: 22px auto 0; max-width: 56ch; }
+  .pr-hero { position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); margin-top: 0; overflow: hidden; text-align: center;
+    background-image: linear-gradient(180deg, rgba(6,11,18,.3), rgba(6,11,18,.62)), url("graphics/reeled-hero.png");
+    background-size: cover, cover; background-position: center, center; background-repeat: no-repeat; }
+  .pr-hero .hbody { position: relative; z-index: 1; padding: 118px 32px 108px; max-width: 860px; margin: 0 auto; }
+  .pr-hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 240px; z-index: 0; pointer-events: none; background: linear-gradient(180deg, transparent, var(--bg) 92%); }
+  .pr-hero .h1 { margin-top: 0; color: #fff; }
+  .pr-hero .lead { margin: 22px auto 0; max-width: 56ch; color: rgba(255,255,255,.82); }
   .pr-hero .row { display: flex; gap: 14px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
+  [data-theme="light"] .pr-hero { }
+  /* lead statement — like the Operators intro */
+  .rp-lead { max-width: 1080px; margin: 0 auto; padding: 78px 0 26px; }
+  .rp-lead-line { font-family: var(--font-display); font-weight: 800; letter-spacing: -.045em; line-height: 1.0; font-size: clamp(38px, 6vw, 76px); margin: 0; text-wrap: balance; color: var(--txt); }
+  .rp-lead-line .w { color: transparent; -webkit-background-clip: text; background-clip: text; background-image: linear-gradient(135deg, var(--accent-2, #8fd0ff), var(--accent) 58%, var(--accent-deep, #1f6feb)); }
+  .rp-lead-body { font-size: clamp(16px, 1.55vw, 19px); line-height: 1.62; color: var(--txt-2); margin: 28px 0 0; max-width: 66ch; text-wrap: pretty; }
 
   /* pipeline journey (independent-scroll embed) */
   .pipeline-embed { padding: 4px 0 10px; }
@@ -512,8 +522,15 @@
 
 <div class="page">
   <section class="pr-hero">
-    <h1 class="h1">Spoolbase to seabed, fully traceable.</h1>
-    <p class="lead">Capture stalk fabrication and reeling data at the spoolbase, verify every weld against spec, and carry a complete as-built record through load-out and reel-lay.</p>
+    <div class="hbody">
+      <h1 class="h1">Spoolbase to seabed, fully traceable.</h1>
+      <p class="lead">Capture stalk fabrication and reeling data at the spoolbase, verify every weld against spec, and carry a complete as-built record through load-out and reel-lay.</p>
+    </div>
+  </section>
+
+  <section class="rp-lead reveal">
+    <h2 class="rp-lead-line">Built before it <span class="w">reaches the vessel.</span></h2>
+    <p class="rp-lead-body">Reeled pipeline projects bring together pipes from multiple suppliers, each with their own material specifications, certificates and manufacturing records. At the spoolbase, individual pipes are welded into stalks before being joined into one continuous pipeline, while welding, NDT and coating data is generated across multiple systems and contractors. SteelTrace captures, validates and approves every record in real time, continuously building the Smart Manufacturing Record and maintaining complete traceability from the first pipe received to the final pipeline installed on the seabed.</p>
   </section>
 
   <!-- PIPELINE TALLY / WELD MAP -->

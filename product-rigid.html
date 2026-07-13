@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem('steeltrace-theme')==='light'?'light':'dark';}catch(e){document.documentElement.dataset.theme='dark';}})();</script>
-<title>Rigid pipelines — SteelTrace</title>
+<title>S-Lay &amp; J-Lay pipelines — SteelTrace</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -20,10 +20,20 @@
   .pr-crumbs a:hover { color: var(--accent); }
   .pr-crumbs .sep { opacity: .5; }
   .pr-crumbs .cur { color: var(--txt); }
-  .pr-hero { padding: 92px 0 36px; text-align: center; max-width: 820px; margin: 0 auto; }
-  .pr-hero .h1 { margin-top: 20px; }
-  .pr-hero .lead { margin: 22px auto 0; max-width: 56ch; }
+  .pr-hero { position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); margin-top: 0; overflow: hidden; text-align: center;
+    background-image: linear-gradient(180deg, rgba(6,11,18,.42), rgba(6,11,18,.72)), url("graphics/rigid-hero.png");
+    background-size: cover, cover; background-position: center, center 42%; background-repeat: no-repeat; }
+  .pr-hero .hbody { position: relative; z-index: 1; padding: 118px 32px 108px; max-width: 860px; margin: 0 auto; }
+  .pr-hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 240px; z-index: 0; pointer-events: none; background: linear-gradient(180deg, transparent, var(--bg) 92%); }
+  .pr-hero .h1 { margin-top: 0; color: #fff; }
+  .pr-hero .lead { margin: 22px auto 0; max-width: 74ch; color: rgba(255,255,255,.82); }
   .pr-hero .row { display: flex; gap: 14px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
+  [data-theme="light"] .pr-hero { }
+  /* lead statement — like the Operators intro */
+  .rp-lead { max-width: 1080px; margin: 0 auto; padding: 78px 0 26px; }
+  .rp-lead-line { font-family: var(--font-display); font-weight: 800; letter-spacing: -.045em; line-height: 1.0; font-size: clamp(38px, 6vw, 76px); margin: 0; text-wrap: balance; color: var(--txt); }
+  .rp-lead-line .w { color: transparent; -webkit-background-clip: text; background-clip: text; background-image: linear-gradient(135deg, var(--accent-2, #8fd0ff), var(--accent) 58%, var(--accent-deep, #1f6feb)); }
+  .rp-lead-body { font-size: clamp(16px, 1.55vw, 19px); line-height: 1.62; color: var(--txt-2); margin: 28px 0 0; max-width: 66ch; text-wrap: pretty; }
 
   /* pipeline journey (independent-scroll embed) */
   .pipeline-embed { padding: 4px 0 10px; }
@@ -508,18 +518,25 @@
 <div class="gridbg"></div>
 <div class="wrap">
 
-<header class="topbar" data-site-header data-page="solutions" data-crumb="Solutions>>solution.html|Rigid pipelines"></header>
+<header class="topbar" data-site-header data-page="solutions" data-crumb="Solutions>>solution.html|S-Lay &amp; J-Lay pipelines"></header>
 
 <div class="page">
   <section class="pr-hero">
-    <h1 class="h1">Every joint of your rigid pipeline, on the record.</h1>
-    <p class="lead">Collect mill and welding data, verify each field weld against your ITP, and build a complete as-built record for the full lay string — joint by joint.</p>
+    <div class="hbody">
+      <h1 class="h1">Every joint of your pipeline, on the record.</h1>
+      <p class="lead">Collect mill and welding data, verify each field weld against your ITP, and build a complete as-built record for the full lay string — joint by joint.</p>
+    </div>
+  </section>
+
+  <section class="rp-lead reveal">
+    <h2 class="rp-lead-line">Built <span class="w">while you lay.</span></h2>
+    <p class="rp-lead-body">During S-Lay and J-Lay pipeline installation, manufacturing data from pipe mills, coating contractors, welding crews and inspection companies comes together on the lay vessel. SteelTrace captures, validates and approves this information in real time, building the Smart Manufacturing Record as construction progresses instead of months after project completion.</p>
   </section>
 
   <!-- PIPELINE TALLY / WELD MAP -->
   <section class="page section" style="padding-top:0">
     <div class="sec-head reveal" style="max-width:680px;margin-left:auto;margin-right:auto;text-align:center">
-      <h2 class="h2" style="margin-top:14px" data-comment-anchor="c52f03ab37-span b1f461dc4b-h2">Every pipe and weld, on one map.</h2>
+      <h2 class="h2" style="margin-top:14px" data-comment-anchor="c52f03ab37-span b1f461dc4b-h2">Visualize your entire lay string with live manufacturing data.</h2>
     </div>
     <div class="tally-wrap reveal" style="--rd:.08s">
       <div class="tally-legend">
@@ -865,12 +882,11 @@
     <div class="pv-wrap reveal" style="--rd:.08s">
       <div class="pv-bar">
         <div class="pv-seg" data-seg="mode">
-          <button type="button" class="on" data-v="fab">Fabrication</button>
-          <button type="button" data-v="asbuilt">As Built</button>
+          <button type="button" class="on" data-v="asbuilt">As Laid</button>
         </div>
         <label class="pv-search">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-          <input type="text" id="pvSearch" placeholder="Search pipe, weld or stalk…" />
+          <input type="text" id="pvSearch" placeholder="Search pipe, weld or FJC…" />
         </label>
         <div class="pv-seg" data-seg="view">
           <button type="button" class="on" data-v="progress">Progress</button>
@@ -902,8 +918,7 @@
       function pad(n) { return (n < 10 ? '00' : n < 100 ? '0' : '') + n; }
 
       var GROUPS = [
-        { label: 'Progress Stalk: WI-30', prefix: 'WI-30', kind: 'Stalk weld', color: 'stalk', count: 63, total: 2179, start: 1 },
-        { label: 'Progress Stalk: WI-29', prefix: 'WI-29', kind: 'Stalk weld', color: 'stalk', count: 21, total: 2021, start: 1 },
+        { label: 'Progress Laying: WI-30', prefix: 'WI-30', kind: 'Stalk weld', color: 'stalk', count: 63, total: 2179, start: 1 },
         { label: 'BASE MATERIALS', prefix: 'P', kind: 'Pipe', color: 'base', count: 120, total: 1180, start: 1 }
       ];
 
@@ -932,7 +947,7 @@
         }
       });
 
-      var mode = 'fab', view = 'progress', query = '';
+      var mode = 'asbuilt', view = 'progress', query = '';
       var gi = 0;
 
       function renderProgress() {

@@ -9,6 +9,92 @@
    ============================================================ */
 (function () {
   "use strict";
+
+  // ============================================================
+  //  Mautic form backend (shared by newsletter / brochure / contact)
+  //  Submissions POST to the same proxy the old site used, which
+  //  verifies hCaptcha and forwards to Mautic. Exposed as window.STMautic.
+  // ============================================================
+  var MAUTIC_SUBMIT_URL = "https://mautic-backend.onrender.com/submit";
+  var HCAPTCHA_SITEKEY = "54dbef36-8433-4901-9338-6a57133127c4";
+  var _hcapPromise;
+
+  function loadHcaptcha() {
+    if (window.hcaptcha) return Promise.resolve();
+    if (_hcapPromise) return _hcapPromise;
+    _hcapPromise = new Promise(function (resolve, reject) {
+      var s = document.getElementById("st-hcaptcha");
+      if (!s) {
+        s = document.createElement("script");
+        s.id = "st-hcaptcha";
+        s.src = "https://js.hcaptcha.com/1/api.js?render=explicit";
+        s.async = true; s.defer = true;
+        document.head.appendChild(s);
+      }
+      s.addEventListener("load", function () { window.hcaptcha ? resolve() : reject(new Error("hCaptcha init failed")); }, { once: true });
+      s.addEventListener("error", function () { _hcapPromise = null; reject(new Error("hCaptcha load failed")); }, { once: true });
+    });
+    return _hcapPromise;
+  }
+
+  function submitMautic(form, token) {
+    function setField(name, val) {
+      var f = form.querySelector('[name="' + name + '"]');
+      if (!f) { f = document.createElement("input"); f.type = "hidden"; f.name = name; form.appendChild(f); }
+      f.value = val;
+    }
+    setField("mauticform[return]", window.location.href);
+    setField("h-captcha-response", token);
+    setField("mauticform[hcdone]", "bleh");
+    return fetch(MAUTIC_SUBMIT_URL, { method: "POST", body: new FormData(form) })
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (p) {
+          if (!r.ok || p.success !== true) throw new Error(p.message || "Form submission failed.");
+          return p;
+        });
+      });
+  }
+
+  // wire a Mautic form. opts: { form, submitBtn, consent, hcap, error, onSuccess }
+  function wireMautic(opts) {
+    var form = opts.form, btn = opts.submitBtn, hcap = opts.hcap, err = opts.error;
+    if (!form || form.dataset.mauticWired === "1") return null;
+    form.dataset.mauticWired = "1";
+    var widgetId;
+    function showErr(m) { if (err) { err.textContent = m; err.classList.add("show"); } }
+    function clearErr() { if (err) { err.textContent = ""; err.classList.remove("show"); } }
+    function renderCap() {
+      if (widgetId !== undefined) return Promise.resolve(true);
+      return loadHcaptcha().then(function () {
+        if (!window.hcaptcha) return false;
+        widgetId = window.hcaptcha.render(hcap, { sitekey: HCAPTCHA_SITEKEY });
+        return true;
+      }).catch(function () { showErr("Captcha failed to load. Refresh and try again."); return false; });
+    }
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      clearErr();
+      if (!form.reportValidity()) return;
+      if (opts.consent && !opts.consent.checked) { showErr("Please confirm your consent."); return; }
+      renderCap().then(function (ready) {
+        if (!ready || !window.hcaptcha || widgetId === undefined) { showErr("Captcha is still loading. Please try again."); return; }
+        var token = window.hcaptcha.getResponse(widgetId);
+        if (!token) { showErr("Please complete the captcha."); return; }
+        if (btn) btn.disabled = true;
+        submitMautic(form, token).then(function () {
+          if (opts.onSuccess) opts.onSuccess();
+        }).catch(function (er) {
+          showErr(er.message || "Error submitting. Please try again.");
+          if (btn) btn.disabled = false;
+          if (window.hcaptcha && widgetId !== undefined) window.hcaptcha.reset(widgetId);
+        });
+      });
+    });
+    return { renderCaptcha: renderCap };
+  }
+
+  window.STMautic = { wire: wireMautic, loadHcaptcha: loadHcaptcha, SITEKEY: HCAPTCHA_SITEKEY, SUBMIT_URL: MAUTIC_SUBMIT_URL };
+
   var EXP = "SteelTrace%20Matrix%20Explorer.html";
 
   var caret =
@@ -80,7 +166,7 @@
           '<svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>' +
           '<svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>' +
         '</button>' +
-        '<a class="nav-login" href="login.html">Login</a>' +
+        '<a class="nav-login" href="https://steeltrace.io/login" target="_blank" rel="noopener">Login</a>' +
         '<a class="nav-cta" href="demo.html">Book a demo <span class="cta-arrow">\u2192</span></a>' +
       '</div>';
   }
@@ -119,7 +205,7 @@
         '</div>' +
         '<div class="foot-col"><h4>Platform</h4><a href="Product.html">Product</a><a href="How%20It%20Works.html">How It Works</a></div>' +
         '<div class="foot-col"><h4>Company</h4><a href="about.html">About SteelTrace</a><a href="careers.html">Careers</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div>' +
-        '<div class="foot-col"><h4>Get started</h4><a href="demo.html">Book a demo</a><a href="login.html">Login to SteelTrace</a><a href="#newsletter" data-newsletter-open>Newsletter</a><a href="#brochure" data-brochure-open>Get a brochure</a></div>' +
+        '<div class="foot-col"><h4>Get started</h4><a href="demo.html">Book a demo</a><a href="https://steeltrace.io/login" target="_blank" rel="noopener">Login to SteelTrace</a><a href="#newsletter" data-newsletter-open>Newsletter</a><a href="#brochure" data-brochure-open>Get a brochure</a></div>' +
       '</div>' +
       '<div class="foot-bottom"><span class="mono-note">© 2026 SteelTrace</span><span class="mono-note"><a class="foot-legal" href="privacy-policy.html">Privacy Statement</a></span><span class="mono-note"><a class="foot-legal" href="disclaimer.html">Disclaimer</a></span><span class="mono-note"><a class="foot-legal" href="#cookies" data-cookie-open>Change Cookie Consent</a></span><span class="mono-note">Smart Manufacturing Records · safety-critical industries</span></div>';
   }
@@ -134,8 +220,16 @@
         '<span class="kicker">Newsletter</span>' +
         '<h3 id="nl-title">Proof, not paper — in your inbox.</h3>' +
         '<p>Occasional updates on Smart Manufacturing Records, traceability and product news. No spam, unsubscribe anytime.</p>' +
-        '<form class="nl-form" novalidate>' +
-          '<input class="nl-input" type="email" name="email" placeholder="Work email" required aria-label="Work email" />' +
+        '<form class="nl-form nl-form-stack" id="mauticform_newsletter" method="post" novalidate>' +
+          '<input type="hidden" name="mauticform[first_name]" value="">' +
+          '<input type="hidden" name="mauticform[last_name]" value="">' +
+          '<input class="nl-input" type="email" name="mauticform[email]" placeholder="Work email" required aria-label="Work email" />' +
+          '<label class="nl-consent"><input type="checkbox" class="nl-consent-box" /> <span>I consent to SteelTrace processing my data as per the <a href="privacy-policy.html" target="_blank" rel="noopener">privacy statement</a>.</span></label>' +
+          '<div class="nl-hcap" data-hcap></div>' +
+          '<span class="nl-err" data-err></span>' +
+          '<input type="hidden" name="mauticform[formId]" value="13">' +
+          '<input type="hidden" name="mauticform[formName]" value="newsletter">' +
+          '<input type="hidden" name="mauticform[submit]" value="1">' +
           '<button class="btn btn-primary nl-btn" type="submit">Subscribe</button>' +
         '</form>' +
         '<p class="nl-done" hidden>Thanks — you are on the list. \u2713</p>' +
@@ -146,7 +240,16 @@
     pop.className = "nl-pop";
     pop.innerHTML = newsletterHTML();
     document.body.appendChild(pop);
-    function open(e) { if (e) e.preventDefault(); pop.classList.add("open"); var i = pop.querySelector(".nl-input"); if (i) setTimeout(function () { i.focus(); }, 60); }
+    var form = pop.querySelector(".nl-form");
+    var ctrl = window.STMautic.wire({
+      form: form,
+      submitBtn: form.querySelector(".nl-btn"),
+      consent: form.querySelector(".nl-consent-box"),
+      hcap: form.querySelector("[data-hcap]"),
+      error: form.querySelector("[data-err]"),
+      onSuccess: function () { form.hidden = true; pop.querySelector(".nl-done").hidden = false; setTimeout(close, 2400); }
+    });
+    function open(e) { if (e) e.preventDefault(); pop.classList.add("open"); if (ctrl) ctrl.renderCaptcha(); var i = pop.querySelector(".nl-input"); if (i) setTimeout(function () { i.focus(); }, 60); }
     function close() { pop.classList.remove("open"); }
     document.addEventListener("click", function (e) {
       var t = e.target.closest ? e.target.closest("[data-newsletter-open]") : null;
@@ -155,18 +258,6 @@
       if (c) close();
     });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
-    var form = pop.querySelector(".nl-form");
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var input = pop.querySelector(".nl-input");
-      var v = (input.value || "").trim();
-      if (!v || v.indexOf("@") < 1 || v.indexOf(".") < 0) { input.classList.add("err"); input.focus(); return; }
-      input.classList.remove("err");
-      try { localStorage.setItem(NL_KEY, v); } catch (err) {}
-      form.hidden = true;
-      pop.querySelector(".nl-done").hidden = false;
-      setTimeout(close, 1800);
-    });
   }
 
   // ---------- brochure popup ----------
@@ -179,10 +270,16 @@
         '<span class="kicker">Product brochure</span>' +
         '<h3 id="br-title">Get the SteelTrace brochure.</h3>' +
         '<p>Learn more about the SteelTrace products and services. We will send the brochure to your inbox.</p>' +
-        '<form class="nl-form nl-form-stack" novalidate>' +
-          '<input class="nl-input" type="text" name="name" placeholder="Full name" required aria-label="Full name" />' +
-          '<input class="nl-input" type="email" name="email" placeholder="Work email" required aria-label="Work email" />' +
-          '<input class="nl-input" type="text" name="company" placeholder="Company" aria-label="Company" />' +
+        '<form class="nl-form nl-form-stack" id="mauticform_brochure" method="post" novalidate>' +
+          '<input class="nl-input" type="text" name="mauticform[first_name]" placeholder="First name" required aria-label="First name" />' +
+          '<input class="nl-input" type="text" name="mauticform[last_name]" placeholder="Last name" required aria-label="Last name" />' +
+          '<input class="nl-input" type="email" name="mauticform[email]" placeholder="Work email" required aria-label="Work email" />' +
+          '<label class="nl-consent"><input type="checkbox" class="nl-consent-box" /> <span>I consent to SteelTrace processing my data as per the <a href="privacy-policy.html" target="_blank" rel="noopener">privacy statement</a>.</span></label>' +
+          '<div class="nl-hcap" data-hcap></div>' +
+          '<span class="nl-err" data-err></span>' +
+          '<input type="hidden" name="mauticform[formId]" value="10">' +
+          '<input type="hidden" name="mauticform[formName]" value="downloadtheproductbrochure">' +
+          '<input type="hidden" name="mauticform[submit]" value="1">' +
           '<button class="btn btn-primary nl-btn" type="submit">Get the brochure</button>' +
         '</form>' +
         '<p class="nl-done" hidden>Thanks \u2014 the brochure is on its way to your inbox. \u2713</p>' +
@@ -193,7 +290,16 @@
     pop.className = "nl-pop";
     pop.innerHTML = brochureHTML();
     document.body.appendChild(pop);
-    function open(e) { if (e) e.preventDefault(); pop.classList.add("open"); var i = pop.querySelector(".nl-input"); if (i) setTimeout(function () { i.focus(); }, 60); }
+    var form = pop.querySelector(".nl-form");
+    var ctrl = window.STMautic.wire({
+      form: form,
+      submitBtn: form.querySelector(".nl-btn"),
+      consent: form.querySelector(".nl-consent-box"),
+      hcap: form.querySelector("[data-hcap]"),
+      error: form.querySelector("[data-err]"),
+      onSuccess: function () { form.hidden = true; pop.querySelector(".nl-done").hidden = false; setTimeout(close, 2600); }
+    });
+    function open(e) { if (e) e.preventDefault(); pop.classList.add("open"); if (ctrl) ctrl.renderCaptcha(); var i = pop.querySelector(".nl-input"); if (i) setTimeout(function () { i.focus(); }, 60); }
     function close() { pop.classList.remove("open"); }
     document.addEventListener("click", function (e) {
       var t = e.target.closest ? e.target.closest("[data-brochure-open]") : null;
@@ -202,21 +308,6 @@
       if (c) close();
     });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
-    var form = pop.querySelector(".nl-form");
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var email = form.querySelector('[name="email"]');
-      var name = form.querySelector('[name="name"]');
-      var ok = true;
-      if (!(name.value || "").trim()) { name.classList.add("err"); ok = false; } else name.classList.remove("err");
-      var v = (email.value || "").trim();
-      if (!v || v.indexOf("@") < 1 || v.indexOf(".") < 0) { email.classList.add("err"); ok = false; } else email.classList.remove("err");
-      if (!ok) return;
-      try { localStorage.setItem(BR_KEY, JSON.stringify({ name: name.value.trim(), email: v, company: (form.querySelector('[name="company"]').value || "").trim() })); } catch (err) {}
-      form.hidden = true;
-      pop.querySelector(".nl-done").hidden = false;
-      setTimeout(close, 2000);
-    });
   }
 
   // ---------- cookie consent ----------

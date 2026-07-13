@@ -83,16 +83,21 @@
     <div class="c-form panel">
       <h2>Send us a message</h2>
       <p class="formsub">We typically respond within one business day.</p>
-      <form class="form-stack" id="cForm">
+      <form class="form-stack" id="mauticform_contact" method="post" novalidate>
         <div class="grid2">
-          <div class="field"><label for="fn">First name</label><input id="fn" type="text" placeholder="First name" required /></div>
-          <div class="field"><label for="ln">Last name</label><input id="ln" type="text" placeholder="Last name" required /></div>
+          <div class="field"><label for="fn">First name</label><input id="fn" name="mauticform[first_name]" type="text" placeholder="First name" required /></div>
+          <div class="field"><label for="ln">Last name</label><input id="ln" name="mauticform[last_name]" type="text" placeholder="Last name" required /></div>
         </div>
-        <div class="field"><label for="co">Company</label><input id="co" type="text" placeholder="Company" /></div>
-        <div class="field"><label for="em">Email</label><input id="em" type="email" placeholder="you@company.com" required /></div>
-        <div class="field"><label for="msgf">Message</label><textarea id="msgf" placeholder="How can we help?"></textarea></div>
-        <label class="consent"><input type="checkbox" required /> <span>I consent to SteelTrace processing my data as per the <a href="#">privacy policy</a></span></label>
-        <div class="form-msg" id="msg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Thanks — this is a demo form, but we'd be in touch shortly.</div>
+        <div class="field"><label for="co">Company</label><input id="co" name="mauticform[company]" type="text" placeholder="Company" /></div>
+        <div class="field"><label for="em">Email</label><input id="em" name="mauticform[email]" type="email" placeholder="you@company.com" required /></div>
+        <div class="field"><label for="msgf">Message</label><textarea id="msgf" name="mauticform[f_message]" placeholder="How can we help?"></textarea></div>
+        <label class="consent"><input type="checkbox" class="c-consent" name="mauticform[consent][]" value="yes" required /> <span>I consent to SteelTrace processing my data as per the <a href="privacy-policy.html" target="_blank" rel="noopener">privacy policy</a></span></label>
+        <div class="c-hcap" data-hcap></div>
+        <span class="form-err" data-err></span>
+        <input type="hidden" name="mauticform[formId]" value="9" />
+        <input type="hidden" name="mauticform[formName]" value="contact" />
+        <input type="hidden" name="mauticform[submit]" value="1" />
+        <div class="form-msg" id="msg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Thanks — we'll be in touch shortly.</div>
         <button type="submit" class="btn btn-primary">Get in touch <span class="ar">→</span></button>
       </form>
     </div>
@@ -102,9 +107,24 @@
 <footer class="site-footer" data-site-footer></footer>
 
 </div>
-<script>
-  document.getElementById('cForm').addEventListener('submit', function (e) { e.preventDefault(); document.getElementById('msg').classList.add('show'); });
-</script>
 <script src="steeltrace/chrome.js"></script>
+<script>
+  (function () {
+    var form = document.getElementById('mauticform_contact');
+    if (!form || !window.STMautic) return;
+    var ctrl = window.STMautic.wire({
+      form: form,
+      submitBtn: form.querySelector('button[type="submit"]'),
+      consent: form.querySelector('.c-consent'),
+      hcap: form.querySelector('[data-hcap]'),
+      error: form.querySelector('[data-err]'),
+      onSuccess: function () {
+        form.querySelectorAll('input, textarea, button').forEach(function (el) { el.disabled = true; });
+        document.getElementById('msg').classList.add('show');
+      }
+    });
+    if (ctrl) ctrl.renderCaptcha();
+  })();
+</script>
 </body>
 </html>
