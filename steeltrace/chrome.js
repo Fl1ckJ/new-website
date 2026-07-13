@@ -48,8 +48,12 @@
     setField("mauticform[hcdone]", "bleh");
     return fetch(MAUTIC_SUBMIT_URL, { method: "POST", body: new FormData(form) })
       .then(function (r) {
-        return r.json().catch(function () { return {}; }).then(function (p) {
-          if (!r.ok || p.success !== true) throw new Error(p.message || "Form submission failed.");
+        return r.text().then(function (txt) {
+          var p = {};
+          try { p = JSON.parse(txt); } catch (e) {}
+          if (!r.ok || p.success !== true) {
+            throw new Error(p.message || ("Submission failed (HTTP " + r.status + ")"));
+          }
           return p;
         });
       });
