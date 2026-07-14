@@ -15,11 +15,7 @@
       consent: form.querySelector(".c-consent"),
       hcap: form.querySelector("[data-hcap]"),
       error: form.querySelector("[data-err]"),
-      onSuccess: function () {
-        form.querySelectorAll("input, textarea, button").forEach(function (el) { el.disabled = true; });
-        var msg = document.getElementById("msg");
-        if (msg) msg.classList.add("show");
-      }
+      onSuccess: function () { window.location.assign("form/message/"); }
     });
     if (ctrl) ctrl.renderCaptcha();
   };

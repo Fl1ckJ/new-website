@@ -43,7 +43,7 @@
       consent: form.querySelector(".nl-consent-box"),
       hcap: form.querySelector("[data-hcap]"),
       error: form.querySelector("[data-err]"),
-      onSuccess: function () { form.hidden = true; pop.querySelector(".nl-done").hidden = false; setTimeout(close, 2400); }
+      onSuccess: function () { window.location.assign("form/message/"); }
     });
     function open(e) { if (e) e.preventDefault(); pop.classList.add("open"); if (ctrl) ctrl.renderCaptcha(); var i = pop.querySelector(".nl-input"); if (i) setTimeout(function () { i.focus(); }, 60); }
     document.addEventListener("click", function (e) {
