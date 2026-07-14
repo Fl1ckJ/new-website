@@ -50,6 +50,7 @@
 import { readFileSync, writeFileSync, readdirSync, statSync, watch } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import { execSync } from "node:child_process";
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const POSTS_DIR = join(ROOT, "posts");
@@ -246,6 +247,9 @@ function build() {
 
   console.log(`✓ ${posts.length} post${posts.length === 1 ? "" : "s"} bundled → steeltrace/posts.generated.js`);
   posts.forEach((p) => console.log(`    · ${p.date}  ${p.title}`));
+
+  // keep sitemap.xml in sync with the posts
+  try { execSync("node build-seo.mjs", { cwd: ROOT, stdio: "inherit" }); } catch (e) { /* best-effort */ }
 }
 
 build();

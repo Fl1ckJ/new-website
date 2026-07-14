@@ -22,6 +22,7 @@ import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
 import { writeFileSync, mkdirSync } from "node:fs";
 import { join, extname } from "node:path";
+import { execSync } from "node:child_process";
 
 const TOKEN = process.env.NOTION_TOKEN;
 const DB = process.env.NOTION_DATABASE_ID;
@@ -185,6 +186,9 @@ async function build() {
   writeFileSync(OUT, banner + "window.STEELTRACE_POSTS = " + JSON.stringify(posts, null, 2) + ";\n");
 
   console.log(`\n✓ ${posts.length} published post${posts.length === 1 ? "" : "s"} synced → steeltrace/posts.generated.js`);
+
+  // keep sitemap.xml in sync with the posts
+  try { execSync("node build-seo.mjs", { cwd: ROOT, stdio: "inherit" }); } catch (e) { /* best-effort */ }
 }
 
 build().catch((e) => {
