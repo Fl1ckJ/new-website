@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
-const BASE = "https://steeltrace.ai";
+const BASE = "https://fl1ckj.github.io/new-website";
 
 // Static pages -> priority. (Fragments/utility pages are intentionally excluded.)
 const PAGES = [

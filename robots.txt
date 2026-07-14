@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://steeltrace.ai/sitemap.xml
+Sitemap: https://fl1ckj.github.io/new-website/sitemap.xml
