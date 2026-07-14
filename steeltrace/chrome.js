@@ -147,13 +147,13 @@
   function mount() {
     applyTheme(curTheme());
     loadScripts([
-      "steeltrace/chrome/header.js?v=4",
-      "steeltrace/chrome/footer.js?v=4",
-      "steeltrace/forms/mautic-core.js?v=4",
-      "steeltrace/forms/newsletter.js?v=4",
-      "steeltrace/forms/brochure.js?v=4",
-      "steeltrace/forms/weekly.js?v=4",
-      "steeltrace/forms/contact.js?v=4"
+      "steeltrace/chrome/header.js?v=5",
+      "steeltrace/chrome/footer.js?v=5",
+      "steeltrace/forms/mautic-core.js?v=5",
+      "steeltrace/forms/newsletter.js?v=5",
+      "steeltrace/forms/brochure.js?v=5",
+      "steeltrace/forms/weekly.js?v=5",
+      "steeltrace/forms/contact.js?v=5"
     ], function () {
       mountChrome();
       wireToggles();
