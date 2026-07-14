@@ -107,24 +107,6 @@
 <footer class="site-footer" data-site-footer></footer>
 
 </div>
-<script src="steeltrace/chrome.js"></script>
-<script>
-  (function () {
-    var form = document.getElementById('mauticform_contact');
-    if (!form || !window.STMautic) return;
-    var ctrl = window.STMautic.wire({
-      form: form,
-      submitBtn: form.querySelector('button[type="submit"]'),
-      consent: form.querySelector('.c-consent'),
-      hcap: form.querySelector('[data-hcap]'),
-      error: form.querySelector('[data-err]'),
-      onSuccess: function () {
-        form.querySelectorAll('input, textarea, button').forEach(function (el) { el.disabled = true; });
-        document.getElementById('msg').classList.add('show');
-      }
-    });
-    if (ctrl) ctrl.renderCaptcha();
-  })();
-</script>
+<script src="steeltrace/chrome.js?v=3"></script>
 </body>
 </html>
