@@ -96,7 +96,7 @@
         if (!ready || !window.hcaptcha || widgetId === undefined) { showErr("Captcha is still loading. Please try again."); return; }
         var token = window.hcaptcha.getResponse(widgetId);
         if (!token) { showErr("Please complete the captcha below, then submit again."); return; }
-        setField(form, "mauticform[return]", new URL("form/message/", location.href).toString());
+        setField(form, "mauticform[return]", location.href);
         setField(form, "h-captcha-response", token);
         setField(form, "mauticform[hcdone]", "bleh");
         loading(true);
