@@ -133,7 +133,7 @@ const COMPANY_TYPES = [
     const day = date.getUTCDate()
     return (
       WEEKDAYS[date.getUTCDay()] + ", " + day + getDaySuffix(day) + " of " +
-      MONTHS[date.getUTCMonth()] + " " + date.getUTCFullYear() + " — start time: " + time
+      MONTHS[date.getUTCMonth()] + " " + date.getUTCFullYear() + ", start time: " + time
     )
   }
 

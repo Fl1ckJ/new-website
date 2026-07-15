@@ -195,7 +195,7 @@ function Column({ kind, title, items, icon, baseDelay }) {
       </div>
       {items.map((it, i) => (
         <div className="row" key={i} style={{ "--d": `${baseDelay + i * 0.06}s` }}>
-          <span className="mk">{kind === "challenge" ? "—" : kind === "value" ? "+" : "·"}</span>
+          <span className="mk">{kind === "challenge" ? "-" : kind === "value" ? "+" : "·"}</span>
           <span>{kind === "value" ? withStats(it) : it}</span>
         </div>
       ))}

@@ -85,7 +85,7 @@
     };
     const formatSlotLabel = (date, time) => {
       const day = date.getUTCDate();
-      return WEEKDAYS[date.getUTCDay()] + ", " + day + getDaySuffix(day) + " of " + MONTHS[date.getUTCMonth()] + " " + date.getUTCFullYear() + " \u2014 start time: " + time;
+      return WEEKDAYS[date.getUTCDay()] + ", " + day + getDaySuffix(day) + " of " + MONTHS[date.getUTCMonth()] + " " + date.getUTCFullYear() + ", start time: " + time;
     };
     const formatSlotValue = (date) => {
       const day = String(date.getUTCDate()).padStart(2, "0");

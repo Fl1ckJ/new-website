@@ -304,7 +304,7 @@ body {
   text-transform: uppercase; color: var(--accent);
   display: inline-flex; align-items: center; gap: 9px;
 }
-.ov-kicker::before { content: ""; width: 18px; height: 1px; background: var(--accent); }
+.ov-kicker::before { content: none; }
 .ov-title {
   font-size: clamp(26px, 2.9vw, 40px); font-weight: 700; letter-spacing: -.03em;
   line-height: 1.03; margin-top: 12px; max-width: 17ch; text-wrap: balance;

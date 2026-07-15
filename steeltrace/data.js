@@ -26,12 +26,12 @@
         "Standardized digital data exchange with project stakeholders",
         "Material certs & manufacturing records flow into the SMR automatically",
         "One standardized exchange channel across multiple operator customers",
-        "Verified traceability — melt to end product — visible to operators",
+        "Verified traceability, melt to end product, visible to operators",
       ],
       content: [
         "Value for Manufacturers & Suppliers",
         "Mill, Pipe & Coating Data Integration",
-        "Materials Traceability — Melt to End Product",
+        "Materials Traceability: Melt to End Product",
         "MES / ERP Connector Documentation",
       ],
     },
@@ -55,7 +55,7 @@
       ],
       value: [
         "Welding parameters & inspection results flow into the SMR automatically",
-        "Standardized exchange with EPCs & operators — no rebuilding per project",
+        "Standardized exchange with EPCs & operators, no rebuilding per project",
         "Welding records connected to upstream materials & downstream inspections",
         "Documentation workload replaced by data exchange",
         "Improved transparency for project stakeholders",
@@ -103,7 +103,7 @@
       code: "EPC",
       name: "EPC Contractors (Onshore & Offshore)",
       short: "EPC Contractors",
-      who: "Engineering, Procurement and Construction contractors coordinating pipeline construction — from spoolbases and fabrication yards to offshore installation vessels and third-party inspectors.",
+      who: "Engineering, Procurement and Construction contractors coordinating pipeline construction: from spoolbases and fabrication yards to offshore installation vessels and third-party inspectors.",
       stage: "Construct",
       needs: [
         "On-time, on-budget project execution",
@@ -135,7 +135,7 @@
       code: "OP",
       name: "Pipeline Operators (IOCs & NOCs)",
       short: "Pipeline Operators",
-      who: "Asset owners building & operating onshore and offshore pipelines, LNG, petrochemical and energy-transition infrastructure (hydrogen, CCS, CO₂ transport). The market makers — they define the rules the supply chain adopts.",
+      who: "Asset owners building & operating onshore and offshore pipelines, LNG, petrochemical and energy-transition infrastructure (hydrogen, CCS, CO₂ transport). The market makers: they define the rules the supply chain adopts.",
       stage: "Operate",
       flag: "Market makers",
       needs: [
@@ -242,7 +242,7 @@
       name: "Project Management",
       short: "Project Management",
       role: "Budget owner",
-      who: "Project managers, project engineering leads and project execution directors at operators and EPCs. Typically the budget owner — SteelTrace sits inside project CAPEX.",
+      who: "Project managers, project engineering leads and project execution directors at operators and EPCs. Typically the budget owner. SteelTrace sits inside project CAPEX.",
       needs: [
         "On-time, on-budget delivery",
         "Predictable approval cycles across suppliers",
@@ -361,7 +361,7 @@
       ],
       content: [
         "QCP / ITP Configuration",
-        "Materials Traceability — Melt to End Product",
+        "Materials Traceability: Melt to End Product",
         "Welding & NDT Data Integration",
         "Engineering Knowledge Capture",
       ],
@@ -370,9 +370,9 @@
 
   const COMMITMENTS = {
     segments:
-      "Connecting the energy supply chain through Smart Manufacturing Records — verified data, end-to-end traceability, lifecycle value.",
+      "Connecting the energy supply chain through Smart Manufacturing Records: verified data, end-to-end traceability, lifecycle value.",
     personas:
-      "The standard for Smart Manufacturing Records in safety-critical industries — trusted data for safety, performance & capital efficiency.",
+      "The standard for Smart Manufacturing Records in safety-critical industries: trusted data for safety, performance & capital efficiency.",
   };
 
   window.ST_DATA = { SEGMENTS, PERSONAS, COMMITMENTS };

@@ -11,7 +11,7 @@
       '<div class="nl-modal" role="dialog" aria-modal="true" aria-labelledby="nl-title">' +
         '<button class="nl-x" type="button" data-newsletter-close aria-label="Close">×</button>' +
         '<span class="kicker">Newsletter</span>' +
-        '<h3 id="nl-title">Proof, not paper — in your inbox.</h3>' +
+        '<h3 id="nl-title">Proof, not paper: in your inbox.</h3>' +
         '<p>Occasional updates on Smart Manufacturing Records, traceability and product news. No spam, unsubscribe anytime.</p>' +
         '<form class="nl-form nl-form-stack" id="mauticform_newsletter" method="post" novalidate>' +
           '<input type="hidden" name="mauticform[first_name]" value="">' +
@@ -25,7 +25,7 @@
           '<input type="hidden" name="mauticform[submit]" value="1">' +
           '<button class="btn btn-primary nl-btn" type="submit">Subscribe</button>' +
         '</form>' +
-        '<p class="nl-done" hidden>Thanks — you are on the list. ✓</p>' +
+        '<p class="nl-done" hidden>Thanks, you are on the list. ✓</p>' +
       '</div>';
   }
 

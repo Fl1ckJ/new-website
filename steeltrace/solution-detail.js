@@ -99,7 +99,7 @@
   var sol = S.byId(window.STEELTRACE_SEG || param("seg")) || S.all[0];
   if (!sol) { el.innerHTML = '<div style="padding:80px 0;text-align:center"><h1 class="h1">Solution not found</h1><p style="margin-top:20px"><a class="btn btn-primary" href="SteelTrace%20Home.html">← Home</a></p></div>'; return; }
 
-  document.title = sol.name + " — SteelTrace Solutions";
+  document.title = sol.name + ": SteelTrace Solutions";
   var groupLabel = sol.group === "supply" ? "Supply chain" : "By role";
   if (sol.strategy) el.classList.add("exec-page");
 

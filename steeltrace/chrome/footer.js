@@ -9,7 +9,7 @@
       '<div class="foot-inner">' +
         '<div class="foot-brand">' +
           '<a class="brand" href="SteelTrace%20Home.html"><img class="brand-logo" src="https://steeltrace.co/wp-content/themes/steeltrace/images/logo_white.svg" alt="SteelTrace" onerror="window.__stBrand&&window.__stBrand(this)" /></a>' +
-          '<p class="foot-blurb">Connecting the energy supply chain through Smart Manufacturing Records — verified data, end-to-end traceability, lifecycle value.</p>' +
+          '<p class="foot-blurb">Connecting the energy supply chain through Smart Manufacturing Records: verified data, end-to-end traceability, lifecycle value.</p>' +
         '</div>' +
         '<div class="foot-col"><h4>Platform</h4><a href="Product.html">Product</a><a href="How%20It%20Works.html">How It Works</a></div>' +
         '<div class="foot-col"><h4>Company</h4><a href="about.html">About SteelTrace</a><a href="careers.html">Careers</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div>' +

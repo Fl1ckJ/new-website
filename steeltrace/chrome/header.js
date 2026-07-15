@@ -23,9 +23,10 @@
     ["Digital Transformation", "dig"]
   ];
   var PRODUCT = [
-    ["Rigid pipelines", "rigid"],
+    ["S-Lay &amp; J-Lay pipelines", "rigid"],
+    ["Onshore pipelines", "onshore"],
     ["Reeled pipelines", "reeled"],
-    ["Flexible pipelines", "flex"],
+    ["Flexible pipelines &amp; Umbilicals", "flex"],
     ["Bundle pipelines", "bundle"],
     ["Fitting &amp; Flanges", "fittings"]
   ];

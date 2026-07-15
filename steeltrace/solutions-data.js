@@ -27,7 +27,7 @@
     {
       id: "op", code: "OP", group: "supply", name: "Operators", img: "op.png", noCode: true, noBenefits: true, noFeatures: true, noCta: true,
       sub: "",
-      blurb: "Asset owners who build and operate the infrastructure — and define the rules the supply chain adopts.",
+      blurb: "Asset owners who build and operate the infrastructure, and define the rules the supply chain adopts.",
       who: "Speed of major capital projects by enabling automated compliance and digital handover. Enable trust with blockchain based traceability.",
       needs: [
         "Confidence in supply-chain manufacturing quality",
@@ -42,7 +42,7 @@
         "Aging assets & tightening regulatory pressure (e.g. PHMSA 192/193/195)"
       ],
       value: [
-        { t: "Real-time visibility", d: "See manufacturing and quality data across every supplier tier as it is produced — not months after completion." },
+        { t: "Real-time visibility", d: "See manufacturing and quality data across every supplier tier as it is produced, not months after completion." },
         { t: "Smart Manufacturing Records", d: "Structured, queryable digital records replace static PDF Manufacturing Record Books." },
         { t: "Faster handover", d: "Reach operations sooner, with handover documentation already complete and verified at mechanical completion." },
         { t: "A lifecycle data foundation", d: "Trusted, structured data underpinning integrity management, analytics, AI and Digital Twins." }
@@ -120,8 +120,8 @@
     {
       id: "epc", code: "EPC", group: "supply", name: "EPC Contractors", noCode: true, noBenefits: true, noFeatures: true, noCta: true,
       sub: "",
-      blurb: "Contractors coordinating construction — from fabrication yards to offshore installation vessels.",
-      who: "Engineering, Procurement and Construction contractors coordinating pipeline construction — from spoolbases and fabrication yards to offshore installation vessels and third-party inspectors.",
+      blurb: "Contractors coordinating construction: from fabrication yards to offshore installation vessels.",
+      who: "Engineering, Procurement and Construction contractors coordinating pipeline construction: from spoolbases and fabrication yards to offshore installation vessels and third-party inspectors.",
       needs: [
         "On-time, on-budget project execution",
         "Efficient management of supplier documentation",
@@ -135,7 +135,7 @@
         "Operator demands for faster, cleaner handover packages"
       ],
       value: [
-        { t: "Automated digital MRBs", d: "Manufacturing Record Books generated during production — not assembled by hand at close-out." },
+        { t: "Automated digital MRBs", d: "Manufacturing Record Books generated during production, not assembled by hand at close-out." },
         { t: "Real-time supplier quality", d: "Continuous visibility into supplier production quality across the whole project." },
         { t: "Works with your tools", d: "Integrates with the welding, inspection and project QA platforms already in use." },
         { t: "Cleaner close-out", d: "Less QA/QC effort and cleaner handover deliverables to the operator." }
@@ -225,7 +225,7 @@
       ],
       value: [
         { t: "Welding data flows in", d: "Welding parameters and inspection results enter the Smart Manufacturing Record automatically." },
-        { t: "Build once, reuse everywhere", d: "Standardized exchange with EPCs and operators — no rebuilding per project." },
+        { t: "Build once, reuse everywhere", d: "Standardized exchange with EPCs and operators, no rebuilding per project." },
         { t: "Connected records", d: "Welding records linked to upstream materials and downstream inspections." },
         { t: "Less manual reporting", d: "Documentation workload replaced by structured data exchange." }
       ],
@@ -313,7 +313,7 @@
         "Significant effort compiling Manufacturing Record Books"
       ],
       value: [
-        { t: "A layer above your MES", d: "SteelTrace sits above internal production systems — no rip-and-replace." },
+        { t: "A layer above your MES", d: "SteelTrace sits above internal production systems, no rip-and-replace." },
         { t: "Certificates flow automatically", d: "Material certs and manufacturing records flow into the SMR without manual rework." },
         { t: "One channel for every customer", d: "A single standardized exchange across multiple operator customers." },
         { t: "Verified melt-to-product traceability", d: "Traceability from melt to end product, visible to operators." }
@@ -321,7 +321,7 @@
       content: [
         { t: "Value for Manufacturers & Suppliers", d: "How SteelTrace reduces documentation effort per customer." },
         { t: "Mill, Pipe & Coating Data Integration", d: "Capturing data from mills, pipe makers, coating and clad lines." },
-        { t: "Materials Traceability — Melt to End Product", d: "A full chain of custody for every component." },
+        { t: "Materials Traceability: Melt to End Product", d: "A full chain of custody for every component." },
         { t: "MES / ERP Connector Documentation", d: "How to integrate with existing production systems." }
       ],
       strategy: {
@@ -402,7 +402,7 @@
         "Difficult traceability across multi-tier projects"
       ],
       value: [
-        { t: "Results as data", d: "NDT, AUT and lab results integrated directly into the SMR — not just PDFs." },
+        { t: "Results as data", d: "NDT, AUT and lab results integrated directly into the SMR, not just PDFs." },
         { t: "Live for operators & EPCs", d: "Real-time visibility on inspections for operators and EPCs." },
         { t: "Immutable approvals", d: "Inspection approvals become digitally verified, immutable records." },
         { t: "Audit-ready", d: "Stronger compliance and audit readiness across every project." }
@@ -507,17 +507,17 @@
         lens: true,
         lead: {
           line: ["Leaner.", "Faster.", "One source of truth."],
-          body: "Every operator wants to run leaner, respond quicker, and pull a fragmented supply chain into a single source of truth. SteelTrace is how you get there — turning the quality record from a paperwork liability into the trusted, structured data your projects, operations and digital systems run on."
+          body: "Every operator wants to run leaner, respond quicker, and pull a fragmented supply chain into a single source of truth. SteelTrace is how you get there, turning the quality record from a paperwork liability into the trusted, structured data your projects, operations and digital systems run on."
         },
         groups: [
           {
             label: "01",
             title: "Cost Reduction",
             word: "Leaner",
-            lede: "Run leaner — strip cost, delay and contingency out of major capital projects.",
+            lede: "Run leaner: strip cost, delay and contingency out of major capital projects.",
             stats: [
               { n: "~6", u: "wks", l: "Earlier first oil" },
-              { n: "~$400M–1.2B", l: "Delay avoided, one project" },
+              { n: "~$400M-1.2B", l: "Delay avoided, one project" },
               { n: "~20", u: "%", l: "CAPEX held as contingency" },
               { n: "~60", u: "%", l: "Fewer inspection hours" }
             ],
@@ -525,7 +525,7 @@
               { t: "Earlier first oil, earlier revenue.",
                 s: "The record is built and verified during the campaign, so handover is near-instant instead of months. Subsea 7 estimated ~6 weeks earlier startup on a current Chevron project. Schedule is the single biggest business-case lever on a megaproject." },
               { t: "Keep defects off the critical path.",
-                s: "Early non-conformity detection avoids delay, rework and surplus contingency (~20% of CAPEX). Rough delay-avoidance on one major project: ~$400M–$1.2B, plus freed contingency and up to ~60% fewer inspection hours." },
+                s: "Early non-conformity detection avoids delay, rework and surplus contingency (~20% of CAPEX). Rough delay-avoidance on one major project: ~$400M-$1.2B, plus freed contingency and up to ~60% fewer inspection hours." },
               { t: "Lower compliance and litigation exposure; higher asset value.",
                 s: "Pre-audited immutable records cut audit load and regulatory exposure (PHMSA, EPA, OSHA, BSEE); certified material history lifts residual/resale value and speeds divestment due diligence." }
             ]
@@ -534,12 +534,12 @@
             label: "02",
             title: "Digitisation",
             word: "Faster",
-            lede: "Respond quicker — automate the manual work and build the data foundation your digital ambitions depend on.",
+            lede: "Respond quicker: automate the manual work and build the data foundation your digital ambitions depend on.",
             topics: [
               { t: "Do more with fewer resources.",
                 s: "Automated verification of manufacturing and inspection data cuts manual QA/QC and documentation workload across the organisation." },
               { t: "The data foundation for digital twins and AI.",
-                s: "Structured manufacturing data becomes a trusted source for twins, analytics and decision support — initiatives that otherwise stall on unreliable data." },
+                s: "Structured manufacturing data becomes a trusted source for twins, analytics and decision support, initiatives that otherwise stall on unreliable data." },
               { t: "Compliance by design, not by audit.",
                 s: "Verifiable, traceable records (proof of human, company, integrity) reduce systemic risk, including the rising risk of AI-falsified records." }
             ]
@@ -548,14 +548,14 @@
             label: "03",
             title: "Centralisation",
             word: "One source of truth",
-            lede: "Pull a fragmented chain into one source of truth — visible, persistent, and in your environment.",
+            lede: "Pull a fragmented chain into one source of truth, visible, persistent, and in your environment.",
             topics: [
               { t: "Transparency across the global supply chain.",
-                s: "One place, one format — real visibility into materials, inspections and approvals across every tier of a complex supplier network." },
+                s: "One place, one format: real visibility into materials, inspections and approvals across every tier of a complex supplier network." },
               { t: "A lifecycle data foundation.",
                 s: "Manufacturing data persists from project into operations and decommissioning, underpinning asset integrity and longevity." },
               { t: "A single source of truth in your environment.",
-                s: "Data lands in the operator's own environment and connects projects, supply chain, operations and digital systems — a shared workflow, not vendor lock-in." }
+                s: "Data lands in the operator's own environment and connects projects, supply chain, operations and digital systems, a shared workflow, not vendor lock-in." }
             ]
           }
         ]
@@ -594,32 +594,32 @@
         lens: true,
         lead: {
           line: ["See everything.", "Control everything.", "Find anything."],
-          body: "Quality lives or dies on the record — and today that record is scattered across inboxes, portals and binders, checked by hand, trusted on faith. SteelTrace verifies every certificate and inspection report against requirements automatically, surfaces non-conformities at source, and lands it all in one structured, searchable place you control."
+          body: "Quality lives or dies on the record, and today that record is scattered across inboxes, portals and binders, checked by hand, trusted on faith. SteelTrace verifies every certificate and inspection report against requirements automatically, surfaces non-conformities at source, and lands it all in one structured, searchable place you control."
         },
         groups: [
           {
             label: "01",
             title: "Insight",
             word: "See everything",
-            lede: "More insight — know what's actually in your records, not just that a document exists.",
+            lede: "More insight: know what's actually in your records, not just that a document exists.",
             stats: [
               { n: "Every", l: "Certificate verified for content, not just receipt" },
               { n: "Live", l: "Outstanding & missing docs across every PO and vendor" }
             ],
             topics: [
               { t: "Verify content, not just receipt.",
-                s: "Automated checks confirm certificates are complete and internally consistent — heat numbers tie across MTR, weld map and NDT report; certs match the ITP — instead of a manual existence check." },
+                s: "Automated checks confirm certificates are complete and internally consistent, heat numbers tie across MTR, weld map and NDT report; certs match the ITP, instead of a manual existence check." },
               { t: "Know your gaps in real time.",
                 s: "See outstanding and missing documentation across every PO and vendor as the campaign runs, not at the MRB-compilation scramble when it's too late." },
               { t: "Turn quality data into intelligence.",
-                s: "Structured records let you trend recurring non-conformities by supplier, process or material — so quality informs decisions instead of sitting in a binder." }
+                s: "Structured records let you trend recurring non-conformities by supplier, process or material, so quality informs decisions instead of sitting in a binder." }
             ]
           },
           {
             label: "02",
             title: "Control",
             word: "Control everything",
-            lede: "Better control — catch issues at source and hold the line on every requirement, every time.",
+            lede: "Better control: catch issues at source and hold the line on every requirement, every time.",
             stats: [
               { n: "~60", u: "%", l: "Fewer manual inspection hours (est.)" },
               { n: "Early", l: "NCRs caught at source, off the critical path" }
@@ -628,27 +628,27 @@
               { t: "Catch non-conformities early.",
                 s: "Detection during manufacture and inspection keeps defects off the critical path, rather than surfacing them at handover when correction is hardest." },
               { t: "Enforce acceptance criteria consistently.",
-                s: "Verification against spec and code on every certificate — no manual sampling gaps, no item slipping through, hold and witness points respected." },
+                s: "Verification against spec and code on every certificate, no manual sampling gaps, no item slipping through, hold and witness points respected." },
               { t: "Defensible, attributable, tamper-proof.",
-                s: "Immutable records carrying proof of human, company and integrity stand up to audit and third-party inspection — and resist falsification, including the rising risk of AI-generated false records." }
+                s: "Immutable records carrying proof of human, company and integrity stand up to audit and third-party inspection, and resist falsification, including the rising risk of AI-generated false records." }
             ]
           },
           {
             label: "03",
             title: "Centralisation",
             word: "Find anything",
-            lede: "Centralised access — one place, one format, across the whole supply chain and the whole lifecycle.",
+            lede: "Centralised access: one place, one format, across the whole supply chain and the whole lifecycle.",
             stats: [
-              { n: "Days", l: "Data book at handover — not months" },
+              { n: "Days", l: "Data book at handover, not months" },
               { n: "One", l: "Place & format for every supplier tier" }
             ],
             topics: [
               { t: "One source for every cert and report.",
-                s: "Materials, inspections and approvals across every tier of supplier in a single place and format — no more chasing PDFs across inboxes and portals." },
+                s: "Materials, inspections and approvals across every tier of supplier in a single place and format, no more chasing PDFs across inboxes and portals." },
               { t: "The record book builds itself.",
-                s: "The MRB / data book assembles as you go — structured and searchable, near-instant at handover instead of months of manual compilation." },
+                s: "The MRB / data book assembles as you go, structured and searchable, near-instant at handover instead of months of manual compilation." },
               { t: "Findable for the life of the asset.",
-                s: "Data persists into operations and decommissioning — pull any heat number, weld or certificate years later for integrity, repair or audit. And it lives in your environment, not a vendor silo." }
+                s: "Data persists into operations and decommissioning. Pull any heat number, weld or certificate years later for integrity, repair or audit. And it lives in your environment, not a vendor silo." }
             ]
           }
         ]
@@ -657,8 +657,8 @@
     {
       id: "pm", code: "PM", group: "role", name: "Project Management", noCode: true, noBenefits: true, noFeatures: true, noCta: true,
       sub: "",
-      blurb: "Project managers, engineering leads and execution directors — SteelTrace sits inside project CAPEX.",
-      who: "Project managers, project engineering leads and project execution directors at operators and EPCs. Typically the budget owner — SteelTrace sits inside project CAPEX.",
+      blurb: "Project managers, engineering leads and execution directors. SteelTrace sits inside project CAPEX.",
+      who: "Project managers, project engineering leads and project execution directors at operators and EPCs. Typically the budget owner. SteelTrace sits inside project CAPEX.",
       needs: [
         "On-time, on-budget delivery",
         "Predictable approval cycles across suppliers",
@@ -687,32 +687,32 @@
         lens: true,
         lead: {
           line: ["See it coming.", "Stay on schedule.", "Fast handover."],
-          body: "Every late surprise on a major project started as something nobody could see — a defect, a missing certificate, a vendor quietly slipping. SteelTrace verifies the quality record as the campaign runs, surfaces problems while there's still float to absorb them, and assembles a handover-ready data book as you go. No closeout scramble. No surprises."
+          body: "Every late surprise on a major project started as something nobody could see: a defect, a missing certificate, a vendor quietly slipping. SteelTrace verifies the quality record as the campaign runs, surfaces problems while there's still float to absorb them, and assembles a handover-ready data book as you go. No closeout scramble. No surprises."
         },
         groups: [
           {
             label: "01",
             title: "Visibility",
             word: "See it coming",
-            lede: "No surprises — know the real status of your quality record while you can still act on it.",
+            lede: "No surprises: know the real status of your quality record while you can still act on it.",
             stats: [
               { n: "Verified", l: "Percent-complete reflects reality, not optimism" },
               { n: "Early", l: "Defects & gaps surface while there's still float" }
             ],
             topics: [
               { t: "Status you can trust.",
-                s: "Not \u201Cdocument received\u201D but verified-complete — so percent-complete reflects reality instead of optimism, and your reporting holds up." },
+                s: "Not \u201Cdocument received\u201D but verified-complete, so percent-complete reflects reality instead of optimism, and your reporting holds up." },
               { t: "Early warning on defects and gaps.",
-                s: "Non-conformities and missing documentation surface during manufacture and inspection, while there's still float — not at FAT or at site when they hit the critical path." },
+                s: "Non-conformities and missing documentation surface during manufacture and inspection, while there's still float, not at FAT or at site when they hit the critical path." },
               { t: "Vendor and interface performance, in view.",
-                s: "Track conformance and documentation across every PO and supplier tier, so a slipping vendor shows up early — not at the expediting crunch." }
+                s: "Track conformance and documentation across every PO and supplier tier, so a slipping vendor shows up early, not at the expediting crunch." }
             ]
           },
           {
             label: "02",
             title: "Schedule",
             word: "Stay on schedule",
-            lede: "On time — keep problems off the critical path and protect the buffer you set aside.",
+            lede: "On time: keep problems off the critical path and protect the buffer you set aside.",
             stats: [
               { n: "~6", u: "wks", l: "Earlier startup, a major subsea project (est.)" },
               { n: "~20", u: "%", l: "CAPEX contingency protected" }
@@ -723,25 +723,25 @@
               { t: "Protect your contingency.",
                 s: "Late-surfacing rework is what eats the buffer (~20% of CAPEX); catching issues early keeps contingency intact instead of consumed." },
               { t: "Earlier startup, earlier milestone.",
-                s: "The record is built and verified during the campaign, so handover is near-instant instead of months — on a current major subsea project, ~6 weeks earlier startup was estimated." }
+                s: "The record is built and verified during the campaign, so handover is near-instant instead of months, on a current major subsea project, ~6 weeks earlier startup was estimated." }
             ]
           },
           {
             label: "03",
             title: "Handover & closeout",
             word: "Fast hand over",
-            lede: "No closeout scramble — the record book is ready when you are.",
+            lede: "No closeout scramble: the record book is ready when you are.",
             stats: [
-              { n: "Days", l: "Handover-ready data book — not months" },
+              { n: "Days", l: "Handover-ready data book, not months" },
               { n: "One", l: "Place & format across the whole chain" }
             ],
             topics: [
               { t: "The data book builds itself.",
-                s: "The MRB / data book assembles as you go, structured and searchable — handover-ready instead of months of manual compilation at the end." },
+                s: "The MRB / data book assembles as you go, structured and searchable, handover-ready instead of months of manual compilation at the end." },
               { t: "One source across the whole chain.",
-                s: "Materials, inspections and approvals in one place and format — no chasing PDFs across vendors, inboxes and portals during the acceptance push." },
+                s: "Materials, inspections and approvals in one place and format, no chasing PDFs across vendors, inboxes and portals during the acceptance push." },
               { t: "A handover that holds up.",
-                s: "Immutable, attributable records mean acceptance and sign-off don't stall on disputed or missing documentation — and the record persists straight into operations." }
+                s: "Immutable, attributable records mean acceptance and sign-off don't stall on disputed or missing documentation, and the record persists straight into operations." }
             ]
           }
         ]
@@ -780,49 +780,49 @@
         lens: true,
         lead: {
           line: ["Know what you're running.", "Decide on data, not assumptions.", "For the life of the asset."],
-          body: "You inherit an asset you have to keep safe for decades — but the record that says what it's actually made of is too often incomplete, unverified, or already lost. SteelTrace carries the verified as-built record straight from manufacturing into operations, so every integrity, inspection and fitness-for-service decision rests on real material data — years, and decades, after everyone who built it has moved on."
+          body: "You inherit an asset you have to keep safe for decades, but the record that says what it's actually made of is too often incomplete, unverified, or already lost. SteelTrace carries the verified as-built record straight from manufacturing into operations, so every integrity, inspection and fitness-for-service decision rests on real material data, years, and decades, after everyone who built it has moved on."
         },
         groups: [
           {
             label: "01",
             title: "Certainty",
             word: "Know what you're running",
-            lede: "Know exactly what's installed — the verified as-built truth, not a binder you hope is complete.",
+            lede: "Know exactly what's installed: the verified as-built truth, not a binder you hope is complete.",
             topics: [
               { t: "As-built reality, verified.",
-                s: "The actual material grades, heat numbers, wall thickness, MDMT, weld and NDT history of what was installed — verified against requirements, not assumed from a spec the metal may not match." },
+                s: "The actual material grades, heat numbers, wall thickness, MDMT, weld and NDT history of what was installed, verified against requirements, not assumed from a spec the metal may not match." },
               { t: "No more lost or incomplete records.",
-                s: "The record persists into operations complete and searchable — so you're not reconstructing material history from partial binders at the moment you need it most." },
+                s: "The record persists into operations complete and searchable, so you're not reconstructing material history from partial binders at the moment you need it most." },
               { t: "Traceable to the heat.",
-                s: "Pull any component back to its heat number, certificate and inspection record — the foundation every integrity assessment stands on." }
+                s: "Pull any component back to its heat number, certificate and inspection record, the foundation every integrity assessment stands on." }
             ]
           },
           {
             label: "02",
             title: "Confidence",
             word: "Decide on data, not assumptions",
-            lede: "Manage integrity with confidence — base RBI, fitness-for-service and remaining-life calls on real data instead of conservative guesswork.",
+            lede: "Manage integrity with confidence: base RBI, fitness-for-service and remaining-life calls on real data instead of conservative guesswork.",
             topics: [
               { t: "Sharper risk-based inspection.",
-                s: "Reliable material data lets you target RBI and corrosion management on evidence — not on worst-case assumptions that waste inspection effort and money." },
+                s: "Reliable material data lets you target RBI and corrosion management on evidence, not on worst-case assumptions that waste inspection effort and money." },
               { t: "Faster, defensible fitness-for-service.",
-                s: "When an anomaly appears, the original material properties are already there — so FFS and remaining-life assessments move quickly and hold up, instead of stalling on missing data." },
+                s: "When an anomaly appears, the original material properties are already there, so FFS and remaining-life assessments move quickly and hold up, instead of stalling on missing data." },
               { t: "Fewer unknowns, less unplanned risk.",
-                s: "Complete, traceable records shrink the gap between what you assume about the asset and what's actually true — the gap where loss-of-containment surprises hide." }
+                s: "Complete, traceable records shrink the gap between what you assume about the asset and what's actually true, the gap where loss-of-containment surprises hide." }
             ]
           },
           {
             label: "03",
             title: "Longevity",
             word: "For the life of the asset",
-            lede: "A record that lasts — usable from first oil through operations to decommissioning.",
+            lede: "A record that lasts: usable from first oil through operations to decommissioning.",
             topics: [
               { t: "One source, in your environment.",
-                s: "Material, inspection and approval data in one place and one format, in the operator's own environment — not scattered across systems, not stranded in a vendor silo." },
+                s: "Material, inspection and approval data in one place and one format, in the operator's own environment, not scattered across systems, not stranded in a vendor silo." },
               { t: "From handover to decommissioning.",
                 s: "The record persists across the full lifecycle, underpinning integrity, repairs, modifications, and eventual divestment or decommissioning." },
               { t: "Audit-ready, always.",
-                s: "Immutable, attributable records stand up to regulator and inspection-code scrutiny (PHMSA, BSEE; API 510 / 570 / 653) — proof of integrity on demand, whenever it's asked for." }
+                s: "Immutable, attributable records stand up to regulator and inspection-code scrutiny (PHMSA, BSEE; API 510 / 570 / 653), proof of integrity on demand, whenever it's asked for." }
             ]
           }
         ]
@@ -861,47 +861,47 @@
         lens: true,
         lead: {
           line: ["Trusted data.", "In your architecture.", "Powering twins and AI."],
-          body: "Digital twins, analytics and AI don't stall on ambition — they stall on data nobody can trust: unstructured certificates, scanned PDFs, unverified records stranded in vendor portals. SteelTrace turns manufacturing and quality data into a verified, structured, machine-readable source layer — in your architecture — so the twins, models and platforms you're building finally have something real to run on."
+          body: "Digital twins, analytics and AI don't stall on ambition. They stall on data nobody can trust: unstructured certificates, scanned PDFs, unverified records stranded in vendor portals. SteelTrace turns manufacturing and quality data into a verified, structured, machine-readable source layer, in your architecture, so the twins, models and platforms you're building finally have something real to run on."
         },
         groups: [
           {
             label: "01",
             title: "Foundation",
             word: "Trusted, structured data",
-            lede: "Solve the input problem first — a source layer your systems can actually consume and rely on.",
+            lede: "Solve the input problem first: a source layer your systems can actually consume and rely on.",
             topics: [
               { t: "Machine-readable, not PDF-readable.",
-                s: "Manufacturing and inspection data arrives as structured, queryable data — not documents your platforms have to scrape, OCR and guess at." },
+                s: "Manufacturing and inspection data arrives as structured, queryable data, not documents your platforms have to scrape, OCR and guess at." },
               { t: "Verified at the source.",
                 s: "The data is checked complete and consistent against requirements before it ever reaches your systems, so you're not building analytics on unvalidated inputs." },
               { t: "Provenance built in.",
-                s: "Every record carries proof of human, company and integrity — the data lineage and trust layer governance and audit demand, and the safeguard against AI-falsified records feeding your models." }
+                s: "Every record carries proof of human, company and integrity, the data lineage and trust layer governance and audit demand, and the safeguard against AI-falsified records feeding your models." }
             ]
           },
           {
             label: "02",
             title: "Integration",
             word: "In your architecture",
-            lede: "Own the data, in your stack — a foundation to build on, not another silo to integrate around.",
+            lede: "Own the data, in your stack, a foundation to build on, not another silo to integrate around.",
             topics: [
               { t: "Lands in your environment.",
-                s: "Data sits in the operator's own environment and systems — not locked in a vendor application you have to extract from later." },
+                s: "Data sits in the operator's own environment and systems, not locked in a vendor application you have to extract from later." },
               { t: "Built to connect.",
-                s: "Structured data and open access let you feed existing platforms, data lakes and applications — a source layer that plugs into the stack you already run." },
+                s: "Structured data and open access let you feed existing platforms, data lakes and applications, a source layer that plugs into the stack you already run." },
               { t: "No new silo.",
-                s: "One place, one format across projects, supply chain and operations — consolidating fragmented data instead of adding another disconnected system to the map." }
+                s: "One place, one format across projects, supply chain and operations, consolidating fragmented data instead of adding another disconnected system to the map." }
             ]
           },
           {
             label: "03",
             title: "Activation",
             word: "Powering twins and AI",
-            lede: "Turn the foundation into outcomes — the flagship initiatives you're accountable for, running on data that holds.",
+            lede: "Turn the foundation into outcomes: the flagship initiatives you're accountable for, running on data that holds.",
             topics: [
               { t: "A digital twin that reflects reality.",
-                s: "As-built material and inspection data grounds the twin in what was actually installed — not a design model that drifts from the physical asset." },
+                s: "As-built material and inspection data grounds the twin in what was actually installed, not a design model that drifts from the physical asset." },
               { t: "AI and analytics you can trust.",
-                s: "Reliable, structured inputs mean models and decision support produce results you can stand behind — the difference between a pilot and production." },
+                s: "Reliable, structured inputs mean models and decision support produce results you can stand behind, the difference between a pilot and production." },
               { t: "Time-to-value, not time-to-cleanse.",
                 s: "Skip the endless data-remediation phase that sinks digital programs; start with data that's already structured and verified." }
             ]
