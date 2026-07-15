@@ -62,12 +62,29 @@
         '<a class="nav-link' + a("blog") + '" href="blog.html">Blog</a>' +
       '</nav>' +
       '<div class="nav-actions">' +
-        '<button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle light or dark theme">' +
-          '<svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>' +
-          '<svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>' +
-        '</button>' +
         '<a class="nav-login" href="https://steeltrace.io/login" target="_blank" rel="noopener">Login</a>' +
         '<a class="nav-cta" href="demo.html">Book a demo <span class="cta-arrow">→</span></a>' +
-      '</div>';
+      '</div>' +
+      '<button class="nav-burger" type="button" data-nav-toggle aria-label="Open menu" aria-expanded="false">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>' +
+      '</button>' +
+      '<nav class="mnav" data-mnav aria-label="Menu">' +
+        '<a class="nav-link' + a("home") + '" href="SteelTrace%20Home.html">Home</a>' +
+        '<div class="mnav-sec"><span class="mnav-h">Solutions</span>' +
+          '<span class="mnav-sub">By Company Type</span>' + SUPPLY.map(ddLink).join("") +
+          '<span class="mnav-sub">By Stakeholder Type</span>' + ROLE.map(ddLink).join("") +
+          '<span class="mnav-sub">By Product Type</span>' + PRODUCT.map(ddLinkProduct).join("") +
+        '</div>' +
+        '<a class="nav-link' + a("prod") + '" href="Product.html">Product</a>' +
+        '<a class="nav-link" href="How%20It%20Works.html">How It Works</a>' +
+        '<div class="mnav-sec"><span class="mnav-h">Company</span>' +
+          '<a href="about.html">About SteelTrace</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a>' +
+        '</div>' +
+        '<a class="nav-link' + a("blog") + '" href="blog.html">Blog</a>' +
+        '<div class="mnav-foot">' +
+          '<a class="nav-login" href="https://steeltrace.io/login" target="_blank" rel="noopener">Login</a>' +
+          '<a class="nav-cta" href="demo.html">Book a demo <span class="cta-arrow">→</span></a>' +
+        '</div>' +
+      '</nav>';
   };
 })();

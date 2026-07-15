@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem('steeltrace-theme')==='light'?'light':'dark';}catch(e){document.documentElement.dataset.theme='dark';}})();</script>
 <title>SteelTrace — All your quality data in one place</title>
 <!-- SEO:start (generated) -->
 <meta name="description" content="SteelTrace turns scattered paper certificates into verified, blockchain-secured Smart Manufacturing Records — end-to-end material traceability for pipelines, platforms and plants in safety-critical industries." />
@@ -23,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="steeltrace/site.css?v=2" />
+<link rel="stylesheet" href="steeltrace/site.css?v=5" />
 <style>
   /* bright orange primary CTA in the nav */
   .nav-cta { background: #ff7a33 !important; color: #ffffff !important; box-shadow: 0 10px 26px -12px color-mix(in srgb, #ff7a33 65%, transparent) !important; }
@@ -34,7 +33,9 @@
   @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1 !important; translate: 0 !important; } }
 
   /* ---------- hero ---------- */
-  .hero { position: relative; padding: 84px 0 64px; }
+  .hero { position: relative; padding: 84px 32px 64px; }
+  /* Restore the page side-gutter that .section's shorthand padding zeroes out */
+  .section { padding-left: 32px; padding-right: 32px; }
   .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
   .hero h1 { font-size: clamp(38px, 5vw, 68px); font-weight: 800; letter-spacing: -.04em; line-height: .98; margin: 22px 0 0; text-wrap: balance; }
   .hero h1 em { font-style: normal; color: var(--accent); }
@@ -46,9 +47,14 @@
   .triad-item b { font-weight: 600; font-size: 15px; }
   .triad-item span { color: var(--txt-3); font-size: 13px; }
   .triad-sep { width: 1px; align-self: stretch; background: var(--line); }
+  @media (max-width: 640px) {
+    .hero-triad { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+    .triad-item { justify-content: center; }
+    .triad-sep { display: none; }
+  }
 
   /* hero visual */
-  .hero-visual { position: relative; }
+  .hero-visual { position: relative; margin-right: -32px; }
   .hv-net { padding: 0; position: relative; overflow: hidden; }
   .hv-net-frame { display: block; width: 100%; aspect-ratio: 720 / 740; border: 0; background: transparent; }
   .hv-net-cap { position: absolute; top: 14px; left: 16px; z-index: 2; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase; color: rgba(234,244,255,.55); pointer-events: none; }
@@ -253,7 +259,7 @@
   .rail-btn:hover { border-color: var(--accent-line); background: var(--elev); }
   .rail-btn:active { transform: scale(.92); }
   .rail-btn.prev { left: -12px; }
-  .rail-btn.next { right: -12px; }
+  .rail-btn.next { right: 8px; }
   .rail-btn[hidden] { opacity: 0; pointer-events: none; }
 
   /* compliance highlight */
@@ -322,6 +328,13 @@
 
   @media (max-width: 1000px) {
     .hero-grid { grid-template-columns: 1fr; gap: 44px; }
+    .hero-visual { order: -1; margin-left: -32px; }
+    /* hero copy fills the full width inside the gutter once stacked */
+    .hero h1 { text-wrap: wrap; }
+    .hero .lead { max-width: none; }
+    /* all CTA buttons go full-width & stack once the layout is mobile */
+    .btn { width: 100%; justify-content: center; }
+    .hero-cta, .cta-final .row { flex-direction: column; align-items: stretch; }
     .pain-grid, .pillars, .sol-grid { grid-template-columns: 1fr 1fr; }
     .stats { grid-template-columns: repeat(3, 1fr); }
     .scale-band { flex-direction: column; align-items: flex-start; gap: 16px; }
@@ -425,6 +438,7 @@
       @media (max-width: 820px) {
         .st-step { grid-template-columns: 1fr; gap: 22px; margin-top: 48px; }
         .st-step.flip .st-copy { order: 0; }
+        .st-viz { order: -1; max-width: none; margin-left: -32px; margin-right: -32px; }
       }
 
       /* device frame (cream screen) */
@@ -891,7 +905,7 @@
     .tz-chip .chk { width: 15px; height: 15px; border-radius: 50%; background: #1f9d57; position: relative; flex: none; margin-left: auto; }
     .tz-chip .chk::after { content: ""; position: absolute; left: 5px; top: 3px; width: 4px; height: 6px; border: 1.6px solid #fff; border-top: 0; border-left: 0; transform: rotate(45deg); }
     .tz-chip .xm { margin-left: auto; color: var(--warn); font-weight: 700; flex: none; font-size: 15px; line-height: 1; }
-    @media (max-width: 900px) { .tz-body { grid-template-columns: 1fr; } .tz-copy { align-items: center; text-align: center; } .tz-copy .lead { margin-left: auto; margin-right: auto; } .tz-copy .row { justify-content: center; } .tz-viz { margin-left: auto; margin-right: auto; } }
+    @media (max-width: 900px) { .tz-body { grid-template-columns: 1fr; } .tz-copy { align-items: center; text-align: center; } .tz-copy .lead { margin-left: auto; margin-right: auto; } .tz-copy .row { justify-content: center; } .tz-viz { order: -1; margin-left: auto; margin-right: auto; } }
   </style>
   <div class="tz reveal">
     <div class="tz-head">
@@ -948,7 +962,7 @@
 
 <script src="steeltrace/image-slot.js"></script>
 <script src="steeltrace/solutions-data.js"></script>
-<script src="steeltrace/chrome.js?v=7"></script>
+<script src="steeltrace/chrome.js?v=12"></script>
 <script>
 (function () {
   // solutions horizontal rails

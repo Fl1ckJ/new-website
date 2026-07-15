@@ -38,27 +38,13 @@
   @media (max-width: 900px) { .tz-body { grid-template-columns: 1fr; } .tz-copy { align-items: center; text-align: center; } .tz-copy .lead { margin-left: auto; margin-right: auto; } .tz-copy .row { justify-content: center; } .tz-viz { margin-left: auto; margin-right: auto; } }
 
 /* ===== Stakeholder hero backdrops ===== */
-  .d-hero.role-hero, [data-theme="light"] .d-hero.role-hero {
-    background-image:
-      linear-gradient(rgba(150,180,230,.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(150,180,230,.06) 1px, transparent 1px),
-      var(--role-bg);
-    background-size: 52px 52px, 52px 52px, cover;
-    background-position: center top, center top, center;
-    border-bottom: none; }
-  /* soft fade at the bottom so the hero blends into the page grid — no hard seam */
+/* soft fade at the bottom so the hero blends into the page grid — no hard seam */
   .d-hero.role-hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 160px; z-index: 0; pointer-events: none;
     background: linear-gradient(180deg, transparent, var(--bg)); }
   .d-hero.role-hero .d-hero-art { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
   .d-hero.role-hero .d-hero-art svg { display: block; width: 100%; height: 100%; }
   .d-hero.role-hero .hbody { position: relative; z-index: 1; }
   .d-hero.role-hero .back-over,
-  [data-theme="light"] .d-hero.role-hero .back-over { color: #fff; opacity: .82; }
-  [data-theme="light"] .d-hero.role-hero h1 { color: #fff; }
-  [data-theme="light"] .d-hero.role-hero .who { color: rgba(255,255,255,.88); }
-  [data-theme="light"] .d-hero.role-hero .glabel { color: #fff; }
-  [data-theme="light"] .d-hero.role-hero .sub { color: rgba(255,255,255,.66); }
-
 /* ===== Breadcrumb overlays the full-bleed hero (no dark band above it) ===== */
   .page:has(> .detail-wrap) { position: relative; }
   .page > .crumbs:has(+ .detail-wrap) {
@@ -67,9 +53,6 @@
   .page > .crumbs:has(+ .detail-wrap) a:hover { color: #fff; }
   .page > .crumbs:has(+ .detail-wrap) .cur { color: rgba(255,255,255,.92); }
   /* light theme, non-role hero has a light backdrop + dark text — match it */
-  [data-theme="light"] .page > .crumbs:has(+ .detail-wrap):not(:has(+ .detail-wrap .role-hero)) a { color: rgba(13,20,32,.55); }
-  [data-theme="light"] .page > .crumbs:has(+ .detail-wrap):not(:has(+ .detail-wrap .role-hero)) .cur { color: #0b121d; }
-
 /* ===== Key-features explorer ===== */
   .kfx { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: 30px; margin-top: 50px; align-items: start; }
   .kfx-list { display: flex; flex-direction: column; gap: 10px; }
@@ -130,8 +113,7 @@
   .mk-rail .mk-prog { position: absolute; left: 0; top: 0; height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius: 3px; }
   .mk-nodes { position: absolute; left: 0; right: 0; top: 50%; display: flex; justify-content: space-between; transform: translateY(-50%); }
   .mk-nodes .nd { width: 15px; height: 15px; border-radius: 50%; background: var(--bg); border: 2px solid var(--line); }
-  [data-theme="light"] .mk-nodes .nd { background: var(--panel-solid); }
-  .mk-labels { display: flex; justify-content: space-between; margin-top: 18px; font-family: var(--font-mono); font-size: 8px; letter-spacing: .05em; text-transform: uppercase; color: var(--txt-3); }
+.mk-labels { display: flex; justify-content: space-between; margin-top: 18px; font-family: var(--font-mono); font-size: 8px; letter-spacing: .05em; text-transform: uppercase; color: var(--txt-3); }
   .mk-labels span { width: 42px; text-align: center; }
   @media (prefers-reduced-motion: no-preference) {
     .win-body .mk-prog { animation: mkProg 5s var(--ease) infinite; }
@@ -255,10 +237,7 @@
   .exec-page .hero-themes { display: flex; flex-wrap: wrap; justify-content: center; gap: 11px; margin: 32px auto 0; }
   .exec-page .hero-themes .ht { display: inline-flex; align-items: center; gap: 10px; padding: 9px 17px 9px 11px; border-radius: 999px; border: 1px solid rgba(255,255,255,.22); background: rgba(8,16,28,.4); backdrop-filter: blur(6px); font-size: 13.5px; font-weight: 600; letter-spacing: -.01em; color: #fff; }
   .exec-page .hero-themes .ht i { font-family: var(--font-mono); font-style: normal; font-size: 11px; font-weight: 700; color: var(--accent); background: rgba(255,255,255,.12); border-radius: 6px; padding: 3px 7px; }
-  [data-theme="light"] .exec-page .hero-themes .ht { color: #0b121d; border-color: rgba(13,20,32,.16); background: rgba(255,255,255,.55); }
-  [data-theme="light"] .exec-page .hero-themes .ht i { background: rgba(13,20,32,.06); }
-
-  /* rhythm */
+/* rhythm */
   .exec-page .sec { margin-top: 100px; }
   .exec-page .ben-sec { margin-top: 88px; }
   .exec-page .kf-sec { margin-top: 108px; }

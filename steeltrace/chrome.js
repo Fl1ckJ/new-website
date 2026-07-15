@@ -103,21 +103,6 @@
     if (!ccGet()) setTimeout(show, 900);
   }
 
-  // ---------- theme toggle ----------
-  var THEME_KEY = "steeltrace-theme";
-  function curTheme() { try { return localStorage.getItem(THEME_KEY) === "light" ? "light" : "dark"; } catch (e) { return "dark"; } }
-  function applyTheme(t) { document.documentElement.dataset.theme = t === "light" ? "light" : "dark"; }
-  function wireToggles() {
-    document.addEventListener("click", function (e) {
-      var b = e.target.closest ? e.target.closest("[data-theme-toggle]") : null;
-      if (!b) return;
-      var next = curTheme() === "light" ? "dark" : "light";
-      try { localStorage.setItem(THEME_KEY, next); } catch (err) {}
-      applyTheme(next);
-    });
-    window.addEventListener("storage", function (e) { if (!e || e.key === THEME_KEY) applyTheme(curTheme()); });
-  }
-
   window.__stBrand = function (img) {
     img.outerHTML =
       '<span class="brand-mark"><svg viewBox="0 0 40 40" fill="none"><path d="M20 3l14.7 8.5v17L20 37 5.3 28.5v-17z" stroke="var(--accent)" stroke-width="1.6"/><path d="M20 11l7.8 4.5v9L20 29l-7.8-4.5v-9z" fill="var(--accent-soft)" stroke="var(--accent-line)" stroke-width="1.2"/><circle cx="20" cy="20" r="3.1" fill="var(--accent)"/></svg></span>' +
@@ -136,6 +121,16 @@
     if (flogo && flogo.complete && flogo.naturalWidth === 0) window.__stBrand(flogo);
   }
 
+  function wireNav() {
+    document.addEventListener("click", function (e) {
+      var bar = document.querySelector(".topbar");
+      if (!bar) return;
+      if (e.target.closest && e.target.closest("[data-nav-toggle]")) { bar.classList.toggle("nav-open"); return; }
+      if (e.target.closest && e.target.closest(".mnav a")) { bar.classList.remove("nav-open"); return; }
+      if (bar.classList.contains("nav-open") && !(e.target.closest && e.target.closest(".topbar"))) bar.classList.remove("nav-open");
+    });
+  }
+
   function initForms() {
     var F = window.STForms || {};
     if (F.newsletter) F.newsletter();
@@ -145,18 +140,17 @@
   }
 
   function mount() {
-    applyTheme(curTheme());
     loadScripts([
-      "steeltrace/chrome/header.js?v=7",
-      "steeltrace/chrome/footer.js?v=7",
-      "steeltrace/forms/mautic-core.js?v=7",
-      "steeltrace/forms/newsletter.js?v=7",
-      "steeltrace/forms/brochure.js?v=7",
-      "steeltrace/forms/weekly.js?v=7",
-      "steeltrace/forms/contact.js?v=7"
+      "steeltrace/chrome/header.js?v=12",
+      "steeltrace/chrome/footer.js?v=10",
+      "steeltrace/forms/mautic-core.js?v=10",
+      "steeltrace/forms/newsletter.js?v=10",
+      "steeltrace/forms/brochure.js?v=10",
+      "steeltrace/forms/weekly.js?v=10",
+      "steeltrace/forms/contact.js?v=10"
     ], function () {
       mountChrome();
-      wireToggles();
+      wireNav();
       wireCookieConsent();
       initForms();
     });
