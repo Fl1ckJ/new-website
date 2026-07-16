@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="steeltrace/site.css?v=5" />
+<link rel="stylesheet" href="steeltrace/site.css?v=7" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" crossorigin="anonymous" />
 <style>
   .reveal { opacity: 0; translate: 0 22px; transition: opacity .7s var(--ease-out), translate .7s var(--ease-out); transition-delay: var(--rd, 0s); }
@@ -38,7 +38,7 @@
   @media (max-width: 980px) { .hiw-hero { grid-template-columns: 1fr; gap: 40px; padding-top: 64px; } .hiw-hero .hh-copy { max-width: 680px; } }
 
   /* ---------- hero visual: fragmented data -> one record ---------- */
-  .hero-viz { position: relative; }
+  .hero-viz { position: relative; min-width: 0; }
   .hv-frame { position: relative; width: 100%; aspect-ratio: 5 / 4.3; min-height: 348px; border-radius: var(--r-lg); border: 1px solid var(--line); background: radial-gradient(135% 130% at 72% -12%, #16233e 0%, #0b1423 74%); box-shadow: var(--shadow); overflow: hidden; }
   [data-theme="light"] .hv-frame { background: radial-gradient(135% 130% at 72% -12%, #eef3fb 0%, #dde6f2 80%); }
   .hv-frame::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 30px 30px; opacity: .6; mask-image: radial-gradient(120% 100% at 70% 0%, #000 30%, transparent 90%); }
@@ -86,6 +86,7 @@
   @keyframes hvFill { to { transform: scaleX(1); } }
   @keyframes hvPop { 0% { opacity: 0; transform: scale(0); } 65% { opacity: 1; transform: scale(1.14); } 100% { opacity: 1; transform: scale(1); } }
   @keyframes hvRing { 0% { opacity: .55; transform: scale(1); } 100% { opacity: 0; transform: scale(1.05); } }
+  @media (max-width: 620px) { .hv-frame { min-height: 0; } .hv-hub { min-width: 0; } }
   @media (max-width: 420px) { .hv-src { font-size: 9px; padding: 6px 9px; } .hv-src .tag { display: none; } }
 
   /* ---------- framing band ---------- */
@@ -226,6 +227,12 @@
   .step-card { display: grid; grid-template-columns: 1fr; row-gap: 0; align-items: start; padding: 24px 28px 26px; }
   .step-card > *:not(.step-viz) { grid-column: 1; min-width: 0; }
   .step-viz { grid-column: 1; order: -1; align-self: stretch; margin: 0 0 20px; }
+  /* only above 1000px does the animation sit beside the text; at 1000px and below it stays on top */
+  @media (min-width: 1001px) {
+    .step-card { grid-template-columns: 300px 1fr; column-gap: 32px; align-items: start; }
+    .step-viz { grid-column: 1; grid-row: 1 / span 20; order: 0; align-self: start; margin: 0; }
+    .step-card > *:not(.step-viz) { grid-column: 2; }
+  }
 
   /* ===== per-step animated visuals ===== */
   .sviz { position: relative; width: 100%; height: 212px; border-radius: var(--r-md); border: 1px solid var(--line); background: radial-gradient(130% 130% at 70% -8%, #16233e 0%, #0c1525 76%); overflow: hidden; }
@@ -235,6 +242,7 @@
   .sv-ck::after { content: ""; position: absolute; left: 5px; top: 3px; width: 4px; height: 7px; border: 1.7px solid #fff; border-top: 0; border-left: 0; transform: rotate(45deg); }
   @keyframes svPop { 0% { opacity: 0; transform: scale(0); } 65% { opacity: 1; transform: scale(1.16); } 100% { opacity: 1; transform: scale(1); } }
   @keyframes svUp { from { opacity: 0; transform: translate(-50%,-50%) translateY(8px); } to { opacity: 1; transform: translate(-50%,-50%); } }
+  @keyframes svUpY { from { opacity: 0; transform: translateY(-50%) translateY(8px); } to { opacity: 1; transform: translateY(-50%); } }
   @keyframes svFlow { to { stroke-dashoffset: -16; } }
 
   /* 1 scope */
@@ -304,7 +312,7 @@
   @media (prefers-reduced-motion: no-preference) {
     .step.in .sv-int .net line { stroke-dasharray: 3 6; animation: svFlow 1.4s linear infinite; }
     .sv-int .in-src { opacity: 0; }
-    .step.in .sv-int .in-src { animation: svUp .5s var(--ease-out) forwards; animation-delay: var(--d, 0s); }
+    .step.in .sv-int .in-src { animation: svUpY .5s var(--ease-out) forwards; animation-delay: var(--d, 0s); }
   }
 
   /* 7 sign */
@@ -417,7 +425,7 @@
 
   /* tag list */
   .taglist { display: flex; flex-wrap: wrap; gap: 9px; }
-  .tag { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 500; color: var(--txt-2); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; background: var(--panel); white-space: nowrap; }
+  .tag { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 500; color: var(--txt-2); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; background: var(--panel); white-space: normal; max-width: 100%; }
   .tag::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex: none; }
 
   /* checklist */

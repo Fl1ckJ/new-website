@@ -44,6 +44,17 @@ a { color: inherit; }
 .crumbs a:hover { color: var(--accent); }
 .crumbs .sep { opacity: .5; }
 .crumbs .cur { color: var(--txt); }
+/* breadcrumb overlays full-bleed image heroes instead of pushing them down */
+.page:has(> .crumbs + .pr-hero),
+.page:has(> .crumbs + .story-hero) { position: relative; }
+.page > .crumbs:has(+ .pr-hero),
+.page > .crumbs:has(+ .story-hero) { position: absolute; z-index: 5; margin: 0; top: 22px; left: 32px; right: 32px; }
+.page > .crumbs:has(+ .pr-hero) a,
+.page > .crumbs:has(+ .story-hero) a { color: rgba(255,255,255,.66); }
+.page > .crumbs:has(+ .pr-hero) a:hover,
+.page > .crumbs:has(+ .story-hero) a:hover { color: #fff; }
+.page > .crumbs:has(+ .pr-hero) .cur,
+.page > .crumbs:has(+ .story-hero) .cur { color: rgba(255,255,255,.92); }
 .foot-legal { color: inherit; text-decoration: none; transition: color .3s; }
 .foot-legal:hover { color: var(--accent); }
 
@@ -183,6 +194,11 @@ a { color: inherit; }
 .btn-ghost:hover { border-color: var(--accent-line); background: var(--accent-soft); color: var(--txt); }
 .btn .ar { transition: transform .35s var(--ease); }
 .btn:hover .ar { transform: translateX(4px); }
+/* mobile: CTA buttons go full-width & stack, consistent across every page (matches home) */
+@media (max-width: 1000px) {
+  .btn { width: 100%; justify-content: center; }
+  .hero-cta, .row:has(> .btn) { flex-direction: column; align-items: stretch; }
+}
 
 /* forms */
 .field { display: flex; flex-direction: column; gap: 8px; }
