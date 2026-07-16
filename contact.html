@@ -6,12 +6,12 @@
 <title>Contact: SteelTrace</title>
 <!-- SEO:start (generated) -->
 <meta name="description" content="Get in touch with SteelTrace: talk to a specialist about traceability, Smart Manufacturing Records and your project." />
-<link rel="canonical" href="https://fl1ckj.github.io/new-website/contact.html" />
+<link rel="canonical" href="https://fl1ckj.github.io/new-website/contact" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="SteelTrace" />
 <meta property="og:title" content="Contact: SteelTrace" />
 <meta property="og:description" content="Get in touch with SteelTrace: talk to a specialist about traceability, Smart Manufacturing Records and your project." />
-<meta property="og:url" content="https://fl1ckj.github.io/new-website/contact.html" />
+<meta property="og:url" content="https://fl1ckj.github.io/new-website/contact" />
 <meta property="og:image" content="https://fl1ckj.github.io/new-website/graphics/visual-charts.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Contact: SteelTrace" />
@@ -47,6 +47,13 @@
   .consent a { color: var(--accent); text-decoration: none; }
   .consent a:hover { text-decoration: underline; }
   @media (max-width: 940px) { .c-grid { grid-template-columns: 1fr; gap: 34px; } }
+  /* keep the form from forcing horizontal overflow on small screens */
+  .c-grid > * { min-width: 0; }
+  .c-form input, .c-form textarea, .c-form select { min-width: 0; }
+  @media (max-width: 560px) { .grid2 { grid-template-columns: 1fr; } .c-form { padding: 24px; } .c-hcap { transform: scale(.9); transform-origin: left top; } }
+  /* hCaptcha widget is a fixed ~302px iframe — scale it down so it never overflows on small screens */
+  @media (max-width: 400px) { .c-hcap { transform: scale(.8); transform-origin: left top; } }
+  @media (max-width: 340px) { .c-hcap { transform: scale(.68); transform-origin: left top; } }
 </style>
 </head>
 <body>
@@ -54,7 +61,7 @@
 <div class="gridbg"></div>
 <div class="wrap">
 
-<header class="topbar" data-site-header data-page="about" data-crumb="About Us>>about.html|Contact"></header>
+<header class="topbar" data-site-header data-page="about" data-crumb="About Us>>/about|Contact"></header>
 
 <div class="page">
   <section class="hero" style="padding-bottom:0">
@@ -104,7 +111,7 @@
         <div class="field"><label for="co">Company</label><input id="co" name="mauticform[company]" type="text" placeholder="Company" /></div>
         <div class="field"><label for="em">Email</label><input id="em" name="mauticform[email]" type="email" placeholder="you@company.com" required /></div>
         <div class="field"><label for="msgf">Message</label><textarea id="msgf" name="mauticform[f_message]" placeholder="How can we help?"></textarea></div>
-        <label class="consent"><input type="checkbox" class="c-consent" name="mauticform[consent][]" value="yes" required /> <span>I consent to SteelTrace processing my data as per the <a href="privacy-policy.html" target="_blank" rel="noopener">privacy policy</a></span></label>
+        <label class="consent"><input type="checkbox" class="c-consent" name="mauticform[consent][]" value="yes" required /> <span>I consent to SteelTrace processing my data as per the <a href="/privacy-policy" target="_blank" rel="noopener">privacy policy</a></span></label>
         <div class="c-hcap" data-hcap></div>
         <span class="form-err" data-err></span>
         <input type="hidden" name="mauticform[formId]" value="9" />

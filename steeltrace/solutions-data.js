@@ -60,11 +60,11 @@
           body: "Operators depend on quality work across a supply chain they can barely see, then live with the result for decades. SteelTrace gives you real-time visibility into manufacturing quality across the entire chain, replacing fragmented documents with trusted Smart Manufacturing Records. The result: lower project risk, faster delivery, and a trusted data foundation for compliance, asset integrity, digital twins and AI."
         },
         pathways: [
-          { t: "Executive Leadership", d: "The business case", href: "solution-exec.html" },
-          { t: "Quality (QA / QC)", d: "Control and defensibility", href: "solution-qaqc.html" },
-          { t: "Project Management", d: "Schedule and clean handover", href: "solution-pm.html" },
-          { t: "Operations & Integrity", d: "Safe for the life of the asset", href: "solution-ops.html" },
-          { t: "Digital Transformation", d: "The data foundation", href: "solution-dig.html" }
+          { t: "Executive Leadership", d: "The business case", href: "/solution-exec" },
+          { t: "Quality (QA / QC)", d: "Control and defensibility", href: "/solution-qaqc" },
+          { t: "Project Management", d: "Schedule and clean handover", href: "/solution-pm" },
+          { t: "Operations & Integrity", d: "Safe for the life of the asset", href: "/solution-ops" },
+          { t: "Digital Transformation", d: "The data foundation", href: "/solution-dig" }
         ],
         groups: [
           {

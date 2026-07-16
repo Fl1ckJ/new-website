@@ -1,12 +1,1221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0; url=SteelTrace%20Home.html">
-  <title>SteelTrace</title>
-  <script>location.replace('SteelTrace%20Home.html');</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SteelTrace: All your quality data in one place</title>
+<!-- SEO:start (generated) -->
+<meta name="description" content="SteelTrace turns scattered paper certificates into verified, blockchain-secured Smart Manufacturing Records: end-to-end material traceability for pipelines, platforms and plants in safety-critical industries." />
+<link rel="canonical" href="https://fl1ckj.github.io/new-website/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SteelTrace" />
+<meta property="og:title" content="SteelTrace: All your quality data in one place" />
+<meta property="og:description" content="SteelTrace turns scattered paper certificates into verified, blockchain-secured Smart Manufacturing Records: end-to-end material traceability for pipelines, platforms and plants in safety-critical industries." />
+<meta property="og:url" content="https://fl1ckj.github.io/new-website/" />
+<meta property="og:image" content="https://fl1ckj.github.io/new-website/graphics/visual-charts.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="SteelTrace: All your quality data in one place" />
+<meta name="twitter:description" content="SteelTrace turns scattered paper certificates into verified, blockchain-secured Smart Manufacturing Records: end-to-end material traceability for pipelines, platforms and plants in safety-critical industries." />
+<meta name="twitter:image" content="https://fl1ckj.github.io/new-website/graphics/visual-charts.png" />
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "SteelTrace", "url": "https://fl1ckj.github.io/new-website/", "logo": "https://fl1ckj.github.io/new-website/graphics/visual-charts.png", "description": "SteelTrace turns scattered paper certificates into verified, blockchain-secured Smart Manufacturing Records: end-to-end material traceability for pipelines, platforms and plants in safety-critical industries.", "sameAs": ["https://www.linkedin.com/company/steel-trace/"]}</script>
+<!-- SEO:end -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="steeltrace/site.css?v=7" />
+<style>
+  /* bright orange primary CTA in the nav */
+  .nav-cta { background: #ff7a33 !important; color: #ffffff !important; box-shadow: 0 10px 26px -12px color-mix(in srgb, #ff7a33 65%, transparent) !important; }
+  .nav-cta:hover { box-shadow: 0 16px 36px -10px color-mix(in srgb, #ff7a33 65%, transparent) !important; }
+  /* ---------- reveal on scroll ---------- */
+  .reveal { opacity: 0; translate: 0 22px; transition: opacity .7s var(--ease-out), translate .7s var(--ease-out); transition-delay: var(--rd, 0s); }
+  .reveal.in { opacity: 1; translate: 0 0; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1 !important; translate: 0 !important; } }
+
+  /* ---------- hero ---------- */
+  .hero { position: relative; padding: 84px 32px 64px; }
+  /* Restore the page side-gutter that .section's shorthand padding zeroes out */
+  .section { padding-left: 32px; padding-right: 32px; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
+  .hero h1 { font-size: clamp(38px, 5vw, 68px); font-weight: 800; letter-spacing: -.04em; line-height: .98; margin: 22px 0 0; text-wrap: balance; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero .lead { margin-top: 24px; max-width: 46ch; }
+  .hero-cta { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
+  .hero-triad { display: flex; gap: 26px; margin-top: 38px; flex-wrap: wrap; }
+  .triad-item { display: flex; align-items: center; gap: 11px; }
+  .triad-num { font-family: var(--font-mono); font-size: 11px; color: var(--accent); border: 1px solid var(--accent-dim); border-radius: 6px; width: 26px; height: 26px; display: grid; place-items: center; }
+  .triad-item b { font-weight: 600; font-size: 15px; }
+  .triad-item span { color: var(--txt-3); font-size: 13px; }
+  .triad-sep { width: 1px; align-self: stretch; background: var(--line); }
+  @media (max-width: 640px) {
+    .hero-triad { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+    .triad-item { justify-content: center; }
+    .triad-sep { display: none; }
+  }
+
+  /* hero visual */
+  .hero-visual { position: relative; margin-right: -32px; }
+  .hv-net { padding: 0; position: relative; overflow: hidden; }
+  .hv-net-frame { display: block; width: 100%; aspect-ratio: 720 / 740; border: 0; background: transparent; }
+  .hv-net-cap { position: absolute; top: 14px; left: 16px; z-index: 2; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase; color: rgba(234,244,255,.55); pointer-events: none; }
+  .hv-panel { padding: 18px; position: relative; overflow: hidden; }
+  .hv-bar { display: flex; align-items: center; gap: 8px; padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+  .hv-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--line-2); }
+  .hv-dot.live { background: var(--accent); box-shadow: 0 0 8px var(--accent); animation: blink 1.8s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:.4} 50%{opacity:1} }
+  .hv-title { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--txt-3); margin-left: 4px; white-space: nowrap; }
+  .hv-rows { display: flex; flex-direction: column; gap: 10px; }
+  .hv-row { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 13px; padding: 13px 14px; background: var(--elev); border: 1px solid var(--line); border-radius: 10px; }
+  .hv-code { font-family: var(--font-mono); font-size: 11px; color: var(--accent); }
+  .hv-label { font-size: 13.5px; font-weight: 500; }
+  .hv-label small { display: block; color: var(--txt-3); font-weight: 400; font-size: 11px; font-family: var(--font-mono); letter-spacing: .04em; margin-top: 2px; }
+  .hv-check { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+  .hv-check svg { width: 14px; height: 14px; }
+  .hv-progress { grid-column: 1 / -1; height: 3px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  .hv-progress i { display: block; height: 100%; background: var(--accent); border-radius: 3px; width: 0; }
+  .hero-stat-float { position: absolute; right: -10px; bottom: -22px; padding: 14px 18px; background: var(--panel-solid); border: 1px solid var(--accent-dim); border-radius: var(--r-md); box-shadow: var(--shadow); }
+  .hero-stat-float .n { font-family: var(--font-mono); font-weight: 600; font-size: 26px; color: var(--accent); line-height: 1; }
+  .hero-stat-float .l { font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--txt-3); margin-top: 6px; }
+
+  /* logos — running marquee */
+  .logos { padding: 22px 0 8px; }
+  .logos .cap { text-align: center; font-family: var(--font-mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--txt-3); margin-bottom: 22px; }
+  .logo-marquee { position: relative; overflow: hidden; width: 100%; padding: 10px 0;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); }
+  .logo-track { display: flex; width: max-content; align-items: center; gap: 0;
+    animation: logoscroll 34s linear infinite; will-change: transform; }
+  .logo-marquee:hover .logo-track { animation-play-state: paused; }
+  .logo-track span { flex: none; padding: 0 38px; font-weight: 700; font-size: 19px; letter-spacing: -.01em;
+    color: var(--txt-2); opacity: .7; white-space: nowrap; transition: opacity .3s, color .3s; }
+  .logo-track span:hover { opacity: 1; color: var(--txt); }
+  .logo-track img { flex: none; height: 58px; width: auto; margin: 0 11px; border-radius: 13px;
+    border: 1px solid var(--line); opacity: .9; transition: opacity .3s, transform .3s var(--ease-out), border-color .3s, box-shadow .3s; }
+  .logo-track img:hover { opacity: 1; transform: scale(1.16); border-color: var(--accent-line); box-shadow: var(--shadow); position: relative; z-index: 2; }
+  @keyframes logoscroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .logo-track { animation: none; } }
+
+  /* section header */
+  .sec-head { max-width: 640px; }
+  .sec-head.center { margin: 0 auto; text-align: center; }
+  .sec-head .h2 { margin-top: 14px; }
+  .sec-head .lead { margin-top: 16px; }
+
+  /* problem cards */
+  .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 44px; }
+  .pain { padding: 22px 22px 24px; display: flex; flex-direction: column; }
+  .pain .q { font-size: 15.5px; line-height: 1.5; color: var(--txt); font-weight: 500; }
+  .pain .q::before { content: "“"; color: var(--accent); font-size: 30px; line-height: 0; vertical-align: -8px; margin-right: 4px; font-family: Georgia, serif; }
+  .pain .who { margin-top: auto; padding-top: 18px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--txt-3); }
+
+  /* difference / pillars */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 44px; }
+  .pillar { padding: 28px; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+  .pillar .step { font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+  .pillar .ic { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-dim); margin: 16px 0 18px; }
+  .pillar h3 { font-size: 20px; font-weight: 700; letter-spacing: -.02em; }
+  .pillar p { color: var(--txt-2); font-size: 14px; line-height: 1.6; margin-top: 10px; }
+  .pillar ul { list-style: none; margin-top: auto; padding-top: 18px; display: flex; flex-direction: column; gap: 9px; }
+  .pillar li { display: flex; gap: 10px; font-size: 13.5px; color: var(--txt-2); }
+  .pillar li svg { flex: none; color: var(--accent); margin-top: 2px; }
+
+  /* stats band */
+  .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; }
+  .stat { background: var(--bg); padding: 30px 22px; text-align: center; }
+  [data-theme="light"] .stat { background: var(--panel-solid); }
+  .stat .n { font-family: var(--font-mono); font-weight: 600; font-size: clamp(28px, 3vw, 40px); color: var(--accent); letter-spacing: -.02em; line-height: 1; }
+  .stat .l { color: var(--txt-2); font-size: 12.5px; line-height: 1.4; margin-top: 12px; }
+  /* scale highlight band */
+  .scale-band { margin-top: 16px; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 26px 32px; border-radius: var(--r-lg); border: 1px solid var(--accent-line); background: linear-gradient(90deg, var(--accent-soft), transparent 70%), var(--panel); flex-wrap: wrap; }
+  .scale-lead { display: flex; flex-direction: column; gap: 8px; }
+  .scale-lead .scale-cap { color: var(--txt); font-size: 17px; font-weight: 600; letter-spacing: -.015em; }
+  .scale-fig { display: flex; align-items: baseline; gap: 12px; }
+  .scale-band .n { font-family: var(--font-mono); font-weight: 700; font-size: clamp(34px, 4vw, 52px); color: var(--accent); letter-spacing: -.03em; line-height: 1; }
+  .scale-band .l { color: var(--txt-2); font-size: 14px; }
+
+  /* solutions */
+  .sol-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 44px; }
+  .sol { padding: 24px; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: transform .4s var(--ease-out), border-color .3s, box-shadow .4s, background .3s; }
+  .sol:hover { transform: translateY(-6px); border-color: var(--accent-line); box-shadow: var(--shadow); }
+  .sol-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .sol-el { font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; color: var(--accent); border: 1px solid var(--accent-dim); background: var(--accent-soft); border-radius: 6px; padding: 5px 9px; }
+  .sol-role { font-family: var(--font-mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--txt-3); }
+  .sol h3 { font-size: 18px; font-weight: 700; letter-spacing: -.02em; }
+  .sol p { color: var(--txt-2); font-size: 13.5px; line-height: 1.55; margin-top: 9px; flex: 1; }
+  .sol .go { margin-top: 16px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); display: inline-flex; align-items: center; gap: 8px; }
+  .sol .go svg { transition: transform .35s var(--ease); }
+  .sol:hover .go svg { transform: translateX(4px); }
+
+  /* solutions — horizontal rails */
+  .sol-rail { margin-top: 38px; }
+  .sol-rail + .sol-rail { margin-top: 30px; }
+  .rail-head { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+  .rail-head .kicker { white-space: nowrap; }
+  .rail-head .ln { flex: 1; height: 1px; background: var(--line); }
+  .rail-head.center { justify-content: center; margin-bottom: 30px; }
+  .rail-head.center .ln { display: none; }
+  .rail-title { font-size: clamp(22px, 2.6vw, 32px); font-weight: 700; letter-spacing: -.025em; line-height: 1.1; text-align: center; }
+  .rail-vp { position: relative; }
+  .rail-scroller { display: flex; gap: 16px; overflow-x: auto; scroll-behavior: smooth;
+    padding: 60px 14px 48px; scrollbar-width: none; scroll-snap-type: x proximity; }
+  .rail-scroller::-webkit-scrollbar { display: none; }
+  .sol-card2 { position: relative; scroll-snap-align: start; flex: 0 0 252px; height: 384px;
+    text-decoration: none; border-radius: var(--r-lg); overflow: hidden; border: 0;
+    background-size: cover; background-position: center; color: #fff;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    transition: transform .4s var(--ease-out), box-shadow .4s, opacity .4s; }
+  .sol-card2::before { content: ""; position: absolute; inset: 0; z-index: 1; transition: background .3s;
+    background: linear-gradient(to top, rgba(4,8,18,.76) 6%, rgba(4,8,18,.36) 50%, rgba(4,8,18,.12) 100%); }
+  [data-theme="light"] .sol-card2 { color: #0a1020; }
+  [data-theme="light"] .sol-card2::before { background: linear-gradient(to top, rgba(247,250,253,.88) 6%, rgba(247,250,253,.54) 50%, rgba(247,250,253,.28) 100%); }
+  .sol-card2:hover { transform: translateY(-5px); z-index: 3; box-shadow: 0 22px 44px -26px rgba(3,10,22,.75); }
+  /* edge cards grow inward so they don't clip past the rail edge */
+  .sol-card2:first-child { transform-origin: left center; }
+  .sol-card2:last-child { transform-origin: right center; }
+  /* focus the hovered card, recede the rest */
+  .rail-scroller:hover .sol-card2:not(:hover) { opacity: .72; }
+  @media (prefers-reduced-motion: reduce) { .rail-scroller:hover .sol-card2:not(:hover) { opacity: .8; } }
+  .sol-card2 > * { position: relative; z-index: 2; }
+  /* zooming background image */
+  .sol-card2 .card-img { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center;
+    transition: transform .55s var(--ease-out); }
+  .sol-card2:hover .card-img { transform: scale(1.09); }
+  .sol-card2:hover::before { background: linear-gradient(to top, rgba(4,8,18,.93) 26%, rgba(4,8,18,.6) 64%, rgba(4,8,18,.28) 100%); }
+  [data-theme="light"] .sol-card2:hover::before { background: linear-gradient(to top, rgba(247,250,253,.96) 26%, rgba(247,250,253,.7) 64%, rgba(247,250,253,.36) 100%); }
+  /* hover preview panel */
+  .sol-card2 .card-preview { display: grid; grid-template-rows: 0fr; opacity: 0; margin-top: 0;
+    transition: grid-template-rows .45s var(--ease-out), opacity .3s ease, margin-top .45s var(--ease-out); }
+  .sol-card2 .card-preview .cp-inner { overflow: hidden; min-height: 0; }
+  .sol-card2:hover .card-preview { grid-template-rows: 1fr; opacity: 1; margin-top: 12px; }
+  .sol-card2 .cp-sub { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; opacity: .82; }
+  .sol-card2 .cp-blurb { font-size: 12.5px; line-height: 1.5; margin-top: 8px; opacity: .94;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .sol-card2 .cp-list { list-style: none; margin-top: 12px; display: flex; flex-direction: column; gap: 7px; }
+  .sol-card2 .cp-list li { position: relative; padding-left: 17px; font-size: 12px; line-height: 1.35; opacity: .96; }
+  .sol-card2 .cp-list li::before { content: ""; position: absolute; left: 0; top: 5px; width: 7px; height: 7px;
+    border-radius: 2px; background: currentColor; opacity: .7; }
+  @media (prefers-reduced-motion: reduce) { .sol-card2 .card-img, .sol-card2 .card-preview { transition: none; } }
+  .sol-card2 .code { position: absolute; top: 14px; left: 14px; font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: .14em; color: inherit; opacity: .92;
+    border: 1px solid currentColor; border-radius: 6px; padding: 4px 9px; }
+  .sol-card2 .glyph { position: absolute; right: -6px; top: 4px; font-family: var(--font-mono);
+    font-weight: 700; font-size: 80px; line-height: 1; letter-spacing: -.03em; opacity: .14; }
+  .sol-card2 .cardcontent { padding: 22px 20px; display: flex; flex-direction: column; }
+  .sol-card2 .cardcontent .go { margin-top: 14px; }
+  .sol-card2 h3 { font-size: 19px; font-weight: 700; letter-spacing: -.02em; line-height: 1.22; }
+  .sol-card2 .go { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em;
+    text-transform: uppercase; color: inherit; opacity: .85; display: inline-flex; align-items: center; gap: 8px; }
+  .sol-card2 .go svg { transition: transform .35s var(--ease); }
+  .sol-card2:hover .go svg { transform: translateX(4px); }
+
+  /* stakeholder cards — gradient tiles with line-art icons */
+  .stake-card { position: relative; scroll-snap-align: start; flex: 0 0 252px; height: 384px;
+    text-decoration: none; border-radius: 20px; overflow: hidden; color: #fff;
+    border: 1px solid rgba(255,255,255,.08);
+    display: flex; flex-direction: column;
+    transition: transform .4s var(--ease-out), box-shadow .4s, opacity .4s; }
+  .stake-card::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size: 34px 34px; -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 62%);
+    mask-image: linear-gradient(180deg, #000 0%, transparent 62%); }
+  .stake-card > * { position: relative; z-index: 1; }
+  .stake-card:hover { transform: translateY(-5px); z-index: 3;
+    box-shadow: 0 22px 44px -26px rgba(3,10,22,.75); border-color: rgba(255,255,255,.16); }
+  .stake-card:first-child { transform-origin: left center; }
+  .stake-card:last-child { transform-origin: right center; }
+  .rail-scroller:hover .stake-card:not(:hover) { opacity: .72; }
+  @media (prefers-reduced-motion: reduce) { .rail-scroller:hover .stake-card:not(:hover) { opacity: .8; } }
+  .stake-card .sc-art { flex: 1; min-height: 0; display: grid; place-items: center; padding: 30px 24px 6px; overflow: hidden; transition: flex-basis .45s var(--ease-out), padding .45s var(--ease-out); }
+  .stake-card .sc-art svg { width: 100%; max-width: 190px; max-height: 100%; height: auto; overflow: visible;
+    transform-origin: center; transition: transform .45s var(--ease-out); }
+  .stake-card:hover .sc-art { padding-top: 18px; padding-bottom: 0; }
+  .stake-card:hover .sc-art svg { transform: scale(.6); }
+  .stake-card .sc-body { padding: 0 24px 26px; }
+  .stake-card h3 { font-size: 19px; font-weight: 700; letter-spacing: -.02em;
+    line-height: 1.22; color: #fff; }
+  /* hover reveal panel — same behaviour as the client cards */
+  .stake-card .card-preview { display: grid; grid-template-rows: 0fr; opacity: 0; margin-top: 0;
+    transition: grid-template-rows .45s var(--ease-out), opacity .3s ease, margin-top .45s var(--ease-out); }
+  .stake-card .card-preview .cp-inner { overflow: hidden; min-height: 0; }
+  .stake-card:hover .card-preview { grid-template-rows: 1fr; opacity: 1; margin-top: 12px; }
+  .stake-card .cp-blurb { font-size: 12.5px; line-height: 1.5; color: rgba(255,255,255,.92);
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .stake-card .cp-list { list-style: none; margin-top: 12px; display: flex; flex-direction: column; gap: 7px; }
+  .stake-card .cp-list li { position: relative; padding-left: 17px; font-size: 12px; line-height: 1.35; color: rgba(255,255,255,.96); }
+  .stake-card .cp-list li::before { content: ""; position: absolute; left: 0; top: 5px; width: 7px; height: 7px;
+    border-radius: 2px; background: currentColor; opacity: .7; }
+  @media (prefers-reduced-motion: reduce) { .stake-card .card-preview { transition: none; } }
+  .stake-card .go { margin-top: 14px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .18em;
+    text-transform: uppercase; color: rgba(255,255,255,.5); display: inline-flex; align-items: center; gap: 10px; }
+  .stake-card .go svg { width: 22px; height: 10px; transition: transform .35s var(--ease); }
+  .stake-card:hover .go { color: rgba(255,255,255,.82); }
+  .stake-card:hover .go svg { transform: translateX(5px); }
+  @media (prefers-reduced-motion: reduce) { .stake-card .sc-art svg, .stake-card .go svg { transition: none; } }
+
+  .rail-btn { position: absolute; top: calc(50% - 20px); z-index: 4; width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid var(--line-2); background: var(--panel-solid); color: var(--txt); display: grid; place-items: center;
+    cursor: pointer; box-shadow: var(--shadow); transition: opacity .3s, background .3s, border-color .3s, transform .15s; }
+  .rail-btn:hover { border-color: var(--accent-line); background: var(--elev); }
+  .rail-btn:active { transform: scale(.92); }
+  .rail-btn.prev { left: -12px; }
+  .rail-btn.next { right: 8px; }
+  .rail-btn[hidden] { opacity: 0; pointer-events: none; }
+
+  /* compliance highlight */
+  .cbd { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .cbd-time { display: flex; flex-direction: column; gap: 0; }
+  .cbd-ev { display: grid; grid-template-columns: auto 1fr; gap: 16px; }
+  .cbd-ev .marker { display: flex; flex-direction: column; align-items: center; }
+  .cbd-ev .dot { width: 13px; height: 13px; border-radius: 50%; border: 2px solid var(--accent); background: var(--bg); margin-top: 4px; }
+  [data-theme="light"] .cbd-ev .dot { background: var(--panel-solid); }
+  .cbd-ev .line { width: 2px; flex: 1; background: var(--line-2); margin: 4px 0; }
+  .cbd-ev:last-child .line { display: none; }
+  .cbd-ev .body { padding-bottom: 22px; }
+  .cbd-ev .t { font-family: var(--font-mono); font-size: 10px; color: var(--txt-3); letter-spacing: .08em; }
+  .cbd-ev .a { font-size: 14.5px; font-weight: 500; margin-top: 3px; }
+
+  /* ---------- animated timeline ---------- */
+  .cbd-time.anim .cbd-ev .dot {
+    opacity: 0; transform: scale(.2);
+    transition: opacity .35s var(--ease-out), transform .45s cubic-bezier(.34,1.56,.64,1),
+                background-color .35s var(--ease-out), box-shadow .35s var(--ease-out);
+  }
+  .cbd-time.anim .cbd-ev .body {
+    opacity: 0; transform: translateY(6px);
+    transition: opacity .4s var(--ease-out), transform .4s var(--ease-out);
+  }
+  .cbd-time.anim .cbd-ev .line {
+    transform: scaleY(0); transform-origin: top center;
+    transition: transform .5s var(--ease-out), background-color .5s var(--ease-out);
+  }
+  .cbd-time.anim .cbd-ev.s-dot  .dot  { opacity: 1; transform: scale(1); }
+  .cbd-time.anim .cbd-ev.s-text .body { opacity: 1; transform: none; }
+  .cbd-time.anim .cbd-ev.s-fill .dot  {
+    background: var(--accent);
+    box-shadow: 0 0 0 4px color-mix(in oklch, var(--accent) 22%, transparent);
+  }
+  .cbd-time.anim .cbd-ev.s-line .line { transform: scaleY(1); background: var(--accent); }
+  @media (prefers-reduced-motion: reduce) {
+    .cbd-time.anim .cbd-ev .dot,
+    .cbd-time.anim .cbd-ev .body { opacity: 1 !important; transform: none !important; }
+    .cbd-time.anim .cbd-ev .line { transform: scaleY(1) !important; }
+  }
+
+  /* customer experience / testimonials */
+  .xp-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 18px; margin-top: 44px; }
+  .xp-feat { padding: 40px 40px 34px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+  .xp-feat::before { content: "“"; position: absolute; top: 6px; right: 28px; font-family: Georgia, serif; font-size: 150px; line-height: 1; color: var(--accent); opacity: .1; }
+  .xp-feat .quote { font-size: clamp(20px, 2.1vw, 27px); font-weight: 600; letter-spacing: -.02em; line-height: 1.32; color: var(--txt); text-wrap: pretty; }
+  .xp-feat .quote em { font-style: normal; color: var(--accent); }
+  .xp-metric { display: flex; flex-wrap: wrap; gap: 30px; row-gap: 22px; margin: 28px 0 4px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .xp-metric .m .n { font-family: var(--font-mono); font-weight: 600; font-size: 30px; color: var(--accent); line-height: 1; letter-spacing: -.02em; }
+  .xp-metric .m .l { color: var(--txt-3); font-size: 12px; margin-top: 7px; line-height: 1.35; }
+  .xp-side { display: flex; flex-direction: column; gap: 18px; }
+  .xp-card { padding: 26px 26px 24px; display: flex; flex-direction: column; flex: 1; }
+  .xp-card .quote { font-size: 15.5px; line-height: 1.55; color: var(--txt); font-weight: 500; }
+  .xp-author { display: flex; align-items: center; gap: 13px; margin-top: auto; padding-top: 20px; }
+  .xp-author .who { min-width: 0; }
+  .xp-author .who b { display: block; font-size: 14.5px; font-weight: 600; letter-spacing: -.01em; }
+  .xp-author .who span { display: block; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .04em; color: var(--txt-3); margin-top: 3px; }
+  @media (max-width: 1000px) { .xp-grid { grid-template-columns: 1fr; } }
+
+  /* big CTA */
+  .cta-final { margin: 96px 0 0; padding: 66px 40px; text-align: center; background: linear-gradient(180deg, var(--accent-soft), transparent 70%), var(--panel); border-radius: var(--r-lg); border: 1px solid var(--line); }
+  .cta-final .h2 { max-width: 20ch; margin: 0 auto; }
+  .cta-final .lead { max-width: 50ch; margin: 18px auto 0; }
+  .cta-final .row { display: flex; gap: 14px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
+
+  @media (max-width: 1000px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 44px; }
+    .hero-visual { order: -1; margin-left: -32px; }
+    /* hero copy fills the full width inside the gutter once stacked */
+    .hero h1 { text-wrap: wrap; }
+    .hero .lead { max-width: none; }
+    /* all CTA buttons go full-width & stack once the layout is mobile */
+    .btn { width: 100%; justify-content: center; }
+    .hero-cta, .cta-final .row { flex-direction: column; align-items: stretch; }
+    .pain-grid, .pillars, .sol-grid { grid-template-columns: 1fr 1fr; }
+    .stats { grid-template-columns: repeat(3, 1fr); }
+    .scale-band { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .cbd { grid-template-columns: 1fr; gap: 30px; }
+  }
+  @media (max-width: 620px) {
+    .pain-grid, .pillars, .sol-grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ---------- pipeline journey (independent-scroll embed) ---------- */
+  .pipeline-embed { padding: 48px 32px 28px; }
+  .pipeline-embed .pe-head { text-align: center; max-width: 720px; margin: 0 auto 22px; padding: 0 24px; }
+  .pipeline-frame { position: relative; width: 100%; max-width: calc(var(--maxw) - 64px); height: clamp(440px, 78vh, 860px); margin: 0 auto; border: 1px solid var(--accent-line); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow), 0 0 0 1px var(--hair) inset; background: #02080f; }
+  .pipeline-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .pf-cap { position: absolute; top: 12px; left: 16px; z-index: 2; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase; color: rgba(234,244,255,.5); pointer-events: none; }
+  .pf-full { position: absolute; top: 11px; right: 14px; z-index: 2; font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; color: rgba(234,244,255,.62); text-decoration: none; border: 1px solid rgba(140,180,220,.22); padding: 6px 11px; border-radius: 7px; transition: color .3s, border-color .3s, background .3s; }
+  .pf-full:hover { color: #ffd9a0; border-color: rgba(255,181,71,.5); background: rgba(255,181,71,.12); }
+  .pf-hint { text-align: center; font-family: var(--font-mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--txt-3); margin-top: 14px; padding: 0 24px; }
+</style>
 </head>
 <body>
-  <p>Redirecting to <a href="SteelTrace%20Home.html">SteelTrace Home</a>&hellip;</p>
+<div class="aura a"></div><div class="aura b"></div>
+<div class="gridbg"></div>
+<div class="wrap">
+
+<!-- NAV -->
+<header class="topbar" data-site-header data-page="home"></header>
+
+<!-- HERO -->
+<section class="page hero">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <span class="kicker">Smart Manufacturing Records</span>
+      <h1>Shortening project timelines with <em>agentic AI.</em></h1>
+      <p class="lead">Data collection and final documentation handover take months. SteelTrace makes it real time and automated, <strong>speeding up your project execution</strong>.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="/demo" style="background:#F5822B;box-shadow:0 12px 30px -14px rgba(245,130,43,.7);color:#fff">Book a demo <span class="ar">→</span></a>
+        <a class="btn btn-ghost" href="/product">Explore the product</a>
+      </div>
+      <div class="hero-triad">
+        <div class="triad-item"><span class="triad-num"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span><div><b>Collect</b> <span>at the source</span></div></div>
+        <div class="triad-sep"></div>
+        <div class="triad-item"><span class="triad-num"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span><div><b>Verify</b> <span>against specs</span></div></div>
+        <div class="triad-sep"></div>
+        <div class="triad-item"><span class="triad-num"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span><div><b>Use</b> <span>for a lifetime</span></div></div>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="hv-net">
+        <iframe class="hv-net-frame" src="graphics/Verified Network.dc.html" title="SteelTrace verified supply-chain network" loading="eager" referrerpolicy="no-referrer" allowtransparency="true"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="page section">
+  <div class="sec-head reveal" style="text-align:center;margin-left:auto;margin-right:auto">
+    <h2 class="h2">Do you recognise this?</h2>
+    <p class="lead">Projects should not be delayed by QC process and documentation.</p>
+  </div>
+  <div class="pain-grid">
+    <div class="pain panel reveal" style="--rd:0s"><p class="q">My inbox is overflowing with supplier emails, and I don't have time to review everything I receive.</p><div class="who">Project QA/QC</div></div>
+    <div class="pain panel reveal" style="--rd:.07s"><p class="q">I feel like an archaeologist trying to find one certificate. The data isn't searchable.</p><div class="who">Asset integrity</div></div>
+    <div class="pain panel reveal" style="--rd:.14s"><p class="q">I don't always trust the information I'm asked to approve, and I never know what's still missing.</p><div class="who">Inspection lead</div></div>
+    <div class="pain panel reveal" style="--rd:0s"><p class="q">Data arrives incomplete or unreadable. My inspectors spend hours double-checking it by hand.</p><div class="who">Quality manager</div></div>
+    <div class="pain panel reveal" style="--rd:.07s"><p class="q">MRBs get assembled manually after the project, months after the work was actually done.</p><div class="who">EPC project lead</div></div>
+    <div class="pain panel reveal" style="--rd:.14s"><p class="q">Modified certificates slip through the supply chain and we only find out far too late.</p><div class="who">Supplier quality</div></div>
+  </div>
+</section>
+
+<!-- DIFFERENCE / PLATFORM HEADER -->
+<section class="page section">
+  <div class="sec-head reveal" style="text-align:center;margin-left:auto;margin-right:auto">
+    <h2 class="h2">With SteelTrace your world looks different</h2>
+    <p class="lead">One location for every supplier's data: automatically organized, delivered in the same format, and verified the moment it's created.</p>
+  </div>
+</section>
+
+<!-- DIFFERENCE / PLATFORM -->
+<section class="page section" style="padding-top:0">
+<div class="story">
+    <style>
+      /* ===== storytelling: collect / verify / use ===== */
+      .story { margin-top: 30px; }
+      .st-step { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 64px; }
+      .st-step:first-child { margin-top: 30px; }
+      .st-head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+      .st-node { width: 48px; height: 48px; border-radius: 50%; flex: none; display: grid; place-items: center; font-family: var(--font-mono); font-weight: 600; font-size: 19px; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line); }
+      .st-kick { font-family: var(--font-mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
+      .st-copy { display: flex; flex-direction: column; }
+      .st-copy h3 { font-size: clamp(22px, 2.4vw, 28px); font-weight: 700; letter-spacing: -.02em; }
+      .st-copy .st-desc { color: var(--txt-2); font-size: 15.5px; line-height: 1.65; margin-top: 12px; }
+      .st-list { list-style: none; padding: 0; margin: 18px 0 0; display: flex; flex-direction: column; gap: 9px; }
+      .st-list li { display: flex; gap: 10px; font-size: 13.5px; color: var(--txt-2); }
+      .st-list li svg { flex: none; color: var(--accent); margin-top: 2px; }
+      .st-viz { width: 100%; max-width: 540px; justify-self: center; }
+      .st-step.flip .st-copy { order: 2; }
+      @media (max-width: 820px) {
+        .st-step { grid-template-columns: 1fr; gap: 22px; margin-top: 48px; }
+        .st-step.flip .st-copy { order: 0; }
+        .st-viz { order: -1; max-width: none; margin-left: -32px; margin-right: -32px; }
+      }
+
+      /* device frame (cream screen) */
+      .st-dev { width: 100%; background: #1C1C1E; border-radius: 16px; padding: 13px; box-sizing: border-box; border: 1px solid #3a3a3c; box-shadow: 0 34px 60px -34px rgba(0,0,0,.65); }
+      .st-scr { position: relative; width: 100%; height: 296px; background: #FAF9F5; border-radius: 8px; overflow: hidden; }
+      .st-bar { position: absolute; inset: 0 0 auto 0; height: 30px; background: #F0EEE6; border-bottom: 1px solid #E0DDD2; display: flex; align-items: center; gap: 8px; padding: 0 13px; box-sizing: border-box; z-index: 6; }
+      .st-bar .d { width: 8px; height: 8px; border-radius: 50%; background: #1D9E75; }
+      .st-bar .lbl { font-size: 11px; color: #5F5E5A; }
+      .st-bar .live { margin-left: auto; font-family: var(--font-mono); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: #9A9892; }
+      .st-stage { position: absolute; inset: 30px 0 0 0; }
+
+      /* ---- 1. COLLECT (excel upload -> values captured -> NCR detected) ---- */
+      .c-stage { display: flex; flex-direction: column; justify-content: center; gap: 12px; padding: 0 18px; box-sizing: border-box; }
+      .c-inhead { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: #888780; margin-bottom: 9px; }
+      /* upload zone */
+      .c-upload { position: relative; display: flex; align-items: center; gap: 10px; width: 100%; padding: 9px 11px; border: 1px dashed #C9C7BC; border-radius: 9px; background: #FAF9F5; box-sizing: border-box; overflow: hidden; opacity: 0; }
+      .c-xls { flex: none; width: 28px; height: 28px; border-radius: 6px; background: #1D7B4D; color: #fff; display: grid; place-items: center; font-family: var(--font-mono); font-size: 8.5px; font-weight: 700; letter-spacing: .04em; }
+      .c-uptext { font-size: 11.5px; color: #33322F; line-height: 1.25; min-width: 0; }
+      .c-uptext b { font-weight: 600; }
+      .c-uptext small { display: block; font-family: var(--font-mono); font-size: 8.5px; color: #9A9892; margin-top: 2px; letter-spacing: .03em; }
+      .c-upbadge { margin-left: auto; flex: none; font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; color: #1D7B4D; opacity: 0; white-space: nowrap; }
+      .c-prog { position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; }
+      .c-prog i { display: block; height: 100%; width: 0; background: #1D7B4D; }
+      /* captured values panel */
+      .c-extract { width: 100%; background: #fff; border: 1px solid #D3D1C7; border-radius: 10px; padding: 10px 12px 5px; box-sizing: border-box; }
+      .c-line { display: flex; align-items: center; gap: 9px; padding: 5px 0; opacity: 0; transform: translateY(4px); }
+      .c-line + .c-line { border-top: 1px solid #F2F0E8; }
+      .c-line .t { flex: 1; font-size: 11px; color: #5F5E5A; }
+      .c-line .val { font-family: var(--font-mono); font-size: 10px; color: #33322F; opacity: 0; white-space: nowrap; }
+      .c-line.bad .val { color: #C13D1E; }
+      .c-line .ck { width: 16px; height: 16px; flex: none; border-radius: 50%; display: grid; place-items: center; font-size: 9px; line-height: 1; color: #fff; transform: scale(0); }
+      .c-line .ck.ok { background: #1D9E75; }
+      .c-line .ck.no { background: #C13D1E; font-weight: 700; }
+      .c-flag { position: absolute; right: 14px; bottom: 14px; display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 8px; background: #FBEAE4; border: 1px solid #F0B49C; color: #B23C18; font-size: 10px; font-weight: 600; box-shadow: 0 8px 18px -10px rgba(120,40,10,.5); opacity: 0; transform: translateY(6px); white-space: nowrap; z-index: 4; }
+
+      /* ---- 1b. GATHER / converge (restored) ---- */
+      .g-stage { display: flex; align-items: center; padding: 0 16px; box-sizing: border-box; }
+      .g-col { display: flex; flex-direction: column; gap: 12px; flex: none; z-index: 3; }
+      .g-src { width: 92px; border-radius: 8px; padding: 8px 10px; box-sizing: border-box; font-family: var(--font-mono); font-size: 11px; font-weight: 600; line-height: 1.1; }
+      .g-src small { display: block; font-family: inherit; font-weight: 400; font-size: 9.5px; margin-top: 3px; opacity: .82; }
+      .g-src.s1 { background: #FAECE7; border: 1px solid #F5C4B3; color: #8A3417; }
+      .g-src.s2 { background: #FAEEDA; border: 1px solid #FAC775; color: #6E4208; }
+      .g-src.s3 { background: #EEEDFE; border: 1px solid #CECBF6; color: #423AA0; }
+      .g-mid { flex: 1; align-self: stretch; position: relative; }
+      .g-mid::before { content: ""; position: absolute; left: 4%; right: 4%; top: 50%; border-top: 1px dashed #D3D1C7; }
+      .g-lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 1; }
+      .g-lines line { stroke: #D3D1C7; stroke-width: 1; stroke-dasharray: 4 4; vector-effect: non-scaling-stroke; }
+      .g-chip { position: absolute; top: 50%; width: 24px; height: 24px; margin-top: -12px; border-radius: 6px; display: grid; place-items: center; font-size: 12px; opacity: 0; }
+      .g-chip.k1 { background: #F0997B; }
+      .g-chip.k2 { background: #FAC775; }
+      .g-chip.k3 { background: #AFA9EC; }
+      .g-inbox { flex: none; width: 150px; background: #fff; border: 1px solid #D3D1C7; border-radius: 10px; padding: 10px; box-sizing: border-box; z-index: 3; }
+      .g-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; opacity: .2; }
+      .g-row .bars { flex: 1; }
+      .g-row .bars i { display: block; height: 5px; border-radius: 3px; background: #E5E3DA; }
+      .g-row .bars i + i { margin-top: 4px; width: 64%; }
+      .g-row .ck { width: 17px; height: 17px; flex: none; border-radius: 50%; background: #1D9E75; color: #fff; display: grid; place-items: center; font-size: 10px; transform: scale(0); }
+
+      /* ---- 2. VERIFY ---- */
+      .v-stage { display: flex; align-items: center; justify-content: center; }
+      .v-card { width: 256px; background: #fff; border: 1px solid #D3D1C7; border-radius: 12px; padding: 14px 15px 15px; box-sizing: border-box; position: relative; }
+      .v-top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 11px; border-bottom: 1px solid #ECEAE1; margin-bottom: 10px; }
+      .v-name { font-size: 12.5px; font-weight: 600; color: #33322F; }
+      .v-spec { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .06em; color: #2C7BC9; }
+      /* excel upload zone */
+      .v-up { position: relative; display: flex; align-items: center; gap: 9px; padding: 9px 11px; border: 1px dashed #C9C7BC; border-radius: 9px; background: #FAF9F5; margin-bottom: 10px; overflow: hidden; }
+      .v-xls { flex: none; width: 26px; height: 26px; border-radius: 6px; background: #1D7B4D; color: #fff; display: grid; place-items: center; font-family: var(--font-mono); font-size: 8px; font-weight: 700; letter-spacing: .03em; }
+      .v-uptext { font-size: 11.5px; color: #5F5E5A; font-weight: 500; line-height: 1.2; }
+      .v-uptext small { display: block; font-family: var(--font-mono); font-size: 8.5px; color: #9A9892; margin-top: 2px; letter-spacing: .04em; }
+      .v-upbadge { margin-left: auto; font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; color: #1D7B4D; opacity: 0; white-space: nowrap; }
+      /* captured value rows */
+      .v-line { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+      .v-line + .v-line { border-top: 1px solid #F2F0E8; }
+      .v-line .t { flex: 1; font-size: 11.5px; color: #5F5E5A; }
+      .v-line .val { font-family: var(--font-mono); font-size: 10.5px; color: #33322F; opacity: 0; white-space: nowrap; }
+      .v-line.bad .val { color: #C13D1E; }
+      .v-line .ck { width: 17px; height: 17px; flex: none; border-radius: 50%; background: #E5E3DA; color: #fff; display: grid; place-items: center; font-size: 10px; line-height: 1; transform: scale(.6); }
+      .v-flag { position: absolute; right: -14px; bottom: 14px; display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 8px; background: #FBEAE4; border: 1px solid #F0B49C; color: #B23C18; font-size: 10.5px; font-weight: 600; box-shadow: 0 8px 18px -10px rgba(120,40,10,.5); opacity: 0; transform: translateX(8px) scale(.9); white-space: nowrap; }
+
+      /* ---- 3. USE ---- */
+      .u-stage { display: flex; flex-direction: column; gap: 12px; padding: 18px 18px 0; box-sizing: border-box; }
+      .u-search { display: flex; align-items: center; gap: 9px; height: 36px; padding: 0 12px; background: #fff; border: 1px solid #D3D1C7; border-radius: 9px; flex: none; }
+      .u-search svg { width: 15px; height: 15px; color: #888780; flex: none; }
+      .u-typed { font-family: var(--font-mono); font-size: 12.5px; color: #33322F; white-space: nowrap; overflow: hidden; max-width: 0; }
+      .u-caret { width: 1.5px; height: 15px; background: #2C7BC9; flex: none; }
+      .u-results { display: flex; flex-direction: column; gap: 7px; }
+      .u-res { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: #fff; border: 1px solid #E0DDD2; border-radius: 8px; font-size: 11.5px; color: #5F5E5A; opacity: 0; transform: translateY(6px); }
+      .u-res b { color: #33322F; font-weight: 600; }
+      .u-res .tag { margin-left: auto; font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .08em; text-transform: uppercase; padding: 2px 6px; border-radius: 5px; background: #E7F0FA; color: #2C7BC9; }
+      .u-res .hb { width: 7px; height: 7px; border-radius: 50%; background: #1D9E75; flex: none; }
+
+      /* run-gated animations */
+      /* 1 · excel file uploads */
+      .st-viz.run .c-upload { animation: c-up 7s ease-in-out infinite; }
+      @keyframes c-up { 0% { opacity: 0; transform: translateY(-10px); } 6% { opacity: 1; transform: translateY(0); } 94% { opacity: 1; transform: translateY(0); } 99%,100% { opacity: 0; transform: translateY(-10px); } }
+      .st-viz.run .c-prog i { animation: c-fill 7s ease-in-out infinite; }
+      @keyframes c-fill { 0%,4% { width: 0; } 18%,100% { width: 100%; } }
+      .st-viz.run .c-upbadge { animation: c-badge 7s ease-in-out infinite; }
+      @keyframes c-badge { 0%,18% { opacity: 0; } 23%,96% { opacity: 1; } 100% { opacity: 0; } }
+      /* 2 · values captured (rows + values + ticks, staggered) */
+      .st-viz.run .c-line { animation: c-rowin 7s ease-in-out infinite; }
+      .st-viz.run .c-line .val { animation: c-valin 7s ease-in-out infinite; }
+      .st-viz.run .c-line .ck { animation: c-ckin 7s ease-in-out infinite; }
+      .st-viz.run .c-line.e2, .st-viz.run .c-line.e2 .val, .st-viz.run .c-line.e2 .ck { animation-delay: .35s; }
+      .st-viz.run .c-line.e3, .st-viz.run .c-line.e3 .val, .st-viz.run .c-line.e3 .ck { animation-delay: .7s; }
+      .st-viz.run .c-line.e4, .st-viz.run .c-line.e4 .val, .st-viz.run .c-line.e4 .ck { animation-delay: 1.05s; }
+      @keyframes c-rowin { 0%,20% { opacity: 0; transform: translateY(4px); } 28%,93% { opacity: 1; transform: translateY(0); } 99%,100% { opacity: 0; transform: translateY(4px); } }
+      @keyframes c-valin { 0%,26% { opacity: 0; } 32%,93% { opacity: 1; } 99%,100% { opacity: 0; } }
+      @keyframes c-ckin { 0%,30% { transform: scale(0); } 36% { transform: scale(1.25); } 40%,93% { transform: scale(1); } 99%,100% { transform: scale(0); } }
+      /* 3 · non-conformity flag */
+      .st-viz.run .c-flag { animation: c-flagin 7s ease-in-out infinite; }
+      @keyframes c-flagin { 0%,48% { opacity: 0; transform: translateY(6px); } 54% { opacity: 1; transform: translateY(0); } 92% { opacity: 1; transform: translateY(0); } 97%,100% { opacity: 0; transform: translateY(6px); } }
+
+      .st-viz.run .g-chip.k1 { animation: g-fly-top 4.2s ease-in-out infinite; top: 50%; }
+      .st-viz.run .g-chip.k2 { animation: g-fly-mid 4.2s ease-in-out infinite 1.4s; top: 50%; }
+      .st-viz.run .g-chip.k3 { animation: g-fly-bot 4.2s ease-in-out infinite 2.8s; top: 50%; }
+      @keyframes g-fly-top { 0% { left: calc(4% - 12px); opacity: 0; transform: translateY(-56px) scale(1); } 8% { opacity: 1; } 44% { left: calc(96% - 12px); opacity: 1; transform: translateY(0) scale(1); } 52% { left: calc(96% - 12px); opacity: 0; transform: translateY(0) scale(.4); } 100% { left: calc(96% - 12px); opacity: 0; transform: translateY(0) scale(.4); } }
+      @keyframes g-fly-mid { 0% { left: calc(4% - 12px); opacity: 0; transform: translateY(0) scale(1); } 8% { opacity: 1; } 44% { left: calc(96% - 12px); opacity: 1; transform: translateY(0) scale(1); } 52% { left: calc(96% - 12px); opacity: 0; transform: translateY(0) scale(.4); } 100% { left: calc(96% - 12px); opacity: 0; transform: translateY(0) scale(.4); } }
+      @keyframes g-fly-bot { 0% { left: calc(4% - 12px); opacity: 0; transform: translateY(56px) scale(1); } 8% { opacity: 1; } 44% { left: calc(96% - 12px); opacity: 1; transform: translateY(0) scale(1); } 52% { left: calc(96% - 12px); opacity: 0; transform: translateY(0) scale(.4); } 100% { left: calc(96% - 12px); opacity: 0; transform: translateY(0) scale(.4); } }
+      .st-viz.run .g-row .ck { animation: g-pop 12.6s ease-in-out infinite; }
+      .st-viz.run .g-row { animation: g-light 12.6s ease-in-out infinite; }
+      .st-viz.run .g-row.r2 .ck, .st-viz.run .g-row.r2 { animation-delay: 1.4s; }
+      .st-viz.run .g-row.r3 .ck, .st-viz.run .g-row.r3 { animation-delay: 2.8s; }
+      @keyframes g-light { 0%,9% { opacity: .2; } 14%,96% { opacity: 1; } 100% { opacity: 1; } }
+      @keyframes g-pop { 0%,11% { transform: scale(0); } 16% { transform: scale(1.25); } 20%,96% { transform: scale(1); } 100% { transform: scale(1); } }
+      .st-viz.run .v-rule .ck { animation: v-tick 7s ease-in-out infinite; }
+      .st-viz.run .v-rule.r1 .ck { animation-delay: .3s; }
+      .st-viz.run .v-rule.r2 .ck { animation-delay: 1.0s; }
+      .st-viz.run .v-rule.r3 .ck { animation-delay: 1.7s; }
+      .st-viz.run .v-rule.r4 .ck { animation-delay: 2.4s; }
+      @keyframes v-tick { 0%,4% { background: #E5E3DA; transform: scale(.6); } 9% { transform: scale(1.3); } 12% { background: #1D9E75; transform: scale(1); } 92% { background: #1D9E75; } 97%,100% { background: #E5E3DA; transform: scale(.6); } }
+      .st-viz.run .v-seal { animation: v-seal 7s ease-in-out infinite; }
+      @keyframes v-seal { 0%,40% { opacity: 0; transform: translateY(6px); } 48%,92% { opacity: 1; transform: translateY(0); } 98%,100% { opacity: 0; transform: translateY(6px); } }
+      .st-viz.run .v-flag { animation: v-flag 7s ease-in-out infinite; }
+      @keyframes v-flag { 0%,52% { opacity: 0; transform: translateX(8px) scale(.9); } 58% { opacity: 1; transform: translateX(0) scale(1); } 78% { opacity: 1; transform: translateX(0) scale(1); } 84%,100% { opacity: 0; transform: translateX(8px) scale(.9); } }
+
+      .st-viz.run .u-typed { animation: u-type 6.5s steps(13) infinite; }
+      @keyframes u-type { 0% { max-width: 0; } 26% { max-width: 13ch; } 90% { max-width: 13ch; } 96%,100% { max-width: 0; } }
+      .st-viz.run .u-caret { animation: u-blink 1s steps(1) infinite; }
+      @keyframes u-blink { 0%,50% { opacity: 1; } 51%,100% { opacity: 0; } }
+      .st-viz.run .u-res { animation: u-pop 6.5s ease infinite; }
+      .st-viz.run .u-res.x2 { animation-delay: .35s; }
+      .st-viz.run .u-res.x3 { animation-delay: .7s; }
+      @keyframes u-pop { 0%,30% { opacity: 0; transform: translateY(6px); } 40%,90% { opacity: 1; transform: translateY(0); } 96%,100% { opacity: 0; transform: translateY(6px); } }
+
+      @media (prefers-reduced-motion: reduce) {
+        .st-viz * { animation: none !important; }
+        .c-chip, .g-chip { display: none; }
+        .g-row { opacity: 1 !important; } .g-row .ck { transform: scale(1) !important; }
+        .c-upload, .c-line { opacity: 1 !important; transform: none !important; }
+        .c-upbadge, .c-line .val { opacity: 1 !important; }
+        .c-line .ck { transform: scale(1) !important; }
+        .c-prog i { width: 100% !important; }
+        .c-flag { opacity: 1 !important; transform: none !important; }
+        .v-rule .ck { background: #1D9E75 !important; transform: scale(1) !important; }
+        .v-seal { opacity: 1 !important; transform: none !important; } .v-flag { display: none; }
+        .u-typed { max-width: 13ch !important; } .u-res { opacity: 1 !important; transform: none !important; }
+      }
+    </style>
+
+    <!-- 01 · COLLECT -->
+    <div class="st-step reveal">
+      <div class="st-copy">
+        <h3>Data Captured at the Source</h3>
+        <p class="st-desc">Mill certs, welding parameters, NDT and coating data flow straight into one record, from every tier of your supply chain, in the same format, every order.</p>
+        <ul class="st-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>One inbox for all suppliers</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Same format, every order</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Integrates with MES / ERP</li>
+        </ul>
+      </div>
+      <div class="st-viz reveal" style="--rd:.08s">
+        <div class="st-dev">
+          <div class="st-scr">
+            <div class="st-bar"><span class="d"></span><span class="lbl">SteelTrace: intake</span><span class="live">live</span></div>
+            <div class="st-stage g-stage">
+              <div class="g-col">
+                <div class="g-src s1">PDF<small>Mill cert</small></div>
+                <div class="g-src s2">CSV<small>Weld log</small></div>
+                <div class="g-src s3">EML<small>NDT report</small></div>
+              </div>
+              <div class="g-mid">
+                <svg class="g-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="4" y1="29" x2="96" y2="50"></line><line x1="4" y1="71" x2="96" y2="50"></line></svg>
+                <div class="g-chip k1">📄</div>
+                <div class="g-chip k2">📊</div>
+                <div class="g-chip k3">✉</div>
+              </div>
+              <div class="g-inbox">
+                <div class="c-inhead">Smart Manufacturing Record</div>
+                <div class="g-row r1"><div class="bars"><i style="width:82%"></i><i></i></div><span class="ck">✓</span></div>
+                <div class="g-row r2"><div class="bars"><i style="width:74%"></i><i></i></div><span class="ck">✓</span></div>
+                <div class="g-row r3"><div class="bars"><i style="width:88%"></i><i></i></div><span class="ck">✓</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 · VERIFY -->
+    <div class="st-step flip reveal">
+      <div class="st-copy">
+        <h3>Verified against specs in real time</h3>
+        <p class="st-desc">Your QCP / ITP rules live in the platform. Nothing moves down the supply chain until it's compliant. NCRs are caught early, not after installation.</p>
+        <ul class="st-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Automated rule-based checks</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Blockchain-secured audit trail</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Counterfeit certs flagged</li>
+        </ul>
+      </div>
+      <div class="st-viz reveal" style="--rd:.08s">
+        <div class="st-dev">
+          <div class="st-scr">
+            <div class="st-bar"><span class="d"></span><span class="lbl">SteelTrace: verification</span><span class="live">live</span></div>
+            <div class="st-stage c-stage">
+              <div class="c-upload">
+                <div class="c-xls">XLS</div>
+                <div class="c-uptext"><b>mill-cert_41C-882.xlsx</b><small>Uploading…</small></div>
+                <div class="c-upbadge">Captured</div>
+                <div class="c-prog"><i></i></div>
+              </div>
+              <div class="c-extract">
+                <div class="c-inhead">Values captured</div>
+                <div class="c-line e1"><span class="t">Yield strength</span><span class="val">462 MPa</span><span class="ck ok">✓</span></div>
+                <div class="c-line e2"><span class="t">Tensile</span><span class="val">541 MPa</span><span class="ck ok">✓</span></div>
+                <div class="c-line e3 bad"><span class="t">Charpy @ −46°C</span><span class="val">22 J</span><span class="ck no">!</span></div>
+                <div class="c-line e4"><span class="t">Carbon equiv.</span><span class="val">0.41 %</span><span class="ck ok">✓</span></div>
+              </div>
+              <div class="c-flag">⚠ Non-conformity detected</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 · USE -->
+    <div class="st-step reveal">
+      <div class="st-copy">
+        <h3>Lifetime traceability</h3>
+        <p class="st-desc">Find any record in seconds. Feed structured, verified data into integrity models, Digital Twins and AI, from birth certificate to decommissioning.</p>
+        <ul class="st-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Search any parameter instantly</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Locate all material from a heat</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Predictive &amp; life-extension ready</li>
+        </ul>
+      </div>
+      <div class="st-viz reveal" style="--rd:.08s">
+        <div class="st-dev">
+          <div class="st-scr">
+            <div class="st-bar"><span class="d"></span><span class="lbl">SteelTrace: records</span><span class="live">search</span></div>
+            <div class="st-stage u-stage">
+              <div class="u-search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+                <span class="u-typed">Heat 41C-882</span><span class="u-caret"></span>
+              </div>
+              <div class="u-results">
+                <div class="u-res x1"><span class="hb"></span><span><b>Pipe joint 1184</b> · heat 41C-882</span><span class="tag">verified</span></div>
+                <div class="u-res x2"><span class="hb"></span><span><b>Pipe joint 1186</b> · heat 41C-882</span><span class="tag">verified</span></div>
+                <div class="u-res x3"><span class="hb"></span><span><b>Flange F-22</b> · heat 41C-882</span><span class="tag">verified</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    (function () {
+      var vizzes = document.querySelectorAll('.story .st-viz');
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) { vizzes.forEach(function (v) { v.classList.add('run'); }); return; }
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (ents) {
+          ents.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('run'); io.unobserve(en.target); } });
+        }, { threshold: 0.3 });
+        vizzes.forEach(function (v) { io.observe(v); });
+      } else { vizzes.forEach(function (v) { v.classList.add('run'); }); }
+    })();
+    </script>
+  </div>
+
+  <div class="reveal" style="display:flex;justify-content:center;margin-top:64px">
+    <a class="btn btn-primary" href="/product">Explore the product <span class="ar">→</span></a>
+  </div>
+</section>
+
+<!-- CUSTOMER EXPERIENCE -->
+<section class="page section">
+  <div class="sec-head reveal">
+    <span class="kicker">Customer experience</span>
+    <h2 class="h2">What teams say once the data is trusted.</h2>
+    <p class="lead">Operators, EPCs and suppliers describe the same shift, from chasing and double-checking documents to working from one record everyone believes.</p>
+  </div>
+  <div class="xp-grid">
+    <div class="xp-feat panel reveal" style="--rd:0s">
+      <p class="quote">“With SteelTrace we certify products <em>in real time during production</em>, every step recorded irrefutably on blockchain, so the record is traceable and transparent to our customers the moment it's created.”</p>
+      <div class="xp-metric">
+        <div class="m"><div class="n">74%</div><div class="l">Fewer NCRs<br>on the first pilot</div></div>
+        <div class="m"><div class="n">2 wks</div><div class="l">Earlier pipe<br>delivery</div></div>
+        <div class="m"><div class="n">9 wks</div><div class="l">Earlier<br>startup</div></div>
+        <div class="m"><div class="n">100×</div><div class="l">Faster<br>handover</div></div>
+      </div>
+    </div>
+    <div class="xp-side">
+      <div class="xp-card panel reveal" style="--rd:.08s">
+        <p class="quote">“Initial startup can be 9 weeks earlier with a fully digital handover.”</p>
+        <div class="xp-author">
+          <div class="who"><b>Technology Manager</b><span>Top-tier offshore EPC</span></div>
+        </div>
+      </div>
+      <div class="xp-card panel reveal" style="--rd:.14s">
+        <p class="quote">“We can invoice weeks early because data is approved during the project, not after.”</p>
+        <div class="xp-author">
+          <div class="who"><b>Plant Quality Director</b><span>Pipe manufacturer</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- YEAR TO DATE PERFORMANCE -->
+<section class="page section" style="padding-top:0">
+  <div class="scale-band reveal">
+    <div class="scale-lead"><span class="kicker">Year to date performance</span><span class="scale-cap">Trusted across live energy projects worldwide</span></div>
+    <div class="scale-fig"><div class="n" data-count="3500" data-suffix="+">3,500+</div><div class="l">Products certified</div></div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<section class="page logos" style="padding-bottom:64px">
+  <div class="cap">SteelTrace ecosystem</div>
+  <div class="logo-marquee">
+    <div class="logo-track">
+      <a href="https://www.chevron.com" target="_blank" rel="noopener"><img src="graphics/logos/chevron.png" alt="Chevron"></a><a href="https://www.totalenergies.com" target="_blank" rel="noopener"><img src="graphics/logos/totalenergies.png" alt="TotalEnergies"></a><a href="https://www.akerbp.com" target="_blank" rel="noopener"><img src="graphics/logos/akerbp.png" alt="Aker BP"></a><a href="https://www.subsea7.com" target="_blank" rel="noopener"><img src="graphics/logos/subsea7.png" alt="Subsea 7"></a><a href="https://www.swgas.com" target="_blank" rel="noopener"><img src="graphics/logos/southwest-gas.png" alt="Southwest Gas"></a><a href="https://www.tenaris.com" target="_blank" rel="noopener"><img src="graphics/logos/tenaris.png" alt="Tenaris"></a><a href="https://www.butting.com" target="_blank" rel="noopener"><img src="graphics/logos/axis.png" alt="AXIS Pipe and Tube"></a><a href="https://www.vallourec.com" target="_blank" rel="noopener"><img src="graphics/logos/vallourec.png" alt="Vallourec"></a><a href="https://www.butting.com" target="_blank" rel="noopener"><img src="graphics/logos/butting.png" alt="BUTTING"></a><a href="https://www.cpw.gr" target="_blank" rel="noopener"><img src="graphics/logos/corinth.png" alt="Corinth Pipeworks"></a><a href="https://www.elementlogistics.com" target="_blank" rel="noopener"><img src="graphics/logos/element.png" alt="Element"></a><a href="https://www.libertypipeline.com" target="_blank" rel="noopener"><img src="graphics/logos/liberty.png" alt="Liberty"></a><a href="https://www.applusplus.com" target="_blank" rel="noopener"><img src="graphics/logos/applus.png" alt="Applus+"></a><a href="https://www.shawcor.com" target="_blank" rel="noopener"><img src="graphics/logos/shawcor.png" alt="Shawcor"></a><a href="https://www.mega-inspection.com" target="_blank" rel="noopener"><img src="graphics/logos/mega.png" alt="M.E.G.A"></a><a href="https://qtc.ae" target="_blank" rel="noopener"><img src="graphics/logos/qtc.png" alt="QTC International"></a>
+      <a href="https://www.chevron.com" target="_blank" rel="noopener" aria-hidden="true"><img src="graphics/logos/chevron.png" alt=""></a><a href="https://www.totalenergies.com" target="_blank" rel="noopener" aria-hidden="true"><img src="graphics/logos/totalenergies.png" alt=""></a><a href="https://www.akerbp.com" target="_blank" rel="noopener" aria-hidden="true"><img src="graphics/logos/akerbp.png" alt=""></a><a href="https://www.subsea7.com" target="_blank" rel="noopener" aria-hidden="true"><img src="graphics/logos/subsea7.png" alt=""></a><a href="https://www.swgas.com" target="_blank" rel="noopener" aria-hidden="true"><img src="graphics/logos/southwest-gas.png" alt=""></a><a href="https://www.tenaris.com" target="_blank" rel="noopener" aria-hidden="true"><img src="graphics/logos/tenaris.png" alt=""></a><a href="https://www.butting.com" target="_blank" rel="noopener" aria-hidden="true"><img src="graphics/logos/axis.png" alt=""></a><a href="https://www.vallourec.com" target="_blank" rel="noopener" aria-hidden="true"><img src="graphics/logos/vallourec.png" alt=""></a><a href="https://www.butting.com" target="_blank" rel="noopener" aria-hidden="true"><img src="graphics/logos/butting.png" alt=""></a><a href="https://www.cpw.gr" target="_blank" rel="noopener" aria-hidden="true"><img src="graphics/logos/corinth.png" alt=""></a><a href="https://www.elementlogistics.com" target="_blank" rel="noopener" aria-hidden="true"><img src="graphics/logos/element.png" alt=""></a><a href="https://www.libertypipeline.com" target="_blank" rel="noopener" aria-hidden="true"><img src="graphics/logos/liberty.png" alt=""></a><a href="https://www.applusplus.com" target="_blank" rel="noopener" aria-hidden="true"><img src="graphics/logos/applus.png" alt=""></a><a href="https://www.shawcor.com" target="_blank" rel="noopener" aria-hidden="true"><img src="graphics/logos/shawcor.png" alt=""></a><a href="https://www.mega-inspection.com" target="_blank" rel="noopener" aria-hidden="true"><img src="graphics/logos/mega.png" alt=""></a><a href="https://qtc.ae" target="_blank" rel="noopener" aria-hidden="true"><img src="graphics/logos/qtc.png" alt=""></a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO GET STARTED -->
+<section class="page section" style="padding-top:0">
+  <style>
+    .gs-band { position: relative; border-radius: 26px; padding: 56px clamp(26px, 5vw, 60px) 60px;
+      --b: #eef2f9; --ink: #0d1424; --ink2: #41527a; --card: #ffffff; --cardln: #dbe3f0;
+      --acc: #2f6fb0; --accbg: #e6eef9; --accln: #cddcf1;
+      background: var(--b); box-shadow: 0 40px 90px -50px rgba(0,0,0,.7); overflow: hidden; }
+    [data-theme="light"] .gs-band { --b: #0b1220; --ink: #f1f5fc; --ink2: #b9c6e0; --card: #16213a;
+      --cardln: #2a3a5c; --acc: #7cc0f0; --accbg: rgba(124,192,240,.14); --accln: rgba(124,192,240,.32);
+      box-shadow: 0 40px 90px -50px rgba(0,0,0,.5); }
+    .gs-band::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--acc) 12%, transparent), transparent 60%); }
+    .gs-band > * { position: relative; }
+    .gs-band .kicker { color: var(--acc); }
+    .gs-band .kicker::before { background: var(--acc); }
+    .gs-band .h2 { color: var(--ink); }
+    .gs-band .lead { color: var(--ink2); }
+    .gs-band .pillars { margin-top: 40px; }
+    .gs-band .pillar { background: var(--card); border: 1px solid var(--cardln); border-radius: var(--r-lg);
+      box-shadow: 0 18px 40px -28px rgba(13,20,36,.55); backdrop-filter: none; }
+    .gs-band .pillar .step { color: var(--acc); }
+    .gs-band .pillar .ic { color: var(--acc); background: var(--accbg); border-color: var(--accln); }
+    .gs-band .pillar h3 { color: var(--ink); }
+    .gs-band .pillar p { color: var(--ink2); }
+    .gs-cta { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 40px; }
+    .gs-cta .gs-btn { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-display); font-size: 15px; font-weight: 700; letter-spacing: -.01em; color: #ffffff; background: #ff7a33; text-decoration: none; padding: 14px 24px; border-radius: var(--r-sm); box-shadow: 0 14px 32px -14px color-mix(in srgb, #ff7a33 70%, transparent); transition: transform .35s var(--spring), box-shadow .35s; }
+    .gs-cta .gs-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 42px -12px color-mix(in srgb, #ff7a33 70%, transparent); }
+    .gs-cta .gs-btn .ar { transition: transform .35s var(--ease); }
+    .gs-cta .gs-btn:hover .ar { transform: translateX(4px); }
+    .gs-cta .gs-note { font-size: 14px; color: var(--ink2); }
+  </style>
+  <div class="gs-band reveal">
+    <div class="sec-head">
+      <span class="kicker">How to get started</span>
+      <h2 class="h2">From first call to full rollout in three steps.</h2>
+      <p class="lead">A guided path that proves the value on your own data before you scale it across every project and supplier.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar reveal" style="--rd:0s">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18"/><path d="M8 3v3M16 3v3"/></svg></div>
+        <span class="step">Step 01</span>
+        <h3>Book a demo</h3>
+        <p>We walk your team through a digital ITP, a live inspection workflow and a sample Manufacturing Record Book, mapped to one of your real projects.</p>
+      </div>
+      <div class="pillar reveal" style="--rd:.1s">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+        <span class="step">Step 02</span>
+        <h3>Pilot &amp; measure</h3>
+        <p>Run a scoped pilot on a single order or supplier. We baseline your current effort and track the gains: fewer NCRs, less QA/QC time, faster delivery.</p>
+      </div>
+      <div class="pillar reveal" style="--rd:.2s">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14c-1.5 1-2 4.5-2 4.5s3.5-.5 4.5-2"/><path d="M13.5 5.5C16 3 20.5 3 20.5 3s0 4.5-2.5 7L13 15l-4-4 4.5-5.5z"/><circle cx="15" cy="9" r="1.2"/></svg></div>
+        <span class="step">Step 03</span>
+        <h3>Deploy company wide</h3>
+        <p>Roll out across projects and supply-chain tiers, integrated with your MES / ERP, so every record is captured at the source and verified by design.</p>
+      </div>
+    </div>
+    <div class="gs-cta reveal" style="--rd:.3s">
+      <a class="gs-btn" href="/demo">Book a demo <span class="ar">→</span></a>
+      <span class="gs-note">No commitment, see it on one of your own projects.</span>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTIONS -->
+<section class="page section" style="padding-top:0">
+
+  <div class="sol-rail reveal">
+    <div class="rail-head center"><h2 class="rail-title">By Company Type</h2></div>
+    <div class="rail-vp">
+      <button class="rail-btn prev" type="button" data-rail="clientRail" data-dir="-1" aria-label="Scroll left" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="rail-scroller" id="clientRail"></div>
+      <button class="rail-btn next" type="button" data-rail="clientRail" data-dir="1" aria-label="Scroll right"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
+  </div>
+  <div class="sol-rail reveal">
+    <div class="rail-head center"><h2 class="rail-title">By Stakeholder Type</h2></div>
+    <div class="rail-vp">
+      <button class="rail-btn prev" type="button" data-rail="stakeRail" data-dir="-1" aria-label="Scroll left" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="rail-scroller" id="stakeRail"></div>
+      <button class="rail-btn next" type="button" data-rail="stakeRail" data-dir="1" aria-label="Scroll right"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST TEASER -->
+<section class="page section" style="padding-top:0">
+  <style>
+    .tz { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
+      padding: clamp(36px, 4.5vw, 60px); border: 1px solid var(--line); border-radius: var(--r-lg);
+      background: linear-gradient(180deg, var(--accent-soft), transparent 66%), var(--panel); box-shadow: var(--shadow); overflow: hidden; }
+    .tz::before { content: ""; position: absolute; inset: 0; background: radial-gradient(120% 120% at 88% -10%, var(--accent-soft), transparent 58%); pointer-events: none; }
+    .tz-head { position: relative; z-index: 1; }
+    .tz-head .kicker { justify-content: center; }
+    .tz-head .h2 { margin-top: 16px; }
+    .tz-head .h2 em { font-style: normal; color: var(--accent); }
+    .tz-body { position: relative; z-index: 1; width: 100%; display: grid; grid-template-columns: .82fr 1fr; gap: clamp(16px, 2vw, 28px); align-items: center; margin-top: 36px; padding: 0 clamp(20px, 5vw, 72px); text-align: left; }
+    .tz-copy { display: flex; flex-direction: column; align-items: flex-start; }
+    .tz-copy .lead { max-width: 38ch; }
+    .tz-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+    .tz-tags span { font-family: var(--font-mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--txt-3); border: 1px solid var(--line-2); border-radius: 999px; padding: 6px 13px; }
+    .tz-copy .row { display: flex; gap: 14px; align-items: center; justify-content: flex-start; margin-top: 28px; flex-wrap: wrap; }
+    .tz-link { display: inline-flex; align-items: center; gap: 9px; font-weight: 600; font-size: 14.5px; color: var(--accent); text-decoration: none; }
+    .tz-link .ar { transition: transform .35s var(--ease); }
+    .tz-link:hover .ar { transform: translateX(4px); }
+
+    .tz-viz { position: relative; z-index: 1; width: min(340px, 100%); margin-left: auto; display: flex; flex-direction: column; gap: 16px; align-items: center; }
+    .tz-seal { width: 108px; height: 108px; margin-bottom: 2px; }
+    .tz-seal .ring { fill: none; stroke: var(--accent-line); }
+    .tz-seal .ring2 { fill: none; stroke: var(--accent-dim); }
+    .tz-seal .ticks { fill: none; stroke: var(--accent); stroke-opacity: .55; stroke-width: 1; }
+    .tz-seal .txt { fill: var(--accent); font-family: var(--font-mono); font-size: 9.2px; letter-spacing: 2.6px; font-weight: 500; }
+    .tz-seal .core { fill: var(--accent-soft); stroke: var(--accent-line); }
+    .tz-seal .check { fill: none; stroke: var(--accent); stroke-width: 3.6; stroke-linecap: round; stroke-linejoin: round; }
+    @media (prefers-reduced-motion: no-preference) { .tz-seal .rot { transform-origin: 75px 75px; animation: tzSpin 60s linear infinite; } }
+    @keyframes tzSpin { to { transform: rotate(360deg); } }
+    .tz-chips { width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: 10px; }
+    .tz-chip { display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: var(--r-md); border: 1px solid var(--line); background: var(--panel-solid); font-size: 13px; }
+    .tz-chip .lab { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; flex: none; width: 74px; }
+    .tz-chip .txt { color: var(--txt-2); }
+    .tz-chip.pdf .lab { color: var(--warn); }
+    .tz-chip.pdf .txt s { color: var(--txt-3); text-decoration-color: color-mix(in srgb, var(--warn) 65%, transparent); }
+    .tz-chip.rec { border-color: var(--accent-line); box-shadow: 0 0 0 1px var(--accent-soft); }
+    .tz-chip.rec .lab { color: var(--accent); }
+    .tz-chip .chk { width: 15px; height: 15px; border-radius: 50%; background: #1f9d57; position: relative; flex: none; margin-left: auto; }
+    .tz-chip .chk::after { content: ""; position: absolute; left: 5px; top: 3px; width: 4px; height: 6px; border: 1.6px solid #fff; border-top: 0; border-left: 0; transform: rotate(45deg); }
+    .tz-chip .xm { margin-left: auto; color: var(--warn); font-weight: 700; flex: none; font-size: 15px; line-height: 1; }
+    @media (max-width: 900px) { .tz-body { grid-template-columns: 1fr; } .tz-copy { align-items: center; text-align: center; } .tz-copy .lead { margin-left: auto; margin-right: auto; } .tz-copy .row { justify-content: center; } .tz-viz { order: -1; margin-left: auto; margin-right: auto; } }
+  </style>
+  <div class="tz reveal">
+    <div class="tz-head">
+      <span class="kicker">Trust &amp; Integrity</span>
+      <h2 class="h2">When AI can forge anything, can we really afford to keep manufacturing records <em>off chain?</em></h2>
+    </div>
+    <div class="tz-body">
+      <div class="tz-copy">
+        <p class="lead">A convincing fake certificate now takes minutes. SteelTrace makes each record verifiable at its source and tamper-proof ever after, so you are trusting proof, not paper.</p>
+        <div class="row">
+          <a class="btn btn-ghost" href="/trust">How SteelTrace proves a record <span class="ar">→</span></a>
+        </div>
+      </div>
+      <div class="tz-viz" aria-hidden="true">
+      <svg class="tz-seal" viewBox="0 0 150 150">
+        <g class="rot"><circle class="ticks" cx="75" cy="75" r="70" stroke-dasharray="1 7"></circle></g>
+        <circle class="ring" cx="75" cy="75" r="63" stroke-width="1"></circle>
+        <circle class="ring2" cx="75" cy="75" r="48" stroke-width="1"></circle>
+        <defs>
+          <path id="tzSealTop" d="M75,75 m-53,0 a53,53 0 1,1 106,0"></path>
+          <path id="tzSealBot" d="M75,75 m-47,0 a47,47 0 1,0 94,0"></path>
+        </defs>
+        <text class="txt"><textPath href="#tzSealTop" startOffset="50%" text-anchor="middle">VERIFIED AT SOURCE</textPath></text>
+        <text class="txt"><textPath href="#tzSealBot" startOffset="50%" text-anchor="middle">TAMPER · PROOF</textPath></text>
+        <circle class="core" cx="75" cy="75" r="27" stroke-width="1"></circle>
+        <path class="check" d="M63 76 l8 8 16-19"></path>
+      </svg>
+      <div class="tz-chips">
+        <div class="tz-chip pdf"><span class="lab">A PDF</span><span class="txt">Yield <s>485</s> 520 MPa</span><span class="xm">✕</span></div>
+        <div class="tz-chip rec"><span class="lab">Record</span><span class="txt">Yield 485 MPa, at source</span><span class="chk"></span></div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="page">
+  <div class="cta-final reveal">
+    <span class="kicker center" style="justify-content:center;display:inline-flex">Take the first step</span>
+    <h2 class="h2" style="margin-top:16px">Stop chasing documents. Start trusting your data.</h2>
+    <p class="lead">See a digital ITP, a live inspection workflow and a sample Manufacturing Record Book, built around your project.</p>
+    <div class="row">
+      <a class="btn btn-primary" href="/demo" style="background:#F5822B;box-shadow:0 12px 30px -14px rgba(245,130,43,.7);color:#0a0f1a">Book a demo <span class="ar">→</span></a>
+      <a class="btn btn-ghost" href="/product">Explore the product</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer" data-site-footer></footer>
+
+</div>
+
+<script src="steeltrace/image-slot.js"></script>
+<script src="steeltrace/solutions-data.js"></script>
+<script src="steeltrace/chrome.js?v=12"></script>
+<script>
+(function () {
+  // solutions horizontal rails
+  var SOL = window.STEELTRACE_SOLUTIONS;
+  if (SOL) {
+    var rarrow = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>';
+    var buildCard = function (s) {
+      var a = document.createElement('a');
+      a.className = 'sol-card2';
+      a.href = '/solution-' + s.id;
+      var imgMap = { op: "url('uploads/pasted-1781179942603-0.png')", epc: "url('uploads/pasted-1781180301349-0.png')", wld: "url('uploads/pasted-1781180335017-0.png')", mfg: "url('uploads/pasted-1781180475297-0.png')", ndt: "url('uploads/pasted-1781180529869-0.png')" };
+      var bg = imgMap[s.id] || s.gradient;
+      var prevItems = (s.value || []).slice(0, 2).map(function (v) {
+        return '<li>' + SOL.esc(v.t) + '</li>';
+      }).join('');
+      a.innerHTML =
+        '<div class="card-img" style="background-image:' + bg + '"></div>' +
+        '<div class="cardcontent">' +
+          '<h3>' + SOL.esc(s.name) + '</h3>' +
+          '<div class="card-preview"><div class="cp-inner">' +
+            (s.sub ? '<p class="cp-sub">' + SOL.esc(s.sub) + '</p>' : '') +
+            (s.blurb ? '<p class="cp-blurb">' + SOL.esc(s.blurb) + '</p>' : '') +
+            (prevItems ? '<ul class="cp-list">' + prevItems + '</ul>' : '') +
+          '</div></div>' +
+          '<span class="go">Explore ' + rarrow + '</span>' +
+        '</div>';
+      return a;
+    };
+    // stakeholder cards — gradient tiles with bespoke line-art icons
+    var STAKE_ART = {
+      exec: {
+        grad: 'radial-gradient(125% 95% at 26% 6%, #3a444f 0%, #1c232b 46%, #10141a 100%)',
+        svg: '<svg viewBox="0 0 200 150" fill="none">'
+          + '<defs><linearGradient id="scGauge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#eef2f6"/><stop offset="1" stop-color="#59626e"/></linearGradient></defs>'
+          + '<path d="M38 95 A62 62 0 0 1 162 95" stroke="url(#scGauge)" stroke-width="9" stroke-linecap="round"/>'
+          + '<g stroke="#aeb8c2" stroke-width="2.4" stroke-linecap="round">'
+          + '<path d="M34 95 L24 95"/><path d="M53.3 48.3 L46.3 41.3"/><path d="M100 29 L100 19"/><path d="M146.7 48.3 L153.7 41.3"/><path d="M166 95 L176 95"/></g>'
+          + '<path d="M100 95 L129.8 52.4" stroke="#eef2f6" stroke-width="3.4" stroke-linecap="round"/>'
+          + '<circle cx="100" cy="95" r="6" fill="#eef2f6"/>'
+          + '<polyline points="44,126 70,131 96,122 118,125 140,116 162,109" stroke="#98a2ae" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>'
+          + '<g fill="#cfd6de"><circle cx="44" cy="126" r="3"/><circle cx="70" cy="131" r="3"/><circle cx="96" cy="122" r="3"/><circle cx="118" cy="125" r="3"/><circle cx="140" cy="116" r="3"/><circle cx="162" cy="109" r="3"/></g>'
+          + '</svg>'
+      },
+      qaqc: {
+        grad: 'radial-gradient(125% 95% at 30% 4%, #147a6c 0%, #0c3c3b 46%, #071f22 100%)',
+        svg: (function () {
+          var c = '#57e0c8', cols = [17, 61, 105, 149], rows = [14, 58, 102], s = '';
+          var checked = { '17-14': 1, '149-14': 1, '61-58': 1, '17-102': 1, '105-102': 1, '149-102': 1 };
+          rows.forEach(function (y) {
+            cols.forEach(function (x) {
+              if (x === 105 && y === 58) return; // crosshair cell
+              s += '<rect x="' + x + '" y="' + y + '" width="34" height="34" rx="6" stroke="' + c + '" stroke-width="2.4"/>';
+              if (checked[x + '-' + y]) {
+                s += '<path d="M' + (x + 9) + ' ' + (y + 18) + ' L' + (x + 15) + ' ' + (y + 24) + ' L' + (x + 26) + ' ' + (y + 9) + '" stroke="' + c + '" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>';
+              }
+            });
+          });
+          s += '<circle cx="122" cy="75" r="19" stroke="' + c + '" stroke-width="2.4" opacity=".35"/>';
+          s += '<circle cx="122" cy="75" r="17" stroke="' + c + '" stroke-width="2.4"/>';
+          s += '<path d="M122 56 L122 94 M103 75 L141 75" stroke="' + c + '" stroke-width="2.4" stroke-linecap="round"/>';
+          return '<svg viewBox="0 0 200 150" fill="none">' + s + '</svg>';
+        })()
+      },
+      pm: {
+        grad: 'radial-gradient(130% 100% at 36% 2%, #2a53c6 0%, #16265f 46%, #0b1330 100%)',
+        svg: (function () {
+          var bar = '#5b82f5', trk = 'rgba(150,172,240,.16)', dia = '#9db4ff', s = '';
+          var bars = [[22, 16, 70], [40, 40, 96], [22, 64, 82], [22, 88, 104], [40, 112, 56]];
+          bars.forEach(function (b) {
+            s += '<rect x="' + b[0] + '" y="' + b[1] + '" width="' + (150 - b[0]) + '" height="13" rx="6.5" fill="' + trk + '"/>';
+            s += '<rect x="' + b[0] + '" y="' + b[1] + '" width="' + b[2] + '" height="13" rx="6.5" fill="' + bar + '"/>';
+          });
+          s += '<path d="M150 4 L150 126" stroke="rgba(157,180,255,.7)" stroke-width="1.6" stroke-dasharray="4 4"/>';
+          s += '<path d="M144 3 L156 3 L150 11 Z" fill="' + dia + '"/>';
+          [[176, 46], [190, 94]].forEach(function (d, i) {
+            var y0 = i === 0 ? 46 : 94;
+            s += '<path d="M150 ' + y0 + ' L' + d[0] + ' ' + d[1] + '" stroke="rgba(157,180,255,.5)" stroke-width="1.4" stroke-dasharray="3 3"/>';
+            s += '<path d="M' + d[0] + ' ' + (d[1] - 7) + ' L' + (d[0] + 7) + ' ' + d[1] + ' L' + d[0] + ' ' + (d[1] + 7) + ' L' + (d[0] - 7) + ' ' + d[1] + ' Z" fill="' + dia + '"/>';
+          });
+          return '<svg viewBox="0 0 210 150" fill="none">' + s + '</svg>';
+        })()
+      },
+      ops: {
+        grad: 'radial-gradient(125% 95% at 30% 4%, #1f9047 0%, #0d4a24 46%, #05230f 100%)',
+        svg: '<svg viewBox="0 0 210 150" fill="none">'
+          + '<circle cx="56" cy="50" r="34" stroke="#57e08a" stroke-width="2" opacity=".32"/>'
+          + '<circle cx="56" cy="50" r="22" stroke="#57e08a" stroke-width="2" opacity=".6"/>'
+          + '<circle cx="56" cy="50" r="10" stroke="#57e08a" stroke-width="2"/>'
+          + '<circle cx="56" cy="50" r="4" fill="#57e08a"/>'
+          + '<g fill="#57e08a"><circle cx="120" cy="46" r="5"/><circle cx="140" cy="64" r="4.5"/><circle cx="126" cy="86" r="3.5"/></g>'
+          + '<polyline points="16,108 74,108 88,108 96,86 104,128 112,74 120,112 128,108 150,108 162,108 172,96 180,112 188,108 196,108" stroke="#57e08a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>'
+          + '</svg>'
+      },
+      dig: {
+        grad: 'radial-gradient(130% 100% at 40% 2%, #8a2350 0%, #4a1330 44%, #24091a 100%)',
+        svg: (function () {
+          var c = '#f078a4', s = '';
+          var lines = [[74, 54, 118, 26], [118, 26, 128, 44], [128, 44, 150, 66], [74, 54, 96, 84], [118, 26, 96, 84], [96, 84, 150, 66], [96, 84, 168, 96], [96, 84, 74, 102], [74, 102, 116, 116], [116, 116, 168, 96], [96, 84, 116, 116], [150, 66, 168, 96]];
+          lines.forEach(function (l) { s += '<path d="M' + l[0] + ' ' + l[1] + ' L' + l[2] + ' ' + l[3] + '" stroke="' + c + '" stroke-width="1.4" opacity=".72"/>'; });
+          s += '<rect x="112" y="20" width="12" height="12" rx="2" fill="' + c + '"/>';
+          s += '<rect x="162" y="90" width="13" height="13" rx="2" fill="' + c + '"/>';
+          var circ = [[74, 54, 9], [128, 44, 4], [150, 66, 7], [96, 84, 10], [74, 102, 7], [116, 116, 5]];
+          circ.forEach(function (n) { s += '<circle cx="' + n[0] + '" cy="' + n[1] + '" r="' + n[2] + '" fill="' + c + '"/>'; });
+          return '<svg viewBox="0 0 200 155" fill="none">' + s + '</svg>';
+        })()
+      }
+    };
+    var STAKE_ARROW = '<svg viewBox="0 0 24 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5h20"/><path d="M17 1l5 4-5 4"/></svg>';
+    var STAKE_NAME = { qaqc: 'QA / QC' };
+    // home-card hover bullets (override the first two benefits for these roles)
+    var STAKE_ITEMS = {
+      qaqc: ['Automated validation', 'Earlier issue detection'],
+      pm: ['Faster approval cycles', 'Real-time supplier data']
+    };
+    var buildStakeCard = function (s) {
+      var art = STAKE_ART[s.id];
+      var a = document.createElement('a');
+      a.className = 'stake-card';
+      a.href = '/solution-' + s.id;
+      if (art) a.style.background = art.grad;
+      var prevItems = (STAKE_ITEMS[s.id] || (s.value || []).slice(0, 2).map(function (v) { return v.t; })).map(function (t) {
+        return '<li>' + SOL.esc(t) + '</li>';
+      }).join('');
+      a.innerHTML =
+        '<div class="sc-art">' + (art ? art.svg : '') + '</div>' +
+        '<div class="sc-body">' +
+          '<h3>' + SOL.esc(STAKE_NAME[s.id] || s.name) + '</h3>' +
+          '<div class="card-preview"><div class="cp-inner">' +
+            (s.blurb ? '<p class="cp-blurb">' + SOL.esc(s.blurb) + '</p>' : '') +
+            (prevItems ? '<ul class="cp-list">' + prevItems + '</ul>' : '') +
+          '</div></div>' +
+          '<span class="go">Explore ' + STAKE_ARROW + '</span>' +
+        '</div>';
+      return a;
+    };
+
+    var clientRail = document.getElementById('clientRail');
+    var stakeRail = document.getElementById('stakeRail');
+    if (clientRail) SOL.supply.forEach(function (s) { clientRail.appendChild(buildCard(s)); });
+    if (stakeRail) SOL.role.forEach(function (s) { stakeRail.appendChild(buildStakeCard(s)); });
+
+    var updateArrows = function (rail) {
+      var vp = rail.closest('.rail-vp'); if (!vp) return;
+      var prev = vp.querySelector('.rail-btn.prev'), next = vp.querySelector('.rail-btn.next');
+      var max = rail.scrollWidth - rail.clientWidth - 2;
+      if (prev) prev.hidden = rail.scrollLeft <= 18;
+      if (next) next.hidden = rail.scrollLeft >= max - 16;
+    };
+    document.querySelectorAll('.rail-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var rail = document.getElementById(btn.getAttribute('data-rail'));
+        if (!rail) return;
+        var dir = parseInt(btn.getAttribute('data-dir'), 10);
+        rail.scrollBy({ left: dir * Math.min(rail.clientWidth * 0.85, 580), behavior: 'smooth' });
+      });
+    });
+    ['clientRail', 'stakeRail'].forEach(function (id) {
+      var rail = document.getElementById(id);
+      if (!rail) return;
+      rail.addEventListener('scroll', function () { updateArrows(rail); });
+      updateArrows(rail);
+
+      // auto-scroll the hovered card into the center of the rail
+      var hoverTimer = null;
+      rail.addEventListener('mouseover', function (e) {
+        var card = e.target.closest('.sol-card2, .stake-card');
+        if (!card || !rail.contains(card)) return;
+        clearTimeout(hoverTimer);
+        hoverTimer = setTimeout(function () {
+          var target = card.offsetLeft - (rail.clientWidth - card.offsetWidth) / 2;
+          var max = rail.scrollWidth - rail.clientWidth;
+          target = Math.max(0, Math.min(target, max));
+          rail.scrollTo({ left: target, behavior: 'smooth' });
+        }, 90);
+      });
+      rail.addEventListener('mouseleave', function () { clearTimeout(hoverTimer); });
+    });
+    window.addEventListener('resize', function () {
+      if (clientRail) updateArrows(clientRail);
+      if (stakeRail) updateArrows(stakeRail);
+    });
+  }
+
+  // scroll reveal
+  var els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    els.forEach(function (el) { io.observe(el); });
+  } else { els.forEach(function (el) { el.classList.add('in'); }); }
+  // failsafe: reveal everything shortly after load no matter what
+  setTimeout(function () { els.forEach(function (el) { el.classList.add('in'); }); }, 1800);
+
+  // hero progress bar loop
+  var fill = document.getElementById('hvFill');
+  if (fill) { var p = 0; setInterval(function () { p = p >= 100 ? 18 : p + 2; fill.style.width = p + '%'; }, 120); }
+
+  // count-up stats when visible
+  function countUp(el) {
+    var target = parseFloat(el.getAttribute('data-count'));
+    var suffix = el.getAttribute('data-suffix') || '';
+    var dur = 1200, t0 = null;
+    function step(t) {
+      if (!t0) t0 = t;
+      var k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      var v = Math.round(e * target);
+      el.textContent = (target >= 1000 ? v.toLocaleString() : v) + suffix;
+      if (k < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var stats = document.querySelectorAll('.stat .n[data-count], .scale-band .n[data-count]');
+  if ('IntersectionObserver' in window) {
+    var sio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { countUp(e.target); sio.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    stats.forEach(function (s) { sio.observe(s); });
+  }
+
+  // animated compliance timeline
+  var time = document.querySelector('.cbd-time');
+  if (time) {
+    var evs = [].slice.call(time.querySelectorAll('.cbd-ev'));
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var timers = [];
+    function clearTimers() { timers.forEach(clearTimeout); timers = []; }
+    function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+    function reset() { evs.forEach(function (ev) { ev.classList.remove('s-dot', 's-text', 's-fill', 's-line'); }); }
+    function run() {
+      clearTimers(); reset();
+      var d = 300;
+      evs.forEach(function (ev) {
+        var hasLine = !!ev.querySelector('.line') && ev !== evs[evs.length - 1];
+        later(function () { ev.classList.add('s-dot'); }, d); d += 480;   // hollow ring pops in
+        later(function () { ev.classList.add('s-text'); }, d); d += 620;  // date + label fade in
+        later(function () { ev.classList.add('s-fill'); }, d); d += 460;  // ring fills solid blue
+        if (hasLine) { later(function () { ev.classList.add('s-line'); }, d); d += 560; } // line draws down
+      });
+      later(run, d + 2400); // hold, then loop
+    }
+    if (reduce) { time.classList.add('anim'); evs.forEach(function (ev) { ev.classList.add('s-dot', 's-text', 's-fill', 's-line'); }); }
+    else if ('IntersectionObserver' in window) {
+      var tio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { time.classList.add('anim'); run(); }
+          else { clearTimers(); }
+        });
+      }, { threshold: 0.35 });
+      tio.observe(time);
+    } else { time.classList.add('anim'); run(); }
+  }
+})();
+</script>
 </body>
 </html>
