@@ -93,23 +93,10 @@
     });
 
     if (pagerEl) {
-      pagerEl.innerHTML = "";
-      if (pages > 1) {
-        for (var i = 1; i <= pages; i++) {
-          (function (n) {
-            var b = document.createElement("button");
-            b.type = "button";
-            b.className = "pg" + (n === state.page ? " on" : "");
-            b.textContent = n;
-            b.addEventListener("click", function () { state.page = n; render(); scrollToGrid(); });
-            pagerEl.appendChild(b);
-          })(i);
-        }
-        var nx = document.createElement("button");
-        nx.type = "button"; nx.className = "pg"; nx.textContent = "→";
-        nx.addEventListener("click", function () { if (state.page < pages) { state.page++; render(); scrollToGrid(); } });
-        pagerEl.appendChild(nx);
-        pagerEl.style.display = "flex";
+      if (window.STPager) {
+        window.STPager.render(pagerEl, state.page, pages, function (n) {
+          state.page = n; render(); scrollToGrid();
+        });
       } else {
         pagerEl.style.display = "none";
       }
