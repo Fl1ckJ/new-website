@@ -27,7 +27,7 @@
     ["Onshore pipelines", "onshore"],
     ["Reeled pipelines", "reeled"],
     ["Flexible pipelines &amp; Umbilicals", "flex"],
-    ["Bundle pipelines", "bundle"],
+    //["Bundle pipelines", "bundle"],//
     ["Fitting &amp; Flanges", "fittings"]
   ];
   function ddLink(item) { return '<a class="dd-link" href="solution-' + item[1] + '">' + item[0] + "</a>"; }
