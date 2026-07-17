@@ -16,7 +16,7 @@
   var featuredPost = posts[0] || null;
   var state = { cat: "All", page: 1 };
 
-  function go(p) { location.href = "/post?slug=" + encodeURIComponent(p.slug); }
+  function go(p) { location.href = "post?slug=" + encodeURIComponent(p.slug); }
   function byline(p) {
     var sub = [p.role, B.formatDate(p.date)].filter(Boolean).join(" · ");
     return '<div class="byline"><span class="av">' + B.esc(B.initials(p.author || "ST")) + '</span>' +

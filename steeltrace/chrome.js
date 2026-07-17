@@ -17,7 +17,7 @@
   function crumbHTML(spec) {
     var sep = '<span class="sep">/</span>';
     var segs = spec.split("|");
-    var out = ['<a href="/">Home</a>'];
+    var out = ['<a href=".">Home</a>'];
     for (var i = 0; i < segs.length; i++) {
       var m = segs[i].split(">>");
       var label = m[0].replace(/^\s+|\s+$/g, "");
@@ -58,11 +58,11 @@
     return '' +
       '<div class="cc-card" role="dialog" aria-modal="false" aria-labelledby="cc-title">' +
         '<h4 id="cc-title">Cookies</h4>' +
-        '<p>We use cookies to improve the security of our website, identify areas for enhancements, and better help our customers. See our <a href="/privacy-policy#cookies">Privacy Policy</a> for details.</p>' +
+        '<p>We use cookies to improve the security of our website, identify areas for enhancements, and better help our customers. See our <a href="privacy-policy#cookies">Privacy Policy</a> for details.</p>' +
         '<p>You can choose to accept all cookies, or manage cookies.</p>' +
         '<div class="cc-manage" hidden>' +
           '<div class="cc-row"><label><input type="checkbox" checked disabled /> <b>Required / Functional Cookies</b> <span class="cc-always">(Always Active)</span></label><p>These cookies allow us to record your privacy choices, log when you have dismissed our automated newsletter popup, and help ensure security on our various on-site forms.</p></div>' +
-          '<div class="cc-row"><label><input type="checkbox" class="cc-analytics" checked /> <b>Analytical / Performance Cookies</b></label><p>These cookies allow us to analyse the usage of our site, so that we can review and improve on the user experience of the site. They also allow us to engage with potential customers who submit forms on this site in a proactive and relevant fashion. <a href="/privacy-policy#cookies">Learn More</a></p></div>' +
+          '<div class="cc-row"><label><input type="checkbox" class="cc-analytics" checked /> <b>Analytical / Performance Cookies</b></label><p>These cookies allow us to analyse the usage of our site, so that we can review and improve on the user experience of the site. They also allow us to engage with potential customers who submit forms on this site in a proactive and relevant fashion. <a href="privacy-policy#cookies">Learn More</a></p></div>' +
           '<div class="cc-row"><label><b>Marketing Cookies</b></label><p>We do not use marketing cookies.</p></div>' +
         '</div>' +
         '<div class="cc-actions">' +

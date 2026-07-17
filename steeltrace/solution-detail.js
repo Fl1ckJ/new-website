@@ -97,7 +97,7 @@
     }
   };
   var sol = S.byId(window.STEELTRACE_SEG || param("seg")) || S.all[0];
-  if (!sol) { el.innerHTML = '<div style="padding:80px 0;text-align:center"><h1 class="h1">Solution not found</h1><p style="margin-top:20px"><a class="btn btn-primary" href="/">← Home</a></p></div>'; return; }
+  if (!sol) { el.innerHTML = '<div style="padding:80px 0;text-align:center"><h1 class="h1">Solution not found</h1><p style="margin-top:20px"><a class="btn btn-primary" href=".">← Home</a></p></div>'; return; }
 
   document.title = sol.name + ": SteelTrace Solutions";
   var groupLabel = sol.group === "supply" ? "Supply chain" : "By role";
@@ -465,7 +465,7 @@
   function siblings() {
     var sibs = S.all.filter(function (x) { return x.group === sol.group && x.id !== sol.id; });
     return '<div class="sib-grid">' + sibs.map(function (x) {
-      return '<button class="sib" type="button" onclick="location.href=\'/solution-' + x.id + '\'"><span class="c">' + e(x.code) + '</span><b>' + e(x.name) + '</b></button>';
+      return '<button class="sib" type="button" onclick="location.href=\'solution-' + x.id + '\'"><span class="c">' + e(x.code) + '</span><b>' + e(x.name) + '</b></button>';
     }).join("") + '</div>';
   }
 
@@ -479,7 +479,7 @@
         '<div class="tz-body">' +
           '<div class="tz-copy">' +
             '<p class="lead">A convincing fake certificate now takes minutes. SteelTrace makes each record verifiable at its source and tamper-proof ever after, so you are trusting proof, not paper.</p>' +
-            '<div class="row"><a class="btn btn-ghost" href="/trust">How SteelTrace proves a record <span class="ar">→</span></a></div>' +
+            '<div class="row"><a class="btn btn-ghost" href="trust">How SteelTrace proves a record <span class="ar">→</span></a></div>' +
           '</div>' +
           '<div class="tz-viz" aria-hidden="true">' +
             '<svg class="tz-seal" viewBox="0 0 150 150">' +
@@ -507,7 +507,7 @@
         '<div class="tz-body">' +
           '<div class="tz-copy">' +
             '<p class="lead">From capture at the point of work to verified handover, explore the platform behind Smart Manufacturing Records.</p>' +
-            '<div class="row"><a class="btn btn-ghost" href="/product">Explore the product <span class="ar">→</span></a></div>' +
+            '<div class="row"><a class="btn btn-ghost" href="product">Explore the product <span class="ar">→</span></a></div>' +
           '</div>' +
           '<div class="tz-viz" aria-hidden="true">' +
             '<div class="tz-prodart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 4.5-9 4.5-9-4.5L12 3Z"/><path d="m3 12 9 4.5 9-4.5"/><path d="m3 16.5 9 4.5 9-4.5"/></svg></div>' +
@@ -559,12 +559,12 @@
     (sol.noCta ? '' :
     '<div class="d-cta">' +
       '<span class="t">See SteelTrace for ' + e(sol.name) + '.</span>' +
-      '<div class="row"><a class="btn btn-primary" href="/demo">Book a demo <span class="ar">→</span></a><a class="btn btn-ghost" href="/how-it-works">How it works</a></div>' +
+      '<div class="row"><a class="btn btn-primary" href="demo">Book a demo <span class="ar">→</span></a><a class="btn btn-ghost" href="how-it-works">How it works</a></div>' +
     '</div>') +
 
     teasers;
 
-  (function(){ var pg = el.closest ? el.closest('.page') : el.parentNode; if(pg && !pg.querySelector('.crumbs')){ var n=document.createElement('nav'); n.className='crumbs'; n.setAttribute('aria-label','Breadcrumb'); n.innerHTML='<a href="/">Home</a><span class="sep">/</span><span class="cur">Solutions</span><span class="sep">/</span><span class="cur">'+e(sol.name)+'</span>'; pg.insertBefore(n, pg.firstChild); } })();
+  (function(){ var pg = el.closest ? el.closest('.page') : el.parentNode; if(pg && !pg.querySelector('.crumbs')){ var n=document.createElement('nav'); n.className='crumbs'; n.setAttribute('aria-label','Breadcrumb'); n.innerHTML='<a href=".">Home</a><span class="sep">/</span><span class="cur">Solutions</span><span class="sep">/</span><span class="cur">'+e(sol.name)+'</span>'; pg.insertBefore(n, pg.firstChild); } })();
   window.scrollTo(0, 0);
 
   var heroEl = el.querySelector(".d-hero");

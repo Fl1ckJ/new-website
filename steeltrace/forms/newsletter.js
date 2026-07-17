@@ -17,7 +17,7 @@
           '<input type="hidden" name="mauticform[first_name]" value="">' +
           '<input type="hidden" name="mauticform[last_name]" value="">' +
           '<input class="nl-input" type="email" name="mauticform[email]" placeholder="Work email" required aria-label="Work email" />' +
-          '<label class="nl-consent"><input type="checkbox" class="nl-consent-box" /> <span>I consent to SteelTrace processing my data as per the <a href="/privacy-policy" target="_blank" rel="noopener">privacy statement</a>.</span></label>' +
+          '<label class="nl-consent"><input type="checkbox" class="nl-consent-box" /> <span>I consent to SteelTrace processing my data as per the <a href="privacy-policy" target="_blank" rel="noopener">privacy statement</a>.</span></label>' +
           '<div class="nl-hcap" data-hcap></div>' +
           '<span class="nl-err" data-err></span>' +
           '<input type="hidden" name="mauticform[formId]" value="13">' +

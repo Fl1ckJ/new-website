@@ -372,8 +372,8 @@
       <h1>Shortening project timelines with <em>agentic AI.</em></h1>
       <p class="lead">Data collection and final documentation handover take months. SteelTrace makes it real time and automated, <strong>speeding up your project execution</strong>.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="/demo" style="background:#F5822B;box-shadow:0 12px 30px -14px rgba(245,130,43,.7);color:#fff">Book a demo <span class="ar">→</span></a>
-        <a class="btn btn-ghost" href="/product">Explore the product</a>
+        <a class="btn btn-primary" href="demo" style="background:#F5822B;box-shadow:0 12px 30px -14px rgba(245,130,43,.7);color:#fff">Book a demo <span class="ar">→</span></a>
+        <a class="btn btn-ghost" href="product">Explore the product</a>
       </div>
       <div class="hero-triad">
         <div class="triad-item"><span class="triad-num"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span><div><b>Collect</b> <span>at the source</span></div></div>
@@ -721,7 +721,7 @@
   </div>
 
   <div class="reveal" style="display:flex;justify-content:center;margin-top:64px">
-    <a class="btn btn-primary" href="/product">Explore the product <span class="ar">→</span></a>
+    <a class="btn btn-primary" href="product">Explore the product <span class="ar">→</span></a>
   </div>
 </section>
 
@@ -836,7 +836,7 @@
       </div>
     </div>
     <div class="gs-cta reveal" style="--rd:.3s">
-      <a class="gs-btn" href="/demo">Book a demo <span class="ar">→</span></a>
+      <a class="gs-btn" href="demo">Book a demo <span class="ar">→</span></a>
       <span class="gs-note">No commitment, see it on one of your own projects.</span>
     </div>
   </div>
@@ -916,7 +916,7 @@
       <div class="tz-copy">
         <p class="lead">A convincing fake certificate now takes minutes. SteelTrace makes each record verifiable at its source and tamper-proof ever after, so you are trusting proof, not paper.</p>
         <div class="row">
-          <a class="btn btn-ghost" href="/trust">How SteelTrace proves a record <span class="ar">→</span></a>
+          <a class="btn btn-ghost" href="trust">How SteelTrace proves a record <span class="ar">→</span></a>
         </div>
       </div>
       <div class="tz-viz" aria-hidden="true">
@@ -949,8 +949,8 @@
     <h2 class="h2" style="margin-top:16px">Stop chasing documents. Start trusting your data.</h2>
     <p class="lead">See a digital ITP, a live inspection workflow and a sample Manufacturing Record Book, built around your project.</p>
     <div class="row">
-      <a class="btn btn-primary" href="/demo" style="background:#F5822B;box-shadow:0 12px 30px -14px rgba(245,130,43,.7);color:#0a0f1a">Book a demo <span class="ar">→</span></a>
-      <a class="btn btn-ghost" href="/product">Explore the product</a>
+      <a class="btn btn-primary" href="demo" style="background:#F5822B;box-shadow:0 12px 30px -14px rgba(245,130,43,.7);color:#0a0f1a">Book a demo <span class="ar">→</span></a>
+      <a class="btn btn-ghost" href="product">Explore the product</a>
     </div>
   </div>
 </section>
@@ -972,7 +972,7 @@
     var buildCard = function (s) {
       var a = document.createElement('a');
       a.className = 'sol-card2';
-      a.href = '/solution-' + s.id;
+      a.href = 'solution-' + s.id;
       var imgMap = { op: "url('uploads/pasted-1781179942603-0.png')", epc: "url('uploads/pasted-1781180301349-0.png')", wld: "url('uploads/pasted-1781180335017-0.png')", mfg: "url('uploads/pasted-1781180475297-0.png')", ndt: "url('uploads/pasted-1781180529869-0.png')" };
       var bg = imgMap[s.id] || s.gradient;
       var prevItems = (s.value || []).slice(0, 2).map(function (v) {
@@ -1081,7 +1081,7 @@
       var art = STAKE_ART[s.id];
       var a = document.createElement('a');
       a.className = 'stake-card';
-      a.href = '/solution-' + s.id;
+      a.href = 'solution-' + s.id;
       if (art) a.style.background = art.grad;
       var prevItems = (STAKE_ITEMS[s.id] || (s.value || []).slice(0, 2).map(function (v) { return v.t; })).map(function (t) {
         return '<li>' + SOL.esc(t) + '</li>';
