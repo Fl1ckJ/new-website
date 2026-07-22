@@ -1,4 +1,4 @@
-name: Notion → Blog sync
+name: Notion → site sync
 
 on:
   workflow_dispatch:        # manual "Run workflow" button in the Actions tab
@@ -27,11 +27,18 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Sync from Notion
+      - name: Sync blog from Notion
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
         run: node sync-notion.mjs
+
+      - name: Sync job offers from Notion
+        continue-on-error: true   # no-op until the NOTION_JOBS_DATABASE_ID secret is set
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_JOBS_DATABASE_ID: ${{ secrets.NOTION_JOBS_DATABASE_ID }}
+        run: node sync-notion-jobs.mjs
 
       - name: Commit and push if changed
         run: |
@@ -41,6 +48,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes — nothing to publish."
           else
-            git commit -m "chore: sync blog from Notion"
+            git commit -m "chore: sync content from Notion"
             git push
           fi

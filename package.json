@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "build": "node build-blog.mjs",
-    "sync": "node sync-notion.mjs"
+    "build:jobs": "node build-jobs.mjs",
+    "sync": "node sync-notion.mjs",
+    "sync:jobs": "node sync-notion-jobs.mjs"
   },
   "dependencies": {
     "@notionhq/client": "^2.2.15",

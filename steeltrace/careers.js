@@ -59,20 +59,21 @@
     var blocks = String(text || "").replace(/\r/g, "").trim().split(/\n-{3,}\n/);
     blocks.forEach(function (block, idx) {
       var lines = block.trim().split("\n");
-      var rl = { id: "r" + idx, title: "", team: "", loc: "", type: "Full-time", summary: "", body: "", cover: idx, img: "" };
+      var rl = { id: "r" + idx, title: "", team: "", loc: "", type: "Full-time", summary: "", body: "", cover: idx, img: "", link: "" };
       var bodyLines = [], sumLines = [];
       lines.forEach(function (ln) {
         var t = ln.trim();
         var mt = t.match(/^##\s+(.*)/);
         if (mt) { rl.title = mt[1].trim(); return; }
-        var meta = t.match(/^(team|location|type|cover|image)\s*:\s*(.*)$/i);
+        var meta = t.match(/^(team|location|type|cover|image|preview|apply|link|url)\s*:\s*(.*)$/i);
         if (meta) {
           var k = meta[1].toLowerCase(), v = meta[2].trim();
           if (k === "team") rl.team = v;
           else if (k === "location") rl.loc = v;
           else if (k === "type") rl.type = v;
           else if (k === "cover") rl.cover = parseInt(v, 10) || 0;
-          else if (k === "image") rl.img = v;
+          else if (k === "image" || k === "preview") rl.img = v;
+          else if (k === "apply" || k === "link" || k === "url") rl.link = v;
           return;
         }
         var bq = ln.match(/^\s*>\s?(.*)$/);
@@ -90,7 +91,12 @@
     return out;
   }
 
-  var roles = src ? parseRoles(src.textContent) : [];
+  // Source of truth: window.STEELTRACE_JOBS (generated from /jobs by build-jobs.mjs
+  // or synced from Notion by sync-notion-jobs.mjs). Falls back to the inline
+  // #rolesMd markdown block if the generated file is missing/empty.
+  var roles = Array.isArray(window.STEELTRACE_JOBS)
+    ? window.STEELTRACE_JOBS
+    : (src ? parseRoles(src.textContent) : []);
 
   /* ---------- render grid ---------- */
   function render() {
@@ -131,7 +137,9 @@
         '<div class="m-meta"><span>' + esc(rl.type || "Full-time") + '</span><span>' + esc(rl.team || "Team") + '</span><span>' + esc(rl.loc || "Remote") + '</span></div>' +
         '<div class="m-desc">' + (mdToHtml(rl.body) || '<p>' + esc(rl.summary || "") + '</p>') + '</div>' +
         '<div class="m-cta">' +
-          '<a class="btn btn-primary" href="#apply" data-apply-role="' + esc(rl.title) + '">Apply for this role <span class="ar">→</span></a>' +
+          (rl.link
+            ? '<a class="btn btn-primary" href="' + esc(rl.link) + '" target="_blank" rel="noopener">Apply for this role <span class="ar">→</span></a>'
+            : '<a class="btn btn-primary" href="#apply" data-apply-role="' + esc(rl.title) + '">Apply for this role <span class="ar">→</span></a>') +
           '<button class="btn btn-ghost" data-close type="button">Close</button>' +
         '</div>' +
       '</div>';
