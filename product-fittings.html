@@ -984,7 +984,8 @@
   var tip = document.getElementById('tallyTip');
   if (!tally || !tip) return;
 
-  var ROWS = 6, PER_ROW = 9;
+  var narrow = window.matchMedia("(max-width: 760px)").matches;
+  var ROWS = 6, PER_ROW = narrow ? 4 : 9;
   var PIPE_TYPES = ['Seamless Pipe', 'Seamless Pipe', 'Seamless Pipe', 'Welded Pipe', 'Induction Bend', 'Clad Pipe'];
   var TOTAL_PTS = 2179;
 
