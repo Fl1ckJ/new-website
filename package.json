@@ -5,6 +5,9 @@
   "scripts": {
     "build": "node build-blog.mjs",
     "build:jobs": "node build-jobs.mjs",
+    "build:blocks": "node build-blocks.mjs",
+    "check:blocks": "node build-blocks.mjs --check",
+    "watch:blocks": "node build-blocks.mjs --watch",
     "sync": "node sync-notion.mjs",
     "sync:jobs": "node sync-notion-jobs.mjs"
   },

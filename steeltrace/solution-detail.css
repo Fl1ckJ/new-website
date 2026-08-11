@@ -39,8 +39,8 @@
 
 /* ===== Stakeholder hero backdrops ===== */
 /* soft fade at the bottom so the hero blends into the page grid — no hard seam */
-  .d-hero.role-hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 160px; z-index: 0; pointer-events: none;
-    background: linear-gradient(180deg, transparent, var(--bg)); }
+  .d-hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 240px; z-index: 0; pointer-events: none;
+    background: linear-gradient(180deg, transparent, var(--bg) 92%); }
   .d-hero.role-hero .d-hero-art { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
   .d-hero.role-hero .d-hero-art svg { display: block; width: 100%; height: 100%; }
   .d-hero.role-hero .hbody { position: relative; z-index: 1; }

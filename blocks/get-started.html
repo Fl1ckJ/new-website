@@ -1,0 +1,71 @@
+<section class="page section" style="padding-top:0">
+  <style>
+    .gs-band { position: relative; border-radius: 26px; padding: 56px clamp(26px, 5vw, 60px) 60px;
+      --b: #eef2f9; --ink: #0d1424; --ink2: #41527a; --card: #ffffff; --cardln: #dbe3f0;
+      --acc: #2f6fb0; --accbg: #e6eef9; --accln: #cddcf1;
+      background: var(--b); box-shadow: 0 40px 90px -50px rgba(0,0,0,.7); overflow: hidden; }
+    [data-theme="light"] .gs-band { --b: #0b1220; --ink: #f1f5fc; --ink2: #b9c6e0; --card: #16213a;
+      --cardln: #2a3a5c; --acc: #7cc0f0; --accbg: rgba(124,192,240,.14); --accln: rgba(124,192,240,.32);
+      box-shadow: 0 40px 90px -50px rgba(0,0,0,.5); }
+    .gs-band::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--acc) 12%, transparent), transparent 60%); }
+    .gs-band > * { position: relative; }
+    .gs-band .kicker { color: var(--acc); }
+    .gs-band .kicker::before { background: var(--acc); }
+    .gs-band .h2 { color: var(--ink); }
+    .gs-band .lead { color: var(--ink2); }
+    {{^standalone}}
+    .gs-band .pillars { margin-top: 40px; }
+    .gs-band .pillar { background: var(--card); border: 1px solid var(--cardln); border-radius: var(--r-lg);
+      box-shadow: 0 18px 40px -28px rgba(13,20,36,.55); backdrop-filter: none; }
+    .gs-band .pillar .step { color: var(--acc); }
+    .gs-band .pillar .ic { color: var(--acc); background: var(--accbg); border-color: var(--accln); }
+    .gs-band .pillar h3 { color: var(--ink); }
+    .gs-band .pillar p { color: var(--ink2); }
+    {{/standalone}}
+    {{#standalone}}
+    .gs-band .pillars { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .gs-band .pillar { padding: 28px; position: relative; overflow: hidden; display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--cardln); border-radius: var(--r-lg);
+      box-shadow: 0 18px 40px -28px rgba(13,20,36,.55); backdrop-filter: none; }
+    .gs-band .pillar .step { font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--acc); margin-top: 16px; }
+    .gs-band .pillar .ic { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; color: var(--acc); background: var(--accbg); border: 1px solid var(--accln); }
+    .gs-band .pillar h3 { font-size: 20px; font-weight: 700; letter-spacing: -.02em; margin-top: 6px; color: var(--ink); }
+    .gs-band .pillar p { font-size: 14px; line-height: 1.6; margin-top: 10px; color: var(--ink2); }
+    @media (max-width: 1000px) { .gs-band .pillars { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 620px) { .gs-band .pillars { grid-template-columns: 1fr; } }
+    {{/standalone}}
+    .gs-cta { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 40px; }
+    .gs-cta .gs-btn { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-display); font-size: 15px; font-weight: 700; letter-spacing: -.01em; color: #ffffff; background: #ff7a33; text-decoration: none; padding: 14px 24px; border-radius: var(--r-sm); box-shadow: 0 14px 32px -14px color-mix(in srgb, #ff7a33 70%, transparent); transition: transform .35s var(--spring), box-shadow .35s; }
+    .gs-cta .gs-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 42px -12px color-mix(in srgb, #ff7a33 70%, transparent); }
+    .gs-cta .gs-btn .ar { transition: transform .35s var(--ease); }
+    .gs-cta .gs-btn:hover .ar { transform: translateX(4px); }
+    .gs-cta .gs-note { font-size: 14px; color: var(--ink2); }
+  </style>
+  <div class="gs-band reveal">
+    <div class="sec-head">
+      {{#kicker}}
+      <span class="kicker">How to get started</span>
+      {{/kicker}}
+      <h2 class="h2">From first call to full rollout in three steps.</h2>
+      <p class="lead">A guided path that proves the value on your own data before you scale it across every project and supplier.</p>
+    </div>
+    <div class="pillars">
+      <!-- st:include pillar
+           delay="0s" step="01" icon="calendar"
+           title="Book a demo"
+           body="We walk your team through a digital ITP, a live inspection workflow and a sample Manufacturing Record Book, mapped to one of your real projects." -->
+      <!-- st:include pillar
+           delay=".1s" step="02" icon="chart"
+           title="Pilot &amp; measure"
+           body="Run a scoped pilot on a single order or supplier. We baseline your current effort and track the gains: fewer NCRs, less QA/QC time, faster delivery." -->
+      <!-- st:include pillar
+           delay=".2s" step="03" icon="rocket"
+           title="Deploy"
+           body="Roll out across all projects and automate document hand over throughout your supply chain and shorten your project timelines." -->
+    </div>
+    <div class="gs-cta reveal" style="--rd:.3s">
+      <a class="gs-btn" href="demo">Book a demo <span class="ar">→</span></a>
+      <span class="gs-note">No commitment: see it on one of your own projects.</span>
+    </div>
+  </div>
+</section>
