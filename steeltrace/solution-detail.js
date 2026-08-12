@@ -504,18 +504,11 @@
           '<span class="kicker">The Product</span>' +
           '<h2 class="h2">See how SteelTrace turns manufacturing data into a <em>record you can prove.</em></h2>' +
         '</div>' +
-        '<div class="tz-body">' +
-          '<div class="tz-copy">' +
-            '<p class="lead">From capture at the point of work to verified handover, explore the platform behind Smart Manufacturing Records.</p>' +
-            '<div class="row"><a class="btn btn-ghost" href="product">Explore the product <span class="ar">→</span></a></div>' +
-          '</div>' +
-          '<div class="tz-viz" aria-hidden="true">' +
-            '<div class="tz-prodart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 4.5-9 4.5-9-4.5L12 3Z"/><path d="m3 12 9 4.5 9-4.5"/><path d="m3 16.5 9 4.5 9-4.5"/></svg></div>' +
-            '<div class="tz-chips">' +
-              '<div class="tz-chip rec"><span class="lab">Capture</span><span class="txt">At the point of work</span><span class="chk"></span></div>' +
-              '<div class="tz-chip rec"><span class="lab">Verify</span><span class="txt">Against your specs</span><span class="chk"></span></div>' +
-              '<div class="tz-chip rec"><span class="lab">Handover</span><span class="txt">Verified, days not months</span><span class="chk"></span></div>' +
-            '</div>' +
+        '<div class="tz-actions">' +
+          '<p class="lead">From capture at the point of work to verified handover, explore the platform behind Smart Manufacturing Records.</p>' +
+          '<div class="row">' +
+            '<a class="btn btn-primary" href="demo">Book a demo <span class="ar">→</span></a>' +
+            '<a class="btn btn-ghost" href="product">Explore the product <span class="ar">→</span></a>' +
           '</div>' +
         '</div>' +
       '</div>' +
