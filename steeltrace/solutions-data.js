@@ -25,7 +25,7 @@
   var SOLUTIONS = [
     /* ---------- supply chain ---------- */
     {
-      id: "op", code: "OP", group: "supply", name: "Operators", img: "op.png", noCode: true, noBenefits: true, noFeatures: true, noCta: true,
+      id: "op", code: "OP", group: "supply", name: "Operators", img: "op.jpg", noCode: true, noBenefits: true, noFeatures: true, noCta: true,
       sub: "",
       blurb: "Asset owners who build and operate the infrastructure, and define the rules the supply chain adopts.",
       who: "Speed of major capital projects by enabling automated compliance and digital handover. Enable trust with blockchain based traceability.",
@@ -118,7 +118,7 @@
       }
     },
     {
-      id: "epc", code: "EPC", group: "supply", name: "EPC Contractors", noCode: true, noBenefits: true, noFeatures: true, noCta: true,
+      id: "epc", code: "EPC", group: "supply", name: "EPC Contractors", img: "epc.jpg", noCode: true, noBenefits: true, noFeatures: true, noCta: true,
       sub: "",
       blurb: "Contractors coordinating construction: from fabrication yards to offshore installation vessels.",
       who: "Engineering, Procurement and Construction contractors coordinating pipeline construction: from spoolbases and fabrication yards to offshore installation vessels and third-party inspectors.",
