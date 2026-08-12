@@ -523,7 +523,7 @@
             ],
             topics: [
               { t: "Earlier first oil, earlier revenue.",
-                s: "The record is built and verified during the campaign, so handover is near-instant instead of months. Subsea 7 estimated ~6 weeks earlier startup on a current Chevron project. Schedule is the single biggest business-case lever on a megaproject." },
+                s: "The record is built and verified during the campaign, so handover is near-instant instead of months. EPC’s estimate ~6 weeks earlier startup on a current Chevron project. Schedule is the single biggest business-case lever on a megaproject." },
               { t: "Keep defects off the critical path.",
                 s: "Early non-conformity detection avoids delay, rework and surplus contingency (~20% of CAPEX). Rough delay-avoidance on one major project: ~$400M-$1.2B, plus freed contingency and up to ~60% fewer inspection hours." },
               { t: "Lower compliance and litigation exposure; higher asset value.",
