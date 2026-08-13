@@ -172,20 +172,20 @@
   .life-track .ln { flex: 1; height: 1px; background: linear-gradient(90deg, var(--accent-line), var(--line)); }
 
   /* ===== STORY / EDITORIAL ===== */
-  .story { max-width: 72ch; margin: 0 auto; }
+  .story { max-width: 72ch; margin: 0; }
   .story .eyebrow { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); }
   .story h1 { font-size: clamp(34px, 5vw, 56px); line-height: 1.05; letter-spacing: -.025em; margin: 20px 0 0; max-width: 18ch; }
   .story .dek { font-size: 19px; line-height: 1.6; color: var(--txt-2); margin-top: 26px; max-width: 60ch; }
-  .story-rule { max-width: 72ch; margin: 52px auto 0; height: 1px; background: var(--line); }
+  .story-rule { max-width: 72ch; margin: 52px 0 0; height: 1px; background: var(--line); }
   .story p.body { font-size: 18px; line-height: 1.75; color: var(--txt-1); margin: 26px 0 0; letter-spacing: -.003em; text-wrap: pretty; }
   .story p.body:first-of-type { margin-top: 38px; }
   .story p.body.lead-para { font-size: 20px; color: var(--txt-1); }
   .story p.body .drop { float: left; font-family: var(--font-mono); font-weight: 600; font-size: 70px; line-height: .82; padding: 6px 14px 0 0; color: var(--accent); }
-  .chapter { max-width: 72ch; margin: 0 auto; padding-top: 72px; }
+  .chapter { max-width: 72ch; margin: 0; padding-top: 72px; }
   .chapter .ch-k { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); }
   .chapter h2 { font-size: clamp(28px, 3.4vw, 40px); line-height: 1.1; letter-spacing: -.02em; margin: 14px 0 0; }
   .chapter p.body { font-size: 20px; line-height: 1.72; color: var(--txt-1); margin-top: 24px; text-wrap: pretty; letter-spacing: -.004em; }
-  .story-figure { max-width: 72ch; margin: 48px auto 0; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line-2); box-shadow: var(--shadow); aspect-ratio: 16/9; }
+  .story-figure { max-width: 72ch; margin: 48px 0 0; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line-2); box-shadow: var(--shadow); aspect-ratio: 16/9; }
   .story-figure img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(.95) brightness(.86); }
   .story-figure figcaption { display: none; }
   .story figure.story-figure { margin-left: auto; margin-right: auto; }
@@ -218,7 +218,7 @@
 
   <!-- ===== INTRODUCTION (STORY) ===== -->
   <section class="story-hero">
-    <div class="bg" style="background-image:url('steeltrace/img/ndt.png')"></div>
+    <div class="bg" style="background-image:url('steeltrace/img/maastricht.jpg')"></div>
     <div class="hbody">
       <div class="hinner">
         <span class="eyebrow reveal">Introduction to SteelTrace</span>
@@ -274,8 +274,10 @@
     <p class="body">Our vision is a world where manufacturing and asset data flows seamlessly across the supply chain, enabling quality to be assured by design rather than verified after the fact. We envision an interconnected ecosystem where trusted, structured, and traceable data powers safer operations, smarter decisions, Digital Twins, AI-driven insights, and full asset lifecycle transparency from cradle to grave.</p>
   </section>
 
+  <div class="story-rule"></div>
+
   <!-- TEAM -->
-  <section class="section" style="padding-top:0">
+  <section class="section">
     <span class="kicker">Team</span>
     <h2 class="h2 team-head">Built by people who've lived this problem for decades</h2>
 

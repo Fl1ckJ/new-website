@@ -210,7 +210,7 @@
       id: "wld", code: "WLD", group: "supply", name: "Welding, NDT & Coating Contractors", img: "wld.png", noCode: true, noBenefits: true, noFeatures: true, noCta: true,
       sub: "",
       blurb: "Welding contractors and fabricators running internal welding-data and qualification workflows.",
-      who: "Pipeline welding contractors and fabricators running internal welding data platforms, automated inspection systems and welder qualification workflows.",
+      who: "Welding parameters and inspection results captured automatically into the Smart Manufacturing Record, linked to upstream material and downstream inspection data, and exchanged in a standart format with every EPC and operator - without reformatting reports per client.",
       needs: [
         "Standardized data exchange with EPCs & operators",
         "Less manual reporting and documentation effort",
@@ -523,7 +523,7 @@
             ],
             topics: [
               { t: "Earlier first oil, earlier revenue.",
-                s: "The record is built and verified during the campaign, so handover is near-instant instead of months. EPC’s estimate ~6 weeks earlier startup on a current Chevron project. Schedule is the single biggest business-case lever on a megaproject." },
+                s: "The record is built and verified during the campaign, so handover is near-instant instead of months. EPC’s estimate ~6 weeks earlier startup on pipeline installation projects. Schedule is the single biggest business-case lever on a megaproject." },
               { t: "Keep defects off the critical path.",
                 s: "Early non-conformity detection avoids delay, rework and surplus contingency (~20% of CAPEX). Rough delay-avoidance on one major project: ~$400M-$1.2B, plus freed contingency and up to ~60% fewer inspection hours." },
               { t: "Lower compliance and litigation exposure; higher asset value.",
@@ -534,7 +534,7 @@
             label: "02",
             title: "Digitisation",
             word: "Faster",
-            lede: "Respond quicker: automate the manual work and build the data foundation your digital ambitions depend on.",
+            lede: "Do more with Fewer resources: Data handover from projects to operations goes much quicker.",
             topics: [
               { t: "Do more with fewer resources.",
                 s: "Automated verification of manufacturing and inspection data cuts manual QA/QC and documentation workload across the organisation." },
@@ -564,8 +564,8 @@
     {
       id: "qaqc", code: "QA", group: "role", name: "QA / QC", noCode: true, noBenefits: true, noFeatures: true, noCta: true,
       sub: "",
-      blurb: "QA/QC managers, project engineers, supplier-quality leads and inspection coordinators.",
-      who: "QA/QC managers, project QA/QC engineers, supplier quality leads and inspection coordinators. The primary daily users of SteelTrace.",
+      blurb: "Still spending your day reviewing documents and chasing suppliers? SteelTrace automates verification, flags non-conformities as they happen and gives you real-time visibility across every supplier, inspection and manufacturing record.",
+      who: "Still spending your day reviewing documents and chasing suppliers? SteelTrace automates verification, flags non-conformities as they happen and gives you real-time visibility across every supplier, inspection and manufacturing record.",
       needs: [
         "Verify supplier data against QCP / ITP requirements",
         "Catch NCRs early, before they impact installation",
@@ -658,7 +658,7 @@
       id: "pm", code: "PM", group: "role", name: "Project Management", noCode: true, noBenefits: true, noFeatures: true, noCta: true,
       sub: "",
       blurb: "Project managers, engineering leads and execution directors. SteelTrace sits inside project CAPEX.",
-      who: "Project managers, project engineering leads and project execution directors at operators and EPCs. Typically the budget owner. SteelTrace sits inside project CAPEX.",
+      who: "Do you know exactly what you’re operating?SteelTrace gives you a verified record of what was actually installed, so integrity, inspection and fitness-for-service decisions are based on real material data, with full traceability throughout the life of the asset.",
       needs: [
         "On-time, on-budget delivery",
         "Predictable approval cycles across suppliers",

@@ -39,7 +39,7 @@
       code: "WLD",
       name: "Welding Contractors",
       short: "Welding",
-      who: "Pipeline welding contractors and fabricators running internal welding data platforms, automated inspection systems and welder qualification workflows.",
+      who: "Welding parameters and inspection results captured automatically into the Smart Manufacturing Record, linked to upstream material and downstream inspection data, and exchanged in a standart format with every EPC and operator - without reformatting reports per client.",
       stage: "Fabricate",
       needs: [
         "Standardized data exchange with EPCs & operators",
@@ -242,7 +242,7 @@
       name: "Project Management",
       short: "Project Management",
       role: "Budget owner",
-      who: "Project managers, project engineering leads and project execution directors at operators and EPCs. Typically the budget owner. SteelTrace sits inside project CAPEX.",
+      who: "Do you know exactly what you’re operating? SteelTrace gives you a verified record of what was actually installed, so integrity, inspection and fitness-for-service decisions are based on real material data, with full traceability throughout the life of the asset.",
       needs: [
         "On-time, on-budget delivery",
         "Predictable approval cycles across suppliers",

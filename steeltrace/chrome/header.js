@@ -17,7 +17,7 @@
   ];
   var ROLE = [
     ["Executive Leadership", "exec"],
-    ["QA / QC", "qaqc"],
+    ["QA / QC Management", "qaqc"],
     ["Project Management", "pm"],
     ["Operations &amp; Asset Integrity", "ops"],
     ["Digital Transformation", "dig"]
