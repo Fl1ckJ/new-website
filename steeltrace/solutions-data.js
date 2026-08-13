@@ -28,7 +28,7 @@
       id: "op", code: "OP", group: "supply", name: "Operators", img: "op.jpg", noCode: true, noBenefits: true, noFeatures: true, noCta: true,
       sub: "",
       blurb: "Asset owners who build and operate the infrastructure, and define the rules the supply chain adopts.",
-      who: "Speed of major capital projects by enabling automated compliance and digital handover. Enable trust with blockchain based traceability.",
+      who: "Accelerate major capital projects with real-time visibility and automated compliance across your supply chain. Take ownership of trusted manufacturing data from project execution through handover and the entire asset lifecycle.",
       needs: [
         "Confidence in supply-chain manufacturing quality",
         "Real-time visibility during construction, not after",
@@ -121,7 +121,7 @@
       id: "epc", code: "EPC", group: "supply", name: "EPC Contractors", img: "epc.jpg", noCode: true, noBenefits: true, noFeatures: true, noCta: true,
       sub: "",
       blurb: "Contractors coordinating construction: from fabrication yards to offshore installation vessels.",
-      who: "Engineering, Procurement and Construction contractors coordinating pipeline construction: from spoolbases and fabrication yards to offshore installation vessels and third-party inspectors.",
+      who: "Connect suppliers, subcontractors and inspectors in one digital quality workflow. Gain real-time control over compliance and production progress to reduce delays, rework and project delivery risk.",
       needs: [
         "On-time, on-budget project execution",
         "Efficient management of supplier documentation",
@@ -210,7 +210,7 @@
       id: "wld", code: "WLD", group: "supply", name: "Welding, NDT & Coating Contractors", img: "wld.png", noCode: true, noBenefits: true, noFeatures: true, noCta: true,
       sub: "",
       blurb: "Welding contractors and fabricators running internal welding-data and qualification workflows.",
-      who: "Welding parameters and inspection results captured automatically into the Smart Manufacturing Record, linked to upstream material and downstream inspection data, and exchanged in a standart format with every EPC and operator - without reformatting reports per client.",
+      who: "Capture welding, NDT and coating data directly from the systems you already use, connect it to upstream material and manufacturing records, and deliver verified data to every EPC and operator, without rebuilding reports for each customer.",
       needs: [
         "Standardized data exchange with EPCs & operators",
         "Less manual reporting and documentation effort",
@@ -299,7 +299,7 @@
       id: "mfg", code: "MFG", group: "supply", name: "Manufacturers & Material Suppliers", img: "mfg.png", noCode: true, noBenefits: true, noFeatures: true, noCta: true,
       sub: "",
       blurb: "Steel mills, pipe makers, coating and clad layers producing components and critical production data.",
-      who: "Steel mills, pipe manufacturers, coating companies, clad layers and other material suppliers that produce pipeline components & generate critical production data.",
+      who: "Turn the data your production already generates into trusted, standardized information for every customer. Automate quality records, accelerate product release and connect directly to the digital supply chain — without changing the systems you already use.",
       needs: [
         "Standardized digital data exchange with project stakeholders",
         "Less effort compiling MRBs and customer documentation",
@@ -328,7 +328,7 @@
         lens: true,
         lead: {
           line: ["^Unlock the value of your", "manufacturing data."],
-          body: "The data your production already generates is locked inside your systems and buried in manual reports that slow down release and payment. SteelTrace integrates with your existing production systems and connects your manufacturing data to the digital supply chain. Automatically generate Smart Manufacturing Records, cut manual reporting, and give EPCs and operators trusted, standardized data in real time."
+          body: "Your production systems already generate the data your customers need, but turning it into compliant quality records still requires significant manual effort. SteelTrace connects directly to your existing systems, structures and validates manufacturing data at the source, and makes it available across the supply chain in real time. Reduce reporting effort, accelerate product release and give every EPC and operator trusted data in a consistent digital format."
         },
         groups: [
           {
@@ -388,7 +388,7 @@
       id: "ndt", code: "NDT", group: "supply", name: "Testing & Inspection Companies", img: "ndt.png", noCode: true, noBenefits: true, noFeatures: true, noCta: true,
       sub: "",
       blurb: "NDT providers, AUT specialists and labs verifying materials, welds and coatings.",
-      who: "NDT service providers, AUT specialists, destructive & non-destructive testing labs and on-site inspection companies verifying materials, welds and coatings.",
+      who: "Turn inspection results into connected digital data that adds value across the entire supply chain. Reduce reporting effort, integrate results directly with material and manufacturing records, and deliver trusted data your customers can use immediately.",
       needs: [
         "Inspection results delivered as data, not just reports",
         "Integration with supplier & manufacturing records",
@@ -658,7 +658,7 @@
       id: "pm", code: "PM", group: "role", name: "Project Management", noCode: true, noBenefits: true, noFeatures: true, noCta: true,
       sub: "",
       blurb: "Project managers, engineering leads and execution directors. SteelTrace sits inside project CAPEX.",
-      who: "Do you know exactly what you’re operating?SteelTrace gives you a verified record of what was actually installed, so integrity, inspection and fitness-for-service decisions are based on real material data, with full traceability throughout the life of the asset.",
+      who: "Still chasing suppliers for status and discovering issues too late? SteelTrace gives you a verified view of project progress as it happens, exposing risks early, keeping quality issues off the critical path and building your handover record along the way.",
       needs: [
         "On-time, on-budget delivery",
         "Predictable approval cycles across suppliers",
@@ -751,7 +751,7 @@
       id: "ops", code: "OPS", group: "role", name: "Operations & Asset Integrity", noCode: true, noBenefits: true, noFeatures: true, noCta: true,
       sub: "",
       blurb: "Integrity, reliability and O&M leaders responsible for assets after handover.",
-      who: "Asset integrity engineers, reliability engineers, operations & maintenance leaders responsible for assets after handover. Long-term beneficiaries of SteelTrace data.",
+      who: "Do you know exactly what you’re operating? SteelTrace gives you a verified record of what was actually installed, so integrity, inspection and fitness-for-service decisions are based on real material data, with full traceability throughout the life of the asset.",
       needs: [
         "Reliable manufacturing history for every component",
         "Faster root-cause analysis on incidents",
@@ -832,7 +832,7 @@
       id: "dig", code: "DIG", group: "role", name: "Digital Transformation", noCode: true, noBenefits: true, noFeatures: true, noCta: true,
       sub: "",
       blurb: "Digital transformation leads, enterprise architecture and Digital Twin / data teams.",
-      who: "Digital transformation leads, IT / enterprise architecture, Digital Twin & data teams. Strategic sponsors who care about data foundations more than any one workflow.",
+      who: "Still building digital initiatives on data you can’t fully trust? SteelTrace turns fragmented manufacturing and quality records into verified, structured data in your own environment, creating a trusted foundation for digital twins, analytics and AI.",
       needs: [
         "Structured, AI-ready data from manufacturing & QA/QC",
         "Integration with ERP, CMMS, EDMS & Digital Twin platforms",

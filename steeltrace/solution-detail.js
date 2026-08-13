@@ -7,6 +7,22 @@
 
   function param(n) { return new URLSearchParams(location.search).get(n); }
 
+  /* Hero intro. Where `who` opens with a question, the question becomes its own
+     bold paragraph and the answer follows underneath. The copy is untouched — the
+     split is on the first "?", so it works whether the source separates the two
+     with a blank line, a space, or nothing at all. Entries without a question
+     keep the previous blank-line-into-paragraphs behaviour. */
+  function whoHTML(who) {
+    var t = e(who);
+    var i = t.indexOf("?");
+    var rest = i > -1 ? t.slice(i + 1).replace(/^\s+/, "") : "";
+    if (rest) {
+      return '<p class="who"><b>' + t.slice(0, i + 1) + "</b></p>" +
+             '<p class="who who-2">' + rest + "</p>";
+    }
+    return '<p class="who">' + t.replace(/\n\n+/g, '</p><p class="who who-2">') + "</p>";
+  }
+
   // ---- stakeholder hero backdrops (line-art motifs matching the home cards) ----
   var VB = 'viewBox="0 0 1440 480" preserveAspectRatio="xMidYMid slice" fill="none"';
   var ROLE_HERO = {
@@ -521,7 +537,7 @@
         (sol.noCode ? '' : '<div class="hmeta"><span class="hcode" style="background-image:' + sol.gradient + '">' + e(sol.code) + '</span><span class="glabel">' + e(groupLabel) + '</span></div>') +
         '<h1>' + e(sol.name) + '</h1>' +
         (sol.sub ? '<div class="sub">' + e(sol.sub) + '</div>' : '') +
-        '<p class="who">' + e(sol.who).replace(/\n\n+/g, '</p><p class="who who-2">') + '</p>' +
+        whoHTML(sol.who) +
       '</div>' +
     '</div>' +
 
