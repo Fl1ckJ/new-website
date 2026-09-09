@@ -4,10 +4,14 @@
 (function () {
   var KEY = "steeltrace-theme";
   function current() {
+    if (window.__stThemeLock) return window.__stThemeLock;
     try { return localStorage.getItem(KEY) === "light" ? "light" : "dark"; }
     catch (e) { return "dark"; }
   }
-  function apply(t) { document.documentElement.dataset.theme = t; }
+  function apply(t) {
+    if (window.__stThemeLock) t = window.__stThemeLock;
+    document.documentElement.dataset.theme = t;
+  }
   // initial (also set inline in <head> to avoid flash, but ensure here too)
   apply(current());
   function wire() {

@@ -115,6 +115,12 @@
     if (h && C.header) { h.innerHTML = C.header(h.getAttribute("data-page") || ""); mountCrumbs(h); }
     var f = document.querySelector("[data-site-footer]");
     if (f && C.footer) f.innerHTML = C.footer();
+    if (window.__stBrandLogoSrc) {
+      document.querySelectorAll(".brand-logo").forEach(function (el) {
+        el.removeAttribute("onerror");
+        el.src = window.__stBrandLogoSrc;
+      });
+    }
     var logo = document.querySelector(".topbar .brand-logo");
     if (logo && logo.complete && logo.naturalWidth === 0) window.__stBrand(logo);
     var flogo = document.querySelector(".site-footer .brand-logo");

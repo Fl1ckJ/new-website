@@ -1,0 +1,176 @@
+/* SteelTrace Design System theme layer — load AFTER site.css.
+   Remaps the site's variables onto the design-system tokens and
+   flattens the effects the guide removes on purpose. */
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root,:root[data-theme="dark"],:root[data-theme="light"]{
+  /* Base palette — six values, no more */
+  --st-accent:#427AB5;--st-accent-deep:#2F5686;--st-gold:#F7DD7D;
+  --st-violet:#6E63C4;--st-green:#3E9A72;--st-red:#C4453D;--st-cta:#FF6A2C;--st-cta-deep:#E4541A;
+  --st-ink:#0C1826;--st-muted:#5A6A7D;--st-ground:#F3F6FA;
+  --st-ink-a04:rgba(12,24,38,.04);--st-ink-a08:rgba(12,24,38,.08);--st-ink-a12:rgba(12,24,38,.12);
+  --st-ink-a13:rgba(12,24,38,.13);--st-ink-a16:rgba(12,24,38,.16);--st-ink-a22:rgba(12,24,38,.22);
+  --st-accent-a05:rgba(66,122,181,.05);--st-accent-a13:rgba(66,122,181,.13);
+  --st-accent-a42:rgba(66,122,181,.42);--st-accent-a62:rgba(66,122,181,.62);
+  --st-shadow-screenshot:0 18px 44px rgba(12,24,38,.12);
+  /* Ramps — surfaces, hovers, borders, chart series. Not new brand colours. */
+  --st-accent-100:#EDF3F9;--st-accent-200:#D3E1EF;--st-accent-300:#A7C2DE;--st-accent-400:#719FCA;
+  --st-accent-500:#427AB5;--st-accent-600:#39699C;--st-accent-700:#2F5686;--st-accent-800:#244266;--st-accent-900:#192E48;
+  --st-cta-100:#FFF0E8;--st-cta-200:#FFDAC6;--st-cta-300:#FFB894;--st-cta-400:#FF8F5C;
+  --st-cta-500:#FF6A2C;--st-cta-600:#F25A18;--st-cta-700:#E4541A;--st-cta-800:#B44014;--st-cta-900:#7F2C0D;
+  --st-gold-100:#FEFAEB;--st-gold-200:#FDF3CE;--st-gold-300:#FBEAA6;--st-gold-400:#F9E391;
+  --st-gold-500:#F7DD7D;--st-gold-600:#E9C94F;--st-gold-700:#CBA92C;--st-gold-800:#9A7F1E;--st-gold-900:#6B5813;
+  --st-violet-100:#F0EFF9;--st-violet-200:#DBD8F0;--st-violet-300:#BCB6E2;--st-violet-400:#918AD4;
+  --st-violet-500:#6E63C4;--st-violet-600:#5E53AE;--st-violet-700:#4B4290;--st-violet-800:#39326E;--st-violet-900:#28234D;
+  --st-green-100:#ECF6F1;--st-green-200:#CFE8DD;--st-green-300:#A2D2BF;--st-green-400:#69B695;
+  --st-green-500:#3E9A72;--st-green-600:#348762;--st-green-700:#2A6D50;--st-green-800:#20533D;--st-green-900:#163A2B;
+  --st-ink-100:#F3F6FA;--st-ink-200:#E4EAF1;--st-ink-300:#C8D2DE;--st-ink-400:#94A2B3;
+  --st-ink-500:#5A6A7D;--st-ink-600:#455568;--st-ink-700:#324153;--st-ink-800:#1E2C3D;--st-ink-900:#0C1826;
+  /* Red — failure, rejection, destructive. Never a chart series. */
+  --st-red-100:#FBEDEC;--st-red-200:#F5D5D3;--st-red-300:#E9AEAA;--st-red-400:#D97B75;
+  --st-red-500:#C4453D;--st-red-600:#AC3A33;--st-red-700:#8E2E28;--st-red-800:#6C231E;--st-red-900:#4A1815;
+  /* Status pairings — 700 text on a 100 surface with a 300 border */
+  --st-status-neutral:var(--st-ink-700);--st-status-neutral-surface:var(--st-ink-100);--st-status-neutral-border:var(--st-ink-300);
+  --st-status-info:var(--st-accent-700);--st-status-info-surface:var(--st-accent-100);--st-status-info-border:var(--st-accent-300);
+  --st-status-success:var(--st-green-700);--st-status-success-surface:var(--st-green-100);--st-status-success-border:var(--st-green-300);
+  --st-status-warning:var(--st-gold-800);--st-status-warning-surface:var(--st-gold-100);--st-status-warning-border:var(--st-gold-400);
+  --st-status-failed:var(--st-red-700);--st-status-failed-surface:var(--st-red-100);--st-status-failed-border:var(--st-red-300);
+  --st-status-danger:var(--st-status-failed);--st-status-danger-surface:var(--st-status-failed-surface);--st-status-danger-border:var(--st-status-failed-border);
+  --st-chart-3:var(--st-violet);--st-chart-4:var(--st-green);
+  --st-status-verified:var(--st-green-700);--st-status-verified-surface:var(--st-green-100);
+
+  /* Site variables, remapped */
+  --font-display:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;
+  --bg:#F3F6FA;--bg-2:#FFFFFF;
+  --panel:linear-gradient(to bottom,#FFFFFF,#FBFCFE);--panel-solid:#FFFFFF;
+  --elev:#FFFFFF;--elev-2:#FBFCFE;
+  --line:var(--st-ink-a13);--line-2:var(--st-ink-a16);--hair:var(--st-ink-a08);--grid:transparent;
+  --txt:var(--st-ink);--txt-2:var(--st-muted);--txt-3:var(--st-muted);
+  --accent:var(--st-accent);--accent-2:var(--st-accent);--accent-deep:var(--st-accent-deep);
+  --accent-soft:var(--st-accent-a13);--accent-line:var(--st-accent-a42);
+  --accent-dim:var(--st-accent-a42);--accent-glow:var(--st-accent-a42);
+  --cta:var(--st-accent);--cta-ink:#FFFFFF;--cta-glow:transparent;
+  --warn:var(--st-status-danger);--warn-soft:var(--st-status-danger-surface);
+  --r-lg:16px;--r-md:12px;--r-sm:12px;
+  --shadow:0 1px 2px var(--st-ink-a04);
+  --ease:cubic-bezier(.22,.61,.36,1);--ease-out:cubic-bezier(.16,1,.3,1);--spring:cubic-bezier(.22,.61,.36,1);
+}
+
+/* Ground: the paper wash. Two grounds only — wash and white. */
+body{background:linear-gradient(160deg,#FFFFFF 0%,#F3F6FA 48%,#E9EFF6 100%) fixed;color:var(--st-ink);font-family:var(--font-display)}
+[data-theme="light"] body{background:linear-gradient(160deg,#FFFFFF 0%,#F3F6FA 48%,#E9EFF6 100%) fixed}
+/* No decorative grid, no ambient blur fields — removed on purpose. */
+.aura,.gridbg{display:none!important}
+::selection{background:var(--st-accent-a13);color:var(--st-ink)}
+
+/* Links */
+a{color:inherit}
+.wrap p a:not(.btn):not(.nav-link):not(.dd-link),.foot-blurb a{color:var(--st-accent-deep);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;transition:color 140ms ease-out}
+.wrap p a:not(.btn):not(.nav-link):not(.dd-link):hover,.foot-blurb a:hover{color:var(--st-accent)}
+
+/* Type ladder */
+.kicker{font-family:var(--font-mono);font-weight:500;color:var(--st-accent);letter-spacing:.22em}
+.kicker::before{background:var(--st-accent)}
+.h1{font-weight:800;letter-spacing:-.02em}
+.h2{font-weight:800;letter-spacing:-.02em;color:var(--st-ink)}
+.lead{color:var(--st-muted);font-weight:400}
+.mono-note{font-family:var(--font-mono);letter-spacing:.18em;color:var(--st-muted)}
+
+/* Cards: hairline, 16px, white→#FBFCFE, barely lifted. Never overlapping. */
+.panel{background:linear-gradient(to bottom,#FFFFFF,#FBFCFE);border:1px solid var(--st-ink-a13);border-radius:16px;box-shadow:0 1px 2px var(--st-ink-a04);backdrop-filter:none}
+
+/* Buttons: flat. Primary accent → accent deep. No gradient, no shadow, no scale. */
+.btn{font-weight:600;border-radius:12px;transition:background 140ms ease-out,border-color 140ms ease-out,color 140ms ease-out}
+.btn-primary,.nav-cta{background:var(--st-accent)!important;color:#FFFFFF!important;box-shadow:none!important;border-color:transparent}
+.btn-primary:hover,.nav-cta:hover{background:var(--st-accent-deep)!important;box-shadow:none!important;transform:none!important}
+.btn-ghost{color:var(--st-ink);background:#FFFFFF;border-color:var(--st-ink-a13)}
+.btn-ghost:hover{background:var(--st-accent-a13);border-color:var(--st-accent-a42);color:var(--st-ink)}
+.btn:hover{transform:none}
+.btn:focus-visible,.nav-cta:focus-visible,.nav-link:focus-visible{outline:none;border-color:var(--st-accent);box-shadow:0 0 0 3px var(--st-accent-a13)}
+
+/* Chrome */
+.topbar{background:rgba(255,255,255,.88);border-bottom:1px solid var(--st-ink-a12);backdrop-filter:blur(14px)}
+.nav-link{color:var(--st-muted);transition:color 140ms ease-out,background 140ms ease-out}
+.nav-link:hover{color:var(--st-ink);background:var(--st-accent-a13)}
+.nav-link.active{color:var(--st-accent-deep)}
+.nav-link.active::after{background:var(--st-accent)}
+.nav-cta .cta-arrow,.nav-cta:hover .cta-arrow{transform:none}
+.nav-dd-menu{background:#FFFFFF;border:1px solid var(--st-ink-a13);border-radius:16px;box-shadow:0 1px 2px var(--st-ink-a04);backdrop-filter:none}
+.dd-item:hover,.dd-link:hover{background:var(--st-accent-a13)}
+.dd-ic{color:var(--st-accent);background:var(--st-accent-a13);border:1px solid var(--st-accent-a42);border-radius:12px}
+.dd-col-head{font-family:var(--font-mono);letter-spacing:.18em;color:var(--st-accent);border-bottom:1px solid var(--st-ink-a12)}
+.site-footer{background:#FFFFFF;border-top:1px solid var(--st-ink-a12)}
+.foot-col h4{font-family:var(--font-mono);letter-spacing:.18em;color:var(--st-muted)}
+.theme-toggle{display:none} /* single ground: the paper wash */
+
+/* Motion: 140ms ease-out on colour and border only. Nothing scales or lifts. */
+.sol:hover,.sol-card2:hover,.stake-card:hover,.theme-toggle:active,.rail-btn:active{transform:none!important}
+.sol-card2:hover .card-img,.stake-card:hover .sc-art svg{transform:none!important}
+.sol{transition:border-color 140ms ease-out,background 140ms ease-out}
+.sol:hover{border-color:var(--st-accent-a42);box-shadow:0 1px 2px var(--st-ink-a04)}
+
+/* Forms */
+.field label{font-family:var(--font-mono);font-size:12px;letter-spacing:.18em;color:var(--st-muted)}
+.field input,.field select,.field textarea,.nl-input{background:#FFFFFF;border:1px solid var(--st-ink-a13);border-radius:12px;color:var(--st-ink);font-size:17px;line-height:24px;padding:11px 14px}
+.field input:focus,.field select:focus,.field textarea:focus,.nl-input:focus{border-color:var(--st-accent);box-shadow:0 0 0 3px var(--st-accent-a13);background:#FFFFFF}
+.field input::placeholder,.field textarea::placeholder,.nl-input::placeholder{color:var(--st-muted)}
+.nl-modal,.cc-card{background:#FFFFFF;border:1px solid var(--st-ink-a13);border-radius:16px;box-shadow:var(--st-shadow-screenshot)}
+.nl-backdrop{background:rgba(12,24,38,.5);backdrop-filter:none}
+.form-msg{color:var(--st-accent-deep);border-color:var(--st-accent-a42);background:var(--st-accent-a13);border-radius:12px}
+
+/* Data marks: pill track at 8% ink, accent fill */
+.hv-progress,.g-row .bars i{background:var(--st-ink-a08)}
+.hv-progress i{background:var(--st-accent)}
+
+/* Screenshots are the only objects allowed off the ground */
+.st-dev,.pipeline-frame{box-shadow:var(--st-shadow-screenshot)}
+
+/* Role hero ends on a hairline — no fade to the page ground. */
+.d-hero.role-hero::after{display:none!important}
+.d-hero.role-hero{border-bottom:1px solid var(--st-ink-a12)!important}
+
+/* Emphasis words in lead statements: solid accent deep. The guide allows no
+   gradient-filled type, and accent text below headline size sits at 2F5686. */
+.exl-lead-line .exl-w,.exl-theme .exl-word{color:var(--st-accent-deep)!important;background-image:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important}
+.exl-sec .exl-lead-line,.exl-theme .exl-word{letter-spacing:-.02em!important}
+
+/* ---- Toast (design system: components/feedback/Toast) ----
+   Tinted status surface, hairline border in the status ink. Title and mark
+   carry the same ink, so each tone reads as one block of colour. No shadow. */
+.st-toast{display:flex;align-items:flex-start;gap:12px;width:420px;max-width:100%;padding:14px 16px;border:1px solid var(--st-status-neutral);border-radius:12px;background:var(--st-status-neutral-surface);box-shadow:none;font-family:var(--font-display)}
+.st-toast .st-toast-mark{flex:0 0 auto;width:22px;height:22px;margin-top:1px;border-radius:50%;background:#FFFFFF;color:var(--st-status-neutral);border:1px solid var(--st-status-neutral-border);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;line-height:1}
+.st-toast .st-toast-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.st-toast .st-toast-title{margin:0;font-size:15px;font-weight:700;letter-spacing:-.01em;color:var(--st-status-neutral)}
+.st-toast .st-toast-text{margin:0;font-size:14px;line-height:20px;color:var(--st-status-neutral)}
+.st-toast[data-tone="info"]{border-color:var(--st-status-info);background:var(--st-status-info-surface)}
+.st-toast[data-tone="info"] .st-toast-mark{color:var(--st-status-info);border-color:var(--st-status-info-border)}
+.st-toast[data-tone="info"] .st-toast-title,.st-toast[data-tone="info"] .st-toast-text{color:var(--st-status-info)}
+.st-toast[data-tone="success"]{border-color:var(--st-status-success);background:var(--st-status-success-surface)}
+.st-toast[data-tone="success"] .st-toast-mark{color:var(--st-status-success);border-color:var(--st-status-success-border)}
+.st-toast[data-tone="success"] .st-toast-title,.st-toast[data-tone="success"] .st-toast-text{color:var(--st-status-success)}
+.st-toast[data-tone="warning"]{border-color:var(--st-status-warning);background:var(--st-status-warning-surface)}
+.st-toast[data-tone="warning"] .st-toast-mark{color:var(--st-status-warning);border-color:var(--st-status-warning-border)}
+.st-toast[data-tone="warning"] .st-toast-title,.st-toast[data-tone="warning"] .st-toast-text{color:var(--st-status-warning)}
+.st-toast[data-tone="failed"]{border-color:var(--st-status-failed);background:var(--st-status-failed-surface)}
+.st-toast[data-tone="failed"] .st-toast-mark{color:var(--st-status-failed);border-color:var(--st-status-failed-border)}
+.st-toast[data-tone="failed"] .st-toast-title,.st-toast[data-tone="failed"] .st-toast-text{color:var(--st-status-failed)}
+/* Stack: bottom-right, 12px gaps, newest at the bottom, at most three */
+.st-toast-stack{position:fixed;right:24px;bottom:24px;z-index:60;display:flex;flex-direction:column;gap:12px}
+/* Compact variant for the in-screen product mockups */
+.st-toast.st-toast-sm{gap:9px;width:auto;padding:9px 11px;border-radius:8px}
+.st-toast.st-toast-sm .st-toast-mark{width:17px;height:17px;font-size:10px}
+.st-toast.st-toast-sm .st-toast-title{font-size:11.5px;line-height:16px}
+.st-toast.st-toast-sm .st-toast-text{font-size:10.5px;line-height:15px}
+
+/* Status badge (design system: components/feedback/StatusBadge) */
+.st-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:999px;font-family:var(--font-display);font-weight:600;font-size:13px;line-height:18px;border:1px solid var(--st-status-neutral-border);background:var(--st-status-neutral-surface);color:var(--st-status-neutral)}
+.st-badge[data-tone="success"]{border-color:var(--st-status-success-border);background:var(--st-status-success-surface);color:var(--st-status-success)}
+.st-badge[data-tone="failed"]{border-color:var(--st-status-failed-border);background:var(--st-status-failed-surface);color:var(--st-status-failed)}
+.st-badge[data-tone="warning"]{border-color:var(--st-status-warning-border);background:var(--st-status-warning-surface);color:var(--st-status-warning)}
+.st-badge[data-tone="info"]{border-color:var(--st-status-info-border);background:var(--st-status-info-surface);color:var(--st-status-info)}
+.st-badge i{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+
+/* Brand mark: the design system's own blue horizontal lockup, unfiltered on paper */
+.brand-logo{filter:none!important;height:28px}
+.foot-brand .brand-logo{height:30px}

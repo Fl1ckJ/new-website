@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SteelTrace supply-chain flow</title>
+<link rel="stylesheet" href="../_ds/steeltrace-design-system-d3ac1a9d-4f87-4e30-9f1d-41aec74b66fd/tokens/fonts.css" />
+<link rel="stylesheet" href="../_ds/steeltrace-design-system-d3ac1a9d-4f87-4e30-9f1d-41aec74b66fd/tokens/colors.css" />
+<style>
+  html,body{margin:0;padding:0;background:transparent}
+  #fit{transform-origin:top left;width:420px;padding:0 12px;box-sizing:border-box}
+  .col{display:flex;flex-direction:column;align-items:stretch;font-family:Figtree,system-ui,sans-serif}
+  .pills{position:relative;height:151px}
+  .pill{position:absolute;transform:translateX(-50%);display:flex;align-items:center;gap:7px;background:#FFFFFF;border:1px solid rgba(12,24,38,.16);border-radius:999px;padding:4px 12px 4px 4px;box-shadow:0 1px 3px rgba(12,24,38,.06)}
+  .pill i{flex:none;display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:999px;background:rgba(12,24,38,.08);font-family:'IBM Plex Mono',monospace;font-size:12px;font-style:normal;color:#5A6A7D}
+  .pill b{font-size:13px;line-height:17px;font-weight:700;color:#0C1826;white-space:nowrap}
+  .v,.h{position:absolute}
+  .v{width:1px;background-image:repeating-linear-gradient(to bottom,rgba(12,24,38,.32) 0 3px,transparent 3px 7px)}
+  .h{height:1px;background-image:repeating-linear-gradient(to right,rgba(12,24,38,.32) 0 3px,transparent 3px 7px)}
+  .link{display:flex;flex-direction:column;align-items:center}
+  .link span{width:1px;height:22px;background-image:repeating-linear-gradient(to bottom,rgba(12,24,38,.32) 0 3px,transparent 3px 7px)}
+  .card{border:1px solid rgba(66,122,181,.42);border-radius:20px;background:linear-gradient(180deg,rgba(66,122,181,.13) 0%,rgba(66,122,181,.05) 100%);padding:14px}
+  .card>.nm{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;margin-bottom:12px;font-size:17px;line-height:22px;font-weight:800;color:#0C1826}
+  .steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .step{display:flex;align-items:flex-start;gap:8px;border-radius:16px;padding:10px 12px}
+  .step em{flex:none;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;font-style:normal}
+  .step b{font-size:14px;line-height:19px;font-weight:700;color:#0C1826}
+  .s1{background:var(--st-violet-100,rgba(110,99,196,.10));border:1px solid var(--st-violet-300,rgba(110,99,196,.32))}
+  .s1 em{color:var(--st-violet-700,#4B4290)}
+  .s2{background:var(--st-status-verified-surface,rgba(62,154,114,.10));border:1px solid rgba(62,154,114,.32)}
+  .s2 em{color:#2E7355}
+  .op{display:flex;justify-content:center}
+  .op span{display:flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid rgba(66,122,181,.42);background:linear-gradient(180deg,rgba(66,122,181,.16) 0%,rgba(66,122,181,.06) 100%);padding:8px 18px;font-size:15px;line-height:20px;font-weight:800;color:#0C1826}
+  .depts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .depts span{background:#FFFFFF;border:1px solid rgba(12,24,38,.13);border-radius:999px;padding:9px 12px;text-align:center;font-size:14px;line-height:19px;font-weight:700;color:#0C1826}
+</style>
+</head>
+<body>
+<div id="fit">
+  <div class="col">
+    <div class="pills">
+      <span class="pill" style="left:198px;top:16px;border-color:rgba(110,99,196,.42)"><i style="background:rgba(110,99,196,.16);color:#574CA0">EP</i><b>EPCs</b></span>
+      <span class="v" style="left:198px;top:51px;height:35px"></span>
+      <span class="pill" style="left:89px;top:46px;border-color:rgba(214,178,58,.45)"><i style="background:rgba(247,221,125,.45);color:#0C1826">CO</i><b>Contractors</b></span>
+      <span class="v" style="left:89px;top:81px;height:5px"></span>
+      <span class="pill" style="left:309px;top:46px;border-color:rgba(62,154,114,.42)"><i style="background:rgba(62,154,114,.16);color:#2E7355">IN</i><b>Inspectors</b></span>
+      <span class="v" style="left:309px;top:81px;height:5px"></span>
+      <span class="pill" style="left:54px;top:92px;width:90px;height:24px;border-color:rgba(66,122,181,.42)"><i style="background:rgba(66,122,181,.16);color:#2F5686">T·I</i><b style="white-space:normal">Test labs</b></span>
+      <span class="v" style="left:54px;top:125px;height:25px"></span>
+      <span class="pill" style="left:327px;top:92px"><i>MF</i><b>Manufacturers</b></span>
+      <span class="v" style="left:327px;top:127px;height:23px"></span>
+      <span class="h" style="left:89px;top:86px;width:220px"></span>
+      <span class="v" style="left:198px;top:86px;height:64px"></span>
+      <span class="h" style="left:54px;top:150px;width:273px"></span>
+    </div>
+    <div class="link"><span></span></div>
+    <div class="card">
+      <div class="nm">SteelTrace</div>
+      <div class="steps">
+        <div class="step s1"><em>01</em><b>Ingest, clean and normalize</b></div>
+        <div class="step s2"><em>02</em><b>A human approves</b></div>
+      </div>
+    </div>
+    <div class="link"><span></span></div>
+    <div class="op"><span>Operators</span></div>
+    <div class="link"><span></span></div>
+    <div class="depts"><span>Engineering</span><span>Procurement</span><span>Quality</span><span>Maintenance</span></div>
+  </div>
+</div>
+<script>
+(function(){
+  var fit=document.getElementById('fit'),W=420;
+  function scale(){var s=Math.max(0.1,document.documentElement.clientWidth/W);fit.style.transform='scale('+s+')';document.body.style.height=(fit.firstElementChild.offsetHeight*s)+'px';}
+  scale();addEventListener('resize',scale);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(scale);
+})();
+</script>
+</body>
+</html>
