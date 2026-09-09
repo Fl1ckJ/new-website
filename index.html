@@ -735,7 +735,33 @@
   </div>
 </section>
 
+<!-- FORK IN THE ROAD -->
+<section class="page section">
+  <div class="fork-wrap reveal">
+    <div class="fork-photo"><img src="graphics/paper-chaos.jpg" alt="An engineer carrying a stack of certificates through an office of scattered paper" loading="lazy" /></div>
+    <div class="fork">
+      <div class="fork-top">
+        <h2 class="fork-title">You can continue as it is and…</h2>
+        <ul class="fork-list">
+        <li class="fork-item"><span class="x"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span><p>Wait years for a data standard to be created</p></li>
+        <li class="fork-item"><span class="x"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span><p>Keep experiencing project delays</p></li>
+        <li class="fork-item"><span class="x"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span><p>Approve incomplete or inaccurate information</p></li>
+        <li class="fork-item"><span class="x"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span><p>Deal with questionable material test records</p></li>
+        <li class="fork-item"><span class="x"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span><p>Build up bad documentation for your assets</p></li>
+        </ul>
+      </div>
+      <div class="fork-foot">
+        <div class="fork-step">
+          <p class="fork-step-h">…or you take the first step today:</p>
+          <a class="btn btn-primary btn-cta" href="demo">Get a Demo <span class="ar">→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CUSTOMER EXPERIENCE -->
+
 <section class="page section">
   <div class="sec-head reveal">
     <span class="kicker">Customer experience</span>
@@ -1226,5 +1252,99 @@
   }
 })();
 </script>
+<style>
+  /* ============================================================
+     Homepage skin — ported from the "Light mode (Remix)" reference
+     (Downloads/Light mode (Remix)/SteelTrace Home.html).
+
+     Visual only. No markup, copy or script is touched, so structure
+     and functionality stay exactly as they are. Loaded last so it
+     overrides the section styles above without !important, except
+     where the reference itself used it.
+
+     Deliberately NOT ported:
+       .rail-vp.static  — hides the rail arrows and turns the
+                          carousel into a fixed grid (functionality)
+       .fork-*          — styles a section this page does not have
+     ============================================================ */
+
+  /* ---- hero: dividers dropped, as in the reference ----
+     The reference also spans the triad across both hero columns, but there
+     .hero-triad is a child of .hero-grid; here it sits inside .hero-copy, so
+     that would need the div moved (structural) and is left alone. */
+  .hero-grid { gap: 56px 56px; }
+  .triad-sep { display: none; }
+
+  /* ---- problem: bare check rows instead of bordered quote cards ---- */
+  .pain-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 34px 44px; }
+  /* this block loads after the page's media queries, so the collapse has to be restated */
+  @media (max-width: 1000px) { .pain-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 620px)  { .pain-grid { grid-template-columns: minmax(0, 1fr); } }
+  .pain.panel { background: none; border: 0; box-shadow: none; padding: 0; backdrop-filter: none; }
+  .pain { display: grid; grid-template-columns: 22px 1fr; column-gap: 14px; row-gap: 6px; align-items: start; }
+  .pain::before { content: ""; grid-row: 1; width: 22px; height: 22px; border-radius: 50%; margin-top: 3px;
+    background: var(--st-accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cpath d='M6.5 11.4 L9.4 14.2 L15.4 7.9' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 22px 22px no-repeat; }
+  .pain .q { grid-column: 2; font-size: 17px; line-height: 1.5; color: var(--st-muted); font-weight: 400; }
+  .pain .q::before { content: none; }
+  /* the reference has no role label; this page keeps it, quietly, in column 2 */
+  .pain .who { grid-column: 2; margin-top: 0; padding-top: 6px; }
+
+  /* ---- solution + stakeholder cards: image on top, light body ---- */
+  .sol-card2 { background: linear-gradient(to bottom, #FFFFFF, #FBFCFE) !important;
+    border: 1px solid rgba(12,24,38,.13); color: var(--st-ink);
+    justify-content: flex-start; height: auto; min-height: 384px; }
+  .sol-card2::before, .sol-card2:hover::before { display: none !important; }
+  .sol-card2 .card-img { position: relative; inset: auto; height: 148px; flex: none; border-radius: 0; }
+  .sol-card2 .cardcontent { flex: 1; justify-content: flex-start; }
+  .sol-card2 h3 { color: var(--st-ink); }
+  .sol-card2 .cp-sub { font-size: 13px; letter-spacing: .18em; color: var(--st-accent); opacity: 1; }
+  .sol-card2 .cp-blurb { font-size: 13px; line-height: 1.55; color: var(--st-muted); opacity: 1; }
+  .sol-card2 .cp-list li { font-size: 13px; line-height: 1.4; color: var(--st-muted); opacity: 1; }
+  .sol-card2 .cp-list li::before { width: 6px; height: 6px; top: 6px; border-radius: 50%; background: var(--st-accent); opacity: 1; }
+  .sol-card2 .code { top: 10px; left: 10px; background: #FFFFFF; border: 1px solid rgba(12,24,38,.13);
+    color: var(--st-accent-deep); font-size: 13px; letter-spacing: .18em; padding: 4px 8px; border-radius: 8px; opacity: 1; }
+  .sol-card2 .glyph { display: none; }
+  .sol-card2 .go { font-size: 13px; color: var(--st-accent); opacity: 1; }
+  .sol-card2:hover .go { color: var(--st-accent-deep); }
+  .sol-card2:hover { border-color: rgba(66,122,181,.42); }
+  /* with the preview always open the card must grow instead of clipping */
+  .stake-card { height: auto; min-height: 384px; }
+  .stake-card .go { font-size: 13px; }
+  .stake-card .cp-list li::before { width: 6px; height: 6px; top: 6px; border-radius: 50%; background: var(--st-accent); opacity: 1; }
+  .rail-scroller:hover .sol-card2:not(:hover),
+  .rail-scroller:hover .stake-card:not(:hover) { opacity: 1; }
+  .rail-btn.next { right: -12px; }
+
+  /* card previews read expanded, as in the reference; the rail keeps its
+     arrows and horizontal scrolling, and cards still link through on click */
+  .sol-card2 .card-preview,
+  .stake-card .card-preview { grid-template-rows: 1fr; opacity: 1; margin-top: 12px; }
+  .sol-card2 .cp-blurb,
+  .stake-card .cp-blurb { -webkit-line-clamp: unset; display: block; }
+
+  /* ---- fork in the road: section carried over from the reference ---- */
+  .fork-wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(32px, 4vw, 64px); align-items: stretch; max-width: 1320px; margin: 0 auto; }
+  .fork-photo { min-width: 0; width: 100%; align-self: start; aspect-ratio: 1 / 1; border-radius: 12px; overflow: hidden; background: #E9EFF6; }
+  .fork-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 52% 46%; filter: saturate(.86) contrast(.98); }
+  .fork { min-width: 0; display: flex; flex-direction: column; justify-content: space-between; gap: clamp(32px, 4vw, 56px); text-align: left; }
+  .fork-top { display: flex; flex-direction: column; gap: clamp(28px, 3vw, 44px); }
+  .fork-title { margin: 0; max-width: 720px; font-weight: 800; font-size: clamp(32px, 3.4vw, 52px); line-height: 1.1; letter-spacing: -.015em; color: var(--st-ink); text-wrap: pretty; }
+  .fork-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 18px; max-width: 720px; }
+  .fork-item { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; align-items: start; }
+  .fork-item .x { margin-top: 4px; width: 22px; height: 22px; color: var(--st-red-700); display: flex; align-items: center; justify-content: center; }
+  .fork-item p { margin: 0; font-weight: 500; font-size: clamp(17px, 1.35vw, 21px); line-height: 1.55; color: var(--st-ink); }
+  .fork-item p b { font-weight: 500; }
+  .fork-foot { max-width: 720px; display: flex; flex-direction: column; gap: clamp(24px, 2.5vw, 36px); }
+  .fork-foot .rule { height: 1px; width: 100%; background: var(--st-ink-a12); }
+  .fork-step { display: flex; flex-wrap: wrap; align-items: center; gap: 24px 32px; }
+  .fork-step-h { margin: 0; font-weight: 800; font-size: clamp(22px, 2.1vw, 32px); line-height: 1.2; letter-spacing: -.01em; color: var(--st-ink); }
+  .fork .btn-cta { background: var(--st-cta) !important; color: #fff !important; border-color: transparent; }
+  .fork .btn-cta:hover { background: var(--st-cta-deep) !important; }
+
+  /* ---- get-started band + trust teaser: flat, no tinted wash ---- */
+  .gs-band::before { background: none; }
+  .tz { border: 1px solid var(--line); background: linear-gradient(to bottom, #ffffff, #FBFCFE); box-shadow: 0 1px 2px rgba(12,24,38,.04); }
+  .tz::before { background: none; }
+</style>
 </body>
 </html>
