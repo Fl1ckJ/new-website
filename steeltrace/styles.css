@@ -4,7 +4,7 @@
    ============================================================ */
 
 :root {
-  --font-display: 'Archivo', system-ui, sans-serif;
+  --font-display: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
   --maxw: 1360px;
   --ease: cubic-bezier(.22, .61, .36, 1);

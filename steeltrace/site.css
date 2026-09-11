@@ -3,7 +3,7 @@
    (blueprint-navy theme, matches the explorer)
    ============================================================ */
 :root {
-  --font-display: 'Archivo', system-ui, sans-serif;
+  --font-display: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
   --bg: #080d18; --bg-2: #0d1424;
   --panel: rgba(22, 33, 56, .55); --panel-solid: #131d34;
