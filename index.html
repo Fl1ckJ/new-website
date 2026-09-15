@@ -364,19 +364,11 @@
 <section class="page hero">
   <div class="hero-grid">
     <div class="hero-copy">
-      <span class="kicker">Smart Manufacturing Records</span>
       <h1>Shortening project timelines with <em>agentic AI.</em></h1>
       <p class="lead">Data collection and final documentation handover take months. SteelTrace makes it real time and automated, <strong>speeding up your project execution</strong>.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="demo" style="background:#F5822B;box-shadow:0 12px 30px -14px rgba(245,130,43,.7);color:#fff">Book a demo <span class="ar">→</span></a>
         <a class="btn btn-ghost" href="product">Explore the product</a>
-      </div>
-      <div class="hero-triad">
-        <div class="triad-item"><span class="triad-num"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span><div><b>Collect</b> <span>at the source</span></div></div>
-        <div class="triad-sep"></div>
-        <div class="triad-item"><span class="triad-num"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span><div><b>Verify</b> <span>against specs</span></div></div>
-        <div class="triad-sep"></div>
-        <div class="triad-item"><span class="triad-num"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span><div><b>Use</b> <span>for a lifetime</span></div></div>
       </div>
     </div>
 
@@ -395,20 +387,19 @@
     <p class="lead">Projects should not be delayed by QC process and documentation.</p>
   </div>
   <div class="pain-grid">
-    <div class="pain panel reveal" style="--rd:0s"><p class="q">My inbox is overflowing with supplier emails, and I don't have time to review everything I receive.</p><div class="who">Project QA/QC</div></div>
-    <div class="pain panel reveal" style="--rd:.07s"><p class="q">I feel like an archaeologist trying to find one certificate. The data isn't searchable.</p><div class="who">Asset integrity</div></div>
-    <div class="pain panel reveal" style="--rd:.14s"><p class="q">I don't always trust the information I'm asked to approve, and I never know what's still missing.</p><div class="who">Inspection lead</div></div>
-    <div class="pain panel reveal" style="--rd:0s"><p class="q">Data arrives incomplete or unreadable. My inspectors spend hours double-checking it by hand.</p><div class="who">Quality manager</div></div>
-    <div class="pain panel reveal" style="--rd:.07s"><p class="q">MRBs get assembled manually after the project, months after the work was actually done.</p><div class="who">EPC project lead</div></div>
-    <div class="pain panel reveal" style="--rd:.14s"><p class="q">Modified certificates slip through the supply chain and we only find out far too late.</p><div class="who">Supplier quality</div></div>
+    <div class="pain panel reveal" style="--rd:0s"><p class="q">My inbox is overflowing with supplier emails, and I don't have time to review everything I receive.</p></div>
+    <div class="pain panel reveal" style="--rd:.07s"><p class="q">I feel like an archaeologist trying to find one certificate. The data isn't searchable.</p></div>
+    <div class="pain panel reveal" style="--rd:.14s"><p class="q">I don't always trust the information I'm asked to approve, and I never know what's still missing.</p></div>
+    <div class="pain panel reveal" style="--rd:0s"><p class="q">Data arrives incomplete or unreadable. My inspectors spend hours double-checking it by hand.</p></div>
+    <div class="pain panel reveal" style="--rd:.07s"><p class="q">MRBs get assembled manually after the project, months after the work was actually done.</p></div>
+    <div class="pain panel reveal" style="--rd:.14s"><p class="q">Modified certificates slip through the supply chain and we only find out far too late.</p></div>
   </div>
 </section>
 
 <!-- DIFFERENCE / PLATFORM HEADER -->
-<section class="page section">
+<section class="page section" style="padding-bottom:0">
   <div class="sec-head reveal" style="text-align:center;margin-left:auto;margin-right:auto">
     <h2 class="h2">With SteelTrace your world looks different</h2>
-    <p class="lead">One location for every supplier's data: automatically organized, delivered in the same format, and verified the moment it's created.</p>
   </div>
 </section>
 
@@ -468,7 +459,7 @@
       .c-line .ck { width: 16px; height: 16px; flex: none; border-radius: 50%; display: grid; place-items: center; font-size: 9px; line-height: 1; color: #fff; transform: scale(0); }
       .c-line .ck.ok { background: var(--st-status-success); }
       .c-line .ck.no { background: var(--st-red-500); font-weight: 700; }
-      .c-flag { position: absolute; right: 14px; bottom: 14px; display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 8px; background: #FBEAE4; border: 1px solid #F0B49C; color: #B23C18; font-size: 10.5px; font-weight: 600; box-shadow: 0 8px 18px -10px rgba(120,40,10,.5); opacity: 0; transform: translateY(6px); white-space: nowrap; z-index: 4; }
+      .c-flag { flex: none; align-self: stretch; opacity: 0; transform: translateY(6px); }
 
       /* ---- 1b. GATHER / converge (restored) ---- */
       .g-stage { display: flex; align-items: center; padding: 0 16px; box-sizing: border-box; }
@@ -526,7 +517,8 @@
       .u-results { display: flex; flex-direction: column; gap: 7px; }
       .u-res { display: flex; align-items: center; gap: 9px; padding: 8px 10px; background: #fff; border: 1px solid var(--st-ink-a13); border-radius: 8px; font-size: 11.5px; color: var(--st-muted); opacity: 0; transform: translateY(6px); }
       .u-res b { color: var(--st-ink); font-weight: 600; }
-      .u-res .tag { margin-left: auto; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; padding: 2px 6px; border-radius: 5px; background: #E7F0FA; color: var(--st-accent); }
+      .u-res .st-badge { margin-left: auto; flex: none; gap: 5px; padding: 2px 8px; font-size: 10.5px; line-height: 15px; }
+      .u-res .st-badge i { width: 5px; height: 5px; }
       .u-res .hb { width: 7px; height: 7px; border-radius: 50%; background: var(--st-status-success); flex: none; }
 
       /* run-gated animations */
@@ -604,18 +596,19 @@
     <!-- 01 · COLLECT -->
     <div class="st-step reveal">
       <div class="st-copy">
-        <h3>Data Captured at the Source</h3>
-        <p class="st-desc">Mill certs, welding parameters, NDT and coating data flow straight into one record, from every tier of your supply chain, in the same format, every order.</p>
+        <h3>You have one place where everyting comes in</h3>
+        <p class="st-desc">With SteelTrace you have one place where all data from every suppliers comes in:</p>
         <ul class="st-list">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>One inbox for all suppliers</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Same format, every order</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Integrates with MES / ERP</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>In the same format</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Automatically organized on project and order level</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>In real time during the project</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Information flows freely between supply chain parties.</li>
         </ul>
       </div>
       <div class="st-viz reveal" style="--rd:.08s">
         <div class="st-dev">
           <div class="st-scr">
-            <div class="st-bar"><span class="d"></span><span class="lbl">SteelTrace: data capture at the source</span><span class="live">live</span></div>
+            <div class="st-bar"><span class="lbl"><b style="font-size:14px">Data ingestion from any source</b></span></div>
             <div class="st-stage g-stage">
               <div class="g-col">
                 <div class="g-src s1">PDF<small>Mill cert</small></div>
@@ -649,18 +642,18 @@
     <!-- 02 · VERIFY -->
     <div class="st-step flip reveal">
       <div class="st-copy">
-        <h3>Verified against specs in real time</h3>
-        <p class="st-desc">Your QCP / ITP rules live in the platform. Nothing moves down the supply chain until it's compliant. NCRs are caught early, not after installation.</p>
+        <h3>You will be full aware of the status</h3>
+        <p class="st-desc">With SteelTrace you know what is going in your project:</p>
         <ul class="st-list">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Automated rule-based checks</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Blockchain-secured audit trail</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Counterfeit certs flagged</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Data is verified agains the project specs</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Non-conformities are flagged automatically</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Progress is tracked in real time.</li>
         </ul>
       </div>
       <div class="st-viz reveal" style="--rd:.08s">
         <div class="st-dev">
           <div class="st-scr">
-            <div class="st-bar"><span class="d"></span><span class="lbl">SteelTrace: verification</span><span class="live">live</span></div>
+            <div class="st-bar"><span class="lbl" style="font-size:14px"><b>Automated verification and customer approval</b></span></div>
             <div class="st-stage c-stage">
               <div class="c-upload">
                 <div class="c-xls">XLS</div>
@@ -675,7 +668,7 @@
                 <div class="c-line e3 bad"><span class="t">Charpy @ −46°C</span><span class="val">22 J</span><span class="ck no">!</span></div>
                 <div class="c-line e4"><span class="t">Carbon equiv.</span><span class="val">0.41 %</span><span class="ck ok">✓</span></div>
               </div>
-              <div class="c-flag">⚠ Non-conformity detected</div>
+              <div class="c-flag st-toast st-toast-sm" data-tone="failed" role="status"><span class="st-toast-mark" aria-hidden="true">✕</span><div class="st-toast-body"><p class="st-toast-title">Non-conformity detected</p></div></div>
             </div>
           </div>
         </div>
@@ -685,27 +678,28 @@
     <!-- 03 · USE -->
     <div class="st-step reveal">
       <div class="st-copy">
-        <h3>Lifetime traceability</h3>
-        <p class="st-desc">Find any record in seconds. Feed structured, verified data into integrity models, Digital Twins and AI, from birth certificate to decommissioning.</p>
+        <h3>You have lifetime traceability</h3>
+        <p class="st-desc">Find any record in seconds and verify its authenticity:</p>
         <ul class="st-list">
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Search any parameter instantly</li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Locate all material from a heat</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Predictive &amp; life-extension ready</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Verify a record's authenticity with cryptography</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Feed you digital twin and asset integrity with real data.</li>
         </ul>
       </div>
       <div class="st-viz reveal" style="--rd:.08s">
         <div class="st-dev">
           <div class="st-scr">
-            <div class="st-bar"><span class="d"></span><span class="lbl">SteelTrace: records</span><span class="live">search</span></div>
+            <div class="st-bar"><span class="lbl" style="font-size:14px"><b>Searchable</b></span></div>
             <div class="st-stage u-stage">
               <div class="u-search">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
                 <span class="u-typed">Heat 41C-882</span><span class="u-caret"></span>
               </div>
               <div class="u-results">
-                <div class="u-res x1"><span class="hb"></span><span><b>Pipe joint 1184</b> · heat 41C-882</span><span class="tag">verified</span></div>
-                <div class="u-res x2"><span class="hb"></span><span><b>Pipe joint 1186</b> · heat 41C-882</span><span class="tag">verified</span></div>
-                <div class="u-res x3"><span class="hb"></span><span><b>Flange F-22</b> · heat 41C-882</span><span class="tag">verified</span></div>
+                <div class="u-res x1"><span><b>Pipe joint 1184</b> · heat 41C-882</span><span class="st-badge" data-tone="success"><i></i>Verified</span></div>
+                <div class="u-res x2"><span><b>Pipe joint 1186</b> · heat 41C-882</span><span class="st-badge" data-tone="success"><i></i>Verified</span></div>
+                <div class="u-res x3"><span><b>Flange F-22</b> · heat 41C-882</span><span class="st-badge" data-tone="success"><i></i>Verified</span></div>
               </div>
             </div>
           </div>
@@ -761,10 +755,8 @@
 <!-- CUSTOMER EXPERIENCE -->
 
 <section class="page section">
-  <div class="sec-head reveal">
-    <span class="kicker">Customer experience</span>
-    <h2 class="h2">What teams say once the data is trusted.</h2>
-    <p class="lead">Operators, EPCs and suppliers describe the same shift, from chasing and double-checking documents to working from one record everyone believes.</p>
+  <div class="sec-head reveal" style="text-align:center;margin-left:auto;margin-right:auto">
+        <h2 class="h2">Others went before you, and this is what they say</h2>
   </div>
   <div class="xp-grid">
     <div class="xp-feat panel reveal" style="--rd:0s">
@@ -809,7 +801,7 @@
 <!-- YEAR TO DATE PERFORMANCE -->
 <section class="page section" style="padding-top:0">
   <div class="scale-band reveal">
-    <div class="scale-lead"><span class="kicker">Year to date performance</span><span class="scale-cap">Trusted across live energy projects worldwide</span></div>
+    <div class="scale-lead"><span class="scale-cap">Trusted across live energy projects worldwide</span></div>
     <div class="scale-fig"><div class="n" data-count="3500" data-suffix="+">3,500+</div><div class="l">Products certified</div></div>
   </div>
 </section>
@@ -826,7 +818,7 @@
 </section>
 
 <!-- HOW TO GET STARTED -->
-<!-- st:block get-started kicker -->
+<!-- st:block get-started -->
 <section class="page section" style="padding-top:0">
   <style>
     .gs-band { position: relative; border-radius: 26px; padding: 56px clamp(26px, 5vw, 60px) 60px;
@@ -856,7 +848,6 @@
   </style>
   <div class="gs-band reveal">
     <div class="sec-head">
-      <span class="kicker">How to get started</span>
       <h2 class="h2">From first call to full rollout in three steps.</h2>
       <p class="lead">A guided path that proves the value on your own data before you scale it across every project and supplier.</p>
     </div>
@@ -955,7 +946,6 @@
   </style>
   <div class="tz reveal">
     <div class="tz-head">
-      <span class="kicker">Trust &amp; Integrity</span>
       <h2 class="h2">When AI can forge anything, can we really afford to keep manufacturing records <em>off chain?</em></h2>
     </div>
     <div class="tz-body">
@@ -991,7 +981,6 @@
 <!-- FINAL CTA -->
 <section class="page">
   <div class="cta-final reveal">
-    <span class="kicker center" style="justify-content:center;display:inline-flex">Take the first step</span>
     <h2 class="h2" style="margin-top:16px">Stop chasing documents. Start trusting your data.</h2>
     <p class="lead">See a digital ITP, a live inspection workflow and a sample Manufacturing Record Book, built around your project.</p>
     <div class="row">
