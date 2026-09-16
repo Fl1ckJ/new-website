@@ -36,7 +36,12 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fl1ckj.github.io/new-website/Trust.html</loc>
+    <loc>https://fl1ckj.github.io/new-website/trust.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fl1ckj.github.io/new-website/blockchain.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

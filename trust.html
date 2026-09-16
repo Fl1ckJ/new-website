@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>window.__stThemeLock='light';window.__stBrandLogoSrc='steeltrace/logo-blue-horizontal.svg';document.documentElement.dataset.theme='light';</script>
+<title>Trust Center: SteelTrace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="steeltrace/site.css?v=8" />
+<link rel="stylesheet" href="steeltrace/ds-theme.css?v=9" />
+<style>
+  .reveal { opacity: 0; translate: 0 20px; transition: opacity .7s var(--ease-out), translate .7s var(--ease-out); transition-delay: var(--rd, 0s); }
+  .reveal.in { opacity: 1; translate: 0 0; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1 !important; translate: 0 !important; } }
+
+  /* ============ HERO ============ */
+  .tc-hero { padding: 72px 0 8px; display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: end; }
+  .tc-hero .h1 { max-width: 20ch; margin-top: 20px; }
+  .tc-hero .lead { max-width: 58ch; margin-top: 24px; }
+  .tc-hero p.lead + p.lead { margin-top: 16px; }
+  .tc-shield { position: relative; aspect-ratio: 4/3.2; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line); background: var(--panel-solid); }
+  .tc-shield img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.55) contrast(.95) brightness(1.04); }
+  .tc-shield::after { content: ""; position: absolute; inset: 0; background: linear-gradient(200deg, rgba(66,122,181,.30), rgba(255,255,255,.55) 70%); }
+  .tc-shield .mark { position: absolute; inset: 0; display: grid; place-items: center; z-index: 1; color: var(--st-accent-deep); }
+  .tc-shield .mark svg { width: 44%; height: auto; opacity: .9; }
+
+  /* jump rail */
+  .jump { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 40px; padding-bottom: 8px; }
+  .jump a { display: inline-flex; align-items: center; gap: 9px; font-size: 13.5px; font-weight: 500; text-decoration: none; color: var(--txt-2); background: var(--panel-solid); border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; transition: border-color .14s ease-out, background .14s ease-out, color .14s ease-out; }
+  .jump a:hover { border-color: var(--accent-line); background: var(--accent-soft); color: var(--txt); }
+  .jump a svg { width: 15px; height: 15px; color: var(--accent); flex: none; }
+
+  /* ============ SECTION HEADS ============ */
+  .sec { padding: 78px 0 0; scroll-margin-top: 92px; }
+  .sec-head { display: block; padding-bottom: 34px; border-bottom: 1px solid var(--line); }
+  .sec-head .h2 { max-width: 28ch; margin-top: 16px; }
+  .sec-head .sh-body { margin-top: 20px; max-width: 74ch; }
+  .sec-head.no-rule { border-bottom: 0; padding-bottom: 6px; }
+  .sec-head .sh-body p { font-size: 15.5px; line-height: 1.62; color: var(--txt-2); }
+  .sec-head .sh-body p + p { margin-top: 13px; }
+
+  /* ============ DOC / LINK CARDS ============ */
+  .cards { display: grid; gap: 18px; margin-top: 34px; }
+  .cards.two { grid-template-columns: 1fr 1fr; }
+  .cards.three { grid-template-columns: repeat(3, 1fr); }
+  .card { padding: 28px 28px 26px; display: flex; flex-direction: column; gap: 14px; }
+  .card .ic { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-dim); }
+  .card .ic svg { width: 20px; height: 20px; }
+  .card h3 { font-size: 18px; font-weight: 700; letter-spacing: -.015em; }
+  .card p { font-size: 14.5px; line-height: 1.6; color: var(--txt-2); }
+  .card .act { margin-top: auto; padding-top: 6px; }
+  .card .act .btn { padding: 12px 20px; font-size: 14px; }
+
+  /* ISO feature card */
+  .iso { display: grid; grid-template-columns: auto 1fr auto; gap: 30px; align-items: center; padding: 30px 32px; margin-top: 34px; }
+  .iso-seal { width: 96px; height: 96px; flex: none; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--accent-dim); background: var(--accent-soft); color: var(--accent-deep); }
+  .iso-seal svg { width: 46px; height: 46px; }
+  .iso-body h3 { font-size: 21px; font-weight: 700; letter-spacing: -.02em; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .iso-body p { font-size: 15px; line-height: 1.62; color: var(--txt-2); margin-top: 11px; max-width: 72ch; }
+  .iso-act { display: flex; flex-direction: column; gap: 9px; align-items: flex-end; }
+  .iso-act .btn { min-width: 268px; }
+  .status .btn { min-width: 268px; }
+
+  /* live status board */
+  .sb { margin-top: 34px; padding: 0; overflow: hidden; }
+  .sb-top { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 24px 28px; border-bottom: 1px solid var(--line); }
+  .sb-top .st-l { display: flex; align-items: center; gap: 13px; }
+  .sb-top h3 { font-size: 20px; font-weight: 700; letter-spacing: -.02em; }
+  .sb-top .upd { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--txt-3); }
+  .sb-grp { padding: 22px 28px 24px; }
+  .sb-grp + .sb-grp { border-top: 1px solid var(--hair); }
+  .sb-grp h4 { font-family: var(--font-mono); font-size: 10.5px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--txt-3); }
+  .sb-mon { padding-top: 18px; }
+  .sb-mon + .sb-mon { border-top: 1px solid var(--hair); margin-top: 18px; }
+  .sb-mon-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .sb-mon-top .svc { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 13.5px; color: var(--txt); word-break: break-all; }
+  .sb-mon-top .svc .ok { width: 15px; height: 15px; border-radius: 50%; background: var(--st-green-600); flex: none; position: relative; }
+  .sb-mon-top .svc .ok::after { content: ""; position: absolute; left: 4.5px; top: 3px; width: 4px; height: 6.5px; border: 1.6px solid #fff; border-top: 0; border-left: 0; transform: rotate(45deg); }
+  .sb-mon-top .up { font-size: 13px; font-weight: 600; color: var(--txt-2); white-space: nowrap; }
+  .bars { display: flex; align-items: flex-end; gap: 2px; height: 30px; margin-top: 12px; }
+  .bars i { flex: 1 1 0; min-width: 0; height: 100%; border-radius: 999px; background: var(--st-green-500); }
+  .bars i.down { background: var(--st-red-500); }
+  .bars-scale { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 9px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--txt-3); }
+  .sb-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0 0; }
+  .sb-row + .sb-row { border-top: 1px solid var(--hair); padding-top: 14px; margin-top: 12px; }
+  .sb-row .svc { font-family: var(--font-mono); font-size: 13.5px; color: var(--txt); word-break: break-all; }
+  .sb-foot { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; padding: 18px 28px; border-top: 1px solid var(--line); background: var(--st-ink-100); }
+  .sb-foot a { font-size: 14px; font-weight: 600; color: var(--st-accent-deep); text-decoration: none; display: inline-flex; align-items: center; gap: 9px; }
+  .sb-foot a:hover { color: var(--accent); }
+  .sb-foot .mono-note { font-size: 10.5px; letter-spacing: .12em; }
+  .iso-act .mono-note { font-size: 10px; letter-spacing: .14em; }
+
+  /* measures */
+  .meas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; margin-top: 18px; }
+  .meas .m { background: var(--panel-solid); padding: 20px 22px; display: flex; align-items: center; gap: 13px; font-size: 14.5px; font-weight: 500; letter-spacing: -.01em; color: var(--txt); }
+  .meas .m svg { width: 17px; height: 17px; flex: none; color: var(--st-status-success); }
+  .meas-lead { font-size: 14.5px; color: var(--txt-2); margin-top: 32px; }
+
+  /* ============ SUBPROCESSOR TABLE ============ */
+  .sp-wrap { margin-top: 18px; border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: var(--panel-solid); }
+  table.sp { width: 100%; border-collapse: collapse; }
+  table.sp th { text-align: left; font-family: var(--font-mono); font-size: 10.5px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--txt-3); padding: 15px 22px; background: var(--st-ink-100); border-bottom: 1px solid var(--line); }
+  table.sp td { padding: 17px 22px; font-size: 14.5px; color: var(--txt-2); border-bottom: 1px solid var(--hair); vertical-align: middle; }
+  table.sp tr:last-child td { border-bottom: 0; }
+  table.sp td.name { color: var(--txt); font-weight: 600; letter-spacing: -.01em; }
+  table.sp td.loc { font-family: var(--font-mono); font-size: 13px; color: var(--txt-2); }
+  .sp-note { font-size: 13px; color: var(--txt-3); margin-top: 14px; }
+
+  /* ============ STATUS ============ */
+  .status { display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center; padding: 30px 32px; margin-top: 34px; }
+  .status .st-l { display: flex; align-items: center; gap: 12px; }
+  .status h3 { font-size: 20px; font-weight: 700; letter-spacing: -.02em; }
+  .status p { font-size: 14.5px; line-height: 1.6; color: var(--txt-2); margin-top: 10px; max-width: 60ch; }
+  .pulse { width: 11px; height: 11px; border-radius: 50%; background: var(--st-green-500); flex: none; position: relative; }
+  .pulse::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 1px solid var(--st-green-300); animation: pls 2.4s var(--ease-out) infinite; }
+  @keyframes pls { 0% { transform: scale(.7); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .pulse::after { animation: none; } }
+
+  /* ============ BLOCKCHAIN ============ */
+  .bc { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 36px; border-top: 1px solid var(--line); }
+  .bc .p { padding: 30px 30px 32px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .bc .p:last-child { border-right: 0; }
+  .bc .pn { font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em; color: var(--accent); }
+  .bc .p h3 { font-size: 18px; font-weight: 700; letter-spacing: -.015em; margin-top: 16px; }
+  .bc .p p { font-size: 14.5px; line-height: 1.62; color: var(--txt-2); margin-top: 11px; }
+  .bc-foot { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; margin-top: 28px; }
+  .bc-foot p { font-size: 15.5px; line-height: 1.6; color: var(--txt); max-width: 62ch; letter-spacing: -.005em; }
+
+  /* ============ LOGOS ============ */
+  .logos { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 34px; }
+  .logos .imgph { aspect-ratio: 16/7; border-radius: var(--r-md); }
+  .logos-note { font-size: 13px; color: var(--txt-3); margin-top: 16px; }
+
+  @media (max-width: 1080px) {
+    .tc-hero { grid-template-columns: 1fr; gap: 34px; align-items: start; }
+    .tc-shield { max-width: 420px; }
+    .meas, .bc, .cards.three { grid-template-columns: 1fr 1fr; }
+    .bc .p:nth-child(2) { border-right: 0; }
+    .logos { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 820px) {
+    .cards.two, .cards.three, .meas, .bc { grid-template-columns: 1fr; }
+    .bc .p { border-right: 0; }
+    .iso, .status, .bc-foot { grid-template-columns: 1fr; align-items: start; }
+    .iso-act { align-items: flex-start; }
+    .logos { grid-template-columns: repeat(2, 1fr); }
+    table.sp th:nth-child(2), table.sp td:nth-child(2) { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="topbar" data-site-header data-page="about" data-crumb="About Us>>about.html|Trust Center"></header>
+
+<div class="page">
+
+  <!-- ============ HERO ============ -->
+  <section class="tc-hero">
+    <div>
+      <span class="kicker reveal">Trust Center</span>
+      <h1 class="h1 reveal">Built for trust in safety-critical supply chains.</h1>
+      <p class="lead reveal">Trust is fundamental when critical manufacturing and quality data is shared across organizations.</p>
+      <p class="lead reveal">SteelTrace is designed to protect the security, integrity and availability of the data entrusted to our platform. Our approach combines information security management, secure cloud infrastructure, data protection practices and blockchain-secured traceability.</p>
+    </div>
+    <div class="tc-shield reveal" aria-hidden="true">
+      <img src="steeltrace/img/facility.png" alt="" />
+      <span class="mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5Z"/><path d="m9 12 2 2 4-4"/></svg>
+      </span>
+    </div>
+  </section>
+
+  <nav class="jump reveal" aria-label="On this page">
+    <a href="#security"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Security &amp; Compliance</a>
+    <a href="#privacy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5Z"/></svg>Data Protection &amp; Privacy</a>
+    <a href="#reliability"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13h4l3 7 4-16 3 9h4"/></svg>Platform Reliability</a>
+    <a href="#integrity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v12l8 4 8-4V6Z"/><path d="M12 22V12M4 6l8 6 8-6"/></svg>Blockchain &amp; Data Integrity</a>
+    <a href="#customers"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20h4v-2a3 3 0 0 0-3-3h-1"/><path d="M7 20H3v-2a3 3 0 0 1 3-3h1"/><circle cx="12" cy="8" r="3"/><path d="M7 20v-2a5 5 0 0 1 10 0v2"/></svg>Trusted Across the Industry</a>
+  </nav>
+
+  <!-- ============ SECURITY & COMPLIANCE ============ -->
+  <section class="sec" id="security">
+    <div class="sec-head no-rule reveal">
+      <div>
+        <span class="kicker">Security &amp; Compliance</span>
+        <h2 class="h2">Security is built into how we operate.</h2>
+      </div>
+      <div class="sh-body">
+        <p>SteelTrace provides the trusted data infrastructure for manufacturing records across safety-critical supply chains. Protecting that information is an integral part of how our platform is developed, operated and maintained.</p>
+      </div>
+    </div>
+
+    <div class="iso panel reveal">
+      <div class="iso-seal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m9 14.5-1.5 7L12 19l4.5 2.5-1.5-7"/><path d="m9.5 9 1.8 1.8L15 7.2"/></svg>
+      </div>
+      <div class="iso-body">
+        <h3>ISO/IEC 27001 Certified</h3>
+        <p>SteelTrace maintains an Information Security Management System (ISMS) certified according to ISO/IEC 27001, which provides an internationally recognized framework for establishing, implementing, maintaining and continually improving information security management.</p>
+      </div>
+      <div class="iso-act">
+        <a class="btn btn-primary" href="steeltrace/docs/SteelTrace-ISO-27001-Certificate.pdf" download>
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+          Download Certificate
+        </a>
+        <span class="mono-note">PDF · ISO/IEC 27001</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ DATA PROTECTION & PRIVACY ============ -->
+  <section class="sec" id="privacy">
+    <div class="sec-head no-rule reveal">
+      <div>
+        <span class="kicker">Data Protection &amp; Privacy</span>
+        <h2 class="h2">Your data. Protected.</h2>
+      </div>
+      <div class="sh-body">
+        <p>SteelTrace connects organizations across complex manufacturing supply chains. Protecting customer, supplier and user data is therefore fundamental to how we operate.</p>
+        <p>Our policies provide transparency into how data is processed, which service providers support the SteelTrace platform and the terms that apply when using our services.</p>
+      </div>
+    </div>
+
+    <div class="iso panel reveal">
+      <div class="iso-seal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"/><path d="M9 13h6M9 17h4"/></svg>
+      </div>
+      <div class="iso-body">
+        <h3>Privacy Statement</h3>
+        <p>Learn how SteelTrace collects, processes, stores and protects personal data.</p>
+      </div>
+      <div class="iso-act">
+        <a class="btn btn-primary" href="privacy-policy">Read Privacy Statement <span class="ar">→</span></a>
+      </div>
+    </div>
+
+    <div class="iso panel reveal" style="margin-top:18px">
+      <div class="iso-seal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v5h1"/></svg>
+      </div>
+      <div class="iso-body">
+        <h3>Disclaimer</h3>
+        <p>Review the legal information and conditions relating to the use of the SteelTrace website and information provided by SteelTrace.</p>
+      </div>
+      <div class="iso-act">
+        <a class="btn btn-primary" href="disclaimer">Read Disclaimer <span class="ar">→</span></a>
+      </div>
+    </div>
+
+    <h3 class="h2" style="font-size:22px;margin-top:52px">Subprocessors</h3>
+    <p class="meas-lead" style="margin-top:12px">SteelTrace uses selected third-party service providers to support the delivery and operation of our platform. Below is our current list of subprocessors, their purpose and applicable data processing locations.</p>
+    <div class="sp-wrap reveal">
+      <table class="sp">
+        <thead>
+          <tr><th>Subprocessor</th><th>Purpose</th><th>Data location</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">Company X</td><td>Cloud infrastructure</td><td class="loc">EU</td></tr>
+          <tr><td class="name">Company Y</td><td>Transactional email</td><td class="loc">EU / US</td></tr>
+          <tr><td class="name">Company Z</td><td>Monitoring</td><td class="loc">EU</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sp-note">Last updated September 2026. Material changes to this list are communicated to customers in line with our data processing agreements.</p>
+  </section>
+
+  <!-- ============ PLATFORM RELIABILITY ============ -->
+  <section class="sec" id="reliability">
+    <div class="sec-head no-rule reveal">
+      <div>
+        <span class="kicker">Platform Reliability</span>
+        <h2 class="h2">Transparency into platform availability.</h2>
+      </div>
+      <div class="sh-body">
+        <p>Our customers rely on SteelTrace to access critical manufacturing and quality information throughout their projects and asset lifecycles.</p>
+        <p>We provide a public status page where customers and users can monitor the current availability and performance of the SteelTrace platform, as well as information about incidents and scheduled maintenance.</p>
+      </div>
+    </div>
+
+    <div class="sb panel reveal">
+      <div class="sb-top">
+        <div class="st-l">
+          <span class="pulse"></span>
+          <h3>All services are online</h3>
+        </div>
+        <span class="upd">Snapshot · 16 Sep 2026</span>
+      </div>
+
+      <div class="sb-grp">
+        <h4>SteelTrace Platform</h4>
+        <div class="sb-mon">
+          <div class="sb-mon-top"><span class="svc"><span class="ok"></span>https://steeltrace.io/</span><span class="up">99.997% uptime</span></div>
+          <div class="bars" data-bars="90" data-down="0" title="Outage on the earliest day shown"></div>
+        </div>
+        <div class="sb-mon">
+          <div class="sb-mon-top"><span class="svc"><span class="ok"></span>https://api.steeltrace.io/</span><span class="up">99.996% uptime</span></div>
+          <div class="bars" data-bars="90" data-down="0" title="Outage on the earliest day shown"></div>
+        </div>
+      </div>
+
+      <div class="sb-grp">
+        <h4>SteelTrace Blockchain Network</h4>
+        <div class="sb-mon">
+          <div class="sb-mon-top"><span class="svc"><span class="ok"></span>https://bc.steeltrace.network</span><span class="up">99.453% uptime</span></div>
+          <div class="bars" data-bars="90" data-down="11,48"></div>
+        </div>
+        <div class="bars-scale"><span>90 days ago</span><span>Today</span></div>
+      </div>
+
+      <div class="sb-foot">
+        <span class="mono-note">Snapshot of the public status page — live availability, incidents &amp; maintenance at</span>
+        <a href="https://status.steeltrace.io" target="_blank" rel="noopener">status.steeltrace.io <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOCKCHAIN & DATA INTEGRITY ============ -->
+  <section class="sec" id="integrity">
+    <div class="sec-head no-rule reveal">
+      <div>
+        <span class="kicker">Blockchain &amp; Data Integrity</span>
+        <h2 class="h2">Making trust verifiable.</h2>
+      </div>
+      <div class="sh-body">
+        <p>Manufacturing records can pass through many organizations during the lifecycle of an asset. Establishing where information originated, who endorsed it and whether it has been changed is essential in safety-critical supply chains. SteelTrace uses blockchain technology as part of its trust infrastructure to provide an additional layer of verifiability, integrity and traceability for critical manufacturing information.</p>
+      </div>
+    </div>
+
+    <div class="iso panel reveal">
+      <div class="iso-seal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v12l8 4 8-4V6Z"/><path d="M12 22V12M4 6l8 6 8-6"/></svg>
+      </div>
+      <div class="iso-body">
+        <h3>Blockchain Infrastructure</h3>
+        <p>Cryptographic proofs, traceable history and digital signatures support the creation of trusted Smart Manufacturing Records with a verifiable audit trail across organizational boundaries.</p>
+      </div>
+      <div class="iso-act">
+        <a class="btn btn-primary" href="blockchain">Read more <span class="ar">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRUSTED ACROSS THE INDUSTRY ============ -->
+  <section class="sec" id="customers">
+    <div class="sec-head no-rule reveal">
+      <div>
+        <span class="kicker">Trusted Across the Industry</span>
+        <h2 class="h2">Working with leading organizations across safety-critical supply chains.</h2>
+      </div>
+      <div class="sh-body">
+        <p>SteelTrace works with operators, EPCs, manufacturers and other supply-chain organizations to digitalize manufacturing records, improve traceability and create a trusted foundation for quality data.</p>
+      </div>
+    </div>
+
+    <div class="logos reveal">
+      <div class="imgph"><span>Operator</span></div>
+      <div class="imgph"><span>EPC</span></div>
+      <div class="imgph"><span>Manufacturer</span></div>
+      <div class="imgph"><span>Operator</span></div>
+      <div class="imgph"><span>Partner</span></div>
+    </div>
+    <p class="logos-note mono-note">Trusted Ecosystem</p>
+  </section>
+</div>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<script>
+(function () {
+  document.querySelectorAll(".bars").forEach(function (el) {
+    var n = parseInt(el.getAttribute("data-bars"), 10) || 90;
+    var down = (el.getAttribute("data-down") || "").split(",").filter(function (v) { return v !== ""; }).map(Number);
+    var html = "";
+    for (var i = 0; i < n; i++) html += '<i' + (down.indexOf(i) > -1 ? ' class="down"' : "") + "></i>";
+    el.innerHTML = html;
+  });
+})();
+(function () {
+  var els = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window) || !els.length) { els.forEach(function (e) { e.classList.add("in"); }); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+  els.forEach(function (e) { io.observe(e); });
+})();
+</script>
+<script src="steeltrace/chrome.js?v=12"></script>
+</div>
+</body>
+</html>

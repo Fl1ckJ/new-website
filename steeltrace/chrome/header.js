@@ -54,7 +54,11 @@
           '<button class="nav-link' + a("about") + '" type="button" aria-haspopup="true">About Us ' + caret + '</button>' +
           '<div class="nav-dd-menu" role="menu">' +
             '<a class="dd-item" href="about"><span class="dd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v.5M11 12h1v4h1"/></svg></span><span class="dd-tx"><b>About SteelTrace</b><span>Mission, vision &amp; what we build</span></span></a>' +
+            '<div class="dd-sep"></div>' +
+            '<a class="dd-item" href="trust"><span class="dd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.3-3 7.8-7 8.5-4-.7-7-4.2-7-8.5V6z"/><path d="M9.3 12l2 2 3.5-3.7"/></svg></span><span class="dd-tx"><b>Trust Center</b><span>Security, privacy &amp; platform status</span></span></a>' +
+            '<div class="dd-sep"></div>' +
             '<a class="dd-item" href="careers"><span class="dd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span><span class="dd-tx"><b>Careers</b><span>Join the team</span></span></a>' +
+            '<div class="dd-sep"></div>' +
             '<a class="dd-item" href="contact"><span class="dd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></span><span class="dd-tx"><b>Contact</b><span>Talk to us</span></span></a>' +
           '</div>' +
         '</div>' +

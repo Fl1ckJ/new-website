@@ -495,7 +495,7 @@
         '<div class="tz-body">' +
           '<div class="tz-copy">' +
             '<p class="lead">A convincing fake certificate now takes minutes. SteelTrace makes each record verifiable at its source and tamper-proof ever after, so you are trusting proof, not paper.</p>' +
-            '<div class="row"><a class="btn btn-ghost" href="trust">How SteelTrace proves a record <span class="ar">→</span></a></div>' +
+            '<div class="row"><a class="btn btn-ghost" href="blockchain">How SteelTrace proves a record <span class="ar">→</span></a></div>' +
           '</div>' +
           '<div class="tz-viz" aria-hidden="true">' +
             '<svg class="tz-seal" viewBox="0 0 150 150">' +
