@@ -579,9 +579,32 @@
   var heroEl = el.querySelector(".d-hero");
   if (heroEl) {
     var rh = ROLE_HERO[sol.id];
-    if (rh) {
+    /* A relative url() inside a custom property resolves against the stylesheet
+       that consumes it (steeltrace/), not the page — pin it to the document base. */
+    var absPhoto = function (v) {
+      return String(v).replace(/url\((['"]?)([^'")]+)\1\)/, function (m, q, path) {
+        return 'url("' + new URL(path, document.baseURI).href + '")';
+      });
+    };
+    /* Roles with a photographic hero. Executive leadership keeps its line-art
+       backdrop on purpose — add an entry here to give it a photo too. */
+    var soloPhoto = {
+      op:  'url("graphics/platform-hero.png")',
+      epc: 'url("steeltrace/img/epc-hero.png")',
+      wld: 'url("steeltrace/img/wld.png")',
+      mfg: 'url("steeltrace/img/mfg.png")',
+      ndt: 'url("steeltrace/img/ndt.png")'
+    }[sol.id];
+    if (!rh && soloPhoto) {
+      heroEl.classList.add("role-hero", "photo-hero");
+      heroEl.style.setProperty("--role-photo", absPhoto(soloPhoto));
+      heroEl.style.setProperty("--photo-veil-1", ".56");
+      heroEl.style.setProperty("--photo-veil-2", ".62");
+      heroEl.style.setProperty("--photo-veil-3", ".88");
+    } else if (rh) {
       heroEl.classList.add("role-hero");
       heroEl.style.setProperty("--role-bg", rh.bg);
+      if (rh.photo) { heroEl.classList.add("photo-hero"); heroEl.style.setProperty("--role-photo", absPhoto(rh.photo)); }
       var art = document.createElement("div");
       art.className = "d-hero-art";
       art.setAttribute("aria-hidden", "true");

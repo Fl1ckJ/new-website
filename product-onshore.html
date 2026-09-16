@@ -35,13 +35,16 @@
   .pr-crumbs a:hover { color: var(--accent); }
   .pr-crumbs .sep { opacity: .5; }
   .pr-crumbs .cur { color: var(--txt); }
-  .pr-hero { position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); margin-top: 0; overflow: hidden; text-align: center;
-    background-image: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 30%, rgba(255,255,255,.88) 48%, rgba(255,255,255,0) 100%), url("graphics/onshore-hero.png");
-    background-size: cover, cover; background-position: center, center 42%; background-repeat: no-repeat; }
-  .pr-hero .hbody { position: relative; z-index: 1; padding: 118px 32px 108px; max-width: 860px; margin: 0 auto; }
-  .pr-hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 240px; z-index: 0; pointer-events: none; background: linear-gradient(180deg, transparent, var(--bg) 92%); }
-  .pr-hero .h1 { margin-top: 0; color: var(--st-ink); }
-  .pr-hero .lead { margin: 22px auto 0; max-width: 56ch; color: var(--st-muted); }
+  .pr-hero { position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); margin-top: 0; overflow: hidden; text-align: center; min-height: 500px; display: flex; align-items: center;
+    background-image:
+      linear-gradient(rgba(150,180,230,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(150,180,230,.05) 1px, transparent 1px),
+      linear-gradient(180deg, rgba(9,20,38,.56) 0%, rgba(8,16,30,.62) 55%, rgba(6,11,18,.88) 100%),
+      url("graphics/onshore-hero.png");
+    background-size: 52px 52px, 52px 52px, cover, cover; background-position: center top, center top, center, center 42%; background-repeat: repeat, repeat, no-repeat, no-repeat; }
+  .pr-hero .hbody { position: relative; z-index: 1; width: 100%; padding: 72px 32px; max-width: 860px; margin: 0 auto; }
+  .pr-hero .h1 { margin-top: 0; color: #fff; }
+  .pr-hero .lead { margin: 22px auto 0; max-width: 56ch; color: rgba(255,255,255,.88); }
   .pr-hero .row { display: flex; gap: 14px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
   [data-theme="light"] .pr-hero { }
   /* lead statement — like the Operators intro */

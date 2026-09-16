@@ -128,7 +128,6 @@ a{color:inherit}
 
 /* Role hero ends on a hairline — no fade to the page ground. */
 .d-hero.role-hero::after{display:none!important}
-.d-hero.role-hero{border-bottom:1px solid var(--st-ink-a12)!important}
 
 /* Emphasis words in lead statements: solid accent deep. The guide allows no
    gradient-filled type, and accent text below headline size sits at 2F5686. */
