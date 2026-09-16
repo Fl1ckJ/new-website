@@ -1,6 +1,6 @@
 /* SteelTrace — Blog index. Reads parsed posts from posts-data.js (window.STEELTRACE_BLOG).
    Featured = most recent post. Category chips + pager filter the grid. Clicking a
-   post navigates to post.html?slug=… (a full markdown-rendered article page). */
+   post navigates to post/<slug>… (a full markdown-rendered article page). */
 (function () {
   "use strict";
   var B = window.STEELTRACE_BLOG;
@@ -16,7 +16,7 @@
   var featuredPost = posts[0] || null;
   var state = { cat: "All", page: 1 };
 
-  function go(p) { location.href = "post?slug=" + encodeURIComponent(p.slug); }
+  function go(p) { location.href = "post/" + encodeURIComponent(p.slug); }
   function byline(p) {
     var sub = [p.role, B.formatDate(p.date)].filter(Boolean).join(" · ");
     return '<div class="byline"><span class="av">' + B.esc(B.initials(p.author || "ST")) + '</span>' +

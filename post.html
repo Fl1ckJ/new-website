@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>(function(){var m=location.pathname.match(/^(.*\/)post\/[^\/]/);if(m)document.write('<base href="'+m[1]+'">');})();</script>
 <script>window.__stThemeLock='light';window.__stBrandLogoSrc='steeltrace/logo-blue-horizontal.svg';document.documentElement.dataset.theme='light';</script>
 <title>SteelTrace: Blog</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -116,7 +117,9 @@
   if (!B || !art) return;
 
   function param(n) { return new URLSearchParams(location.search).get(n); }
-  var slug = param("slug");
+  /* /post/<slug> — основная форма; ?slug=<slug> оставлена для ранее выданных ссылок */
+  function pathSlug() { var m = location.pathname.match(/\/post\/([^\/?#]+)/); return m ? decodeURIComponent(m[1]) : null; }
+  var slug = param("slug") || pathSlug();
   var post = B.posts.filter(function (p) { return p.slug === slug; })[0] || (param("id") ? B.posts.filter(function (p) { return p.id === param("id"); })[0] : null);
   // fall back to the most recent post when opened without a valid slug
   if (!post && !slug && !param("id")) post = B.byDate[0];
@@ -128,7 +131,7 @@
     var rl = document.getElementById("recentLink");
     rl.textContent = recent.title;
     rl.innerHTML = B.esc(recent.title) + ' <span class="ar">→</span>';
-    rl.href = "post?slug=" + encodeURIComponent(recent.slug);
+    rl.href = "post/" + encodeURIComponent(recent.slug);
   }
 
   if (!post) {
@@ -142,7 +145,7 @@
   // per-post SEO meta (title/description/canonical/OG/Twitter)
   (function () {
     var BASE = "https://fl1ckj.github.io/new-website";
-    var url = BASE + "/post.html?slug=" + encodeURIComponent(post.slug);
+    var url = BASE + "/post/" + encodeURIComponent(post.slug);
     var desc = (post.summary || post.title || "").slice(0, 300);
     var img = post.image ? (/^https?:/.test(post.image) ? post.image : BASE + "/" + post.image) : BASE + "/graphics/visual-charts.png";
     function meta(sel, attr, key, val) {
@@ -195,7 +198,7 @@
   var sidebar = others.length ? (
     '<aside class="a-side"><div class="side-card"><span class="side-h">Connected posts</span>' +
     others.map(function (p) {
-      return '<a class="side-link" href="post?slug=' + encodeURIComponent(p.slug) + '">' +
+      return '<a class="side-link" href="post/' + encodeURIComponent(p.slug) + '">' +
         '<span class="sl-cov" style="' + B.cardStyle(p) + '"></span>' +
         '<span class="sl-tx"><span class="sl-cat">' + B.esc(p.cat || "Article") + '</span>' +
         '<span class="sl-t">' + B.esc(p.title) + '</span></span></a>';

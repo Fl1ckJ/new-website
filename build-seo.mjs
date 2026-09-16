@@ -51,7 +51,7 @@ const posts = readPosts();
 for (const p of posts) {
   if (!p.slug) continue;
   const lm = /^\d{4}-\d{2}-\d{2}/.test(p.date || "") ? `\n    <lastmod>${p.date.slice(0, 10)}</lastmod>` : "";
-  rows.push(`  <url>\n    <loc>${esc(BASE + "/post.html?slug=" + p.slug)}</loc>${lm}\n    <changefreq>yearly</changefreq>\n    <priority>0.6</priority>\n  </url>`);
+  rows.push(`  <url>\n    <loc>${esc(BASE + "/post/" + p.slug)}</loc>${lm}\n    <changefreq>yearly</changefreq>\n    <priority>0.6</priority>\n  </url>`);
 }
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${rows.join("\n")}\n</urlset>\n`;
