@@ -1,0 +1,3 @@
+/* SteelTrace uses Figtree (all UI + slide type) and IBM Plex Mono (kickers, captions, numerals in labels).
+   Both are Google Fonts; served from the Google Fonts CDN rather than bundled binaries. */
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap");
