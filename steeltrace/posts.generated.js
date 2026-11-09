@@ -827,21 +827,6 @@ window.STEELTRACE_POSTS = [
     "slug": "improve-the-value-of-assets-cradle-to-grave-traceability-part-2"
   },
   {
-    "id": "webinar-saving-costs-while-gaining-control-of-the-supply-chain",
-    "title": "Webinar: Saving costs while gaining control of the supply chain",
-    "cat": "Webinars & Events",
-    "author": "Tom Meulendijks",
-    "role": "Watch the webinar now",
-    "date": "2020-05-26",
-    "cover": 5,
-    "image": "uploads/blog/webinar-saving-costs-while-gaining-control-of-the-supply-chain/hero.jpg",
-    "preview": "uploads/blog/webinar-saving-costs-while-gaining-control-of-the-supply-chain/preview.jpg",
-    "glyph": "LIVE",
-    "body": "[▶ Watch the video on YouTube](https://www.youtube.com/watch?v=83JqwR_MazA)",
-    "summary": "Maintain quality while shaving on costs, the holy grail for every company with a high focus on quality. During this webinar, we will deep dive into the business case of SteelTrace. How to maintain quality, while even reducing costs.",
-    "slug": "webinar-saving-costs-while-gaining-control-of-the-supply-chain"
-  },
-  {
     "id": "webinar-steeltrace-blockchain-in-oil-gas-q-a",
     "title": "Webinar SteelTrace Blockchain in Oil&Gas Q&A",
     "cat": "Webinars & Events",
